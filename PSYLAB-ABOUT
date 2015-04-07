@@ -1,0 +1,25 @@
+                         ABOUT PSYLAB 
+
+Purpose
+			 
+     "PSYLAB" is a collection of scripts for designing and controlling
+     various interactive psychoacoustical listening experiments.
+
+Author 
+     
+     PSYLAB is written in Matlab by Martin Hansen at Institut für
+     Hörtechnik und Audiologie, Jade Hoschule, in Oldenburg.  Write to
+     psylab_AT_jade-hs.de
+
+Distribution
+     
+     PSYLAB is distributed as free software under the terms of the
+     GNU-GPL.  See the file DISTRIBUTION.
+
+History
+     
+     PSYLAB is based on many ideas and concepts of its predecessor
+     "SISG/SI", a system originally written in Fortran by Dirk
+     Püschel, Rene Koch, and Ralf Fassel at Drittes Physikalisches
+     Institut in Göttingen in 1989-1991.
+     

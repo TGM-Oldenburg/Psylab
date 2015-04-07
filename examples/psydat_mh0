@@ -1,0 +1,77 @@
+######## psydat version 2 header ########  DO NOT change THIS line ########
+#### sam_sincarrier_detect mh0 08-Jan-2006__18:46:03 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -31.000000 1.278275 -34.000000 -29.000000 dB
+#### sam_sincarrier_detect mh0 08-Jan-2006__18:48:51 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -35.000000 1.046297 -36.000000 -32.000000 dB
+#### sam_sincarrier_detect mh0 08-Jan-2006__18:52:17 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -48.000000 0.978337 -50.000000 -47.000000 dB
+#### sam_sincarrier_detect mh0 08-Jan-2006__18:58:10 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -34.000000 1.200490 -36.000000 -32.000000 dB
+#### sam_sincarrier_detect mh0 08-Jan-2006__19:01:35 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -29.000000 1.010765 -30.000000 -27.000000 dB
+#### sam_sincarrier_detect mh0 08-Jan-2006__19:05:08 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -50.000000 0.832352 -52.000000 -49.000000 dB
+#### sam_sincarrier_detect mh0 08-Jan-2006__19:10:51 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -31.000000 0.795822 -33.000000 -30.000000 dB
+#### sam_sincarrier_detect mh0 08-Jan-2006__19:14:07 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -32.000000 1.366052 -33.000000 -28.000000 dB
+#### sam_sincarrier_detect mh0 08-Jan-2006__19:18:20 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -32.000000 3.392204 -36.000000 -24.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__10:45:38 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -32.000000 1.685500 -35.000000 -29.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__10:51:32 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -34.500000 0.759155 -35.000000 -33.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__21:08:54 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -31.000000 0.787752 -33.000000 -30.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__21:13:07 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -40.000000 1.620434 -42.000000 -37.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__21:17:16 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -54.000000 0.705036 -55.000000 -53.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__21:23:24 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -32.000000 0.646762 -33.000000 -31.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__21:27:15 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -52.000000 0.893701 -54.000000 -51.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__21:30:58 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -32.000000 0.867898 -34.000000 -31.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__21:34:38 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -34.000000 0.707107 -35.000000 -33.000000 dB
+#### sam_sincarrier_detect mh0 01-Mar-2006__21:38:07 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -31.000000 0.700340 -32.000000 -30.000000 dB

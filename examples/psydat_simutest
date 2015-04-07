@@ -1,0 +1,87 @@
+######## psydat version 2 header ########  DO NOT change THIS line ########
+#### sam_sincarrier_detect simutest 04-May-2012__22:21:55 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -20.000000 1.278019 -22.000000 -17.000000 dB
+#### sam_sincarrier_detect simutest 04-May-2012__22:26:35 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -20.000000 1.278019 -22.000000 -17.000000 dB
+#### sam_sincarrier_detect simutest 04-May-2012__22:29:45 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -20.000000 0.841191 -21.000000 -18.000000 dB
+#### sam_sincarrier_detect simutest 04-May-2012__23:19:06 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -17.500000 1.007220 -20.000000 -16.000000 dB
+#### sam_sincarrier_detect simutest 04-May-2012__23:31:08 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -19.000000 0.893152 -20.000000 -17.000000 dB
+#### sam_sincarrier_detect simutest 04-May-2012__23:40:13 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -20.000000 2.061254 -22.000000 -15.000000 dB
+#### sam_sincarrier_detect simutest 04-May-2012__23:47:34 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -18.000000 0.740013 -20.000000 -17.000000 dB
+#### match_freq_binaural simutest 04-May-2012__23:59:00 npar 2 ####
+%%----- PAR1: reference_frequency 250.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+  rel_frequency_increment 11.000000 0.885061 9.000000 12.000000 cent
+#### match_freq_binaural simutest 05-May-2012__00:12:09 npar 2 ####
+%%----- PAR1: reference_frequency 250.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+  rel_frequency_increment 12.000000 0.738549 11.000000 13.000000 cent
+#### match_freq_binaural simutest 05-May-2012__00:13:32 npar 2 ####
+%%----- PAR1: reference_frequency 500.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+  rel_frequency_increment 12.000000 1.344504 10.000000 14.000000 cent
+#### match_freq_binaural simutest 05-May-2012__00:14:52 npar 2 ####
+%%----- PAR1: reference_frequency 1000.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+  rel_frequency_increment 10.000000 0.915475 8.000000 11.000000 cent
+#### match_freq_binaural_singletrack simutest 17-Mar-2014__11:52:57 npar 3 ####
+%%----- PAR1: reference_frequency 500.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+%%----- PAR3: percent_correct 70.700000 percent
+  rel_frequency_increment 12.000000 0.978093 10.000000 14.000000 cent
+#### match_freq_binaural_singletrack simutest 17-Mar-2014__11:55:21 npar 3 ####
+%%----- PAR1: reference_frequency 1000.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+%%----- PAR3: percent_correct 70.700000 percent
+  rel_frequency_increment 12.000000 1.191927 9.000000 14.000000 cent
+#### match_freq_binaural_singletrack simutest 17-Mar-2014__11:57:06 npar 3 ####
+%%----- PAR1: reference_frequency 2000.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+%%----- PAR3: percent_correct 70.700000 percent
+  rel_frequency_increment 12.000000 0.688247 11.000000 13.000000 cent
+#### match_freq_binaural_singletrack simutest 17-Mar-2014__11:59:16 npar 3 ####
+%%----- PAR1: reference_frequency 3000.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+%%----- PAR3: percent_correct 70.700000 percent
+  rel_frequency_increment 10.000000 1.186030 9.000000 13.000000 cent
+#### match_freq_binaural_singletrack simutest 17-Mar-2014__12:01:31 npar 3 ####
+%%----- PAR1: reference_frequency 6000.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+%%----- PAR3: percent_correct 70.700000 percent
+  rel_frequency_increment 11.000000 0.997147 9.000000 13.000000 cent
+#### match_freq_binaural_singletrack simutest 17-Mar-2014__17:07:56 npar 3 ####
+%%----- PAR1: reference_frequency 500.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+%%----- PAR3: percent_correct 70.700000 percent
+  rel_frequency_increment 11.000000 0.685994 10.000000 12.000000 cent
+#### sam_sincarrier_detect simutest 17-Mar-2014__17:46:57 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -6.666667 3.464280 -9.666667 -0.333333 dB
+#### sam_sincarrier_detect simutest 17-Mar-2014__17:48:35 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -5.000000 1.590481 -7.333333 -2.333333 dB
+#### sam_sincarrier_detect simutest 17-Mar-2014__17:54:40 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -7.000000 1.967925 -10.000000 -4.000000 dB

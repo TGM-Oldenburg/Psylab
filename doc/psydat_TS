@@ -1,0 +1,216 @@
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__17:55:58 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 57.000000 1.311220 55.000000 60.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__17:57:44 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 64.000000 0.917663 63.000000 66.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__17:59:40 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 59.000000 0.848115 58.000000 61.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:01:25 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 62.000000 0.848115 60.000000 63.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:03:17 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 62.000000 0.772328 60.000000 63.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:05:16 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 52.000000 1.370107 50.000000 55.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:07:15 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 55.000000 0.696692 53.000000 56.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:09:20 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 54.000000 1.216360 51.000000 55.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:11:44 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 46.000000 1.300022 45.000000 49.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:14:07 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 45.000000 0.976328 43.000000 46.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:16:09 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 44.000000 1.583910 42.000000 47.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 12-Dec-2004__18:18:23 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 44.000000 0.657836 43.000000 45.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:22:00 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 62.000000 1.911798 61.000000 67.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:23:51 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 65.000000 1.216360 63.000000 68.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:25:41 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 62.000000 1.718492 59.000000 65.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:27:47 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 63.000000 1.216360 60.000000 64.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:29:41 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 61.000000 1.169795 58.000000 62.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:31:43 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 51.000000 0.942809 49.000000 52.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:33:24 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 59.000000 1.352926 57.000000 62.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:35:16 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 57.000000 1.078769 55.000000 59.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:37:43 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 52.000000 1.073334 51.000000 55.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:39:54 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 52.000000 0.976328 50.000000 53.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:41:50 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 52.000000 1.216360 49.000000 53.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 12-Dec-2004__18:43:58 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 47.000000 1.017393 46.000000 50.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:39:00 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 64.000000 1.565341 62.000000 68.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:40:52 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 65.000000 0.875261 63.000000 66.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:42:44 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 61.000000 1.428613 59.000000 64.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:44:44 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 62.000000 0.779864 61.000000 63.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:46:43 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 58.000000 0.666667 57.000000 59.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:48:37 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 53.000000 0.768533 52.000000 55.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:50:36 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 56.000000 1.017393 55.000000 59.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:52:31 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 55.000000 0.705036 54.000000 56.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:54:37 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 51.000000 0.688247 50.000000 52.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:56:53 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 53.000000 0.834210 51.000000 54.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__10:58:55 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 53.000000 1.407997 50.000000 55.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 13-Dec-2004__11:00:57 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 48.000000 1.031662 46.000000 50.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:06:03 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 64.000000 0.991189 62.000000 65.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:08:09 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 66.000000 0.834210 65.000000 68.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:10:07 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 62.000000 1.263523 59.000000 63.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:11:50 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 61.000000 1.304513 58.000000 63.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:13:43 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 59.000000 1.045738 58.000000 61.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:15:39 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 54.000000 0.657836 53.000000 55.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:17:35 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 55.000000 1.100239 53.000000 57.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:19:49 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 54.000000 1.733738 51.000000 56.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:21:48 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 48.000000 1.105542 46.000000 50.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:23:57 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 45.000000 1.002920 43.000000 47.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:26:09 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 44.000000 1.157230 42.000000 46.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 13-Dec-2004__11:28:44 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 43.000000 1.216360 40.000000 44.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:35:52 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 62.000000 0.805682 60.000000 63.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:37:41 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 64.000000 1.002920 62.000000 66.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:39:49 PAR: Delta_fL/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 60.000000 0.958190 59.000000 62.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:41:41 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 60.000000 1.899523 57.000000 63.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:43:58 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 59.000000 1.196975 57.000000 61.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:46:00 PAR: Delta_fL/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 55.000000 1.357242 51.000000 56.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:48:24 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 58.000000 0.805682 56.000000 59.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:50:25 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 58.000000 0.895081 57.000000 60.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:52:58 PAR: Delta_fL/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 52.000000 1.167293 50.000000 54.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:54:56 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.000000 Hz/Hz
+  testton 53.000000 0.834210 52.000000 55.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:56:53 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) 0.100000 Hz/Hz
+  testton 52.000000 0.933459 51.000000 54.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToLowF TS 15-Dec-2004__11:59:05 PAR: Delta_fL/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fU-Delta_fL)/f0) -1.000000 Hz/Hz
+  testton 48.000000 0.834210 46.000000 49.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:34:56 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 68.000000 0.933459 66.000000 70.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:37:06 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 67.000000 0.964274 65.000000 68.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:39:18 PAR: Delta_fU/f0 0.000000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 62.000000 1.374369 60.000000 65.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:41:25 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 61.000000 1.172292 58.000000 62.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:43:11 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 60.000000 1.272746 58.000000 63.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:45:19 PAR: Delta_fU/f0 0.100000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 54.000000 0.964274 53.000000 56.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:47:42 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 53.000000 1.017393 52.000000 55.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:49:52 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 48.000000 0.964274 47.000000 50.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:51:58 PAR: Delta_fU/f0 0.200000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 50.000000 0.945905 49.000000 52.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:54:42 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.000000 Hz/Hz
+  testton 43.000000 1.129094 41.000000 45.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:57:06 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) 0.100000 Hz/Hz
+  testton 43.000000 0.854982 41.000000 44.000000 dB
+%%Auditory_Filter_Asymmetry_Shift_NB_ToHighF TS 15-Dec-2004__17:59:38 PAR: Delta_fU/f0 0.400000 Hz/Hz
+%%----- PAR2: ((Delta_fL-Delta_fU)/f_0) -1.000000 Hz/Hz
+  testton 42.000000 0.657836 41.000000 43.000000 dB

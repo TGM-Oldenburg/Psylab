@@ -1,0 +1,10 @@
+exp2/
+simu/
+*.m~
+*.tar*
+*.zip
+psylab-2.6*/
+todolist*
+Makefile*
+*~
+TODO

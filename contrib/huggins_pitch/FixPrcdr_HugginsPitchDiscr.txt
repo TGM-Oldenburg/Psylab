@@ -1,0 +1,20 @@
+
+        In diesem psychoakustischen Experiment geht es um die
+        Wahrnehmbarkeit tonartiger Geräusche in einem Rauschen. 
+
+        Sie werden jeweils zwei kurze Rauschintervalle hintereinander
+        hören. In beiden hören Sie dabei auch einen Ton. Dieser kann
+        unterschiedlich stark ausgeprägt sein und die Tonhöhe kann
+        dabei zufällig variieren.  Zusätzlich ist die Tonhöhe des
+        2. Tons entweder höher, tiefer oder gleich der des ersten
+        Tons. Es wird jedes Mal von Neuem zufällig ausgewählt, ob und
+        wie die Tonhöhe des 2. Tons sich unterscheidet.
+    
+
+        Ihre Aufgabe als Versuchsperson ist es, nach jeder Darbietung
+        zu entscheiden, ob die Tonhöhe des 2. Tons entweder höher,
+        tiefer oder gleich der des ersten Tons ist.
+     
+        Falls Sie sich nicht entscheiden können, sollen Sie raten.
+
+        

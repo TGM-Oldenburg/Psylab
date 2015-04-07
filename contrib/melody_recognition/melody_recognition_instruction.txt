@@ -1,0 +1,22 @@
+Ziel in diesem psychoakustischem Experiment ist es, Melodien
+zu erkennen, die auf verschiedene Art und Weise erzeugt
+werden.
+
+Sie werden jeweils eine Melodie hören, die aus 16 Tönen
+besteht. Je nach Durchlauf ist die Melodie mit reinen Tönen
+oder durch Rauschen erzeugt. Zusätzlich erhalten Sie eine
+Übersicht aller Liedernamen, die in diesem Experiment
+verwendet werden.
+Ihre Aufgabe als Versuchsperson besteht darin, die gehörte
+Melodie einem Namen der Liste zuzuordnen, die ihnen
+angezeigt wird.
+
+Jede Melodie wird nur ein einziges Mal abgespielt, ein
+wiederholtes Abspielen des zuletzt gehörten Liedes ist nicht
+vorgesehen. Wenn Sie die Melodie nicht erkannt haben, so 
+haben Sie die Möglichkeit dies mit der "not recognized"-
+Schaltfläche kenntlich zu machen.
+
+
+Die Eingabe können Sie über die Maus oder direkt über die
+Tastatur vornehmen. 

@@ -1,0 +1,221 @@
+######## psydat version 2 header ########  DO NOT change THIS line ########
+#### sam_sincarrier_detect mh 08-Jan-2006__18:42:58 npar 2 ####
+%%----- PAR1: modulation_frequency 4.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -28.000000 2.028825 -32.000000 -24.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__18:46:03 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -31.000000 1.278275 -34.000000 -29.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__18:48:51 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -35.000000 1.046297 -36.000000 -32.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__18:52:17 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -48.000000 0.978337 -50.000000 -47.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__18:55:20 npar 2 ####
+%%----- PAR1: modulation_frequency 4.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -34.000000 0.646762 -35.000000 -33.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__18:58:10 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -34.000000 1.200490 -36.000000 -32.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__19:01:35 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -29.000000 1.010765 -30.000000 -27.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__19:05:08 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -50.000000 0.832352 -52.000000 -49.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__19:07:45 npar 2 ####
+%%----- PAR1: modulation_frequency 4.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -30.000000 0.512348 -31.000000 -30.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__19:10:51 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -31.000000 0.795822 -33.000000 -30.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__19:14:07 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -32.000000 1.366052 -33.000000 -28.000000 dB
+#### sam_sincarrier_detect mh 08-Jan-2006__19:18:20 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -32.000000 3.392204 -36.000000 -24.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__10:45:38 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -32.000000 1.685500 -35.000000 -29.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__10:51:32 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -34.500000 0.759155 -35.000000 -33.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__21:08:54 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -31.000000 0.787752 -33.000000 -30.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__21:13:07 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -40.000000 1.620434 -42.000000 -37.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__21:17:16 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 400.000000 Hz
+  modulation_degree -54.000000 0.705036 -55.000000 -53.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__21:23:24 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -32.000000 0.646762 -33.000000 -31.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__21:27:15 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -52.000000 0.893701 -54.000000 -51.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__21:30:58 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -32.000000 0.867898 -34.000000 -31.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__21:34:38 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -34.000000 0.707107 -35.000000 -33.000000 dB
+#### sam_sincarrier_detect mh 01-Mar-2006__21:38:07 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 3200.000000 Hz
+  modulation_degree -31.000000 0.700340 -32.000000 -30.000000 dB
+#### sam_sincarrier_detect mh 29-Mar-2006__14:54:32 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -29.000000 1.899960 -32.000000 -25.000000 dB
+#### sam_sincarrier_detect mh 11-Oct-2006__21:51:14 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -16.000000 0.506370 -17.000000 -16.000000 dB
+#### sam_sincarrier_detect mh 11-Oct-2006__22:30:56 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -16.000000 0.506370 -17.000000 -16.000000 dB
+#### sam_sincarrier_detect mh 11-Oct-2006__22:34:10 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -16.000000 0.506370 -17.000000 -16.000000 dB
+#### sam_sincarrier_detect mh 19-Oct-2006__23:01:33 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -17.000000 0.487950 -18.000000 -17.000000 dB
+#### sam_sincarrier_detect mh 20-Oct-2006__11:03:03 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -14.000000 0.487950 -15.000000 -14.000000 dB
+#### sam_sincarrier_detect mh 24-Oct-2006__11:14:26 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -23.000000 0.487950 -24.000000 -23.000000 dB
+#### sam_sincarrier_detect mh 24-Oct-2006__11:16:08 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -24.000000 0.513553 -25.000000 -24.000000 dB
+#### sam_sincarrier_detect mh 24-Oct-2006__11:18:49 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree -21.000000 0.680074 -22.000000 -20.000000 dB
+#### abs_threshold_tones mh 25-Oct-2006__22:17:25 npar 1 ####
+%%----- PAR1: tone-frequency 8000.000000 Hz
+  tone-level -55.000000 0.487950 -56.000000 -55.000000 dB
+#### jnd_frequency mh 11-Jan-2007__15:37:56 npar 2 ####
+%%----- PAR1: reference_frequency 1000.000000 Hz
+%%----- PAR2: tone_level -30.000000 dB
+  rel_frequency_increment 6.000000 0.928388 5.000000 8.000000 cent
+#### tone_in_broadbandnoise mh 14-Jun-2007__14:38:02 npar 2 ####
+%%----- PAR1: testtone_frequency 3200.000000 Hz
+%%----- PAR2: noise_level -30.000000 dB
+  testtone_level -49.000000 2.045449 -51.000000 -44.000000 dB
+#### tone_in_broadbandnoise mh 14-Jun-2007__14:39:22 npar 2 ####
+%%----- PAR1: testtone_frequency 800.000000 Hz
+%%----- PAR2: noise_level -30.000000 dB
+  testtone_level -53.000000 1.297212 -55.000000 -51.000000 dB
+#### tone_in_broadbandnoise mh 14-Jun-2007__14:40:33 npar 2 ####
+%%----- PAR1: testtone_frequency 6400.000000 Hz
+%%----- PAR2: noise_level -30.000000 dB
+  testtone_level -48.000000 1.018305 -50.000000 -46.000000 dB
+#### tone_in_broadbandnoise mh 14-Jun-2007__14:40:46 npar 2 ####
+%%----- PAR1: testtone_frequency 400.000000 Hz
+%%----- PAR2: noise_level -30.000000 dB
+  testtone_level -54.000000 2.184745 -57.000000 -49.000000 dB
+#### tone_in_broadbandnoise mh 14-Jun-2007__14:41:27 npar 2 ####
+%%----- PAR1: testtone_frequency 1600.000000 Hz
+%%----- PAR2: noise_level -30.000000 dB
+  testtone_level -51.000000 0.979854 -53.000000 -49.000000 dB
+#### tone_in_broadbandnoise mh 14-Jun-2007__14:43:00 npar 2 ####
+%%----- PAR1: testtone_frequency 200.000000 Hz
+%%----- PAR2: noise_level -30.000000 dB
+  testtone_level -58.500000 3.081006 -62.000000 -51.000000 dB
+#### match_octave_pitch mh 01-Feb-2008__15:50:28 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:50:39 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:50:47 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:50:58 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:51:48 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:52:54 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:53:42 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:53:50 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:54:07 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:54:18 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:55:33 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__15:59:47 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### match_octave_pitch mh 01-Feb-2008__16:25:24 npar 1 ####
+%%----- PAR1: reference_frequency 8000.000000 Hz
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### dully_exp_3par_test_purpose mh 24-Feb-2009__11:05:24 npar 3 ####
+%%----- PAR1: dully_frequency 8000.000000 Hz
+%%----- PAR2: dully_level 80.000000 dB
+%%----- PAR3: dully_duration 8.000000 s
+  frequency_change -1424.000000 3.926599 -1428.000000 -1416.000000 cent
+#### dully_exp_3par_test_purpose mh 23-Feb-2009__11:05:24 npar 3 ####
+%%----- PAR1: dully_frequency 8000.000000 Hz
+%%----- PAR2: dully_level 80.000000 dB
+%%----- PAR3: dully_duration 8.000000 s
+  frequency_change -1414.000000 4.926599 -1418.000000 -1406.000000 cent
+#### match_freq_binaural mh 30-Mar-2009__08:07:19 npar 2 ####
+%%----- PAR1: reference_frequency 250.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+  rel_frequency_increment 25.000000 3.867831 20.000000 33.000000 cent
+#### match_freq_binaural mh 30-Mar-2009__08:09:41 npar 2 ####
+%%----- PAR1: reference_frequency 500.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+  rel_frequency_increment -2.000000 2.439750 -8.000000 1.000000 cent
+#### match_freq_binaural mh 30-Mar-2009__08:20:03 npar 2 ####
+%%----- PAR1: reference_frequency 1000.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+  rel_frequency_increment -4.000000 0.915475 -5.000000 -2.000000 cent
+#### match_freq_binaural mh 30-Mar-2009__08:22:01 npar 2 ####
+%%----- PAR1: reference_frequency 2000.000000 Hz
+%%----- PAR2: test_ear_side 1.000000 left1_right2
+  rel_frequency_increment 0.000000 0.806226 -2.000000 1.000000 cent

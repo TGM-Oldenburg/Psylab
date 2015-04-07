@@ -1,0 +1,13 @@
+######## psydat version 2 header ########  DO NOT change THIS line ########
+#### sam_sincarrier_detect test 23-Mar-2009__16:06:48 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -36.000000 1.726197 -40.000000 -33.000000 dB
+#### jnd_intensity test 22-Mar-2010__14:22:31 npar 2 ####
+%%----- PAR1: reference_level -30.000000 dB
+%%----- PAR2: tone_frequency 1000.000000 Hz
+  level_increment 1.250000 0.275928 0.750000 1.500000 dB
+#### sam_sincarrier_detect test 10-Mar-2011__12:05:52 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -18.000000 1.108183 -20.000000 -17.000000 dB

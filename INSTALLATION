@@ -1,0 +1,16 @@
+
+Installation
+************
+
+psylab is easy to install:  Extract all files in the psylab
+distribution to some directory in your file system, say C:/home/some/place.
+Then start matlab and ADD TO YOUR PATH THE DIRECTORY WHERE ALL THE
+FILES NAMED 'mpsy_*.m' RESIDE.  Depending on version of psylab, this
+could for example be C:/home/some/place/psylab-2.4   -- and you are done.
+You should save that path for future Matlab sessions.   
+
+psylab was tested to work on Matlab 6.5, 7.04, R2006a, R2010b on a Windows PC 
+as well as on Linux/Ubuntu.
+
+Feedback about experience with psylab from other computer systems are very
+welcome.

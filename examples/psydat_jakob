@@ -1,0 +1,29 @@
+######## psydat version 2 header ########  DO NOT change THIS line ########
+#### sam_sincarrier_detect jakob 15-Jun-2010__20:23:34 npar 2 ####
+%%----- PAR1: modulation_frequency 16.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree 9.666667 3.642696 3.666667 14.666667 dB
+#### sam_sincarrier_detect jakob 15-Jun-2010__20:28:38 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree 3.500000 3.745327 -1.000000 11.000000 dB
+#### sam_sincarrier_detect jakob 15-Jun-2010__20:37:47 npar 2 ####
+%%----- PAR1: modulation_frequency 256.000000 Hz
+%%----- PAR2: carrier_frequency 800.000000 Hz
+  modulation_degree -13.000000 6.759393 -23.000000 -3.000000 dB
+#### sam_sincarrier_detect jakob 15-Jun-2010__20:51:50 npar 2 ####
+%%----- PAR1: modulation_frequency 64.000000 Hz
+%%----- PAR2: carrier_frequency 1600.000000 Hz
+  modulation_degree 5.666667 8.214943 -8.333333 18.000000 dB
+#### jnd_frequency jakob 07-Jan-2012__12:03:11 npar 2 ####
+%%----- PAR1: reference_frequency 1000.000000 Hz
+%%----- PAR2: tone_level -30.000000 dB
+  rel_frequency_increment 38.000000 6.486449 28.000000 48.000000 cent
+#### jnd_intensity jakob 10-Mar-2013__15:00:16 npar 2 ####
+%%----- PAR1: reference_level -30.000000 dB
+%%----- PAR2: tone_frequency 1000.000000 Hz
+  level_increment 5.500000 0.527102 4.750000 6.750000 dB
+#### jnd_frequency jakob 10-Mar-2013__15:10:40 npar 2 ####
+%%----- PAR1: reference_frequency 1000.000000 Hz
+%%----- PAR2: tone_level -30.000000 dB
+  rel_frequency_increment 18.000000 1.906796 16.000000 22.000000 cent

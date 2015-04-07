@@ -1,0 +1,798 @@
+2014-04-02  Martin Hansen  <psylab AT jade-hs.de>
+
+	* mpsy_maxreversal_check.m (mpsy_maxreversal_check):  new file
+	to check for value of M.MAXREVERSAL:  In older version up to
+	2.5 only the upper reversals were counted.  From version 2.6
+	and higher, both upper and lower reversals are counted, and
+	M.MAXREVERSAL should therefore be twice as large as earlier.
+	This file serves as an automatic check for smaller value of
+	M.MAXREVERSAL (<=4) in older psylab experiments.  
+
+2014-03-18  Martin Hansen  <psylab AT jade-hs.de>
+
+	* mpsy_det_reversal_adj_step.m: File is made obsolete.  Its
+	functionality is now placed into each separate file with an
+	adaptive method, like mpsy_adapt_1up_1down.m,
+	mpsy_adapt_1up_2down.m, mpys_adapt_uwud.m, etc.  The reasons are:
+	1) The code looks much easier in the non-general form.
+	2) In case of the uwud-method, the "unsure" answer is treated
+	as a "wrong" answer (go up) but is not marked by 0 or 1 in
+	array M.ANSWERS
+	3) From version 2.6, the counting of reversals has changed to
+	count both uppper AND lower reversals.  This is now also done in
+	each file for adaptive procedures.
+
+2014-02-20  Martin Hansen  <psylab AT jade-hs.de>
+
+	* display_psydat.m (display_psydat): fixed error for the case
+	npar==1 :
+npar     = size(y,2)-4;
+if npar == 1,
+  % hm... only 1 parameter.  Add one fake-column for par2, being
+  % only zero.  this will then be the one-and-only value of par2,
+  % thus yielding just 1 "unique" value, i.e. uni_par2==1, see below
+  y = [y 0*y(:,end) ];
+  % despite only 1 parameter, 'npar' must reflect size of matrix y
+  npar = npar + 1;
+  param_perm = (1:npar);   % THIS line is new
+end
+
+	* display_psydat_raw.m (display_psydat_raw):
+	fix of same error as in display_psydat.m
+
+
+2013-09-09  Martin Hansen  <psylab AT jade-hs.de>
+
+	* mpsy_plot_feedback.m: changed look of plot:
+	familiarization	phase is now plotted in gray and measurement
+	phase in black.
+
+2013-04-10  Martin Hansen  <psylab AT jade-hs.de>
+
+	changed affiliation/email of all files into jade-hs.de
+
+2012-11-23  Martin Hansen  <psylab AT jade-hs.de>
+
+	* mpsy_intrlv_match_main.m: new file for interleaved matching
+	experiments
+	* mpsy_match_main.m: the earlier version used a hard-coded
+	1up_1down method as the only method of matching experiment.
+	This has been changed, such that the adaptive method has to be
+	specified now.  This is needed in cases where, e.g., the 29.3%
+	point or/and the 70.7% point for a percept like "A is louder than
+	B" is desired.  Omitted specification of the method will now lead
+	to an error.
+
+2011-11-01  Martin Hansen  <psylab AT jade-hs.de>
+
+	* mpsy_msound_present.m:
+	new functionality to use msound for playback (at the
+	users option).  Originally this was to overcome errors of
+	"sound" in Matlab-2011 Versions.  Also, visual interval
+	indication is now always possible in combination with msound,
+	which is useful on non-win PCs.
+
+	* mpsy_afc_present.m:
+	added new msound functionality
+
+	* mpsy_visual_interval_check.m:
+	new file to perform checks for correct (equal) lengths of
+	m_test and m_ref which are required for visual interval
+	indication.  This script is now called from
+	mspsy_visual_interval_indicator and from mpsy_msound_present
+
+	* mpsy_init_run.m:
+	reflected new feature of msound-playback
+
+	* mpsy_2afc_gui.m, mpsy_2auc_gui.m, ..., mpsy_4auc_gui.m:
+	all GUI answer buttons handles have changed from individual
+	variable names (afc_b1, afc_b2, etc.) to an array afc_but(1),
+	afc_but(2), etc.
+
+	* mpsy_visual_interval_indicator.m:
+	reflecting change of answer button handle names made this
+	script simpler.
+
+	* mpsy_check.m:
+	reflected the change of answer button handle names
+
+
+2009-11-10  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_intrlv_afc_main.m: same change regarding reversed order
+	as in mpsy_afc_main.m and mpsy_match_main.m
+
+	Also, applied same change in quit-mechanism as for
+	mpsy_match_main.m and mpsy_afc_main.m, see 2009-11-05.
+
+	* mpsy_match_main.m: same change as in mpsy_afc_main.m
+
+	* mpsy_afc_main.m: new reversed order of
+
+	eval([M.EXPNAME 'user']);   % now step 1 (was step 2)
+
+	and
+
+	M.VARS  = [M.VARS M.VAR];   % now step 2 (was step 1)
+	M.STEPS = [M.STEPS M.STEP];
+
+	this is in order to reflect possible changes of M.VAR by the
+	user script.  For example, the user script might limit M.VAR
+	to within certain boundaries, e.g., to prevent amplitude
+	clipping, overmodulation, negative increments, etc.
+	-- suggestion by Björn Ohl. 
+
+
+2009-11-05  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_up_down_gui.m: same fix as for mpsy_afc_gui.m
+
+	* mpsy_afc_gui.m: explicit " M.QUIT = 1;" added to DeleteFcn
+	in psylab_gui.  This is in relation to fix in mpsy_afc_main.m
+	and mpsy_match_main.m
+
+	* mpsy_afc_main.m: same fix as in mpsy_match_main.m
+
+	* mpsy_match_main.m: improved quit-mechanism when user is
+	asked whether she is ready for the next run.  Pressing RET was
+	required so far.  Then matlab hangs when the GUI was deleted.
+	This is now controlled for. 
+
+2009-9-24  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_afc_gui.m: new method and new value calculated by the
+	'KeyPressFcn' of the subject GUI.  The user answer is set to
+	M.UA=double(get(gcf, 'CurrentCharacter'))-double('0');
+	This allows direct detection of single characters, e.g. RET,
+	or '-'
+
+	* mpsy_adapt_1up_1down.m: the variables M.ADAPT_N_UP and
+	M.ADAPT_N_DOWN are now set in this script.  Previously, until
+	version 2.2 they had to be set in the main script of each
+	experiment.  They were previously used inside mpsy_afc_main.m
+	to "eval"uate which adaptive script should be run.  This has
+	changed, by they are still needed for the automatic detection
+	of reversal points.
+
+	* mpsy_adapt_1up_2down.m: same as in mpsy_adapt_1up_1down
+	* mpsy_adapt_2up_1down.m: same as in mpsy_adapt_1up_1down
+	* mpsy_adapt_1up_3down.m: same as in mpsy_adapt_1up_1down
+
+	* mpsy_adapt_wud.m: new file that implements the "weighted
+	up-down method according to Kaernbach (1991) 
+
+	* mpsy_adapt_uwud.m: new file that implements the "unforced
+	weighted up-down method according to Kaernbach (2001)
+
+	* mpsy_3auc_gui.m: new GUI for use with UNforced WUD method. 
+
+	* mpsy_afc_present.m: new possible value -3 for M.ACT_ANSWER
+	indication "indecision", needed by the UWUD adaptive method
+
+	
+2009-03-19  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_afc_present.m: new name chosen instead of previous name
+	mpsy_present.m
+	
+	* mpsy_match_present.m: new file, very similar to
+	mpsy_afc_present.m but suitable for matching experiments.
+	ALSO:  correct typo in
+	    if isempty(M.UD),  ud = -1;  end;
+	into
+	    if isempty(M.UD),  M.UD = -1;  end;
+	now bug observation of H. Kern is solved
+
+	* Makefile:  changes to reflect the above two new names.
+
+	* psydat_helper.m: new small help application: make it eays to
+	check through all your psydat files, and select subset of a
+	subject's measured data.  This is not yet made a standard part
+	of psylab.
+	
+	* mpsy_match_main.m: a block of lines has been removed and
+	placed into mpsy_match_present.  As a result, mpsy_match_main
+	and mpsy_afc_main now look extremely similar.   
+
+2009-01-15  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_plot_result.m: minor change:  figure is only created in case
+	of data to be plotted. 
+
+	* mpsy_split_lines_to_toks.m (tok): corrected a crash problem 
+	due to empty lines in psydat file by adding
+             tok = {};  % to avoid crash in case of empty input
+	as the first line.
+	
+	* display_psydat_raw.m: added same two additional input arguments
+	'pstyle' and 'param_perm' as already present in display_psydat.m  
+
+	* read_psydat.m: introduced a more informative message, including
+	line_number in psydat file, in case that some lines of the psydat
+	contain malformed entries.
+
+2008-11-04  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_info.m: added check for existence of handles before setting
+	any of the text fields.  This is necessary in case that the AFC
+	GUI was deleted.
+
+	* mpsy_up_down_gui.m (psylab_gui): added same 'DeleteFcn' as in
+	mpsy_afc_gui.m
+
+	* mpsy_afc_gui.m (psylab_gui): added a 'DeleteFcn' property to the
+	AFC-GUI which allows a smooth stop of a current psylab run. 
+
+2008-11-03  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_plot_feedback.m : bug fix: first run with M.DEBUG > 0
+	crashed due to non-existent variable "measurement_fidx" when text
+	information about median, mean and std.dev. should be diplayed
+
+2008-02-01  Martin Hansen  <psylab AT fh-oldenburg.de>
+	
+	* Makefile changed to reflect new directories/names
+	
+	* New name "examples" for previous subdir "exp"
+	
+	* Introduction of new subdirectory "contrib".  First
+	members of that directory are:
+	1) melody recognition experiment, provided by A.Baumgart & S.Franz 
+           based on reference Akeroyd et al. 2001
+	2) huggins pitch detection/discrimintaion experiment, provided by G. Stiefenhofer
+           based on reference Santurette & Dau 2007
+
+	* mpsy_plot_feedback.m (legend): added text information about
+	median, mean and std.dev. to plot 
+
+	* mpsy_proto.m (m_filenamedate): changed behaviour when saving
+	data in binary matlab format.  Save only once into filename with
+	name consisting of subject name, current date (and current hour)
+
+	* mpsy_proto.m: added check for new flag-variable M.SAVEMEAN.  If
+	M.SAVEMEAN is set, it specifies that the MEAN of all values of
+	M.VAR during the measurement phase should be taken as the final
+	threshold value, rather than the MEDIAN -- as has been the psylab
+	standard up to now.  Provided by Sven Franz.
+	
+	(M.ALLTHRES_MEAN): new variable which holds the collection of all
+	threshold MEANs - similar to already existing M.ALLTHRES_MED
+
+	* rms.m: added/corrected text for verbose information about RMS
+	value in case of multi-column input signals.
+
+	* test_adaptive_rule.m: new file to test adaptive up-down-rules
+
+	* mpsy_check.m: slight rearrangement of checks.  Corrected check
+	for strings that must not contain empty spaces.
+
+	* mpsy_1up_3down.m: new file for 1up-3down method.  Provided by Christian Bartsch
+
+2007-07-09  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* display_psydat_raw.m (figure(200)): removed explicit figure number
+	200 for plotting.  
+
+	* display_psydat.m (figure(200)): removed explicit figure number
+	200 for plotting.  
+
+2007-05-24  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_init_run.m: check for computer operating system.  Reset
+	M.VISUAL_INDICATOR to 0 if not on a windows PC system. 
+
+	* mpsy_present.m: added check for computer operating system: only
+	add an explicit pause after sound on windows PC systems.
+
+2007-04-17  Martin Hansen  <psylab AT fh-oldenburg.de>
+
+	* mpsy_intrlv_afc_main.m: new file for running experiment with
+	interleaved tracks
+
+	* mpsy_intrlv_init.m: new file for intializing interleaved tracks
+
+	* mpsy_intrlv_gettrack.m: new file for finding next running track
+	at random, and for putting a copy of that tracks data in MI into
+	variable M
+
+	* mpsy_intrlv_puttrack.m: new file for putting current tracks' M
+	back into array MI
+
+2007-04-16  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_simu_main.m:  added 'figure(111)' prior to call to mpsy_plot_feedback
+	* mpsy_match_main.m: added 'figure(111)' prior to call to mpsy_plot_feedback
+	* mpsy_afc_main.m:   added 'figure(111)' prior to call to mpsy_plot_feedback
+
+2007-03-29  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_afc_main.m: changed order of informaton about next run and
+	asking subject whether to start the next run. 
+
+	* mpsy_present.m: new file that contains mounting and presentatino
+	of n-AFC intervals, and subsequent processing of user answer.
+
+	changed all occurrences of 'ua'  (user answer)
+	into M.UA
+	
+	changed all occurrences of 'ud'  (up-down user answer)
+	into M.UD
+
+2007-03-12  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_plot_feedback.m: changed so that current plot of M.VARS is
+	only append to file "plots_mvars_M.SNAME" in case M.DEBUG>1
+
+2007-01-04  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_visual_interval_indicator.m (dur_interval): check for equal
+	length of m_test and m_ref resp. m_ref1 and m_ref2.  Issue warning
+	about setting M.VISUAL_INDICATOR = 0 in that case.
+	Check for existence of m_ref vs. m_ref1. 
+
+	* mpsy_init_run.m: now also m_test and m_ref* are getting
+	cleared here. 
+
+	* mpsy_afc_main.m: changed call to mpsy_nafc from function-like to
+	script-like.
+
+	* mpsy_nafc_singleref.m: new name for previous file mpsy_nafc.m
+	This file handles N-AFC experiments with one single-reference,
+	stored in 'm_ref' - as was the one-and-only possibility prior to
+	psylab version 1.97.
+
+	* mpsy_nafc.m: changed from a function to a script, allowing
+	EITHER a single-reference interval 'm_ref' OR different reference
+	interval 'm_ref1', 'm_ref2' (and 'm_ref3', if applicable).  This
+	is necessary for truely random presentations of noises within one
+	trial.
+
+2006-11-29  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_init_run.m: added M.DIRECTION = [] so that 2up1down
+	etc. can work correctly if the very first answer is wrong.
+	1up2down was not affected, because the if-expression in line 61 in
+	mpsy_1up_2down.m was already determined as 'false' due to first
+	argument of the logical '&'.  
+
+2006-11-27  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* display_psydat.m: added new optional parameter param_perm.  It
+	allows to permutate the order of experiment parameters for
+	plotting purposes.  The permutation is performed after data have
+	been read via read_psydat.m.  The xlabel and legend(s) are also
+	adapted accordingly.  The argument param_perm must be a
+	permutation of (1:npar), which is the natural order of parameters
+	as found in the psydat file.
+
+	* mpsy_plot_data.m (npar): fixed an error in line 85:
+	correct:    for k=1:lengt(uni_par2)
+	wrong:      for k=1:size(uni_par2,1)
+
+
+2006-11-22  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_plot_data.m (par2): fixed an error in line 70:
+	correct:            par2 = par(:,2:npar);
+	previously wrong:   par2 = par(:,npar);
+
+	* mpsy_plot_data.m: fixed a problem occuring from a Matlab
+	stupidity: Matlab has stupidly changed the way how handles are
+	assigned to errorbar-plots between its versions 6 and 7.  ARGH!!
+	This is now caught by a query for the matlab version release
+	string.
+
+	* display_psydat.m: added 3rd (optional) argument pstyle which is
+	passed on to mpsy_plot_data.m 
+
+2006-11-01  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* read_psydat.m (nparam): determination of nparam now only if
+	correct match for experiment name is found.
+
+	* mpsy_match_main.m: new file for controlling matching experiments
+	where a test signal and a reference signal are presented and the
+	subject is requested to match a signal property by answering "up" or
+	"down" which will then be used to adjust the test signal.  Takes
+	the equivalent role as mpsy_afc_main.m for n-AFC experiments. 
+
+	* mpsy_match.m: new file for mounting test signal, reference
+	signal, and quiet signals together for matching type experiments.
+	Takes the equivalent role as file mpsy_nafc.m for n-AFC experiments.
+
+	* mpsy_check.m: added a check for psylab version used in the
+	current experiment, via checking existence of variable M_PARAM,
+	indicating version 1, instead of M.PARAM, indicating version 2.
+
+	removed old check of signal named m_ruhe
+
+	added check for type of experiment (n-AFC vs. matching experiment) and
+        corresponding error message if both fiels NAFC and MATCH_ORDER are specified
+
+	added automated choice of correct GUI (AFC vs. Up/Down)
+	corresponding to experiment type
+	
+	* mpsy_init_run.m: added checks and default values for fields
+	VISUAL_INDICATOR, INFO, FEEDBACK, DEBUG
+
+
+2006-10-25  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_info.m: new file for presenting information to the subject,
+	either via commandline or via GUI.
+
+	* mpsy_init.m: old file name for new functionality: This script is
+	called once at the beginning of a (new) experiment.  It clears the
+	main psylab variable M and then sets a few variables to their
+	starting value.  
+	This script should be called by the user within her experimen'#s
+	main script as the very first action, prior to assigning the
+	psylab variables M.* 
+
+	* mpsy_init_run.m: new name for functionality of previous file
+	name mpsy_init.m.  This script is called automatically by
+	mpsy_afc_main.m once before each new run.  It resets all variable
+	pertaining to the control of one experimental run.
+
+2006-10-22  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_proto_v1.m: updated mpsy_proto.m to new psydat format
+	version 2.  Previvous file now changed to mpsy_proto_v1.m
+	
+	* read_psydat_v1.m: updated read_psydat.m to new psydat format
+	version 2. Previvous file now changed to read_psydat_v1.m
+
+	* mpsy_check_psydat_version.m: new function for determining format
+	of psydat file.  A new file with a version 2 header is produced,
+	if filename doesn't exist yet. 
+
+2006-10-20  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_varhighlimit.m: removed this file from being part of psylab,
+	by excluding it in file list in Makefile. 
+
+	* mpsy_varlowlimit.m: removed this file from being part of psylab,
+	by excluding it in file list in Makefile. 
+
+	* mpsy_plot_result.m: updated for new plotting with >=2 parameters
+
+	* mpsy_plot_data.m: updated data sorting via call to unique() and
+	legend formatting for new plotting with >=2 parameters in
+	M.ALLPARAM
+
+	function has new argument "pstyle".
+
+	new psylab variable M.RESULTSTYLE, determines style of plotting
+	threshold data.  can be used as argument for mpsy_plot_data.m 
+
+
+2006-10-19  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_proto.m (max_thres): new format for accumulating data in
+	M.ALLTHRES_MED and M.ALLTHRES_STD (column vectors) and for
+	M.ALLPARAM (matrix with M.NUM_PARAMS columns and same number of
+	rows as M.ALLTRES_MED and M.ALLTHRES_STD).  This format is
+	expected in mpsy_plot_data.m 
+
+	* mpsy_check.m (mpsy_must_not_be_empty): new check for length of
+	M.PARAM.  Removed previous check for scalar size of variables
+	named in variable "mpsy_must_be_numeric"
+
+	* mpsy_global.m: new names M.ALLTHRES_MED and M.ALLTHRES_STD insted
+	old M.ALLTRHES and M.ALLTHSD.  changed all occurences throughout
+	psylab.
+
+	IMPORTANT CHANGE: new name M.ALLPARAM instead old M.ALLPAR1 and               <------ !!!
+	M.ALLPAR2 
+
+	IMPORTANT CHANGE: all variables for the second parameter, like                <------ !!!
+	"M.PAR2*", are now deprecated in psylab version 2.  Instead, a
+	deliberate number of multiple parameters is now possible by making
+	M.PARAM a (row) vector, where column number corresponds to
+	parameter number.  names and units of parameter are stored in
+	M.PARAMNAME and M.PARAMUNIT.  The number of individual parameters
+	needs to be specified in NEW variable M.NUM_PARAMS
+
+
+2006-10-11  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_global.m: new version 1.95, branch towards 2.0
+	
+	  IMPORTANT CHANGE: changed ALL variables M_* into being struct               <------ !!!
+	  member fields of only one variable M, e.g. M_VAR became M.VAR
+	  
+	  changed variable name of field ADAPT_M_DOWN into ADAPT_N_DOWN               <------ !!!
+	  throughout all files of psylab.
+
+	* mpsy_check.m (mpsy_must_be_cell): M.PARAMNAME and M.PARAMUNIT
+	must now be cells of strings, but this needs no checking in this
+	file, as each element is subjected to conversion by char() (e.g. in
+	mpsy_proto).
+
+
+2006-03-19  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* display_psydat.m (yl): added units to par2 in legend, added
+	par2name to title
+	
+2006-03-10  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* Makefile: Larger reorganisation of the Makefile.  Allow for
+	zip/tar including the leading base-directory
+
+	* doc/Makefile: Reorganisation for making of documentation.
+
+2006-03-01  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_2up_1down.m: same corresponding rewrite as in mpsy_1up_2down.m
+
+	* mpsy_1up_1down.m: same corresponding rewrite as in mpsy_1up_2down.m
+
+	* mpsy_1up_2down.m: changed from function into script.  Rewrite to
+	reflect new order of M_ACT_ANSWER being appended to M_ANSWERS (see
+	also changes in mpsy_afc_main.m)
+
+	* mpsy_debug.m: added new plot of reversal points into plot of M_VAR
+
+	* mpsy_det_reversal_adj_step.m: new script to detect reversals and
+	adjust current step size.  The ALGORITHM for detection is
+	CORRECTED rel. to previous version found in mpsy_afc_main.m
+
+	* mpsy_afc_main.m: application of reversal detection removed from
+	mpsy_afc_main.m.  This step is now performed in the new script
+	mpsy_det_reversal_adj_step.m
+
+	The current answer, M_ACT_ANSWER, is now added to the array of all
+	answers within mpsy_afc_main.m, instead of in the scripts
+	mpsy_*up_*down.m
+
+	plot of m_outsig is now only shown if M_DEBUG >	1 (instead of ==1).
+	
+	* check_messphase.m (m): new help script, not part of public
+	psylab used to check correctness of detection of reversals. 
+
+	* mpsy_init.m (M_REV_IDX): M_REV_IDX set to empty variable
+
+	* mpsy_global.m (M_REV_IDX): new global variable.  Contains the
+	indices (==trial numbers) of the detected reversals of the current
+	run.
+	(M_LAST_ANSWER): unused global variable deleted.
+
+	* mpsy_check.m: handles of new findobj for all answer buttons of
+	the GUI
+
+2006-01-16  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* doc/psylab-doc.tex: updates in documentation
+
+2006-01-07  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* fft_rect_filt.m: new file for signal filterung, not a central
+	part for controlling psylab.
+
+	* display_psydat_raw.m: changed to make use of new mpsy_plot_data.m
+
+	* mpsy_plot_result.m: changed to make use of new mpsy_plot_data.m 
+
+	* exp/jnd_frequency.m  update to reflect use of mpsy_plot_result
+	* exp/jnd_intensity.m  update to reflect use of mpsy_plot_result
+
+	* mpsy_plot_data.m: new file/function for plotting threshold
+	data.  Used by mpsy_plot_result.m and by display_psydat_raw.m
+
+	* mpsy_check.m (m_quiet): checks for existence of pre-, quiet-,
+	and post-signals is now placed here, instead of previous location
+	in mpsy_afc_main.m 
+	(afc_fb): creation or check for existing GUI
+
+	* mpsy_afc_gui.m (psylab_gui): new file for creating the overall
+	GUI and its general functionality.  This file is called by
+	mpsy_2afc_gui.m, mpsy_3afc_gui.m, and mpsy_4afc_gui.m to setup the
+	GUI.  Then the individual answer buttons are created.
+
+	The GUI now contains a few menus for displaying copyright
+	information etc.
+
+	* NO-WARRANTY: new file with no-warranty terms
+	* DISTRIBUTION: new file with distribution information
+	* GNU-GPL:  new file with GNU GPL
+	* PSYLAB-LICENSE: new file about license
+	* PSYLAB-ABOUT: new file for information "about"
+
+	* mpsy_global.m: new global variable M_ALLTHSTD for collecting all
+	standard deviation values corresponding to threshold values in
+	M_ALLTHRES in an array 
+
+2006-01-06  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* display_psydat.m:    change-of-name from previous auswert_psydat.m
+	* display_psydat_raw.m: equivalent change-of-name
+
+	* mpsy_init.m: checks for empty flag variables like M_USE_GUI,
+	M_DEBUG etc. are now deleted as empty value will have same effect
+	as a value of 0
+	
+	* mpsy_global.m: IMPORTANT CHANGE:  overall change-of-name of           <------ !!!
+	variable  M_ALLPARS into new name M_ALLPAR1 
+	* mpsy_proto.m (ALL_PAR1):  IMPORTANT CHANGE:  overall                  <------ !!!
+	change-of-name of variable  M_ALLPARS into new name M_ALLPAR1
+	* mpsy_proto.m (ALL_PAR2):  added collection of M_PAR2 values
+	into array M_ALLPAR2
+
+	* mpsy_global.m: new global variable M_ALLPAR2 for collecting all
+	values of M_PAR2 in an array
+	* mpsy_global.m: new flag variable M_INFO for giving information
+	to subject about the experimental parameters
+
+	* mpsy_check.m (mpsy_must_be_numeric): added variable M_STEP to
+	list of variables that must be numeric
+	(m_ruhe): compatiblity check of existence of m_ruhe is placed here
+	now, instead of in mpsy_afc_main.m 
+
+	* mpsy_3afc_gui.m (psylab_gui): Added a new KeyPressFunction for
+	the answer GUI to allow for answering via keyboard press during
+	GUI use instead of mouse button click
+	* mpsy_2afc_gui.m (afc_info): same new KeyPressFcn
+	* mpsy_4afc_gui.m (afc_info): same new KeyPressFcn
+
+	* mpsy_3afc_gui.m (afc_info): new text field in afc answer gui for
+	providing user information 
+	* mpsy_2afc_gui.m (afc_info): same new text field
+	* mpsy_4afc_gui.m (afc_info): same new text field 
+
+2005-11-30  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_visual_interval_indicator.m: new file allowing a visual
+	interval indication via colour change of the respective response
+	buttons of the answer GUI. 
+
+	* mpsy_init.m: updated to also perform a "clear M_*" at the
+	beginning.  Therefore, the main script now only needs a one-liner
+	mpsy_init at the beginning.  Example scripts have been changed
+	accordingly. 
+
+	* mpsy_check.m: a new file for checking type (string/numeric) and
+	value of certain vital PSYLAB variables.
+
+	* mpsy_plot_result.m: a new file for plotting the results of
+	several runs, typically for plotting after thresholds for one set
+	of M_PARAM values has been obtained. 
+	
+	* mpsy_global.m: added new global flag variable
+	M_VISUAL_INDICATOR.  Added global M_ADAPT_N_UP and M_ADAPT_M_DOWN.
+	Added new variables M_EXPPART and M_EXPPARTNAME (future use).
+
+	* mpsy_version.m:  a new file for telling the
+	current version.  Needs maybe a smarter way for auto-updating
+	itself in case of version change
+
+2005-06-28  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_3afc_gui.m (psylab_gui): Bold symbol "!" in right corner
+	
+	Also: set random-state for rand-generator.
+	Same in 4AFC and 2AFC GUIs 
+
+2005-06-28  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* exp/jnd_intensity.m:  New example experiment for
+	JND-measurements.  Specialty:  if-clause for M_VAR<0 
+
+	* exp/jnd_frequency.m:  New example experiment for
+	JND-measurements.  Specialty:  if-clause for M_VAR<0 
+
+	* mpsy_afc_main.m: changed new calculation of M_STEP
+	   OLD:    M_STEP = max(M_MINSTEP, floor (M_STEP / 2));
+	   NEW:    M_STEP = max(M_MINSTEP, M_STEP / 2);
+
+2005-04-14  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_proto.m (fidx): fixed a problem occuring since MATLAB-7
+	(R14) related to indexing and "end"?
+
+2005-04-11  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* hanwin.m: changed use of function "hanning" from matlab signal
+	toolbox.  The window is now generated with a (sub)function in
+	hanwin.m
+
+2005-04-03  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_afc_main.m: rearrangements, e.g. for start and stop message 
+
+	* mpsy_4afc_gui.m: new GUI for 4 AFC
+	* mpsy_2afc_gui.m: new GUI for 2 AFC
+	* mpsy_3afc_gui.m: new name, replacing previous name afc3_gui.m 
+
+	* mpsy_split_lines_to_toks.m: new name, replacing previous name
+	split_lines_to_toks.m
+	
+
+2005-03-31  Martin Hansen  <martin.hansen AT h-oldenburg.de>
+
+	* mpsy_afc_main.m: detection of a reversal and adjustment of
+	M_STEP is now a part of mpsy_afc_main.m  (previously, it was a
+	common procedure in the adaptive script(s) mpsy_Nup_Mdown.m)
+
+	* mpsy_afc_main.m: new name for previous file mpsy_3afc_main.m
+	This script now calls mpsy_nafc.m, amongst others with new
+	variable number M_NAFC of aternative intervals.
+
+	* mpsy_nafc.m: new script for mounting test signal and reference
+	signal in an N AFC fashion.  Replaces a previous part of
+	mpsy_3afc_main.m
+
+	* mpsy_2up_1down.m: new script for 2up-1down adaptive procedure
+
+	* mpsy_1up_2down.m: new name for previous file one_up_two_down.m
+
+	* mpsy_1up_1down.m: new name for previous file one_up_one_down.m
+
+2004-11-24  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* auswert_psydat_raw.m: new file name for previous file
+	auswert_psydat.m 
+
+2004-11-20  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* auswert_psydat_par2.m: new script to allow analysis of data in
+	psydat file.  The data is read, multiple instances of threshold
+	data for the same combination of PARAM and PAR2 are averaged, and
+	a plot of the data is made.
+
+2004-11-17  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_proto.m (med_thres): output to psydat file:  use MEDIAN
+	threshold instead of MEAN threshold!
+
+2004-10-24  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_proto.m (M_ALLTHRES): changed M_ALLTHRES to contain the
+	value mean_thres instead of current value of M_VAR 
+
+	* mpsy_3afc_main.m (m_quiet): Changed name of the
+	inter-stimulus-intervall signal-vector 'm_ruhe' to 'm_quiet'.
+	Introduced compatibility check for older scripts still using
+	`'m_ruhe'. 
+
+	* mpsy_3afc_main.m: added a call to the set-script in the first
+	line of this script.  this makes a call of the set-script from the
+	main-script of the experiment obsolete.
+
+	* exp/phase_detect_random.m: Comments added, also for
+	corresponding set- und user-skripts.
+
+	Deleted all calls to the set-script
+
+	* exp/phase_detect_frozen.m: Changed name from phase_detect.m to
+	phase_detect_frozen.m.  Also for corresponding set- und
+	user-skripts.  Comments added. 
+
+	Deleted all calls to the set-script
+
+	* afc3_gui.m (psylab_gui): Added a Tag 'psylab_feedback' for the
+	text field afc_fb.  Used in mpsy_3afc_main.m to find the handle,
+	in case a 'clear all' was issued but the GUI figure not closed.
+	Changed the text on the quit-button from '9' to '!'.
+
+2004-10-23  Martin Hansen  <martin.hansen AT fh-oldenburg.de>
+
+	* mpsy_3afc_main.m: Added communication with GUI text field
+	afc_fb, giving feedback to the subject.  Quitting and continuing
+	can now be performed from the GUI alone.
+
+	* mpsy_proto.m: Output is now written to psydat_* instead
+	messdat_*
+
+	Added tests 'if isempty(M_PAR2NAME)' and 'if isempty(M_PAR2UNIT)'
+	so that output of PAR2-line to psydat-file does not get messed
+	when M_PAR2 exists. 
+ 
+	* read_psydat.m: Changed name from read_messdat.m to read_psydat.m 
+	* auswert_psydat.m: Changed name from auswert_messdat.m to
+	auswert_psydat.m 
+
+	* mess_*.m  Changed file names from mess_*.m into mpsy_*.m
+
+
+

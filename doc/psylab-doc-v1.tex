@@ -1,0 +1,1160 @@
+% psylab-doku.tex
+
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{makeidx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\psylab\ - Dokumentation}
+\chead{Version 1.96}
+\rhead{\thepage}
+
+
+%% -----------------------------------------------------------------
+%% Copyright (C) 2004         Martin Hansen, FH OOW  
+%% Author :  Martin Hansen,  <martin.hansen AT fh-oldenburg.de>
+%% Date   :  14 Jan 2004
+%% Updated:  <16 Jan 2006 21:09, mh>
+%% Updated:  <16 Jan 2006 21:08, mh>
+%% Updated:  < 8 Apr 2005 11:34, hansen>
+
+%% This file is part of PSYLAB, at collection of scripts for
+%% designing and controlling interactive psychoacoustical listening
+%% experiments.  
+%% This file is free software; you can redistribute it and/or modify
+%% it under the terms of the GNU General Public License as published
+%% by the Free Software Foundation; either version 2 of the License, 
+%% or (at your option) any later version.  See the GNU General
+%% Public License for more details:  http://www.gnu.org/licenses/gpl
+%% This file is distributed in the hope that it will be useful,
+%% but WITHOUT ANY WARRANTY.
+%% PSYLAB is written in MATLAB, based on many ideas and concepts 
+%% of its predecessor SISG/SI, a system originally written 
+%% by Dirk Pueschel, Rene Koch, and Ralf Fassel in 1989-1991.
+
+% the name of the game. 
+\newcommand{\psylab}{{\sc PsyLab}}
+% formatting for matlab code
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\zb}{z.\,B.\ }
+
+
+\title{\psylab\ -- Dokumentation}
+\author{Martin Hansen \\ Institut für Hörtechnik + Audiologie, FH OOW}
+%\date{8. Januar 2006}
+
+\makeindex
+
+\begin{document}
+
+\maketitle
+% \begin{center}
+% \section*{PSYLAB -- Dokumentation}
+% Version: \today
+% \end{center}
+
+\vfill
+\tableofcontents
+\clearpage
+
+
+\begin{center}
+  \textbf{Diese Dokumentation ist zur Zeit out-of-date, \\
+    sie beschreibt nicht die neue psylab version 2.  }
+\end{center}
+
+%% ============================================================
+\section{Kurz-Übersicht}
+\label{sec:einfuhrung}
+
+
+%% --------------------------------------------------
+\subsection{Was ist \psylab?}
+\label{sec:was-ist-psylab}
+
+
+Es handelt sich bei '\psylab' um eine Sammlung von Matlab-Skripten,
+mit denen man nahezu beliebige psychoakustische Detektions- und
+Diskriminations-Experimente auf einheitliche und schnelle Art
+entwickeln kann.  
+
+Bisher ist die Durchführung von $n$-AFC Experimente ($n=2,3,4$) mit
+adaptiver Stimulusgrößensteuerung gemäß $x$-up-$y$-down Algorithmen
+($x,y \in \{1,2\})$) implementiert.
+
+
+%% --------------------------------------------------
+\subsection{Geschichte von \psylab}
+\label{sec:geschichte-psylab}
+
+\psylab\ basiert auf vielen Ideen der Programme SI/SISG, die zwischen
+ca.\ 1989 und 1991 am Dritten Physikalischen Institut der Universität
+Göttingen geschrieben und unter der GNU GPL zu Verfügung gestellt
+wurden.  SI~("`Signalverarbeitung interaktiv"') wurde von Dirk Püschel
+und René Koch und weiteren Kollegen in Fortran programmiert und diente
+zur digitalen Signalgenerierung und -analyse.  SISG wurde von Ralf
+Fassel aufbauend auf SI geschrieben und diente zur Entwicklung,
+Steuerung und Auswertung von psychoakustischen Experimenten.  Die
+Funktionsweise und Organisation von \psylab\ ist in vielen Punkten
+durch sein Vorbild "`SISG"' inspiriert worden.
+
+\psylab\ wurde seit ca.\ Anfang des Jahrtausends von Martin Hansen
+geschrieben.  Es wird u.a.\ in der Lehre und Forschung am Institut für
+Hörtechnik und Audiologie der Fachhochschule in Oldenburg eingesetzt
+und soll den Studierenden in den Vorlesungen über Psychoakustik einen
+einheitlichen und einfachen Einstieg für die Durchführung eigener
+psychoakustischer Experimente ermöglichen.
+
+
+  
+%% --------------------------------------------------
+\subsection{Lizenz von \psylab}
+\label{sec:lizenz-psylab}
+
+\psylab\ ist "`freie Software"' und wird im OpenSource-Format
+unter der GNU General Public Licence (GPL) verbreitet.  Das bedeutet
+unter anderem, dass die \psylab-Software unter Einhaltung der
+Bedingungen der GPL frei an Andere weitergegeben werden darf.  Für
+Einzelheiten zur GPL siehe unter\\
+\texttt{http://www.gnu.org/licenses/gpl}
+
+
+\subsection{Keine Garantie}
+\label{sec:psylab-keine-garantie}
+
+%\begin{center}
+\emph{  \psylab\ wird ohne jegliche Form von Garantie oder Gewährleistung
+  verbreitet.}
+%\end{center}
+\\
+
+Die Anwendung von \psylab\ geschieht auf eigene Verantwortung der
+Nutzer.  Insbesondere wird darauf aufmerksam gemacht, dass \psylab\
+keinen automatischen Mechanismus zum Schutz vor zu lauten Schallpegeln
+enthält.  Der Nutzer muss explizit selbstständig dafür Sorge
+tragen sorgen, dass die generierten Stimuli in Verbindung mit der
+verwendetem weiteren Ausstattung (Soundkarte, Verstärker, Kopfhörer
+bzw.\ Lautsprecher) zu dem beabsichtigten Schallpegel führen.
+
+
+%% --------------------------------------------------
+\subsection{Schnellstart:  \psylab\ anhand von Beispielen}
+\label{sec:schnellstart-psylab}
+
+
+Zur anschaulichen Erklärung der Funktionsweise von \psylab\ finden
+sich im subdirectory '\texttt{exp}' mehrere Beispiel-Experimente.
+
+Zu jedem Experiment gehören immer drei Skripte mit jeweils verwandten
+Namen.  Der Name des Hauptskripts ist frei wählbar, \zb
+'\texttt{myscript.m}', die beiden anderen müssen dann
+'\texttt{myscriptset.m}' und '\texttt{myscriptuser.m}' heißen.  Das
+Hauptskript beschreibt und steuert die vorgesehenen Messungen, die
+beiden anderen Skripte werden zum Erzeugen der jeweils aktuellen
+Stimuli benötigt.
+
+% Im Beispiel-Experiment im file '\texttt{phase\_detect\_random.m}' (und
+% entsprechend zugehörigem '\texttt{phase\_detect\_randomset.m}' und
+% '\texttt{phase\_detect\_randomuser.m}') geht es um die Detektion eines kurzen
+% Sinustones in einem Rauschen.  Im Experiment wird der Pegel des Sinus
+% an der Schwelle in Abhängigkeit von der relativen Startphase des Sinus
+% gemessen.
+
+% Im Beispiel-Experiment im file '\texttt{phase\_detect\_frozen.m}' geht
+% es im Prinzip um die gleiche Messung wie zuvor, mit dem Unterschied,
+% dass in allen Trials stets die identische Realisierung des Rauschens
+% dargeboten wird.
+
+Im Beispiel-Experiment im file '\texttt{sam\_sincarrier\_detect.m}'
+geht es \zb um die Messung der Detektionsschwelle des
+Modulationsgrades bei sinusförmiger Amplitudenmodulation ("`SAM"')
+eines Sinuston-Trägers als Funktion der Modulationsfrequenz.  Die
+Messungen finden für verschiedene Trägerfrequenzen statt.
+
+
+
+%% ============================================================
+\section{Funktionsweise von \psylab}
+\label{sec:funktionsweise-psylab}
+
+% Zu jedem psychoakustischen Experiment, das mittels \psylab\
+% durchgeführt werden soll, gehören immer drei Skripte, und zwar das so
+% genannte "`Hauptskript"'\index{Hauptskript}, das
+% "`set-Skript"'\index{set-Skript} und das
+% "`user-Skript"'\index{user-Skript}.  Der Name des Hauptskripts ist im
+% Prinzip frei wählbar, \zb '\texttt{myscript.m}'.  Die Namen der beiden
+% anderen Skripte sind durch den Namen des Hauptspkripts festgelegt, sie
+% \emph{müssen} für das obige Beispiel '\texttt{myscriptset.m}' und
+% '\texttt{myscriptuser.m}' heißen.  Die beiden Namens-Suffixe
+% ``\texttt{set}'' und ``\texttt{user}'' müssen dem Hauptskript-Namen
+% direkt folgen, d.h.\ ohne ein einziges Zeichen dazwischen.
+
+
+%% --------------------------------------------------
+\subsection{Terminologie und Definitionen}
+\label{sec:terminologie}
+
+Im folgenden werden einige Begriffe und Abkürzungen verwendet, die
+hier erklärt werden. Ebenso wird auf den grundsätzlichen Ablauf der
+mittels \psylab\ realisierbaren psychoakustischen Experimente eingegangen.
+Am Ende dieses Abschnittes werden die verschiedenen Begriffe anhand
+eines Beispiels verdeutlicht. 
+
+\begin{description}
+\item[VP] Versuchsperson
+
+\item[Stimulus, Intervall, Signal] 
+
+  Während eines Experiments werden der VP jeweils ein oder mehrere
+  akustische Stimuli dargeboten.  Diese einzelnen Stimuli werden auch
+  \index{Intervall}Intervalle oder Signale genannt.  In einem
+  $n$-AFC-Experiment werden $n$ Intervalle nacheinander dargeboten.
+  Meist werden die einzelnen Signal-Intervalle durch kurze Pausen von
+  einander getrennt.  Es ist möglich, die einzelnen Intervalle auch
+  visuell anzeigen zu lassen.
+
+\item [Trial] 
+
+  Ein \index{Trial}Trial ist die Darbietung eines Stimulus bzw.\ aller
+  zu einem $n$-AFC-Experiment gehörenden $n$ Stimulus-Intervalle.
+  Nach jedem Trial wird die VP nach ihrer Antwort befragt.
+
+\item[(Stimulus-)Variable] 
+
+  Die \index{Stimulus-Variable}Variable hat im Rahmen von \psylab\ die
+  Bedeutung der variablen Stimulusgröße, deren Wert von Trial zu Trial
+  adaptiv verändert wird, um die \index{Schwelle}Schwelle der Versuchsperson zu
+  finden.  Die ``Variable'' hat innerhalb von \psylab\ den
+  reservierten Namen \texttt{M\_VAR}.
+
+\item[(Stimulus-)Schrittweite] 
+
+  Die \index{Schrittweite}Schrittweite (step size) ist diejenige Größe, um die die
+  Stimulus-Variable in adaptiven Experimenten von Trial zu Trial
+  geändert wird.  Sie wird in derselben Einheit gemessen wie die
+  Variable \texttt{M\_VAR}.  Die Schrittweite ist typischerweise
+  anfangs größer und wird im Verlauf des Experiments kleiner, bis eine
+  minimale Schrittweite erreicht ist.  Die ``Schrittweite'' hat
+  innerhalb von \psylab\ den reservierten Namen \texttt{M\_STEP}, die
+  \index{Schrittweite!minimale}minimale Schrittweite hat den reservierten Namen
+  \texttt{M\_MINSTEP}.
+
+\item[Run] 
+
+  Ein \index{Run}Run ist die Abfolge aller Trials, die benötigt
+  werden, um die Schwelle der variablen Stimulusgröße zu ermitteln.
+
+\item[(Stimulus-)Parameter] 
+
+  Der \index{Stimulus-Parameter}Parameter hat im Rahmen von \psylab\ die
+  Bedeutung der wählbaren aber festen Stimulusgröße, die
+  typischerweise innerhalb eines Runs zum Finden der Schwelle konstant
+  gehalten wird und nach Auffinden der Schwelle im nächsten Run
+  typischerweise auf einen neuen Wert gesetzt wird.  Der ``Parameter''
+  hat innerhalb von \psylab\ den reservierten Namen \texttt{M\_PARAM}.
+  %
+
+\item[2.\ (Stimulus-)Parameter] 
+  Falls in einem Experiment mehr als ein Parameter benötigt wird,
+  steht in \psylab\ der \index{Stimulus-Parameter!zweiter}zweite Parameter mit
+  reserviertem Namen \texttt{M\_PAR2} zur Verfügung.
+
+\item[Referenz-Signal] 
+
+  In einem Trial eines $n$-AFC Experiments werden $n$ Intervalle in
+  zufälliger Reihenfolge dargeboten.  Davon enthalten $n-1$ Intervalle
+  das \index{Referenz-Signal}Referenz-Signal, welches das zu
+  detektierende zusätzliche Signal \emph{nicht} enthält.  Das
+  Referenz-Signal hat in \psylab\ den reservierten Namen
+  \texttt{m\_ref}.
+
+\item[Test-Signal] 
+  
+  Das \index{Test-Signal}Test-Signal ist dasjenige Signal, welches im
+  Unteschied zum Referenz-Signal das zusätzliche Signal enthält.  Es
+  wird an zufälliger Reihenfolge während der $n$ Intervalle eines
+  $n$-AFC Trials dargeboten.  Das Test-Signal hat in \psylab\ den
+  reservierten Namen \texttt{m\_test}.
+
+\item[Eingewöhnungsphase] 
+
+  Zu Beginn eines neuen Runs wird das Testsignal meist stark
+  überschwellig dargeboten, um die VP über die Art des Signals bzw.\
+  den "`cue"' zu orientieren.  Die Schrittweite ist dabei groß
+  gewählt, so dass die Stimulus-Variable sich aufgrund richtiger
+  Antworten der VP zügig in Richtung der Schwelle bewegt.  Die
+  Schrittweite wird im Verlauf der
+  \index{Eingewöhnungsphase}Eingewöhnungsphase fortlaufend verringert,
+  bis sie den Wert der minimalen Schrittweite erreicht hat.  Die
+  Trials bis zu diesem Zeitpunkt dienen nur als Eingewöhnungsphase für
+  die VP, um sie in die Nähe ihrer Schwelle zu führen.  Die während
+  dieser Phase erhobenen Antworten der VP werden nicht zur Bestimmung
+  der Schwelle herangezogen.
+
+\item[Messphase] 
+
+  Am Ende der Eingewöhnungsphase startet die
+  \index{Messphase}Messphase.  Die VP sollte sich in der Nähe ihrer
+  Schwelle befinden und die Variable ändert sich nur noch mit der
+  minimalen Schrittweite.  Für eine festzulegende Anzahl von
+  Wendepunkten wird aus den Werten der Stimulus-Variablen während der
+  Messphase die Schwelle bestimmt.
+
+\item[Reversal / Wendepunkt] 
+
+  In einem transformed-up-down Experiment ändert sich abhängig von den
+  VP-Antworten die Richtung, in der die Variable geändert wird
+  abwechselnd von "`down"' nach "`up"' und umgekehrt.  Eine
+  Richtungsumkehrung wird \index{Reversal}Reversal oder
+  \index{Wendepunkt}Wendepunkt genannt.  In \psylab\ wird eine
+  zusammenhängende Aufeinanderfolge von down- und up-Richtung wird als
+  1~Reversal gezählt (Achtung, in der Literatur wird dies manchmal
+  abweichend als 2 Reversals gezählt).  Die Anzahl der Reversals wird
+  durch Vergleich mit der gewählten \index{Reversals!maximale
+    Anzahl}maximalen Anzahl von Reversals als
+  \index{Abbruchkriterium}Abbruchkriterium für einen Run verwendet.
+
+\end{description}
+
+
+%%
+\begin{figure}[htbp]
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{example_run_with_reversals}
+  \caption{Beispiel für den Verlauf eines \psylab\ Runs.  Die
+    Plus-Zeichen markieren eine richtige Antwort der VP, die Kreise
+    ein falsche.  Die Pfeile markieren die Reversals.}
+  \label{fig:example_run}
+\end{center}
+\end{figure}%
+%%
+
+
+In Abb.~\ref{fig:example_run} ist der Verlauf der Stimulus-Variablen
+während eines Runs dargestellt, der mittels des Beispiel-Experiments
+\texttt{sam\_sincarrier\_detect.m} im Subdirectory \texttt{doc}
+erhalten wurde.  Die gezeigte Darstellung wird automatisch durch
+\psylab\ erzeugt.  In der Abbildung sind zusätzlich die Reversals
+durch Pfeile markiert.  Im dargestellten Run beginnt die
+Eingewöhnungsphase mit den Einstellungen \texttt{M\_VAR} = -8,
+\texttt{M\_STEP} = 8.  Beide werden hier in dB angegeben.  Nach dem
+11.~Trial ist der erste Reversal erreicht und die Schrittweite wird
+daraufhin auf 4~dB halbiert.  Nach dem 15.~Trial ist der zweite
+Reversal erreicht und die Schrittweite wird wieder halbiert.  Nach dem
+19.~Trial ist der dritte Reversal erreicht und die Schrittweite wird
+halbiert und erreicht den Wert 1~dB.  Dieser Wert wurde als minimale
+Schrittweite festgelegt, so dass die Schrittweite nun nicht mehr
+weiter verringert wird.  Ab dem 19.~Trial startet daher die Messphase.
+Die Anzahl der Reversals wird ab hier von neuem angefangen zu zählen
+und der Run endet, sobald die Anzahl von \texttt{M\_MAXREVERSAL}
+Reversals erreicht ist.  Im Beispiel mit \texttt{M\_MAXREVERSAL=4;}
+ist der 4.~Reversal nach dem 38.~Trial erreicht.  In der Abbildung ist
+für den 39.~Trial derjenige Wert von \texttt{M\_VAR} dargestellt, der
+im nächsten Trial gemäß der verwendeten adaptiven Regel dargeboten
+worden wäre, falls kein Abbruch wegen der erreichten Zahl der Reversal
+erfolgt wäre.  Die gesuchte Schwelle ist der Median der Werte von
+\texttt{M\_VAR} während der Messphase, in diesem Fall -34~dB.  Die
+Standardabweichung der Schwelle beträgt im Beispiel 0,76~dB.
+
+
+
+
+%% --------------------------------------------------
+%\subsection{Das Skript \texttt{mpsy\_afc\_main}}
+%\label{sec:skript-mpsy_afc-main}
+
+%% --------------------------------------------------
+\subsection{Durchführung von $n$-AFC Experimenten}
+\label{sec:n-afc-experimente}
+
+
+Das Skript \code{mpsy\_afc\_main.m} ist zentraler Teil von \psylab\
+zur Steuerung von $n$-AFC Experimenten.  Es braucht zum Erstellen
+eigener Experimente \emph{nicht} verändert zu werden.  Es steuert den
+Ablauf von adaptiven transformed-up-down $n$-AFC-Messungen.  Damit es
+korrekt funktioniert, ist es erforderlich, dass das eigene Experiment
+eine Reihe von Konventionen einhält.
+
+
+%% --------------------------------------------------
+\subsection{Namenskonventionen}
+\label{sec:namenskonventionen}
+
+Eine wichtige Konvention bzw.\ Anforderung besteht darin, dass das
+eigene Experiment aus drei Skripten bestehen muss, dem sog.\
+"`Hauptskript"' und dem dazugehörigen "`set"'-Skript und dem
+"`user"'-Skript.  Diese drei files müssen reine Skripte sein, d.h.\ es
+dürfen \emph{keine} Matlab-Funktionen sein.  Sie können daher auf die
+Variablen des globalen Matlab-Workspace zugreifen.  Die drei Skripte
+dürfen selbstverständlich weitere Skripte oder Funktionen aufrufen.
+%
+Durch den Filenamen des Hauptskripts ergibt sich automatisch, welche
+Filenamen das "`set"'-Skript und das "`user"'-Skript haben
+\emph{müssen}: Die Namen ergeben sich durch Anhängen von \texttt{set}
+bzw.\ \texttt{user} direkt hinter den Namen des Hauptskripts.
+Beispielsweise \texttt{testnameset.m} und \texttt{testnameuser.m},
+falls das Hauptskript \texttt{testname.m} heißt.  Es darf also jeweils
+\emph{kein} Zeichen zwischen dem "`\texttt{set}"' bzw.\
+"`\texttt{user}"' und dem Filenamen des Hauptskript stehen.
+
+Eine weitere Konvention betrifft die festgelegte Verwendung einiger
+Variablen mit reservierten Namen, \zb \texttt{M\_VAR},
+\texttt{M\_PARAM}, \texttt{m\_ref}, \texttt{m\_test}.   Siehe dazu in
+den folgenden Abschnitten \ref{sec:hauptskript}, \ref{sec:setskript},
+\ref{sec:userskript}. 
+
+
+% %% --------------------------------------------------
+% \subsection{Automatische Experimentsteuerung}
+% \label{sec:automatisch-experiment-steuerung}
+%
+%
+% \ldots Mechanismus \code{M\_STEP} \code{M\_MINSTEP}, \code{M\_VAR}
+% Messphase
+
+
+%% ============================================================
+\section{Entwicklung eines eigenen Experiments}
+\label{sec:eigenes-experiment}
+
+%% --------------------------------------------------
+\subsection{Das Hauptskript des eigenen Experiments}
+\label{sec:hauptskript}
+
+Im \index{Hauptskript}Hauptskript werden die grundsätzlichen
+\psylab-Variablen zur Beschreibung des Experiments definiert.  Die
+Namen dieser Variablen beginnen stets mit den beiden Buchstaben
+'\texttt{M\_}'.
+
+Am Anfang des Hauptskripts
+sollte folgende Zeile stehen:
+%
+\begin{verbatim}
+mpsy_init;
+\end{verbatim}
+%
+Der Aufruf von \code{mpsy\_init} muss dabei zwingend vor der ersten
+Wertzuweisung für die internen \psylab-Variablen durch den Nutzer
+stehen.  Durch \code{mpsy\_init} werden alle benötigen
+\psylab-Variablen als global definiert und einige Variablen auf die
+richtigen Startwerte für den Beginn einer neuen Messung gesetzt.
+
+Danach muss unter anderem die Variable \code{M\_EXPNAME} für den
+Experimentnamen gesetzt werden.  Da der Filename des Hauptskripts auch
+gleichzeitig identisch mit dem Inhalt der Variablen
+\code{M\_EXPNAME} sein muss, kann folgende Zeile zum Setzen
+verwendet werden (siehe \code{help mfilename}):
+%
+\begin{verbatim}
+M_EXPNAME = mfilename;  % important to be set correctly!
+\end{verbatim}
+%
+Das bedeutet, dass das Hauptskript einen entsprechend geeigneten Namen
+haben sollte, der das Experiment treffend beschreibt.
+% Im Filenamen eines Matlabskripts können keine Leerzeichen oder \zb
+% Minuszeichen vorkommen.
+Im Hauptskript sollten außerdem die folgenden generellen Variablen
+gesetzt werden, siehe das folgende Beispiel aus dem file
+%
+%% \texttt{exp/phase\_detect\_random.m} 
+%% %
+%% \begin{verbatim}
+%% M_PARAMNAME   = 'testton_phase';
+%% M_PARAMUNIT   = 'degree';
+%% M_VARNAME     = 'testton_snr';
+%% M_VARUNIT     = 'dB';
+%% M_TASK        = 'which interval contained the test signal (1,2,3)? ';
+%% M_MINSTEP     = 1;  % minumum step size, in units of M_VARUNIT
+%% M_MAXREVERSAL = 4;  % number of reversals required as stop criterion
+%% % ------------------------------ 
+%% M_CALIB    = 100;   % i.e. a full-scale square wave has THIS dB SPL
+%% M_FS       = 32000; % sampling frequency
+%% M_FEEDBACK = 1;     % i.e. give correct/false feedback to subject
+%% M_USE_GUI  = 1;     % i.e. use GUI for subject answers
+%% \end{verbatim}
+%
+%
+\texttt{exp/sam\_sincarrier\_detect.m} 
+\begin{verbatim}
+M_PARAMNAME    = 'modulation_frequency';
+M_PARAMUNIT    = 'Hz';
+M_PAR2NAME     = 'carrier_frequency';
+M_PAR2UNIT     = 'Hz';
+M_VARNAME      = 'modulation_degree';
+M_VARUNIT      = 'dB';
+M_TASK         = 'which interval contained the test signal (1,2,3)?  ';
+M_FEEDBACK     = 1;   % 1/0  = yes/no
+M_MINSTEP      = 1;   % minumum step size, in units of M_VARUNIT
+M_NAFC         = 3;   % number of forced choice intervals
+M_ADAPT_N_UP   = 1;   % number of succesive wrong answers required for "up"
+M_ADAPT_M_DOWN = 2;   % number of succesive correct answer required for "down"
+M_MAXREVERSAL  = 4;   % number of reversals required as stop criterion
+% ------------------------------ 
+M_FS               = 48000; % sampling frequency
+M_CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
+M_EARSIDE          = M_BINAURAL;
+M_USE_GUI          = 1;     % use a GUI for user input
+M_VISUAL_INDICATOR = 1;
+M_DEBUG            = 0;   
+\end{verbatim}
+
+Als nächstes folgen im Hauptskript typischerweise eine Reihe von
+Aufrufen des Skripts \texttt{mpsy\_afc\_main}, jeweils nachdem der
+Versuchsparameter \texttt{M\_PARAM} (und falls nötig auch
+\texttt{M\_PAR2}) auf einen neuen Wert gesetzt wurde.  Das Skript
+\texttt{mpsy\_afc\_main} steuert dann automatisch den kompletten
+Ablauf \emph{eines Runs}.   
+%
+Der prinzipielle Ablauf ist in Abb.~\ref{fig:prinzip-ablauf_afc_main}
+dargestellt.
+%%
+\begin{figure}[htb]
+%\begin{center}
+mpsy\_afc\_main.m\\
+\setlength{\unitlength}{1mm}
+\begin{picture}(110,50)
+\put(5,43){\textit{call \textbf{set-script} of the current experiment}}
+\put(5,33){\texttt{while~}  (\textit{threshold not reached}) }
+\put(15,23){\textit{call \textbf{user-script} of the current experiment}}
+\put(15,13){\textit{present signals} \texttt{m\_test} \textit{and} \texttt{m\_ref} \textit{in an n-AFC manner}}
+\put(15,8){\textit{process subject answer, apply adaptive rule}}
+\put(5,3){\texttt{end}}
+\framebox(110,50)[t]{
+}
+\end{picture}
+  %\includegraphics[width=\textwidth]{}
+  \caption{Prinzipieller Ablauf eines Runs, gesteuert durch das
+    Skript \texttt{mpsy\_afc\_main.m}} 
+  \label{fig:prinzip-ablauf_afc_main}
+%\end{center}
+\end{figure}%
+%%
+%
+%
+In \texttt{mpsy\_afc\_main} wird anfangs einmalig das zum Experiment
+gehörende set-Skript aufgerufen.  Im weiteren Verlauf wird durch
+\texttt{mpsy\_afc\_main} automatisch für jeden neuen Trial je einmal
+das zum Experiment gehörende user-Skript aufgrufen.  Typischerweise
+werden damit \zb neue aktuelle Stimulussignale (\texttt{m\_test} und
+\texttt{m\_ref}) generiert.  Das Setzen von \texttt{M\_PARAM} (und
+falls nötig auch von \texttt{M\_PAR2}) und der Aufruf von
+\texttt{mpsy\_afc\_main} kann im Hauptskript \zb folgendermaßen
+erfolgen, um im folgenden Beispiel mit den beiden
+Sinus-Trägerfrequenzen 500 und 2000~Hz und den Modulationsfrequenzen
+zwischen 2~Hz und 256~Hz in Oktavabständen zu messen:
+%
+\begin{verbatim}
+carrier_freqs = [ 500 2000 ]; 
+mod_freqs     = [ 2 4 8 16 32 64 128 256 ];
+%
+for cf = carrier_freqs,
+    M_PAR2 = cf;
+    for modf = mod_freqs,
+        M_PARAM = modf;
+        mpsy_afc_main;
+    end
+end
+\end{verbatim}
+%
+
+
+%% --------------------------------------------------
+\subsection{Das "`set"'-Skript}
+\label{sec:setskript}
+
+Das \index{set-Skript}set-Skript wird wie in \ref{sec:hauptskript}
+erwähnt \emph{am Anfang} eines neuen Runs, d.h.\ vor der Ermittelung
+des Schwellenwertes von \texttt{M\_VAR} für einem (neuen) festen
+Parameterwert \texttt{M\_PARAM}, \emph{einmal} aufgerufen, und zwar
+automatisch durch das Skript \texttt{mpsy\_afc\_main}.
+
+Der Sinn des set-Skripts liegt darin, einige (Matlab-)Variablen auf
+ihren Anfangswert zu setzen, sowie eventuell rechenintensive, aber nur
+einmal benötige Berechnungen durchzuführen.  Hier sollten auch
+etwaige immer wieder benötigten Signale vorab generiert werden, \zb
+auch die Signalvektoren \texttt{m\_quiet}, \texttt{m\_postsig} und
+\texttt{m\_presig} (siehe Abschnitt~\ref{sec:userskript}).
+
+
+Im set-Skript sollten auf jeden Fall die Variablen \texttt{M\_STEP}
+und \texttt{M\_VAR} auf ihre Startwerte gesetzt werden.  
+
+%% --------------------------------------------------
+\subsection{Das "`user"'-Skript}
+\label{sec:userskript}
+
+Das \index{user-Skript}user-Skript wird wie in \ref{sec:hauptskript}
+erwähnt jeweils vor jedem neuen Trial aufgerufen, und zwar automatisch
+durch das Skript \texttt{mpsy\_afc\_main}.
+
+Der Sinn des user-Skripts ist die Generierung der aktuellen Stimuli,
+die im aktuellen Trial dargeboten werden sollen.  Typischerweise
+hängen die Stimuli von den aktuellen Werten von \texttt{M\_VAR} und
+\texttt{M\_PARAM} ab, sowie eventuell auch von \texttt{M\_PAR2}.  Die
+Signalvektoren dieser erzeugten Stimuli werden im aufrufenden Skript
+\texttt{mpsy\_afc\_main} weiterverwendet und müssen daher einen
+festen, reservierten Namen haben.
+
+Am Ende des user-Skriptes \emph{müssen} die folgenden beiden
+Signalvektoren als Variablen im globalen Matlab-Workspace vorhanden
+sein:
+\begin{description}
+\item[\texttt{m\_ref}] Derjenige Signalvektor, der den Stimulus für
+  das bzw.\ die Referenz-Intervall(e) enthält.
+\item[\texttt{m\_test}] Derjenige Signalvektor, der den Stimulus für
+  das Test-Intervall enthält.  Im Testintervall ist das zu
+  detektierende ``Signal'' bzw.\ die zu diskriminierende
+  Signal-Änderung enthalten, im Intervall \texttt{m\_ref} jedoch
+  nicht.
+\end{description}
+
+Die folgenden Signalvektoren mit reserviertem Namen \emph{können}
+zusätzlich (müssen aber nicht, s.u.) am Ende des user-Skriptes bzw.\
+schon zum Ende des set-Skripts ebenfalls im Matlab-Workspace vorhanden
+sein:
+\begin{description}
+\item[\texttt{m\_quiet}] Dasjenige Signal, das jeweils \emph{zwischen}
+  zwei Stimulus-Intervallen eines $n$-AFC-Trials dargeboten werden
+  soll.  Typischerweise ist dies ein mit \texttt{zeros} erstellter
+  Nullen-Vektor, dem eine Pause mit Stille entspricht.  Alternativ
+  könnte dies \zb ein leerer Vektor \code{m\_quiet=[\,]} sein, was ein
+  lückenloses Aufeinanderfolgen der $n$ Stimuli eines $n$-AFC-Trials
+  bewirkt.
+\item[\texttt{m\_presig}] Dasjenige Signal, das vor Beginn des ersten
+  der $n$ Stimulus-Intervalle dargeboten werden soll.  Dies kann
+  ebenfalls Stille, also Nullen sein, oder auch \zb ein bestimmter
+  "`Ankündigungsstimulus"' sein.
+\item[\texttt{m\_postsig}] Dasjenige Signal, das nach dem Ende des
+  letzten der $n$ Stimulus-Intervalle dargeboten werden soll.
+\end{description}
+
+Falls eines oder mehrere der Signale \texttt{m\_quiet},
+\texttt{m\_presig} oder \texttt{m\_postsig} nach Verlassen des
+user-Skripts (noch) nicht existieren, werden diese Signale innerhalb
+von \psylab\ innerhalb von \code{mpsy\_check.m} automatisch auf leere
+Vektoren (\code{[\,]}) gesetzt, denen jeweils eine zeitliche Dauer von
+Null entspricht, also einem lückenlosen Aufeinanderfolgen der
+einzelnen Intervalle.
+
+
+%% --------------------------------------------------
+\subsection{Interaktive Bedienung von \psylab}
+\label{sec:bedienung-von-psylab}
+
+Die VP muss während eines Experiments ihre jeweilige
+\index{Antwort!der VP}Antwort zu jedem Trial eingeben.  Bei $n$-AFC
+besteht die Angabe in einer Zahl zwischen 1 und $n$.  Dafür gibt es
+mehrere Möglichkeiten.  Zur Eingabe kann entweder die Tastatur
+oder/und eine graphische Oberfläche verwendet werden.
+
+Falls die Variable \code{M\_USE\_GUI} nicht gesetzt wurde oder Null
+ist, dann funktioniert die Eingabe der VP-Antwort mittels der
+\index{Antwort!via Tastatur}Tastatur.  Die VP wird in dem
+Command-Window von Matlab zur Eingabe aufgefordert, indem ihr nach der
+Stimulusdarbietung der Inhalt von \code{M\_TASK} (ein String) auf den
+Bildschirm angezeigt wird, \zb "`\emph{In welchem Interval was das
+  Testsignal?  (1,2,3)}"' Nach Eingabe der Zahl muss die VP jeweils
+noch die Return-Taste drücken.
+
+%%
+\begin{figure}[htbp]
+\begin{center}
+  \includegraphics[width=0.8\textwidth]{example_3afcgui_psylab}
+  \caption{Beispiel für die graphische Oberfläche für die VP.}
+  \label{fig:example_3afc_gui}
+\end{center}
+\end{figure}%
+%%
+
+Ist die Variable \code{M\_USE\_GUI} ungleich Null, dann wird eine
+\index{Antwort!via graphische Oberfläche}graphische Oberfläche wie in
+Abb.~\ref{fig:example_3afc_gui} für die Antworten verwendet.  Die VP
+kann entweder durch Anklicken des passenden Feldes anworten.  Sie kann
+stattdessen auch durch Eintippen der entsprechenden Ziffer
+(\emph{ohne} Return-Taste) antworten.  Damit letzteres funktioniert,
+muss die Antwort-Oberfläche jedoch die aktuelle Figure sein und es
+darf keines der Objekte (Buttons, Text, etc.) der Figure den Fokus
+besitzen.  Im Zweifelsfall erreicht man dies durch einmaligen
+Maus-Klick auf die freie, farbige Fläche der Figure.
+
+Falls \code{M\_USE\_GUI} gesetzt ist und gleichzeitig auch
+\code{M\_VISUAL\_INDICATOR} ungleich Null ist, dann werden die
+einzelnen Intervalle während ihrer Darbietung
+\index{Intervall!Visuelle Markierung}visuell durch Aufleuchten der
+jeweiligen Antwort-Buttons markiert.  Damit dies funktioniert, müssen
+jedoch das Test-Intervall \code{m\_test} und das Referenz-Intervall
+\code{m\_ref} dieselbe Dauer aufweisen.  Dies ist jedoch in fast allen
+psychoakustischen Experimenten ohnehin dringend angeraten, damit die
+VP nicht allein aus der Dauer des Signal das Testsignal detektieren
+kann.
+
+
+
+%% --------------------------------------------------
+\subsection{Reservierte Variablennamen}
+\label{sec:reserved-variables}
+
+Das Verhalten von \psylab\ wird durch eine Anzahl von Variablen
+gesteuert, die einen festen, reservierten Namen haben.  Der
+Variablenname startet stets mit ``\texttt{M\_}'' und ist mit
+Großbuchstaben geschrieben.  Diese Variablen sind im file
+\texttt{mpsy\_global.m} als \texttt{global} deklariert und auch
+dokumentiert.  Einige Variablen dienen zur internen Steuerung, andere
+können/müssen durch den Benutzer entsprechend des individuellen
+Experiments gesetzt werden.
+%
+Eine Zusammenfassung aller Variablen und ihrer Bedeutung ist in 
+Tabelle~\ref{tab:reserved-variables} aufgeführt.
+
+\fbox{\textbf{Wichtig:}} Die Werte der String-Variablen \texttt{M\_SNAME},
+\texttt{M\_EXPNAME}, \texttt{M\_VARNAME}, \texttt{M\_VARUNIT},
+\texttt{M\_PARNAME}, \texttt{M\_PARUNIT}, \texttt{M\_PAR2NAME},
+\texttt{M\_PAR2UNIT} dürfen keine Leerzeichen enthalten!  Diese
+Eigenschaft ist wesentlich für das Funktionieren der Skripte zum Lesen
+und Auswerten der Ergebnisse im \index{psydat-file}psydat-file.  
+
+Es ist wichtig, dass den oben genannten Variablen ein korrekter Wert
+zugewiesen wird, d.h.\ dass die Variablen \emph{nicht} nicht-definiert
+sind, und dass sie vom Typ eines Stings sind!
+
+Ebenso ist es wichtig, dass die Variablen \texttt{M\_VAR},
+\texttt{M\_PARAM} und \texttt{M\_PAR2} vom Typ eines Zahlenwerts sind
+und entsprechend nur Zahlenwerte zugewiesen bekommen, also
+\emph{nicht} einen String.
+
+Das Skript \code{mpsy\_check.m} übernimmt in \psylab\ u.a.\ die
+Aufgabe, die oben genannten Variablen auf korrekt zugewiesene Werte zu
+prüfen.
+
+\setlongtables
+\begin{center}
+\begin{longtable}{l p{0.7\textwidth}}
+ \hline\multicolumn{2}{|c|}{Benutzer-Variablen}\\
+ \hline
+\\
+%% --------------------------------------------------
+Name                  &  Bedeutung \\
+%% --------------------------------------------------
+\hline
+\hline
+\texttt{M\_SNAME}     &
+   subject name = Name der Versuchsperson, als String.  Meist nur als
+   Initialien.  \emph{Wichtig}:  keine Leerzeichen innerhalb des Stings.\\ 
+\texttt{M\_EXPNAME}   &
+   Name des Experiments, als string.  Der Experiment-Name muss
+   \emph{identisch} zum Namen des Main-Scripts sein (bis auf das
+   \texttt{.m}) \emph{Wichtig}:  keine Leerzeichen innerhalb des Stings.
+\\
+% --------------------------------------------------
+\hline
+\texttt{M\_VAR}       &
+   Der Wert der variablen Stimulusgröße, die von Trial zu Trial
+   adaptiv verändert wird, um die Schwelle der Versuchsperson zu finden. \\
+\texttt{M\_VARNAME} &
+   Name der Variablen \texttt{M\_VAR}, als String, \zb 'Testtonpegel'\\ 
+\texttt{M\_VARUNIT} &
+    Einheit der Variablen, als String, \zb 'dB'\\
+% --------------------------------------------------
+\texttt{M\_PARAM}     &
+   Der Wert des Stimulusparameters, der innerhalb eines Runs zum Finden der
+   Schwelle konstant gehalten wird und nach Auffinden der Schwelle im
+   nächsten Run typischerweise auf einen neuen Wert gesetzt wird. \\
+\texttt{M\_PARAMNAME} &
+     Name des Parameters, als String, \zb 'Frequenz'\\
+\texttt{M\_PARAMUNIT} &
+     Einheit des Parameters, als String, \zb 'Hz'\\
+% --------------------------------------------------
+\texttt{M\_PAR2} &
+     Wert eines optionalen zweiten Parameters.  Falls es keinen
+     zweiten Parameter gibt, sollte diese Variable nicht gesetzt sein. \\
+\texttt{M\_PAR2NAME} &
+     Name des optionalen zweiten Parameters, als String \\
+\texttt{M\_PAR2UNIT} &
+     Einheit des optionalen Parameters, als String \\
+% --------------------------------------------------
+\texttt{M\_STEP} &
+      Wert der aktuellen Schrittweite, mit der \texttt{M\_VAR} adaptiv
+      in Abhängigkeit der VP-Antwort geändert werden wird. \\
+\texttt{M\_MINSTEP} &
+      Minimaler Wert der Schrittweite.  Hat \texttt{M\_STEP} den Wert
+      \texttt{MIN\_STEPSIZE} erreicht, so wird \texttt{M\_STEP} nicht
+      weiter verkleinert (halbiret).  Bei Erreichen der Bedigung 
+      (\texttt{M\_STEP} == \texttt{MIN\_STEPSIZE}) beginnt die
+      Messphase.  Zu deren Beginn wird \texttt{M\_REVERSAL} wieder auf
+      Null gesetzt und zählt von neuem die Zahl der Reversals. \\
+\texttt{M\_MAXREVERSAL}   &
+     Anzahl von Reversals == Kriterium
+     für das Ende des Runs.  Ist innerhalb der Messphase die Bedigung
+     \texttt{M\_REVERSAL} == \texttt{M\_MAXREVERSAL} erfüllt, dann
+     wird der Run beendet.\\
+\texttt{M\_NAFC}  & 
+     Die Zahl $n$ der Intervalle im $n$-AFC-Task \\
+\texttt{M\_ADAPT\_N\_UP}  & 
+     Die Zahl $n$ der erforderlichen aufeinanderfolgenden falschen
+     Antworten für ein "`up"' in der adaptiven transformed-up-down Regel\\
+\texttt{M\_ADAPT\_M\_DOWN}  & 
+     Die Zahl $m$ der erforderlichen aufeinanderfolgenden richtigen
+     Antworten für ein "`down"' in der adaptiven transformed-up-down Regel\\
+% --------------------------------------------------
+\hline
+\texttt{M\_FS}        &
+   Die Sampling-Frequenz, in Hz \\
+\texttt{M\_CALIB}     &
+   Kalibrierkonstante == RMS-Pegel eines voll-ausgesteuerten
+   \emph{Rechteck}-Signals (``full-scale square wave'') in dB~SPL.  Bei
+   Annahme einer spektral flachen elektroakustischen
+   Übertragungsfunktion.  \\ 
+\texttt{M\_EARSIDE} &
+   Variable, die die Darbietungseite angibt.  Kann drei feste
+   vordefinierte Werte annehmen, nämlich \texttt{M\_BINAURAL},
+   \texttt{M\_LEFTSIDE} oder \texttt{M\_RIGHTSIDE}.\\
+\texttt{M\_TASK}      &
+   Task der Versuchsperson, als String.  Typischerweise "`welches
+   intervall enthielt das Testsignal?"'\\
+\texttt{M\_FEEDBACK}  &
+    Flag-Variable (1 oder 0), ob die VP ein Feedback (\zb 'richtig'/'falsch') zu ihrer Antwort erhält.\\
+\texttt{M\_USE\_GUI}  &
+    Flag-Variable (1 oder 0), ob die VP eine graphische Oberfläche
+    (GUI) oder die Tastatur für ihre Antworten benutzen soll\\
+\texttt{M\_VISUAL\_INDICATOR}     &
+   Flag-Variable (1 oder 0), ob während des Runs die einzelnen
+   Stimulus-Intervalle visuell durch Aufleuchten der
+   entsprechenden Antwort-Buttons angezeigt werden sollen. Hat nur
+   Wirkung, falls ebenfalls \texttt{M\_USE\_GUI} gesetzt ist.  \\
+\texttt{M\_DEBUG}     &
+   Flag-Variable (1 oder 0), ob während des Runs einige
+   Zwischenergebnisse angezeigt werden sollen.  Wird \zb in
+   \texttt{mpsy\_afc\_main.m} verwendet.  \\
+\\
+\\
+%% --------------------------------------------------
+\hline\multicolumn{2}{|c|}{Interne Variablen}\\
+\hline
+\\
+%% --------------------------------------------------
+Name                  &  Bedeutung \\
+\hline
+%% --------------------------------------------------
+\texttt{M\_ACT\_ANSWER}   &
+    Aktuelle Antwort der VP (1=korrekt, 0=falsch) \\
+\texttt{M\_LAST\_ANSWER}  &
+    Vorhergehende Antwort der VP (1=korrekt, 0=falsch) \\
+\texttt{M\_REVERSAL}    &
+      Anzahl der Reversals.  Wird automatisch innerhalb von
+      \texttt{mpsy\_afc\_main} gezählt \\
+\texttt{M\_REV\_IDX}    &
+      Indizes (Trialnummern) bei denen ein Reversal passierte.  Wird
+      intern in \texttt{mpsy\_debug.m} verwendet. \\
+\hline
+\texttt{M\_ANSWERS}       &
+     Vektor mit allen Antworten der VP während eines Runs \\
+\texttt{M\_STEPS} &
+    Vektor  mit allen Werten von \texttt{M\_STEP} während eines Runs. \\
+% --------------------------------------------------
+\texttt{M\_VARS} &
+   Vektor mit allen Werten von \texttt{M\_VAR} während eines Runs,
+   d.h.\ zu einem festen Wert von \texttt{M\_PARAM}.\\
+% --------------------------------------------------
+\texttt{M\_ALLPAR1} &
+   Vektor mit allen Werten von \texttt{M\_PARAM} während des aktuellen
+   Experiments (für unterschiedliche Runs). \\
+\texttt{M\_ALLPAR2} &
+   Vektor mit allen Werten von \texttt{M\_PAR2} während des aktuellen
+   Experiments. \\
+\texttt{M\_ALLTHRES} &
+   Vektor mit allen Werten der entsprechenden Schwellenwerten während
+   des aktuellen Experiments.  Jeder Schwellenwert wird pro Run aus
+   den Werten von \texttt{M\_VARS} errechnet.\\ 
+\texttt{M\_ALLTHSTD} &
+   Vektor mit allen Werten der entsprechenden Standardabweichungen der
+   Schwellenwerte während des aktuellen Experiments.  Wird pro Run aus
+   den Werten von \texttt{M\_VARS} errechnet.\\  
+\texttt{M\_DIRECTION}     &
+   Richtung der letzten Änderung von \texttt{M\_VAR}.  Kann drei
+   feste, vordefinierte Werte annehmen: \texttt{M\_UP},
+   \texttt{M\_DOWN} oder \texttt{M\_STAY}\\
+% \texttt{M\_VAR\_LOWLIMIT}  & 
+%    number of times that \texttt{M\_VAR} reached its lower limit \\
+% \texttt{M\_VAR\_HIGHLIMIT} & 
+%    number of times that \texttt{M\_VAR} reached its higher limit \\
+% --------------------------------------------------
+\hline\hline
+\\
+\caption{Name und Bedeutung der Benutzer-Variablen und der internen
+  Variablen mit reservierten Namen.  Die Benutzer-Variablen ändert der
+  Benutzer, um sein Experiment entsprechend zu beschreiben.  Die
+  internen Variablen ändert der Benutzer typischerweise nicht selbst.  Sie
+  werden von \psylab\ für die automatische adaptive Steuerung und
+  Auswertung verwendet. }
+  \label{tab:reserved-variables}
+\end{longtable}
+\end{center}
+
+
+
+%\clearpage
+%% --------------------------------------------------
+\section{Auswertung}
+\label{sec:auswertung}
+
+
+\subsection{Das 'psydat'-File}
+\label{sec:psydat-file}
+
+
+Das Ergebnis am Ende eines Runs wird nach Erreichen der Schwelle
+automatisch in eine Ergebnis-file im ASCII-Format gespeichert.  Der
+Name des files ergibt sich aus dem prefix '\texttt{psydat\_}'\,, an das
+der Wert von \texttt{M\_SNAME} angehängt wird.
+%
+Beispiel: \texttt{M\_SNAME = 'mh'} ergibt den Filenamen
+\texttt{psydat\_mh}.  Im \index{psydat-file}psydat-file werden pro Run
+folgende Daten in einem festen Format gespeichert: Experimentname;
+Datum und Uhrzeit; Paramtername, -Wert und -Einheit; falls vorhanden:
+Parameter2-Name, -Wert und -Einheit; Variablen-Name,
+Variablen-Schwellenwert berechnet als Median der Variablen-Werte,
+deren Standardabweichung, Minimal- und Maximalwert, jeweils berechnet
+aus den Werten der Variablen innerhalb der Messphase des Runs.
+
+Zusätzlich zum psydat-file im ASCII-Format werden alle Variablen
+\texttt{M\_*} des akuellen Runs auch als \texttt{*.mat}-Matlab-file
+gespeichert, wobei der Filename aus dem aktuellen Datum (ohne
+Uhrzeit) gebildet wird. 
+
+Das psydat-file kann mittels verschiedener \psylab-Skripte
+\index{Auswertung}ausgewertet werden.
+%
+Zum einfachen \index{psydat-file!Einlesen}Einlesen des psydat-files:
+\begin{verbatim}
+[x, y] = read_psydat(s_name, exp_name)
+\end{verbatim}
+Danach enthält \texttt{x} die Daten als struct-array, bei dem jede
+Member-variable ein Vektor oder ein cell-array ist.  Die Länge jedes
+Vektor/cell-arrays ist gleich der Anzahl von passenden Einträgen im
+psydat-file.  Die Matrix \texttt{y} enthält nur die Teilmenge der
+numerischen Daten, die auch in \texttt{x} enthalten sind.  \texttt{y}
+eignet sich u.U.\ besser zu weiteren numerischen Bearbeitung.
+
+Zum gleichzeitigen Plotten der Ergebnisse im psydat-File als Rohdaten
+dient:
+\begin{verbatim}
+[x, y] = display_psydat_raw(s_name, exp_name)
+\end{verbatim}
+
+Falls das psydat-File mehrere \index{Auswertung!wiederholte
+  Messungen}Wiederholungsmessungen zur gleichen Kombination von Werten
+von \texttt{M\_PARAM} und \texttt{M\_PAR2} enthält, sollte
+\begin{verbatim}
+[y_all, y_ave] = display_psydat(s_name, exp_name)
+\end{verbatim}
+verwendet werden.  Damit wird eine Auswertung in der Weise
+vorgenommen, dass die pro Run ermittelten Schwellenwerte über alle
+Wiederholungs-Runs zum selben Wert von \texttt{M\_PARAM} und
+\texttt{M\_PAR2} gemittelt werden.  Es wird ebenfalls die
+Standardabweichung über alle einzelnen Schwellenwerte berechnet sowie
+der mittlere Minimal- und Maximalwert.  Diese Daten werden in
+\texttt{y\_ave} zurückgegeben.  Sie werden zusätzlich geplottet, wobei
+für jeden unterschiedlichen Wert des Parameters \texttt{M\_PAR2} eine
+eigene Kurve dargestellt wird.  Im Rückgabeargument \texttt{y\_all}
+sind alle extrahierten, ungemittelten Daten des psydat-Files
+enthalten, die auch \texttt{read\_psydat} liefert, jedoch in
+geordneter Reihenfolge.
+
+
+%%
+\begin{figure}[htbp]
+ \begin{minipage}[t]{0.49\textwidth}
+  \centering
+   \includegraphics[width=1.0\textwidth]{example_psydat_raw_sam}
+   \caption{Beispiel-Ergebnis aus der Verwendung von
+    \texttt{display\_psydat\_raw.m} für das Experiment in
+    \texttt{sam\_sincarrier\_detect.m}} 
+   \label{fig:example_psydat_raw_sam}
+ \end{minipage}
+    \hspace{0.01\textwidth}
+ \begin{minipage}[t]{0.49\textwidth}
+  \centering
+   \includegraphics[width=1.0\textwidth]{example_psydat_mean_sam}
+   \caption{Beispiel-Ergebnis aus der Verwendung von
+    \texttt{display\_psydat.m} für dasselbe Experiment und dieselben
+    Daten im psydat-File wie in
+    Abb.~\protect\ref{fig:example_psydat_raw_sam}} 
+   \label{fig:example_psydat_mean_sam}
+ \end{minipage}
+\end{figure}%
+%%
+
+Das folgende Biespiel illustriert die Funktionsweise von
+\code{display\_psydat.m} und \code{display\_psydat\_raw.m}: Das File
+\code{psydat\_mh} im subdirectory '\code{exp}' enthält
+Beispiel-Messdaten einer Versuchsperson.  Nach einem \code{cd} in
+jenes subdirectory ergibt sich beim Aufruf von
+\code{display\_psydat\_raw} eine Figur wie
+in Abb.~\ref{fig:example_psydat_raw_sam} sowie \zb folgender Output:
+
+\label{page:example_psydat_data}
+\begin{verbatim}
+[x,y] = display_psydat_raw('mh', 'sam_sincarrier_detect')
+*** info:  found 22 matching entries in psydat_mh
+*** info:  meaning of the 6 cols of y:
+    par, par2, threshold, thres_sd, thres_min, thres_max
+x = 
+         date: {1x22 cell}
+      parname: {1x22 cell}
+          par: [1x22 double]
+      parunit: {1x22 cell}
+     par2name: {1x22 cell}
+         par2: [1x22 double]
+     par2unit: {1x22 cell}
+      varname: {1x22 cell}
+    threshold: [1x22 double]
+     thres_sd: [1x22 double]
+    thres_min: [1x22 double]
+    thres_max: [1x22 double]
+      varunit: {1x22 cell}
+y =
+  1.0e+003 *
+    0.0040    0.4000   -0.0280    0.0020   -0.0320   -0.0240
+    0.0040    1.6000   -0.0340    0.0006   -0.0350   -0.0330
+    0.0040    3.2000   -0.0300    0.0005   -0.0310   -0.0300
+    0.0160    0.4000   -0.0310    0.0013   -0.0340   -0.0290
+    0.0160    1.6000   -0.0340    0.0012   -0.0360   -0.0320
+    0.0160    3.2000   -0.0310    0.0008   -0.0330   -0.0300
+    0.0160    0.4000   -0.0320    0.0017   -0.0350   -0.0290
+    0.0160    1.6000   -0.0345    0.0008   -0.0350   -0.0330
+    0.0160    0.4000   -0.0310    0.0008   -0.0330   -0.0300
+    0.0160    3.2000   -0.0320    0.0009   -0.0340   -0.0310
+    0.0640    0.4000   -0.0350    0.0010   -0.0360   -0.0320
+    0.0640    1.6000   -0.0290    0.0010   -0.0300   -0.0270
+    0.0640    3.2000   -0.0320    0.0014   -0.0330   -0.0280
+    0.0640    0.4000   -0.0400    0.0016   -0.0420   -0.0370
+    0.0640    1.6000   -0.0320    0.0006   -0.0330   -0.0310
+    0.0640    3.2000   -0.0340    0.0007   -0.0350   -0.0330
+    0.2560    0.4000   -0.0480    0.0010   -0.0500   -0.0470
+    0.2560    1.6000   -0.0500    0.0008   -0.0520   -0.0490
+    0.2560    3.2000   -0.0320    0.0034   -0.0360   -0.0240
+    0.2560    0.4000   -0.0540    0.0007   -0.0550   -0.0530
+    0.2560    1.6000   -0.0520    0.0009   -0.0540   -0.0510
+    0.2560    3.2000   -0.0310    0.0007   -0.0320   -0.0300
+\end{verbatim}
+
+
+% %%
+% \begin{figure}[htbp]
+% \begin{center}
+%   \includegraphics[width=0.9\textwidth]{example_psydat_raw_sam}
+%   \caption{Beispiel-Ergebnis aus der Verwendung von
+%     \texttt{display\_psydat\_raw.m} für das Experiment in \texttt{sam\_sincarrier\_detect.m}}
+%   \label{fig:example_psydat_raw_sam}
+% \end{center}
+% \end{figure}%
+% %%
+
+% %%
+% \begin{figure}[htbp]
+% \begin{center}
+%   \includegraphics[width=0.9\textwidth]{example_psydat_mean_sam}
+%   \caption{Beispiel-Ergebnis aus der Verwendung von
+%     \texttt{display\_psydat.m} für das Experiment in
+%     \texttt{sam\_sincarrier\_detect.m} und psydat-File wie in
+%     Abb.~\protect\ref{fig:example_psydat_raw_sam}}
+%   \label{fig:example_psydat_mean_sam}
+% \end{center}
+% \end{figure}%
+% %%
+
+Der Aufruf von \texttt{display\_psydat} ergibt dagegen bei denselben
+Daten im File \texttt{psydat\_mh} folgenden Output und eine Figur wie
+in Abb.~\ref{fig:example_psydat_mean_sam}
+
+\begin{verbatim}
+[y_all,y_ave] = display_psydat('mh', 'sam_sincarrier_detect')
+*** info:  found 22 matching entries in psydat_mh
+*** info:  meaning of the 6 cols of y:
+    par, par2, threshold, thres_sd, thres_min, thres_max
+y_all = 
+1x3 struct array with fields:
+    psydata
+y_ave = 
+1x3 struct array with fields:
+    psydata
+\end{verbatim}
+%
+Dabei enthält z.B. das struct '\texttt{psydata}' des 1.~Elements von
+\texttt{y\_all} folgende Werte:
+%
+\begin{verbatim}
+ y_all(1).psydata
+ans =
+    4.0000  400.0000  -28.0000    2.0288  -32.0000  -24.0000
+   16.0000  400.0000  -31.0000    1.2783  -34.0000  -29.0000
+   16.0000  400.0000  -32.0000    1.6855  -35.0000  -29.0000
+   16.0000  400.0000  -31.0000    0.7878  -33.0000  -30.0000
+   64.0000  400.0000  -35.0000    1.0463  -36.0000  -32.0000
+   64.0000  400.0000  -40.0000    1.6204  -42.0000  -37.0000
+  256.0000  400.0000  -48.0000    0.9783  -50.0000  -47.0000
+  256.0000  400.0000  -54.0000    0.7050  -55.0000  -53.0000
+\end{verbatim}
+Dies ist diejenige Untermenge der Einträge des psydat-Files (siehe
+Daten bzw.\ Output von  
+\code{[x,y] = display\_psydat\_raw('mh', 'sam\_sincarrier\_detect')}
+ab Seite \pageref{page:example_psydat_data}), bei denen der
+2.~Parameter \texttt{M\_PAR2} gleich ist und den ersten aller im File
+vorkommenden Werte annimmt (hier: 400.0000).  Im Vergleich dazu
+enthält das das struct '\texttt{psydata}' des 1.~Elements von
+\texttt{y\_ave} folgende Werte:
+\begin{verbatim}
+y_ave(1).psydata
+ans =
+    4.0000  400.0000  -28.0000         0  -32.0000  -24.0000
+   16.0000  400.0000  -31.3333    0.5774  -34.0000  -29.3333
+   64.0000  400.0000  -37.5000    3.5355  -39.0000  -34.5000
+  256.0000  400.0000  -51.0000    4.2426  -52.5000  -50.0000
+\end{verbatim}
+Hier wurden alle Daten aus Wiederholungsmessungen mit jeweils
+demselben Wert von \texttt{M\_PAR2} und \texttt{M\_PARAM} gemittelt.  
+
+
+
+
+%% ============================================================
+\section{Hilfreiche Skripte in \psylab}
+\label{sec:hilfreiche-skripte}
+
+In der \psylab-Distribution sind einige weitere hilfreiche Skripte
+enthalten, die nicht direkt für das FUnktionieren von \psylab\ selbst
+nötig sind, sondern für die Signal-Generierung hilfreich sein können.
+Die Funktionsweise der folgenden Skripte/Funktionen wird jeweils in
+deren help beschrieben.
+
+\begin{description}
+
+\item[\texttt{rms.m}]  Zur RMS-Wert-Bestimmung eines Signalvektor.
+  
+\item[\texttt{gensin.m}] Zur Generierung von Sinustönen.
+
+\item[\texttt{hanwin.m}] Zur Fensterung bzw.\ Flankung eines Signals
+  mit Hannigfester bzw.\ -flanken, \zb zur weichen Ein- und
+  Ausschalten eines Signals.
+ 
+\item[\texttt{fft\_rect\_filt.m}] Zur steilflankigen Bandpassfilterung
+  mittels FFT, wobei im Spektrum alle Fourierkomponenten im
+  Sperrbereich auf Null gesetzt werden.
+
+\end{description}
+
+
+
+\printindex
+
+\end{document}
+% End of psylab-doku.tex
+
+% Local Variables:
+% time-stamp-pattern: "30/Updated:  <%2d %3b %:y %02H:%02M, %u>"
+% End:
+ 
