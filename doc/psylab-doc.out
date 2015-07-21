@@ -1,36 +1,36 @@
-\BOOKMARK [1][-]{section.1}{Introduction}{}
-\BOOKMARK [2][-]{subsection.1.1}{What is PsyLab?}{section.1}
-\BOOKMARK [2][-]{subsection.1.2}{History of PsyLab}{section.1}
-\BOOKMARK [2][-]{subsection.1.3}{Licence of PsyLab}{section.1}
-\BOOKMARK [2][-]{subsection.1.4}{No warranty}{section.1}
-\BOOKMARK [2][-]{subsection.1.5}{Quick start: example experiments}{section.1}
-\BOOKMARK [1][-]{section.2}{Philosophy of PsyLab}{}
-\BOOKMARK [2][-]{subsection.2.1}{Terminology and definitions}{section.2}
-\BOOKMARK [2][-]{subsection.2.2}{Coding style in PsyLab}{section.2}
-\BOOKMARK [2][-]{subsection.2.3}{Conventions in PsyLab: reserved names for files and variables}{section.2}
-\BOOKMARK [2][-]{subsection.2.4}{Types of experiments in PsyLab}{section.2}
-\BOOKMARK [3][-]{subsubsection.2.4.1}{N-AFC experiment}{subsection.2.4}
-\BOOKMARK [3][-]{subsubsection.2.4.2}{Matching experiments}{subsection.2.4}
-\BOOKMARK [3][-]{subsubsection.2.4.3}{Available adaptive methods}{subsection.2.4}
-\BOOKMARK [3][-]{subsubsection.2.4.4}{Experiments with interleaved tracks}{subsection.2.4}
-\BOOKMARK [1][-]{section.3}{Designing your own experiment}{}
-\BOOKMARK [2][-]{subsection.3.1}{The main script}{section.3}
-\BOOKMARK [2][-]{subsection.3.2}{The set-script}{section.3}
-\BOOKMARK [2][-]{subsection.3.3}{The user script}{section.3}
-\BOOKMARK [2][-]{subsection.3.4}{Required type and value of PsyLab-variables}{section.3}
-\BOOKMARK [2][-]{subsection.3.5}{Test subject interface}{section.3}
-\BOOKMARK [2][-]{subsection.3.6}{Running your experiment}{section.3}
-\BOOKMARK [2][-]{subsection.3.7}{Saving your data: the 'psydat' file}{section.3}
-\BOOKMARK [2][-]{subsection.3.8}{Setting up interleaved-tracks experiments}{section.3}
-\BOOKMARK [2][-]{subsection.3.9}{Displaying your results}{section.3}
-\BOOKMARK [3][-]{subsubsection.3.9.1}{read\137psydat.m}{subsection.3.9}
-\BOOKMARK [3][-]{subsubsection.3.9.2}{display\137psydat\137raw.m}{subsection.3.9}
-\BOOKMARK [3][-]{subsubsection.3.9.3}{display\137psydat.m}{subsection.3.9}
-\BOOKMARK [3][-]{subsubsection.3.9.4}{special effects: permutate/change the look of your data with display\137psydat.m}{subsection.3.9}
-\BOOKMARK [3][-]{subsubsection.3.9.5}{psydat\137helper.m}{subsection.3.9}
-\BOOKMARK [2][-]{subsection.3.10}{Avoid the use of built-in function sound for playback}{section.3}
-\BOOKMARK [2][-]{subsection.3.11}{Debugging your experiment}{section.3}
-\BOOKMARK [1][-]{section.4}{Variables controlling PsyLab}{}
-\BOOKMARK [1][-]{section.5}{Helpful scripts in PsyLab}{}
-\BOOKMARK [1][-]{section.6}{New contributions to PsyLab}{}
-\BOOKMARK [1][-]{section*.3}{GNU GPL}{}
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{What is PsyLab?}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{History of PsyLab}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Licence of PsyLab}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{No warranty}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Quick start: example experiments}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Philosophy of PsyLab}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Terminology and definitions}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Coding style in PsyLab}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Conventions in PsyLab: reserved names for files and variables}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.4}{Types of experiments in PsyLab}{section.2}% 11
+\BOOKMARK [3][-]{subsubsection.2.4.1}{N-AFC experiment}{subsection.2.4}% 12
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Matching experiments}{subsection.2.4}% 13
+\BOOKMARK [3][-]{subsubsection.2.4.3}{Available adaptive methods}{subsection.2.4}% 14
+\BOOKMARK [3][-]{subsubsection.2.4.4}{Experiments with interleaved tracks}{subsection.2.4}% 15
+\BOOKMARK [1][-]{section.3}{Designing your own experiment}{}% 16
+\BOOKMARK [2][-]{subsection.3.1}{The main script}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.2}{The set-script}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.3}{The user script}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.4}{Required type and value of PsyLab-variables}{section.3}% 20
+\BOOKMARK [2][-]{subsection.3.5}{Test subject interface}{section.3}% 21
+\BOOKMARK [2][-]{subsection.3.6}{Running your experiment}{section.3}% 22
+\BOOKMARK [2][-]{subsection.3.7}{Saving your data: the 'psydat' file}{section.3}% 23
+\BOOKMARK [2][-]{subsection.3.8}{Setting up interleaved-tracks experiments}{section.3}% 24
+\BOOKMARK [2][-]{subsection.3.9}{Displaying your results}{section.3}% 25
+\BOOKMARK [3][-]{subsubsection.3.9.1}{read\137psydat.m}{subsection.3.9}% 26
+\BOOKMARK [3][-]{subsubsection.3.9.2}{display\137psydat\137raw.m}{subsection.3.9}% 27
+\BOOKMARK [3][-]{subsubsection.3.9.3}{display\137psydat.m}{subsection.3.9}% 28
+\BOOKMARK [3][-]{subsubsection.3.9.4}{special effects: permutate/change the look of your data with display\137psydat.m}{subsection.3.9}% 29
+\BOOKMARK [3][-]{subsubsection.3.9.5}{psydat\137helper.m}{subsection.3.9}% 30
+\BOOKMARK [2][-]{subsection.3.10}{Avoid the use of built-in function sound for playback}{section.3}% 31
+\BOOKMARK [2][-]{subsection.3.11}{Debugging your experiment}{section.3}% 32
+\BOOKMARK [1][-]{section.4}{Variables controlling PsyLab}{}% 33
+\BOOKMARK [1][-]{section.5}{Helpful scripts in PsyLab}{}% 34
+\BOOKMARK [1][-]{section.6}{New contributions to PsyLab}{}% 35
+\BOOKMARK [1][-]{section*.3}{GNU GPL}{}% 36

@@ -50,8 +50,8 @@ end
 
 
 
-% count correct trials found in psydat file
-trial = 0;
+% count correct entries (=copmleted experimental runs) found in psydat file
+entry = 0;
 % count line number in psydat file
 line_number = 0;
 
@@ -63,7 +63,7 @@ while 1,
   lin = fgets(fid1);  line_number = line_number+1;
   if lin == -1, break; end;  % we are now at EOF
   
-  % split into space-separated words
+  % split it into space-separated words
   tok = mpsy_split_lines_to_toks(lin);
 
   % check whether we have a line starting a new block
@@ -76,55 +76,71 @@ while 1,
     
     if strcmp(tok(3), s_name),  % check for correct subject name
       if strcmp(tok(2), exp_name), % check for correct experiment name
-        trial = trial+1;
+        entry = entry+1;
 	
 	nparam = str2num(char(tok(6)));
-	x.date(trial)    = tok(4);
+	x.date(entry)    = tok(4);
 	
 	for k=1:nparam,
 	  % get next line
 	  lin = fgets(fid1);  line_number = line_number+1;
-	  % split into space-separated words
+	  % split it into space-separated words
 	  tok = mpsy_split_lines_to_toks(lin);
 	  
 	  if length(tok) == 5 & strcmp(tok(2), sprintf('PAR%d:',k)),
-	    x.par(k).name(trial)  = tok(3);
-	    x.par(k).value(trial) = str2num(char(tok(4)));
-	    x.par(k).unit(trial) = tok(5);
+	    x.par(k).name(entry)  = tok(3);
+	    x.par(k).value(entry) = str2num(char(tok(4)));
+	    x.par(k).unit(entry) = tok(5);
 	  else
 	    fclose(fid1);
-	    error('sorry, psydat file garbled  in line %d at trial %d. Expecting a line for parameter #%d here.', line_number, trial, k);
+	    error('sorry, psydat file garbled  in line %d at entry %d. Expecting a line for parameter #%d here.', line_number, entry, k);
 	  end
 	end % for all parameters
       
 	% get next line in the file
 	lin = fgets(fid1);   line_number = line_number+1;
-	% split into space-separated words
+	% split it into space-separated words
 	tok = mpsy_split_lines_to_toks(lin);
 	
-	if length(tok) == 6,
-	  x.varname(trial)    = tok(1);
-	  x.threshold(trial)  = str2num(char(tok(2)));  % the threshold itself
-	  x.thres_sd(trial)   = str2num(char(tok(3)));  % its std. dev.
-	  x.thres_min(trial)  = str2num(char(tok(4)));  % min. values during meas. phase
-	  x.thres_max(trial)  = str2num(char(tok(5)));  % max. values during meas. phase
-	  x.varunit(trial)    = tok(6);
+        if strcmp(tok(2), 'VAL:')
+          x.run(entry).vars = str2num(char(tok(3:2:end)));
+          x.run(entry).answers = str2num(char(tok(4:2:end)));
+        
+          % get next line in the file
+          lin = fgets(fid1);   line_number = line_number+1;
+          % split it into space-separated words
+          tok = mpsy_split_lines_to_toks(lin);
+        end
+    
+	
+        if length(tok) == 6 & ~strcmp(tok(1), '%%-----'),
+	  x.varname(entry)    = tok(1);
+	  x.threshold(entry)  = str2num(char(tok(2)));  % the threshold itself
+	  x.thres_sd(entry)   = str2num(char(tok(3)));  % its std. dev.
+	  x.thres_min(entry)  = str2num(char(tok(4)));  % min. values during meas. phase
+	  x.thres_max(entry)  = str2num(char(tok(5)));  % max. values during meas. phase
+	  x.varunit(entry)    = tok(6);
 	else
 	  fclose(fid1);
-	  error('sorry, psydat file garbled in line %d at trial %d. Expecting a line for the threshold data here.', line_number, trial, k);
+	  error('sorry, psydat file garbled in line %d at entry %d. Expecting a line for the threshold data here.', line_number, entry, k);
 	end
 	
       end % if correct exp.name
+      
     else
       fprintf('*** WARNING, found a different subject name (%s) for experiment %s.\n', s_name, exp_name);
-      fprintf('             that line (trial after %d) is skipped\n', trial);
+      fprintf('             that line (entry after %d) is skipped\n', entry);
     end % if correct subject name
+    
+  else
+    %% nothing to do.  this line does not belong to the current entry.
   end % if correct starting line
-end
+  
+end % while loop
 fclose(fid1);
 
-if trial > 0,
-  fprintf('*** info:  found %d matching entries in %s\n',trial,file_name);
+if entry > 0,
+  fprintf('*** info:  found %d matching entries in %s\n', entry, file_name);
 else
   warning('*** I''m sorry, no appropriate entries found in file %s\n', file_name);
   x = []; y = [];

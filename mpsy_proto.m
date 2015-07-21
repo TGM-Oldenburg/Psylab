@@ -12,11 +12,15 @@
 % Copyright (C) 2003, 2004   Martin Hansen, FH OOW  
 % Author :  Martin Hansen,  <psylab AT jade-hs.de>
 % Date   :  23 May 2003
-% Updated:  <14 Jan 2004 11:30, hansen>
+
+% Updated:  < 6 Jan 2006 20:07, mh>
 % Updated:  < 6 Jan 2006 20:07, mh>
 % Updated:  <13 Nov 2007 Sven Franz>
 %           added var "M.SAVEMEAN". When M.SAVEMEAN==1 the mean (not
 %           median) will be saved
+% Updated:  <20 Jul 2015 12:29, mh>
+%           added option for saving all values of M.VARS during one
+%           run.  Original idea/commit by Stephanus Volke
 
 %% This file is part of PSYLAB, a collection of scripts for
 %% designing and controlling interactive psychoacoustical listening
@@ -55,6 +59,17 @@ fprintf(fidm,'#### %s %s %s__%s npar %d ####\n', ...
 for k=1:M.NUM_PARAMS,
   fprintf(fidm,'%%%%----- PAR%d: %s %f %s\n', k, char(M.PARAMNAME(k)), M.PARAM(k), char(M.PARAMUNIT(k)));
 end  
+
+% output the individual values of M.VAR and the answers to the
+% psydat file, if flag-variable M.SAVERUN has been set accordingly  
+if (isfield(M, 'SAVERUN')) && M.SAVERUN == 1
+  fprintf(fidm, '%%%%----- VAL:');
+  for k = 1:length(M.ANSWERS)
+    fprintf(fidm, ' %g %d',M.VARS(k), M.ANSWERS(k));
+  end
+  fprintf(fidm, '\n');
+end
+
 if (isfield(M, 'SAVEMEAN')) && M.SAVEMEAN == 1
     fprintf(fidm,'  %s %f %f %f %f %s\n', ...
         M.VARNAME, M.mean_thres, M.std_thres, M.min_thres, M.max_thres, M.VARUNIT);

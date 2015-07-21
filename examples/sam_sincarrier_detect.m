@@ -40,7 +40,7 @@ M.ADAPT_METHOD = '1up_2down';   % transformed 1-up-2-down
 %M.PC_CONVERGE  = 0.75;
 %M.ADAPT_METHOD = 'uwud';   % unforced weighted up down
 
-M.MAXREVERSAL  = 6 ;  % number of reversals required as stop criterion
+M.MAXREVERSAL  = 2 ;  % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;  % 1/0 = yes/no, 2=show result plot, 3=save it with individual name
 M.INFO         = 1 ;  % flag for additional info for test subject
 
@@ -52,7 +52,7 @@ M.EARSIDE          = M_BINAURAL;
 M.USE_GUI          = 1;     % use a GUI for user input
 M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
 M.DEBUG            = 0;
-
+M.SAVERUN          = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 M.USE_MSOUND       = 1;     % flag whether to use msound (1 or 0)

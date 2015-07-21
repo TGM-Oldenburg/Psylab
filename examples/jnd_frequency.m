@@ -62,10 +62,10 @@ type jnd_frequency_instruction.txt
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
 %% ==================================================
-M.PARAM(2)  =  -30;
+M.PARAM(2)  =  -20;
 
-ref_freqs = 1000;
-%ref_freqs = [250 500 1000 2000 3000 6000];
+%ref_freqs = 1000;
+ref_freqs = [250 500 1000 2000 3000 6000];
 % 
 for freq = ref_freqs,
    

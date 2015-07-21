@@ -22,9 +22,11 @@ function varargout = psydat_helper(varargin)
 % Copyright (C) 2009 by Martin Hansen, Fachhochschule OOW, Oldenburg
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  24 Feb 2009
+% Changed:  Stephanus Volke, 16 Jun 2015
  
 
-% Last Modified by GUIDE v2.5 27-Feb-2009 11:05:32
+%      Modified by GUIDE v2.5 27-Feb-2009 11:05:32
+% Last Modified by GUIDE v2.5 15-Jun-2015 23:01:48
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -217,9 +219,17 @@ function listbox3_Callback(hObject, eventdata, handles)
 % Hints: contents = get(hObject,'String') returns listbox3 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox3
 
-% note(MH): this callback does nothing but it has to be here because it
-% gets called upon clicks into the listbox.
-
+% note(MH): this callback gets called upon clicks into the listbox
+% with "dates/times" of the individual measurement runs
+%
+% enable the pushbutton4 only in case that one single item has
+% been selected from the listbox:
+if length(get(hObject,'value')) ~= 1
+  set(handles.pushbutton4, 'Enable', 'Off');
+else
+  
+  set(handles.pushbutton4, 'Enable', 'On');
+end
 
 function listbox3_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to listbox3 (see GCBO)
@@ -275,10 +285,25 @@ for l=1:length(date_idx),
     new_string = strrep(old_string, handles.subject_name, subname);
     fprintf(fid, '%s\n', new_string);
     
-    % copy the following npar+1 lines with parameter lines and result lines
-    for jj= 1 : 1+this_npar,
+    % copy the following npar lines with parameter lines
+    for jj= 1 : this_npar,
         fprintf(fid, '%s\n', char(handles.psydat_all_lines(line_idx_exp_start+jj)));
     end
+    % now look at the next line following:
+    line_tmp = char(handles.psydat_all_lines(line_idx_exp_start+jj+1));
+    if strcmp(line_tmp(1:12),'%%----- VAL:')
+      % this line holds all the values of M.VARS and M.ASNWERS, so
+      % the next following line is the one containing the threshold
+      % result data, so output both lines into the subset-psydatfile:
+      fprintf(fid, '%s\n', char(handles.psydat_all_lines(line_idx_exp_start+jj+1)));
+      fprintf(fid, '%s\n', char(handles.psydat_all_lines(line_idx_exp_start+jj+2)));
+    else
+      % the current line does already contain the threshold result
+      % data, so output it into the subset-psydatfile 
+      fprintf(fid, '%s\n', line_tmp);
+    end
+        
+    
 end
 
 fclose(fid);
@@ -300,3 +325,30 @@ figure(200);
 display_psydat(handles.subject_name, handles.exp_name);
 
 
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over listbox3.
+function listbox3_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to listbox3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on key press with focus on listbox3 and none of its controls.
+function listbox3_KeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to listbox3 (see GCBO)
+% eventdata  structure with the following fields (see UICONTROL)
+%	Key: name of the key that was pressed, in lower case
+%	Character: character interpretation of the key(s) that was pressed
+%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton4.
+function pushbutton4_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+run_idx = get(handles.listbox3, 'Value');
+
+mpsy_replot_run(handles.subject_name, handles.exp_name, run_idx);

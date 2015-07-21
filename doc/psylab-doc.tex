@@ -906,7 +906,7 @@ These are:
 \begin{enumerate}
 \item The following \psylab-variables must be \emph{numeric} in type:
 
-  \code{M.VAR}, ~ \code{M.STEP}, ~ \code{M.NUM\_PARAMS}
+  \code{M.VAR}, ~ \code{M.STEP}, ~ \code{M.NUM\_PARAMS}, ~ \code{M.PARAMS}
 
 \item The following \psylab-variables must be of type \emph{string} and must
   \emph{not contain whitespace} characters:
@@ -1105,6 +1105,13 @@ the measurement phase.  The default behaviour can be acchieved by
 letting \code{M.SAVEMEAN} be an empty field or by setting it to a
 value~$\neq1$.
 
+The default behaviour of psylab is to output only the resulting
+threshold value to the psydat-file.  However, by setting the variable
+\code{M.SAVERUN} to 1, you can change this and specify that also all
+values of \code{M.VAR} during the entire run, including the
+corresponding answers of the subject, should be output to the
+psydat-file in a separate line.   
+
 In addition to the psydat-file in ASCII format, the variables
 \texttt{M} and \texttt{M\_*} also get saved as a binary mat-file each
 time a run has been completed.  However, this is mainly for rescue and
@@ -1133,7 +1140,8 @@ non-interleaved experiment, but the following exceptions apply:
   sufficient to only assign the ``relevant'' fields of \texttt{M(2)},
   \texttt{M(3)}, \ldots\ .  When doing this, any fields of
   \texttt{M(2:end)} that are left empty will be assigned with
-  the same values as found in \texttt{M(1)} automatically. 
+  the same values as found in \texttt{M(1)} automatically.  (This is
+  a specific feature of \psylab, not of Matlab.) 
 
 \item The script \code{mpsy\_intrlv\_afc\_main.m} is called to control
   the whole interleaved AFC experiment, instead of \code{mpsy\_afc\_main.m}.
@@ -1186,9 +1194,9 @@ mpsy_intrlv_afc_main;
 The first part looks exactly the same as for a single-run experiment.
 The difference starts in the \code{for}-loop, where
 \code{M(kk).PARAM(1)} and \code{M(kk).PARAM(2)} are assigned, thereby
-rendering \code{M} into an array with \code{length(bandwidths)}
+rendering \code{M} into an array with \code{length(tone\_freqs)}
 elements (in this case 6 elements).  After the \code{for}-loop, most
-fields of \texttt{M(2:6)} are still empty.  These fields will be
+fields of \texttt{M(2:6)} are still empty (by standard Matlab behaviour).  These fields will be
 filled in automatically by way of the script
 \texttt{mpsy\_intrlv\_init.m} which is called inside \texttt{mpsy\_intrlv\_afc\_main}
 
@@ -1724,7 +1732,7 @@ The \code{msound} mex-file is now part of the \psylab-distribution.
 It comes in several pre-compiled versions for win and
 gnu/linux-systems in 32 and 64bit format.  The dll-format is used for
 older Matlab versions on win32-system.  If you encounter a warning
-about a ``shadowing'' effect of some msound-file over anothe, e.g.\
+about a ``shadowing'' effect of some msound-file over another, e.g.\
 the mexw32 version shadowing the dll version, you may just delete the
 dll version.
 %
@@ -1910,6 +1918,9 @@ Name (type)              &  Meaning \\
     Flag variable to indicate that the threshold value should be
     calculated as the \emph{mean} across M.VAR for trials within the measurement
     phase, instead of the default behaviour, i.e., calculate their \emph{median} \\
+\code{M.SAVERUN}  (n)&
+    Flag variable to indicate that also all values of M.VAR and the
+    corresponding answers of the subject should be output to the psydat-file\\
 \code{M.DEBUG}     (n)& 
    Flag variable (0, or larger) to indicate the amount of intermediate
    information presented for debug purposes.  Should be set to 0 during real
@@ -2048,8 +2059,8 @@ become part of the regular \psylab-distribution.
 
 
 The first two contributions are provided by students of ``Institut für
-Hörtechnik und Audiologie'', Fachhochschule OOW.  They implemented two
-new experimental designs in \psylab, namely
+Hörtechnik und Audiologie''.  They implemented two new experimental
+designs in \psylab, namely
 \begin{enumerate}
 \item A procedure to estimate several points on the psychometric
   function (that means: not only one threshold value) by repeatedly
@@ -2063,6 +2074,9 @@ new experimental designs in \psylab, namely
   recognition experiment by \cite{akeroyd_2001}
   % Akeroyd et al. (JASA~110(3), 2001)
 \end{enumerate}
+
+Please note that the content of the contrib-directory is checked for
+consistency with the remaining part of psylab far less frequently! 
 
 
 \bibliography{mh-refs}
