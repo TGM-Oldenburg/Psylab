@@ -1,4 +1,4 @@
-% Usage: y = mpsy_afc_present
+% Usage: mpsy_afc_present
 % ----------------------------------------------------------------------
 %
 %   input:   (none), works on global variables

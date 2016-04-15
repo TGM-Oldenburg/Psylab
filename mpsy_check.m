@@ -10,6 +10,7 @@
 % Copyright (C) 2005 by Martin Hansen, Fachhochschule OOW
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  08 Nov 2005
+% Updated:  <15 Apr 2016 16:55, martin>
 % Updated:  <23 Okt 2006 00:05, hansen>
 % Updated:  < 8 Nov 2005 22:10, mh>
 
@@ -36,82 +37,93 @@ if exist('M_PARAM'),
 end
 
 % check for experiment using old style definition of adaptive procedure
-if isfield(M, 'M.ADAPT_N_UP') & ~isfield(M, 'M.ADAPT_METHOD'),
+if isfield(M, 'ADAPT_N_UP') & ~isfield(M, 'ADAPT_METHOD'),
   fprintf('*** You seem to try to run an experiment made for psylab version prior to 2.3,\n');
   fprintf('*** while your psylab appears to be version %s. \n', mpsy_version);
   fprintf('*** You will probably need to change one or the other to a matching version.\n');a
   warning('version mismatch of psylab version and your experiment files');
 end
 
-% variables that must contain a string
-mpsy_must_be_string = {'M.SNAME', 'M.VARNAME', 'M.VARUNIT'};
+% field variables that must contain a string
+mpsy_field_must_be_string = {'SNAME', 'VARNAME', 'VARUNIT'};
 
-% variables that must contain a numeric value ...
-mpsy_must_be_numeric = {'M.VAR', 'M.STEP', 'M.NUM_PARAMS'};
+% field variables that must contain a numeric scalar value
+mpsy_field_must_be_scalar = {'VAR', 'STEP', 'NUM_PARAMS'};
+% field variables that must contain a numeric value (scalar or vector)
+mpsy_field_must_be_numeric = [mpsy_field_must_be_scalar, 'PARAM'];
 
-% ... or numeric values as a scalar or vector
-mpsy_scalar_or_vector = {'M.PARAM'};
-
-% these variables need to be cells (of stings), EVEN if only 1 element exist
-mpsy_must_be_cell = {'M.PARAMNAME', 'M.PARAMUNIT'};
+% these field variables need to be cells (of stings), EVEN if only 1 element exist
+mpsy_field_must_be_cell = {'PARAMNAME', 'PARAMUNIT'};
 
 
-mpsy_must_not_be_empty = [mpsy_must_be_string mpsy_must_be_numeric mpsy_scalar_or_vector];
+mpsy_field_must_not_be_empty = [mpsy_field_must_be_string mpsy_field_must_be_numeric];
 
 % check for empty variables
-for tmp = mpsy_must_not_be_empty,
+for tmp = mpsy_field_must_not_be_empty,
   tmp_varname = char(tmp);
-  if ~isfield(M, tmp_varname(3:end)) | isempty(tmp_varname),
-    error('psylab-variable "%s" must not be left empty! ',  tmp_varname);
+ 
+  % check for existence first:
+  if ~isfield(M, tmp_varname), 
+    error('psylab-variable "M.%s" must exist and must not be empty!  \n',  tmp_varname);
+  end
+  % then check for emptiness:
+  if isempty(getfield(M, tmp_varname)),
+    error('psylab-variable "M.%s" must not be left empty! \n',  tmp_varname);
   end
 end
 
 % check for numeric type variables
-for tmp = [mpsy_must_be_numeric  mpsy_scalar_or_vector],
+for tmp = mpsy_field_must_be_numeric,
   tmp_varname = char(tmp);
-  tmp_val = eval(tmp_varname);
-  %if ~isnumeric(tmp_val) | max(size(tmp_val)) > 1,
-  if ~isnumeric(tmp_val),
-    error('content of psylab-variable "%s" must be a scalar numeric value! ',  tmp_varname);
+  if ~isnumeric(getfield(M, tmp_varname)),
+    error('content of psylab-variable "M.%s" must be a numeric value!  \n',  tmp_varname);
   end
 end
 
 % check for string type variables
-for tmp = mpsy_must_be_string,
+for tmp = mpsy_field_must_be_string,
   tmp_varname = char(tmp);
-  tmp_val = eval(tmp_varname);
-  if ~ischar(tmp_val),
-    error('psylab-variable "%s" must be a string! ', tmp_varname);
+  if ~ischar(getfield(M, tmp_varname)),
+    error('psylab-variable "M.%s" must be a string!  \n', tmp_varname);
   end
-  if strfind(tmp_val, ' '),
-    error('content of psylab-variable "%s" must not contain blank spaces! ', tmp_varname);
+  if strfind(getfield(M, tmp_varname), ' '),
+    error('content of psylab-variable "M.%s" must not contain blank spaces!  \n', tmp_varname);
   end
 end
+
+% check for being scalar variables
+for tmp = mpsy_field_must_be_scalar,
+  tmp_varname = char(tmp);
+  if ~isscalar(getfield(M, tmp_varname)),
+    error('psylab-variable "M.%s" must be a scalar!  \n', tmp_varname);
+  end
+end
+
 
 % check for correct lengthes of M.PARAM* variables
 if length(M.PARAM) ~= M.NUM_PARAMS,
-  error('length of M.PARAM must match value of M.NUM_PARAMS');
+  error('length of M.PARAM must match value of M.NUM_PARAMS \n');
 end
 if length(M.PARAMNAME) ~= M.NUM_PARAMS,
-  error('length of M.PARAMNAME must match value of M.NUM_PARAMS');
+  error('length of M.PARAMNAME must match value of M.NUM_PARAMS \n');
 end
 if length(M.PARAMUNIT) ~= M.NUM_PARAMS,
-  error('length of M.PARAMUNIT must match value of M.NUM_PARAMS');
+  error('length of M.PARAMUNIT must match value of M.NUM_PARAMS \n');
 end
 
 % check for cellstring type variables
-for tmp = mpsy_must_be_cell,
+for tmp = mpsy_field_must_be_cell,
   tmp_varname = char(tmp);
-  tmp_val = eval(tmp_varname);
+  tmp_val = getfield(M,tmp_varname);
   if ~iscellstr(tmp_val),
-    error('psylab-variable "%s" must be a cell(string)! ', tmp_varname);
+    error('psylab-variable "%s" must be a cell(string)!  \n', tmp_varname);
   end
   for k=1:M.NUM_PARAMS
     if strfind(char(tmp_val(k)), ' '),
-      error('content of psylab-variable "%s(%d)" must not contain blank spaces! ', tmp_varname, k);
+      error('content of psylab-variable "%s(%d)" must not contain blank spaces!  \n', tmp_varname, k);
     end
     if length(char(tmp_val(k))) == 0,
-      error('psylab-variable "%s(%d)" must not be empty! ', tmp_varname, k);
+      error('psylab-variable "%s(%d)" must not be empty!  \n', tmp_varname, k);
     end
   end
 end

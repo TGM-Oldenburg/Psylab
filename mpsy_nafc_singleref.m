@@ -98,7 +98,7 @@ switch N
       end
 
   otherwise 
-      fprintf('N AFC not yet implemented for N=%d, aborting\n', N);
+      error('N-AFC not yet implemented for N=%d, aborting\n', N);
 end
 
 

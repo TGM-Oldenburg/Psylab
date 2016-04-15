@@ -305,7 +305,7 @@ Fig.~\ref{fig:example_run}.
 \item[test signal] 
   
   The \index{signals!test signal}test signal is the signal which \emph{does}
-  contain that special ``cue'' that the subject is required to
+  contains that special ``cue'' that the subject is required to
   detect, contrary to the reference signal which does not.  The test
   signal will be presented at random in one of the $n$ intervals of a
   $n$-AFC trial. The test signal carries the reserved name
@@ -849,13 +849,17 @@ the global Matlab-workspace at the end of the user script:
   contains ``the signal'' to be detected by the subject, respectively
   the signal deviation to be discriminated, which the reference signal
   does not.
-\item[ m\_ref ] \index{signals!m\_ref} The signal vector that
-  contains the stimulus of the reference interval(s).  If the variable
+\item[ m\_ref ] \index{signals!m\_ref} The signal vector that contains
+  the stimulus of the reference interval(s).  If the variable
   \code{m\_ref} exists in the Matlab workspace, \emph{this} signal is
   presented in the $(n-1)$ reference intervals of an $n$-AFC
   experiment, which means that all reference intervals are identical.
   This is illustrated in the example experiment
-  \texttt{jnd\_frequency.m}.
+  \texttt{jnd\_frequency.m}.  
+
+  If \code{m\_ref} exists in the workspace, then \code{m\_ref1},
+  \code{m\_ref2}, ... (see item described next) \emph{must not} exist
+  in the Matlab workspace.
 
 \item[ m\_ref1, m\_ref2, ...]  
   \index{signals!m\_ref1} \index{signals!m\_ref2}
@@ -869,7 +873,11 @@ the global Matlab-workspace at the end of the user script:
   presented in random order within each trial (on top of the random
   placement of the test signal within the $n$ intervals).
 
+  If \code{m\_ref1}, \code{m\_ref2}, ...  exist in the workspace, then
+  \code{m\_ref}(see item described before) \emph{must not} exist in
+  the Matlab workspace.
 \end{description}
+
 
 Additionally, the following signal vectors with reserved names can (but
 need not) reside in the Matlab-workspace after leaving the user script
@@ -887,13 +895,21 @@ respectively the set script:
   silence, or for example a certain marker stimulus.
 \item[ m\_postsig ] \index{signals!m\_postsig} The signal which is presented after the
   last of the $n$ stimulus intervals.
+\item[ m\_background ] \index{signals!m\_background} A signal which is
+  presented simultaneously during the whole duration of a trial,
+  i.e.\ from the beginning of the pre-signal until the end of the
+  post-signal.  This could, for example, hold a continuous noise
+  background signal.  
 \end{description}
 
 If one or more of the three signals \texttt{m\_quiet},
 \texttt{m\_presig} or \texttt{m\_postsig} are left unspecified, i.e.\
-nonexistent in the workspace, they default to the empty vector.  This
-is automatically taken care of by the \psylab-script
-\code{mpsy\_check.m}.
+are nonexistent as a variable in the workspace, they default to the
+empty vector.  This is automatically taken care of by the
+\psylab-script \code{mpsy\_check.m}.
+
+If the signal \texttt{m\_background} is unspecified, i.e.\ nonexistent
+as a variable in workspace, it is neglected.
 
 
 %% --------------------------------------------------
@@ -1774,7 +1790,7 @@ to get an increasing amount of temporary information and plots.
 Stick to the rule: ``Use the force -- read the source'' in
 that case.
 
-However, when gathering real data with test subjects, you will want to
+When gathering real data with test subjects, however, you will want to
 set \code{M.DEBUG=0;}
 
 

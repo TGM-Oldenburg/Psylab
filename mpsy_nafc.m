@@ -1,24 +1,13 @@
-% function [m_outsig, rand_afc] = mpsy_nafc(m_test, m_ref, N, m_quiet, m_presig, m_postsig) 
-
-% mount testsignal and reference signal randomly in an N AFC fashion
+% Usage: mpsy_nafc
 % ----------------------------------------------------------------------
-% Usage: [m_outsig, rand_afc] = mpsy_nafc(m_test, m_ref, N, m_quiet, m_presig, m_postsig) 
 %
-%   input:   ---------
-%        m_test     test signal vector   
-%        m_ref      reference signal vector   
-%        N          number of alternative intervals (e.g. 2, 3, or 4)
-%        m_quiet    signal vector played in-between signals
-%        m_presig   signal vector played before first signal
-%        m_postsig  signal vector played after last signal
-% 
-%  output:   ---------
-%        m_outsig   signal vector containing complete interval sequence
-%        rand_afc   the interval number containing the test interval
+%   input:   (none), works on global variables
+%  output:   (none), mounts signal intervals in AFC fashion
 %
-% Copyright (C) 2005 by Martin Hansen, Fachhochschule OOW, Oldenburg
+% Copyright (C) 2005 by Martin Hansen, Jade Hochschule, Oldenburg
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  31 Mrz 2005
+% Updated:  <16 Nov 2015 16:36, martin>
 % Updated:  < 3 Nov 2005 14:09, hansen>
 
 %% This file is part of PSYLAB, a collection of scripts for
@@ -38,12 +27,17 @@
 
 if exist('m_ref')
   
-  % call the "single-reference" N-AFC procedure
+  % call the "single-reference" N-AFC procedure, i.e. the case with
+  % only one instance of the reference signal "m_ref"
   [m_outsig, M.rand_afc] = mpsy_nafc_singleref(m_test, m_ref, M.NAFC, m_quiet, m_presig, m_postsig);
 
 else
     
-  % implement the "multiple/different-references" N-AFC procedure
+  % implement the "multiple/different-references" N-AFC procedure,
+  % i.e. the case where (n-1) different instances of a reference signal 
+  % are present in an n-AFC experiment.  This is, e.g., needed in
+  % case of random noise maskers, where every noise interval is
+  % made up of a "new" uncorrelated noise.  
   switch M.NAFC
   
    case 2   % --------------- 2AFC ---------------
@@ -52,7 +46,7 @@ else
        % case, where the refenrence is stored in variable 'm_ref'
        
        if exist('m_ref1'),
-	 error('found variable "m_ref1" in your workspace.  should probably be called "m_ref" ?');
+	 error('found variable called "m_ref1" in your workspace.  It should probably be called "m_ref" ?');
        end
             
    case 3   % --------------- 3AFC ---------------
@@ -103,10 +97,18 @@ else
       end
 
   otherwise 
-      fprintf('N AFC not yet implemented for N=%d, aborting\n', N);
-end
+      error('N-AFC not yet implemented for N=%d, aborting\n', N);
+  end
 
-
+  
+  % finally, add the "background signal" if it is present in the workspace
+  if exist('m_background'),
+    % issue an error if the size of m_background does not fit 
+    if all(size(m_background) == size(m_outsig)),
+      m_outsig = m_outsig + m_background;
+    end
+  end
+  
 end
 
 

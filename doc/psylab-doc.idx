@@ -27,12 +27,13 @@
 \indexentry{signals!m\_quiet|hyperpage}{11}
 \indexentry{signals!m\_presig|hyperpage}{11}
 \indexentry{signals!m\_postsig|hyperpage}{11}
+\indexentry{signals!m\_background|hyperpage}{11}
 \indexentry{psydat-file|hyperpage}{13}
 \indexentry{threshold!calculation of|hyperpage}{13}
-\indexentry{run!with interleaved tracks|hyperpage}{13}
+\indexentry{run!with interleaved tracks|hyperpage}{14}
 \indexentry{psydat functions!read\_psydat.m|hyperpage}{16}
-\indexentry{psydat functions!display\_psydat\_raw.m|hyperpage}{16}
-\indexentry{psydat functions!display\_psydat.m|hyperpage}{17}
+\indexentry{psydat functions!display\_psydat\_raw.m|hyperpage}{17}
+\indexentry{psydat functions!display\_psydat.m|hyperpage}{18}
 \indexentry{msound!alternative sound output|hyperpage}{22}
-\indexentry{debugging!variable \texttt{M.DEBUG}|hyperpage}{22}
+\indexentry{debugging!variable \texttt{M.DEBUG}|hyperpage}{23}
 \indexentry{variables!reserved   name|hyperpage}{23}

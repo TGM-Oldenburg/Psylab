@@ -25,7 +25,13 @@ tdur   = 0.6;    % duration of the carrier [s]
 a0     = 0.5;    % its amplitude
 moddur = 0.5;    % duration of the modulation [s]
 
-carrier = gensin(M.PARAM(2), a0, tdur, 0, M.FS);
+
+if M.PARAM(2) == -1,
+  disp('broad band noise carrier instead of sinusoid carrier')
+  carrier =  0.1*randn(round(tdur*M.FS),1);
+else
+  carrier = gensin(M.PARAM(2), a0, tdur, 0, M.FS);
+end
 
 % the "ones-offset" of the modulator with 50ms Hanning-ramps
 mod1 = ones(size(carrier));

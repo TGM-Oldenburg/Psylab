@@ -1,6 +1,6 @@
-function y = mpsy_maxreversal_check(n_maxreversal) 
+function y = mpsy_maxreversal_askagain(n_maxreversal) 
 
-% to called from mpsy_init_run
+% to be called from mpsy_init_run
 % ----------------------------------------------------------------------
 % Usage: y = mpsy_maxreversal_check(n_maxreversal)
 %
@@ -39,8 +39,8 @@ uiwait( warndlg (warn_text, 'import notice', 'modal'));
 
 
 yes_answer = 'yes, please ask again';
-no_answer  = 'no, please do not ask agin';
-question1  = 'would you like to be asked again about number of reversals in any of your experiments in the future?';
+no_answer  = 'no, please do not ask again';
+question1  = 'would you like to be asked again about the number of reversals in any of your experiments in the future?';
 user_answer = questdlg(question1, 'important, please read well', ...
                        yes_answer, no_answer, yes_answer);
 
@@ -50,7 +50,7 @@ if strcmp(user_answer, yes_answer),
 else
   y = 0; 
   
-  uiwait ( warndlg( 'OK. You will not be asked again. However, should you like to change your mind at a later time, then please copy the the file "mpsy_maxreversal_askagain.m" onto the file "mpsy_maxreversal_check.m"', 'import notice', 'modal'));
+  uiwait ( warndlg( 'OK. You will not be asked again. However, should you like to change your mind at a later time, then please copy the file "mpsy_maxreversal_askagain.m" onto the file "mpsy_maxreversal_check.m"', 'import notice', 'modal'));
   
 end
 

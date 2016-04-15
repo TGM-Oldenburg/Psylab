@@ -6,7 +6,8 @@
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  3 Apr 2005
 % Updated:   <13 Mai 2005 15:51, hansen>
-% Updated:  < 8 Nov 2005 23:15, mh>
+% Updated:   <13 Mai 2005 15:51, hansen>
+% Updated:  <15 Apr 2016 14:38, martin>
 
 %% This file makes use of PSYLAB, a collection of scripts for
 %% designing and controling interactive psychoacoustical listening
@@ -27,7 +28,7 @@ M.EXPNAME      = mfilename;    % experiment name, very important to be set corre
 M.NUM_PARAMS   = 2;            % number of parameters
 M.PARAMNAME(1) = {'modulation_frequency'};
 M.PARAMUNIT(1) = {'Hz'};
-M.PARAMNAME(2) = {'carrier_frequency'};
+M.PARAMNAME(2) = {'carrier_frequency'};   % choose value -1 for broad band carrier
 M.PARAMUNIT(2) = {'Hz'};
 M.VARNAME      = 'modulation_degree';
 M.VARUNIT      = 'dB';
@@ -40,7 +41,7 @@ M.ADAPT_METHOD = '1up_2down';   % transformed 1-up-2-down
 %M.PC_CONVERGE  = 0.75;
 %M.ADAPT_METHOD = 'uwud';   % unforced weighted up down
 
-M.MAXREVERSAL  = 2 ;  % number of reversals required as stop criterion
+M.MAXREVERSAL  = 6 ;  % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;  % 1/0 = yes/no, 2=show result plot, 3=save it with individual name
 M.INFO         = 1 ;  % flag for additional info for test subject
 
@@ -51,7 +52,7 @@ M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
 M.EARSIDE          = M_BINAURAL;
 M.USE_GUI          = 1;     % use a GUI for user input
 M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
-M.DEBUG            = 0;
+M.DEBUG            = 2;
 M.SAVERUN          = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -70,9 +71,11 @@ type sam_instruction.txt
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
 %% ==================================================
+carrier_freqs = -1;  %  broad band noise
 carrier_freqs = [ 800 1600 3200 ]; 
+
 %mod_freqs     = [ 16 64 256 ];
-mod_freqs     = [ 4 16 64 256 ];
+mod_freqs     = [ 16 64 256 ];
 
 for carrierf = carrier_freqs,
     M.PARAM(2) = carrierf;

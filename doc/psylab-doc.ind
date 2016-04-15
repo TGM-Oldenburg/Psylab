@@ -1,7 +1,7 @@
 \begin{theindex}
 
   \item debugging
-    \subitem variable \texttt{M.DEBUG}, \hyperpage{22}
+    \subitem variable \texttt{M.DEBUG}, \hyperpage{23}
 
   \indexspace
 
@@ -20,8 +20,8 @@
   \indexspace
 
   \item psydat functions
-    \subitem display\_psydat.m, \hyperpage{17}
-    \subitem display\_psydat\_raw.m, \hyperpage{16}
+    \subitem display\_psydat.m, \hyperpage{18}
+    \subitem display\_psydat\_raw.m, \hyperpage{17}
     \subitem read\_psydat.m, \hyperpage{16}
   \item psydat-file, \hyperpage{13}
 
@@ -30,7 +30,7 @@
   \item reversal, \hyperpage{5}
     \subitem maximum number of, \hyperpage{5}
   \item run, \hyperpage{4}
-    \subitem with interleaved tracks, \hyperpage{13}
+    \subitem with interleaved tracks, \hyperpage{14}
 
   \indexspace
 
@@ -40,6 +40,7 @@
     \subitem set script, \hyperpage{10}
     \subitem user script, \hyperpage{6}, \hyperpage{10}
   \item signals
+    \subitem m\_background, \hyperpage{11}
     \subitem m\_postsig, \hyperpage{11}
     \subitem m\_presig, \hyperpage{11}
     \subitem m\_quiet, \hyperpage{11}
