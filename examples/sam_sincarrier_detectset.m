@@ -63,6 +63,20 @@ m_presig  = m_quiet;
 
 
 
+% add some overall background signal:  a low level white noise
+%
+% This background noise is not part of the original experiment by
+% Kohlrausch et al. (2000).  It is added here for demostration purposes only
+
+% generate a signal template with the size of the final output signal
+tmp_outsig = [m_presig; carrier; m_quiet; carrier; m_quiet; carrier; m_postsig];
+% generate a noise with that duration
+m_background = hanwin( 0.01*randn(size(tmp_outsig)), 0.05*M.FS);
+% clear the template signal as it is not needed anymore
+clear tmp_outsig;
+
+
+
 % End of file:  sam_sincarrrier_detectset.m
 
 % Local Variables:

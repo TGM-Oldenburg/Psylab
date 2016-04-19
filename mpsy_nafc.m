@@ -99,17 +99,20 @@ else
   otherwise 
       error('N-AFC not yet implemented for N=%d, aborting\n', N);
   end
-
-  
-  % finally, add the "background signal" if it is present in the workspace
-  if exist('m_background'),
-    % issue an error if the size of m_background does not fit 
-    if all(size(m_background) == size(m_outsig)),
-      m_outsig = m_outsig + m_background;
-    end
-  end
   
 end
+
+
+% finally, add the "background signal" if it is present in the workspace
+if exist('m_background'),
+  % issue an error if the size of m_background does not fit 
+  if all(size(m_background) == size(m_outsig)),
+    m_outsig = m_outsig + m_background;
+  else 
+    error('the size of your background signal does not match the size of the output signal \n');
+  end
+end
+
 
 
 % End of file:  mpsy_nafc.m

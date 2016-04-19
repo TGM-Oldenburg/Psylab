@@ -44,7 +44,7 @@ M.ADAPT_N_DOWN = 3 ;    % number of succesive correct answers required for "down
 M.MAXREVERSAL  = 5 ;    % number of reversals required as stop criterion
 M.USE_GUI      = 0;     % 1/0  = yes/no
 M.FEEDBACK     = 1;
-M.DEBUG        = 1;
+M.DEBUG        = 2;
 
 M.MINSTEP      = 0.1 ;    % minumum step size, in units of M.VARUNIT
 M.VAR          = 4;    
@@ -101,7 +101,7 @@ while (M.REVERSAL < M.MAXREVERSAL) | (M.STEP > M.MINSTEP)
     end
   end
   
-  if M.DEBUG,
+  if M.DEBUG>1,
       htmp = gcf;    % remember current figure
       % show last stimuli and answers
       figure(111);   mpsy_plot_feedback;

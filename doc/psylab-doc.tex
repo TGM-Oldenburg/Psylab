@@ -1129,11 +1129,13 @@ corresponding answers of the subject, should be output to the
 psydat-file in a separate line.   
 
 In addition to the psydat-file in ASCII format, the variables
-\texttt{M} and \texttt{M\_*} also get saved as a binary mat-file each
-time a run has been completed.  However, this is mainly for rescue and
-analysis purposes and the binary files may as well be deleted.  If you
-do not need/like this behaviour, look at the end of the file
-\texttt{mpsy\_proto.m} and delete the corresponding lines. 
+\texttt{M} and \texttt{M\_*} can also get saved as a binary mat-file
+each time a run has been completed.  This behaviour will be turned on
+if \code{M.DEBUG}$>$0. However, this is mainly for rescue and analysis
+purposes and the binary files may as well be deleted.  They will not
+be used for later data analysis.  If you do not need this behaviour,
+just set \code{M.DEBUG=0;}
+%%%look at the end of the file \texttt{mpsy\_proto.m} and delete the corresponding lines.
 
 
 %% --------------------------------------------------
@@ -1785,10 +1787,10 @@ use the visual interval indication.
 \label{sec:debug-your-experiment}
 
 For purposes of \index{debugging!variable \texttt{M.DEBUG}}debugging,
-set the variable \code{M.DEBUG} to a value larger than zero (1, 2, 3),
-to get an increasing amount of temporary information and plots.
-Stick to the rule: ``Use the force -- read the source'' in
-that case.
+set the variable \code{M.DEBUG} to a value larger than zero (1, 2, 3,
+4), to get an increasing amount of temporary information and plots.
+Stick to the rule: ``Use the force -- read the source'' to see the
+behaviour in case of \code{M.DEBUG}$>$0.
 
 When gathering real data with test subjects, however, you will want to
 set \code{M.DEBUG=0;}

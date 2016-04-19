@@ -169,11 +169,11 @@ while ~all(M1.TRACKS_COMPLETED)
     %end
   end
   
-  if M.DEBUG,
+  if M.DEBUG>1,
       htmp = gcf;    % remember current figure
       % show last stimuli and answers
       figure(120+M1.cur_track_idx);   mpsy_plot_feedback;
-      if M.DEBUG > 1,
+      if M.DEBUG > 2,
 	figure(130+M1.cur_track_idx);   plot((1:length(m_outsig))/M.FS, m_outsig);
 	title('stimuli of PREVIOUS run')
 	xlabel('time [s]'); ylabel('amplitude');

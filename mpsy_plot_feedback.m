@@ -71,7 +71,7 @@ if ~isempty(M.med_thres),
 end
 
 % save the plot figure containing all M.VARS of current run into eps-file
-if M.DEBUG>2 | M.FEEDBACK>1,
+if M.DEBUG>3 | M.FEEDBACK>1,
   m_plotfilename = ['plot_run_' M.SNAME];
   
   if M.FEEDBACK>2,
