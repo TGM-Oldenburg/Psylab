@@ -21,6 +21,7 @@ function [x,y] = read_psydat(s_name, exp_name)
 % Copyright (C) 2006   Martin Hansen, FH OOW  
 % Author :  Martin Hansen,  <psylab AT jade-hs.de>
 % Date   :  10 Sep 2003
+% Updated:  <25 Apr 2016 15:00, martin>
 % Updated:  <23 Okt 2006 00:10, hansen>
 % Updated:  <14 Jan 2004 11:30, hansen>
 
@@ -50,7 +51,7 @@ end
 
 
 
-% count correct entries (=copmleted experimental runs) found in psydat file
+% count correct entries (=completed experimental runs) found in psydat file
 entry = 0;
 % count line number in psydat file
 line_number = 0;
@@ -67,7 +68,7 @@ while 1,
   tok = mpsy_split_lines_to_toks(lin);
 
   % check whether we have a line starting a new block
-  if length(tok) == 7 & strcmp(tok(5), 'npar'),
+  if length(tok) == 7 & strcmp(tok(1), '####') & strcmp(tok(5), 'npar') & strcmp(tok(7), '####') ,
     % second item is experiment name
     ename = char(tok(2));
     % third item is subject name
@@ -102,11 +103,33 @@ while 1,
 	% split it into space-separated words
 	tok = mpsy_split_lines_to_toks(lin);
 	
+        % to ensure compatability with older psydat files, check
+        % whether or not the next line holds the ADAPT: info
+        if strcmp(tok(2), 'ADAPT:')
+          % output the name of the adaptive rule, as a cell
+          x.adapt_method(entry) = tok(3);
+          if length(tok) > 3,
+            % output value of p_correct, as a cell string in order to
+            % allow empty values, see else-case
+            x.adapt_pcorrect(entry) = tok(4);
+          else
+            % non existent information on p_correct is specified as such 
+            x.adapt_pcorrect(entry) = {''};
+          end
+          
+          % and then get next line in the file
+          lin = fgets(fid1);   line_number = line_number+1;
+          % split it into space-separated words
+          tok = mpsy_split_lines_to_toks(lin);
+        end
+        
+        % to ensure compatability with older psydat files, check
+        % whether or not the next line holds the VAL: info
         if strcmp(tok(2), 'VAL:')
           x.run(entry).vars = str2num(char(tok(3:2:end)));
           x.run(entry).answers = str2num(char(tok(4:2:end)));
         
-          % get next line in the file
+          % and then get next line in the file
           lin = fgets(fid1);   line_number = line_number+1;
           % split it into space-separated words
           tok = mpsy_split_lines_to_toks(lin);

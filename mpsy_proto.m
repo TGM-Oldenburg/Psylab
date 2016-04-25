@@ -51,14 +51,28 @@ M.max_thres  =    max (M.VARS(M.measurement_fidx));
 M.familiarization_fidx = find(M.STEPS > M.MINSTEP);
 
 
-% output to text protocol file
-% this is done in the NEW psydat format version 2 
+% now output all relevant information to a text protocol file
+% this is done in the psydat format version 2 
+%
+% N.B. the order of following information output here DOES matter,
+%       as read_psydat.m relies on it. 
+%
 [fidm,message] = fopen( ['psydat_',M.SNAME], 'a' );
 fprintf(fidm,'#### %s %s %s__%s npar %d ####\n', ...
 	M.EXPNAME, M.SNAME, datestr(now,1), datestr(now,13), M.NUM_PARAMS);
 for k=1:M.NUM_PARAMS,
   fprintf(fidm,'%%%%----- PAR%d: %s %f %s\n', k, char(M.PARAMNAME(k)), M.PARAM(k), char(M.PARAMUNIT(k)));
 end  
+
+% output the information about the adaptive method used
+fprintf(fidm, '%%%%----- ADAPT:');
+fprintf(fidm,' %s', M.ADAPT_METHOD);
+if isfield(M, 'PC_CONVERGE'),
+  fprintf(fidm,'  %.4f \n', M.PC_CONVERGE);
+else
+  fprintf(fidm,' \n');
+end
+
 
 % output the individual values of M.VAR and the answers to the
 % psydat file, if flag-variable M.SAVERUN has been set accordingly  
