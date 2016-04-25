@@ -1,5 +1,0 @@
-######## psydat version 2 header ########  DO NOT change THIS line ########
-#### match_freq_binaural martin 18-Mar-2008__23:41:23 npar 2 ####
-%%----- PAR1: reference_frequency 500.000000 Hz
-%%----- PAR2: test_ear_side 1.000000 left1_right2
-  rel_frequency_increment 11.000000 1.131111 9.000000 13.000000 cent
