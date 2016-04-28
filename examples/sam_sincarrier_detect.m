@@ -43,10 +43,10 @@ M.TASK         = 'which interval contained the test signal (1,2,3)?  ';
 M.MINSTEP      = 1 ;  % minumum step size, in units of M.VARUNIT
 M.NAFC         = 3 ;  % number of forced choice intervals
 
-%M.ADAPT_METHOD = '1up_2down';   % transformed 1-up-2-down
+M.ADAPT_METHOD = '1up_2down';   % transformed 1-up-2-down
 %M.ADAPT_METHOD = '2up_1down';   % transformed 2-up-1-down
-M.PC_CONVERGE  = 0.75;
-M.ADAPT_METHOD = 'uwud';   % unforced weighted up down
+%M.PC_CONVERGE  = 0.75;
+%M.ADAPT_METHOD = 'uwud';   % unforced weighted up down
 
 M.MAXREVERSAL  = 6 ;  % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;  % 1/0 = yes/no, 2=show result plot, 3=save it with individual name

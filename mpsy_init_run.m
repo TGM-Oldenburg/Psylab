@@ -50,15 +50,12 @@ M.DIRECTION = [];
 % NOTE: this works only in case of mono signals
 if isscalar(m_quiet),
   m_quiet = zeros(round(m_quiet*M.FS), 1);
-  disp('hu')
 end
 if isscalar(m_postsig),
   m_postsig = zeros(round(m_postsig*M.FS), 1);
-  disp('ha')
 end
 if isscalar(m_presig),
   m_presig = zeros(round(m_presig*M.FS), 1);
-  disp('he')
 end
 
 

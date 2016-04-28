@@ -13,7 +13,7 @@
 \setlength{\textheight}{24cm}
 \addtolength{\topmargin}{-1.8cm}
 
-\newcommand{\psylabversion}{2.6a}
+\newcommand{\psylabversion}{2.6c}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -893,8 +893,8 @@ respectively the set script:
 \item[ m\_presig ] \index{signals!m\_presig} The signal which is
   presented before the first stimulus interval.  This could also be
   silence, or for example a certain marker stimulus.
-\item[ m\_postsig ] \index{signals!m\_postsig} The signal which is presented after the
-  last of the $n$ stimulus intervals.
+\item[ m\_postsig ] \index{signals!m\_postsig} The signal which is
+  presented after the last of the $n$ stimulus intervals.
 \item[ m\_background ] \index{signals!m\_background} A signal which is
   presented simultaneously during the whole duration of a trial,
   i.e.\ from the beginning of the pre-signal until the end of the
@@ -906,10 +906,23 @@ If one or more of the three signals \texttt{m\_quiet},
 \texttt{m\_presig} or \texttt{m\_postsig} are left unspecified, i.e.\
 are nonexistent as a variable in the workspace, they default to the
 empty vector.  This is automatically taken care of by the
-\psylab-script \code{mpsy\_check.m}.
+\psylab-script \code{mpsy\_check.m}.  
 
 If the signal \texttt{m\_background} is unspecified, i.e.\ nonexistent
-as a variable in workspace, it is neglected.
+as a variable in workspace, it is neglected and no background signal
+will be added. 
+
+If any of the variables \texttt{m\_quiet}, \texttt{m\_presig}, and
+\texttt{m\_postsig} are assigned a scalar value in the main script,
+then this will be replaced by a silence signal with a duration
+as specified by that value (in seconds).  Example: \texttt{m\_quiet = 0.3;}
+will automatically be overwritten by the vector
+ \verb+m_quiet = zeros(0.3*M.FS, 1);+
+\\
+Note that this convenience will currently only work for single-channel
+(mono) signals, and only if the scalar duration is specified in the
+main script!
+
 
 
 %% --------------------------------------------------
