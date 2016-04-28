@@ -46,19 +46,6 @@ M.UPPER_REV_IDX   = [];
 M.DIRECTION = [];
 %
 
-% generate silence signals, in case only their duration is specified.
-% NOTE: this works only in case of mono signals
-if isscalar(m_quiet),
-  m_quiet = zeros(round(m_quiet*M.FS), 1);
-end
-if isscalar(m_postsig),
-  m_postsig = zeros(round(m_postsig*M.FS), 1);
-end
-if isscalar(m_presig),
-  m_presig = zeros(round(m_presig*M.FS), 1);
-end
-
-
 % reset some internal variables 
 % NOTE:  mpsy_proto and mpsy_plot_feedback depend on THIS:
 M.med_thres = [];

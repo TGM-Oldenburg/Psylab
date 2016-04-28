@@ -146,10 +146,37 @@ end
 
 %% --------------------------------------------------
 %% ensure existence of pre-signal, quiet-signal, and post-signal
-%% if not yet existent, create empty signals
-if exist('m_quiet')~=1,   m_quiet   = [];  end
-if exist('m_presig')~=1,  m_presig  = [];  end
-if exist('m_postsig')~=1, m_postsig = [];  end
+%% - if not yet existent, thencreate empty signals
+%% - if existent but a scalar value, then generate silence signals
+%
+% For the generation of silence signals, we need to know the number
+% of channels (mono, stereo, ...).  In order to determine than
+% number of channels, run the user-script once here and check the
+% size of the signal m_test which will then have been generated:
+eval([M.EXPNAME 'user']); 
+numchannels = size(m_test);
+
+if exist('m_quiet')~=1,   
+  m_quiet   = [];  
+else
+  if isscalar(m_quiet),
+    m_quiet = zeros(round(m_quiet*M.FS), numchannels);
+  end
+end
+if exist('m_presig')~=1,  
+  m_presig  = [];  
+else
+  if isscalar(m_presig),
+    m_presig = zeros(round(m_presig*M.FS), numchannels);
+  end
+end
+if exist('m_postsig')~=1, 
+  m_postsig = [];  
+else
+  if isscalar(m_presig),
+    m_presig = zeros(round(m_presig*M.FS), numchannels);
+  end
+end
 
 %% --------------------------------------------------
 %% check type of experiment (e.g. n-AFC or matching) 

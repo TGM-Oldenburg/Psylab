@@ -913,15 +913,16 @@ as a variable in workspace, it is neglected and no background signal
 will be added. 
 
 If any of the variables \texttt{m\_quiet}, \texttt{m\_presig}, and
-\texttt{m\_postsig} are assigned a scalar value in the main script,
-then this will be replaced by a silence signal with a duration
-as specified by that value (in seconds).  Example: \texttt{m\_quiet = 0.3;}
-will automatically be overwritten by the vector
- \verb+m_quiet = zeros(0.3*M.FS, 1);+
+\texttt{m\_postsig} are assigned a scalar value in the main script or
+in the set script, then this will be
+replaced by a silence signal with a duration as specified by that
+value (in seconds).  Example: \texttt{m\_quiet = 0.3;} will
+automatically be overwritten by the vector
+\verb+m_quiet = zeros(0.3*M.FS, 1);+
 \\
-Note that this convenience will currently only work for single-channel
-(mono) signals, and only if the scalar duration is specified in the
-main script!
+Note that this convenience will only work if the scalar duration is
+specified in the main script or in the set script, but not in the user
+script.  
 
 
 
