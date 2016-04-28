@@ -154,7 +154,7 @@ end
 % number of channels, run the user-script once here and check the
 % size of the signal m_test which will then have been generated:
 eval([M.EXPNAME 'user']); 
-numchannels = size(m_test);
+numchannels = size(m_test, 2);
 
 if exist('m_quiet')~=1,   
   m_quiet   = [];  

@@ -30,8 +30,7 @@ ton = hanwin(ton, round(0.05*M.FS));
 
 
 % pause-signals
-pauselen  = 0.2;
-m_quiet   = zeros(round(pauselen*M.FS),1);
+m_quiet   = 0.2;
 m_postsig = m_quiet;
 m_presig  = m_quiet;
 

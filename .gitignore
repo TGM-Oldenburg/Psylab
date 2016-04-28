@@ -9,6 +9,7 @@ doc/*.idx
 doc/*.ilg
 doc/*.ind
 doc/*.log
+doc/*.out
 doc/*.ps
 doc/*.toc
 exp2/
