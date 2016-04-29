@@ -130,6 +130,45 @@ end
 
 
 %% --------------------------------------------------
+% check proper value of M.VISUAL_INDICATOR
+if M.VISUAL_INDICATOR & ~M.USE_GUI,
+  fprintf('\n*** INFO: the VISUAL_INDICATOR feature can only be used when using a GUI\n');
+  warning('M.VISUAL_INDICATOR has been set to 0.');
+  pause(2);
+  M.VISUAL_INDICATOR = 0;
+end
+
+%% --------------------------------------------------
+% check whether matlab's built-in sound works asynchronously
+% (control is back on the commandline right after the sound-command)
+% or synchronously (control is back on the commandline only after
+% the complete signal vector has been played by sound):
+%
+% however, we only need to check this when msound is not in use
+if M.USE_MSOUND == 0,
+  % first, use sound once in order to intiate the sound system 
+  sound( zeros(0.2*M.FS, 1), M.FS); 
+  % then measure the duration for playback of a 1 second silence vector
+  tic; sound( zeros(M.FS, 1), M.FS); tmpdur = toc;
+  if tmpdur >= 1,
+    M.SOUND_IS_SYNCHRONOUS = 1;
+    if M.VISUAL_INDICATOR == 1,
+      fprintf('\n\n*** INFO: the built-in function "sound" of your system/Matlab seems to \n');
+      fprintf('work synchronously.  In that case the VISUAL_INDICATOR feature will not \n');
+      fprintf('work. If you need the VISUAL_INDICATOR feature, then switch to \n');
+      fprintf('using "msound" instead of "sound".\n');
+      warning('M.VISUAL_INDICATOR has been set to 0.');
+      pause(2)
+      M.VISUAL_INDICATOR = 0;
+    end
+  else
+    M.SOUND_IS_SYNCHRONOUS = 0;
+  end
+end
+  
+
+
+%% --------------------------------------------------
 % check version of psydat file, create correct header line 
 % if file doesn't exist yet
 M.PSYDAT_VERSION = mpsy_check_psydat_version( ['psydat_' M.SNAME] );
@@ -150,7 +189,7 @@ end
 %% - if existent but a scalar value, then generate silence signals
 %
 % For the generation of silence signals, we need to know the number
-% of channels (mono, stereo, ...).  In order to determine than
+% of channels (mono, stereo, ...).  In order to determine that
 % number of channels, run the user-script once here and check the
 % size of the signal m_test which will then have been generated:
 eval([M.EXPNAME 'user']); 
@@ -244,7 +283,7 @@ if M.USE_GUI,
     
     if isfield(M, 'NAFC')
       % in case of ACF experiment, also get the handles for the interval 
-      % buttons, as they are needed by mpsy_visual_indicator.m   
+      % buttons, as they are needed by mpsy_visual_interval_indicator.m   
       for kk=1:M.NAFC
         afc_but(kk) = findobj('Tag',['afc_answer' num2str(kk)] );
     

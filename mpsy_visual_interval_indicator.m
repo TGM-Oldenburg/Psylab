@@ -45,7 +45,7 @@ set(afc_but(1), 'BackgroundColor', [1 0 0]);  % RED
 pause(dur_interval);
 set(afc_but(1), 'BackgroundColor', c_tmp);    % back to normal
 
-for kk=1:M.NAFC
+for kk=2:M.NAFC
   pause(dur_quiet);
 
   set(afc_but(kk), 'BackgroundColor', [1 0 0]);  % RED

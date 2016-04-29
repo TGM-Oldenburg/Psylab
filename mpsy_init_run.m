@@ -81,12 +81,6 @@ if ~isfield(M, 'USE_MSOUND')
 end
 
 
-if ~ispc & M.VISUAL_INDICATOR & ~M.USE_MSOUND,
-  M.VISUAL_INDICATOR = 0;
-  disp('*** info:  The VISUAL_INDICATOR feature is not yet supported on non-pcwin computers');
-end
-
-
 if M.USE_MSOUND
   msound_state = msound('verbose', 0);
   if ~msound_state.IsOpenForWriting,

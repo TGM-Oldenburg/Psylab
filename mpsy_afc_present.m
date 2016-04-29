@@ -61,8 +61,8 @@ else
   if M.VISUAL_INDICATOR & M.USE_GUI,
     mpsy_visual_interval_indicator;  %  acts depending on global variables
   else
-    if ispc,
-      %  Matlab 'sound' works asynchronously on WIN PCs, so: 
+    if M.SOUND_IS_SYNCHRONOUS==0,
+      %  if Matlabs "sound" works asynchronously, then
       %  pause execution for as long as the signal duration
       pause(length(m_outsig)/M.FS);
     end
