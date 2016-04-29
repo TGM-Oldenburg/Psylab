@@ -54,8 +54,8 @@ M.familiarization_fidx = find(M.STEPS > M.MINSTEP);
 % now output all relevant information to a text protocol file
 % this is done in the psydat format version 2 
 %
-% N.B. the order of following information output here DOES matter,
-%       as read_psydat.m relies on it. 
+% N.B. the order of the following information output DOES matter,
+%       as read_psydat.m and psydat_helper.m rely on it. 
 %
 [fidm,message] = fopen( ['psydat_',M.SNAME], 'a' );
 fprintf(fidm,'#### %s %s %s__%s npar %d ####\n', ...

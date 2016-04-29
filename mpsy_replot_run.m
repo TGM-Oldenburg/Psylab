@@ -18,8 +18,9 @@ function h = mpsy_replot_run(subject_name, exp_name, run_idx)
 % Copyright (C) 2015   Martin Hansen/Stephanus Volke, Jade Hochschule
 % Author :  Martin Hansen/Stephanus Volke,  <psylab AT jade-hs.de>
 % Date   :  27 Jun 2003
+% Updated:  <29 Apr 2016 16:19, mh>
 % Updated:  <21 Jul 2015 16:34, mh>
-% Updated:  <14 Jan 2004 11:30, mh / Stephanus Volke >
+% Updated:  <14 Jan 2014 11:30, mh / Stephanus Volke >
 
 %% This file is part of PSYLAB, a collection of scripts for
 %% designing and controlling interactive psychoacoustical listening
@@ -38,40 +39,46 @@ x = read_psydat(subject_name, exp_name);
 
 figure(111);
 
-if isfield('run', x),
+if isfield(x, 'run'),
   idx_plus  = find(x.run(run_idx).answers ==1);  % correct/down answers
   idx_minus = find(x.run(run_idx).answers ==0);  % wrong/up answers
 end
 
-if ~isfield('run', x) | isempty(idx_plus) | isempty(idx_minus),
+if ~isfield(x, 'run') | isempty(idx_plus) | isempty(idx_minus),
   clf;
-  error('there are apparently no run-data for run #%d of subject "%s" and experiment "%s" in the psydat-file\n', ...
+  msg = sprintf('there are apparently no trial-data saved for run #%d of subject "%s" \nand experiment "%s" in the psydat-file\n', ...
         run_idx, subject_name, exp_name);
+  % just an empty plot
+  plot([0 1 0 1 0], [0 1 1 0 0], 'r:');  % plot a visual cross 
+  text(0.05, 0.2, strrep(msg, '_', '\_'));
+  fprintf(msg);
+  
+else
+
+  % simple plot
+  vars = x.run(run_idx).vars;
+  h=plot(1:length(vars), vars,'b.-', idx_plus, vars(idx_plus), 'r+', idx_minus, vars(idx_minus), 'ro');
+
+  xlabel('trial number')
+  yl = [ char(x.varname(run_idx)) ' [' char(x.varunit(run_idx)) ']'];
+  ylabel(strrep(yl, '_','\_'));
+  
+  % add text information about median and std.dev., 
+  text(0.6*length(vars), 0.7*max(x.run(run_idx).vars)+0.3*min(x.run(run_idx).vars),sprintf('thresh:%g, std:%g', x.threshold(run_idx), x.thres_sd(run_idx)));
+
 end
 
-
-% simple plot
-vars = x.run(run_idx).vars;
-h=plot(1:length(vars), vars,'b.-', idx_plus, vars(idx_plus), 'r+', idx_minus, vars(idx_minus), 'ro');
-
-xlabel('trial number')
-yl = [ char(x.varname(run_idx)) ' [' char(x.varunit(run_idx)) ']'];
-ylabel(strrep(yl, '_','\_'));
-
-tit = ['Exp.: ' exp_name ', Parameter: ' char(x.par(1).name(run_idx)) ' = ' num2str(x.par(1).value(run_idx)) ' ' char(x.par(1).unit(run_idx))];
+titl = ['Exp.: ' exp_name ', Parameter: ' char(x.par(1).name(run_idx)) ' = ' num2str(x.par(1).value(run_idx)) ' ' char(x.par(1).unit(run_idx))];
 
 for k=2:length(x.par),
-  tit = [tit '  Par.' num2str(k) ': ' char(x.par(k).name(run_idx)) ' = ' num2str(x.par(k).value(run_idx)) ' ' char(x.par(k).unit(run_idx))];
+  titl = [titl '  Par.' num2str(k) ': ' char(x.par(k).name(run_idx)) ' = ' num2str(x.par(k).value(run_idx)) ' ' char(x.par(k).unit(run_idx))];
 end
-title(strrep(tit,'_','\_'));
+title(strrep(titl,'_','\_'));
 
 % add a legend with subject name and date
 leg = sprintf('%s: %s', subject_name, char(x.date(run_idx)));
-legend(strrep(leg, '_', '\_') ,0);
-
-% and add text information about median and std.dev., 
-text(0.5*length(vars), 0.5*(x.thres_max(run_idx)+x.thres_min(run_idx)),sprintf('thresh:%g, std:%g', x.threshold(run_idx), x.thres_sd(run_idx)));
-
+legend(strrep(leg, '_', '\_'), 'location', 'Best' );
+  
 
 % End of file:  mpsy_replot_run.m
 

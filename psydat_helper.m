@@ -23,6 +23,7 @@ function varargout = psydat_helper(varargin)
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  24 Feb 2009
 % Changed:  Stephanus Volke, 16 Jun 2015
+% Changed:  Martin Hansen, 29 Apr 2016
  
 
 %      Modified by GUIDE v2.5 27-Feb-2009 11:05:32
@@ -227,7 +228,6 @@ function listbox3_Callback(hObject, eventdata, handles)
 if length(get(hObject,'value')) ~= 1
   set(handles.pushbutton4, 'Enable', 'Off');
 else
-  
   set(handles.pushbutton4, 'Enable', 'On');
 end
 
@@ -290,19 +290,28 @@ for l=1:length(date_idx),
         fprintf(fid, '%s\n', char(handles.psydat_all_lines(line_idx_exp_start+jj)));
     end
     % now look at the next line following:
-    line_tmp = char(handles.psydat_all_lines(line_idx_exp_start+jj+1));
+    line_idx = line_idx_exp_start+jj+1;
+    line_tmp = char(handles.psydat_all_lines(line_idx));
+    if strcmp(line_tmp(1:14),'%%----- ADAPT:')
+      % This line holds the information about the adaptive method used.
+      % This information is present in the psydat file since
+      % version 2.6c, so output it into the subset-psydatfile 
+      fprintf(fid, '%s\n', line_tmp);
+      % and look at the next line following:
+      line_idx = line_idx+1;
+      line_tmp = char(handles.psydat_all_lines(line_idx));
+    end
     if strcmp(line_tmp(1:12),'%%----- VAL:')
-      % this line holds all the values of M.VARS and M.ASNWERS, so
+      % This line holds all the values of M.VARS and M.ASNWERS, so
       % the next following line is the one containing the threshold
-      % result data, so output both lines into the subset-psydatfile:
-      fprintf(fid, '%s\n', char(handles.psydat_all_lines(line_idx_exp_start+jj+1)));
-      fprintf(fid, '%s\n', char(handles.psydat_all_lines(line_idx_exp_start+jj+2)));
+      % result data, so output BOTH lines into the subset-psydatfile:
+      fprintf(fid, '%s\n', char(handles.psydat_all_lines(line_idx)));
+      fprintf(fid, '%s\n', char(handles.psydat_all_lines(line_idx+1)));
     else
       % the current line does already contain the threshold result
       % data, so output it into the subset-psydatfile 
       fprintf(fid, '%s\n', line_tmp);
     end
-        
     
 end
 
@@ -311,7 +320,7 @@ fclose(fid);
 figure(201);
 display_psydat(subname, handles.exp_name);
 
-    
+
     
 
 

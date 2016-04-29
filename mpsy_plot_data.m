@@ -132,9 +132,12 @@ if (npar > 1) & (length(uni_par2)>1),
       % Now something UGLY:  Matlab has stupidly changed the way how handles
       % are assigned to errorbar-plots between its versions 6 and 7.  ARGH!!
       if strcmp( version('-release'), '13'),
-	legend(h(2,k), leg(k), 0);  
+        %% again STUPID:  Matlab changed the possible location arguments in 2016a
+	%% legend(h(2,k), leg(k), 0);  
+        legend(h(2,k), leg(k), 'location', 'Best');  
       else
-	legend(h(k), leg(k), 0);  
+	%%legend(h(k), leg(k), 0);  
+        legend(h(k), leg(k), 'location', 'Best');  
       end
     end
     
@@ -143,9 +146,12 @@ if (npar > 1) & (length(uni_par2)>1),
     % Now something UGLY:  Matlab has stupidly changed the way how handles
     % are assigned to errorbar-plots between its versions 6 and 7.  ARGH!!
     if strcmp( version('-release'), '13'),
-      legend(h(2,:), leg, 0);   % set all legend lines at once
+      %% again STUPID:  Matlab changed the possible location arguments in 2016a
+      %%legend(h(2,:), leg, 0);   % set all legend lines at once
+      legend(h(2,:), leg, 'location', 'Best');   % set all legend lines at once
     else
-      legend(h, leg, 0);   % set all legend lines at once
+      %%legend(h, leg, 0);   % set all legend lines at once
+      legend(h, leg, 'location', 'Best');   % set all legend lines at once
     end
     
   end

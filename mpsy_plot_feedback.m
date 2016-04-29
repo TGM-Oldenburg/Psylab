@@ -37,7 +37,7 @@ if isempty(M.med_thres),
 else
   % a somewhat nicer plot.  
   % Careful:  The field M.familiarization_fidx has been calculated by mpsy_proto.  
-  % The indices at transition between familiarization phase and measurement phase: 
+  % The 2 indices at transition between familiarization phase and measurement phase: 
   idx_trans = [M.familiarization_fidx(end) M.measurement_fidx(1)]; %
   hp = plot(M.measurement_fidx, M.VARS(M.measurement_fidx), 'k.-', ...
             M.familiarization_fidx, M.VARS(M.familiarization_fidx), 'k.-', ...
