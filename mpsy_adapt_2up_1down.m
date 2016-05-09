@@ -39,14 +39,10 @@ if isfield(M, 'PC_CONVERGE'),
   warning('The value of M.PC_CONVERGE (%g) is ignored by THIS adaptive rule', M.PC_CONVERGE);
 end
 
-% $$$ % for compatibility, set these 2 variables as they are needed by mpsy_det_reversal_adj_step
-% $$$ M.ADAPT_N_UP   = 2;
-% $$$ M.ADAPT_N_DOWN = 1;
-% $$$ % check whether a new reversal has occurred. if so, adapt step size  
-% $$$ mpsy_det_reversal_adj_step;
-% $$$ 
 
+% ==================================================
 % Check for occurrence of a new reversal
+% ==================================================
 if length(M.ANSWERS) >= 3,
   
   % ----- a) uppper reversal:  
@@ -77,17 +73,20 @@ if length(M.ANSWERS) >= 3,
 end
 
 
+% for security, ensure M.STEP cannot become negative
 if M.STEP <= 0,
   error(' variable M.STEP (%g)  is <= 0', M.STEP);
 end
 
+% ==================================================
+% apply adaptive   2-up-1-down   rule
+% ==================================================
 if length (M.ANSWERS) < 2,
   prev_answer = 0;
 else
   prev_answer = M.ANSWERS(end-1);
 end
-
-% 2-up-1-down rule
+%
 if M.ACT_ANSWER == 1,
   M.VAR = M.VAR - M.STEP;    % 1 correct answer, DEcrease stimulus
   M.DIRECTION = M_DOWN;

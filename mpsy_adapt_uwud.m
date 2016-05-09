@@ -36,14 +36,10 @@
 % answer == -3 means: undecided, go up (in case of UWUD-N-AFC experiment)
 
 
-% $$$ % for compatibility, set these 2 variables as they are needed by mpsy_det_reversal_adj_step
-% $$$ M.ADAPT_N_UP   = 1;
-% $$$ M.ADAPT_N_DOWN = 1;
-% $$$ % check whether a new reversal has occurred. if so, adapt step size  
-% $$$ mpsy_det_reversal_adj_step;
-% $$$ 
 
+% ==================================================
 % Check for occurrence of a new reversal
+% ==================================================
 if length(M.ANSWERS) >= 2,
   
   % ----- a) uppper reversal
@@ -74,6 +70,7 @@ if length(M.ANSWERS) >= 2,
 end
 
 
+% for security, ensure M.STEP to be positive
 if M.STEP <= 0,
   error(' variable M.STEP (%g)  is <= 0', M.STEP);
 end
@@ -85,13 +82,13 @@ if M.PC_CONVERGE >= 1 | M.PC_CONVERGE <= 1/M.NAFC,
   error('value M.PC_CONVERGE=%g not feasible (above 1 or below 1/M.NAFC)', M.PC_CONVERGE);
 end
 
-% --------------------------------------------------
-% "UWUD" (unforced weighted up-down) rule:
-% --------------------------------------------------
-% calculate separate step size after 
-%  correct answer -->  going down,
-%  wrong answer --> going up, and 
-%  unsure ("I don't know") answer --> going up, too, but less
+% ============================================================
+% apply adaptive   "UWUD" (unforced weighted up-down)   rule:
+% ============================================================
+% calculate separate step sizes for
+%  - correct answer -->  going down,
+%  - wrong answer --> going up, and 
+%  - unsure ("I don't know") answer --> going up as well, but smaller step
 
 % variable M.STEP is defined to hold the step size S_correct for going down 
 M.STEP_DOWN   = M.STEP;    
@@ -103,7 +100,7 @@ M.STEP_UP     = M.PC_CONVERGE/(1-M.PC_CONVERGE) * M.STEP_DOWN;
 M.STEP_UNSURE = (M.PC_CONVERGE-1/M.NAFC)/(1-M.PC_CONVERGE) * M.STEP_DOWN;
 
 
-% note that the above 3 step sizes (M.STEP_UNSURE, M.STEP_UP, M.STEP_DOWN) all 
+% note that the above 3 step SIZES (M.STEP_UNSURE, M.STEP_UP, M.STEP_DOWN) all 
 % have positive sign.  The DIRECTION of change is reflected in the following code:
 switch M.ACT_ANSWER
   case -3

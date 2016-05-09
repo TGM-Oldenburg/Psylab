@@ -34,14 +34,10 @@
 % answer == 0 means: false (in case of N-AFC experiment)
 
 
-% $$$ % for compatibility, set these 2 variables as they are needed by mpsy_det_reversal_adj_step
-% $$$ M.ADAPT_N_UP   = 1;
-% $$$ M.ADAPT_N_DOWN = 1;
-% $$$ % check whether a new reversal has occurred. if so, adapt step size  
-% $$$ mpsy_det_reversal_adj_step;
-% $$$ 
 
+% ==================================================
 % Check for occurrence of a new reversal
+% ==================================================
 if length(M.ANSWERS) >= 2,
   
   % ----- a) uppper reversal
@@ -72,35 +68,56 @@ if length(M.ANSWERS) >= 2,
 end
 
 
+% for security, ensure M.STEP to be positive
 if M.STEP <= 0,
   error(' variable M.STEP (%g)  is <= 0', M.STEP);
 end
 
 
 % check reasonable value of the desired percent correct at convergence:
-% it must be below 1 (100%) and above chance level (1/M.NAFC)
-
-% however, as WUD can also be used in matching experiments, where
-% "chance level" has no meaning, so 
+% it must be below 1 (100%) ...
 if M.PC_CONVERGE >= 1, 
   error('value M.PC_CONVERGE=%g not feasible (above 1)', M.PC_CONVERGE);
 end
-
+% ... and above chance level (1/M.NAFC).  However, WUD can also be
+% used in matching experiments, where "chance level" has no
+% meaning.  Therefore (note slight difference relative to the UWUD case):
 if isfield(M, 'NAFC') & M.PC_CONVERGE <= 1/M.NAFC, 
   error('value M.PC_CONVERGE=%g not feasible (below 1/M.NAFC)', M.PC_CONVERGE);
 end
 
 
 
-
-% --------------------------------------------------
-% "WUD" (weighted up-down) rule:
-% --------------------------------------------------
+% ============================================================
+% apply adaptive   "WUD" (weighted up-down)   rule:
+% ============================================================
 % calculate separate step size for going up and down:
-% variable M.STEP is defined to hold the step size S_down for going down
+% variable M.STEP is defined to hold the step size S_down for going down:
 M.STEP_DOWN = M.STEP;    
-% now use equation (1) from  Kaernbach (1991) to calculate new step size
-% S_up for going up. 
+
+% now use equation (1) from  Kaernbach (1991), (e.g. at 
+% http://www.emotion.uni-kiel.de/fileadmin/emotion/team/kaernbach/publications/1991a_kae_p_p.pdf )
+% to calculate new step size S_up for going up.   
+% However, NOTE that that equation (1) and also the sentence following
+% immediately contains a MAJOR TYPO.  Quote from Kaernbach (1991):
+%%%  --- QUOTE BEGIN ---
+%%%      S_up * p = S_down * (1-p).               (eq. 1)
+%%%  For X_75, it   follows   that   S_up/S_down = 1/3.   
+%%%  --- QUOTE END ---
+%  That above equation is WRONG!  The sentence following it fits to
+%  the equation, which is wrong, however.
+%
+%  The next sentence then, in the original paper, gives a CORRECT EXAMPLE
+%%%  --- QUOTE BEGIN ---
+%%%  The rule for a convergence to the X_75 point would thus read: 
+%%%  Decrease the Level 1 step after each correct response, and
+%%%  increase it 3 steps  after each incorrect response. 
+%%%  --- QUOTE END ---
+
+% So the correct equilibirum condition for convergence is:
+%   stepsize_UP * probability_UP = stepsize_DOWN * probability_DOWN
+%   where probability_DOWN  = probability for a correct answer:
+%   
 M.STEP_UP   = M.PC_CONVERGE/(1-M.PC_CONVERGE) * M.STEP_DOWN;
 
 
@@ -119,3 +136,4 @@ end
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"
 % End:
+ 
