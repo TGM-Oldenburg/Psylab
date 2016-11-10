@@ -22,6 +22,7 @@ function [m_outsig, test_pos] = mpsy_match(m_test, m_ref, mode, m_quiet, m_presi
 % Copyright (C) 2005 by Martin Hansen, Fachhochschule OOW, Oldenburg
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  1 Nov 2006
+% Updated:  <10 Mai 2016 14:03, martin>  addition of background signal
 % Updated:  < 1 Nov 2006 14:09, hansen>
 
 %% This file is part of PSYLAB, a collection of scripts for
@@ -66,6 +67,17 @@ switch test_pos
  otherwise
         fprintf('undefined test_pos: %g, aborting\n',test_pos);
 	return;
+end
+
+
+% finally, add the "background signal" if it is present in the workspace
+if exist('m_background'),
+  % issue an error if the size of m_background does not fit 
+  if all(size(m_background) == size(m_outsig)),
+    m_outsig = m_outsig + m_background;
+  else 
+    error('the size of your background signal does not match the size of the output signal \n');
+  end
 end
       
 

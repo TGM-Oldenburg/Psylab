@@ -35,9 +35,9 @@ if isempty(M.med_thres),
   % simple plot
   plot(1:length(M.VARS), M.VARS,'b.-', idx_plus, M.VARS(idx_plus), 'r+', idx_minus, M.VARS(idx_minus), 'ro');
 else
-  % a somewhat nicer plot.  
-  % Careful:  The field M.familiarization_fidx has been calculated by mpsy_proto.  
-  % The 2 indices at transition between familiarization phase and measurement phase: 
+  % A somewhat nicer plot.   Careful:  The field M.familiarization_fidx
+  % has been calculated by mpsy_proto.  Then these are the 2 indices at
+  % transition between familiarization phase and measurement phase:  
   idx_trans = [M.familiarization_fidx(end) M.measurement_fidx(1)]; %
   hp = plot(M.measurement_fidx, M.VARS(M.measurement_fidx), 'k.-', ...
             M.familiarization_fidx, M.VARS(M.familiarization_fidx), 'k.-', ...
@@ -59,7 +59,7 @@ end
 title(strrep(tit,'_','\_'));
 
 % add a legend with subject name and date
-legend( sprintf('%s: %s',M.SNAME,datestr(now)), 0 );
+legend( sprintf('%s: %s',M.SNAME,datestr(now)), 'location', 'Best');
 
 % and add text information about median and std.dev., 
 % but only if run is finished, i.e. threshold is reached.  This can

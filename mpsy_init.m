@@ -24,7 +24,7 @@
 %% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
-disp(' start of a new experiment.  ALL psylab variables are now deleted.')
+fprintf('\n\n *** Start of a new experiment.  ALL psylab variables are now deleted. ***\n')
 
 % clear variable M (and all its fields) belonging to PSYLAB (if any)
 % also clear MI (storing individual runs' M for interleaved tracks)
@@ -74,6 +74,7 @@ M_SIMULATION = 2;    % 2. possible value of M.MODE, meaning:  simulation via mod
 afc_fb   = [];
 afc_info = [];
 
+  
 
 
 

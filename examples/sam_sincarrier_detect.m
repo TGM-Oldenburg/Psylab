@@ -81,7 +81,6 @@ M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN a
 carrier_freqs = -1;  %  broad band noise
 carrier_freqs = [ 800 1600 3200 ]; 
 
-%mod_freqs     = [ 16 64 256 ];
 mod_freqs     = [ 16 64 256 ];
 
 for carrierf = carrier_freqs,
@@ -95,7 +94,7 @@ mpsy_plot_result;
 
 
 
-% M.PARAM(2)  =  500;
+% M.PARAM(2)  =  800;
 
 % M.PARAM(1) = 2;
 % mpsy_afc_main;

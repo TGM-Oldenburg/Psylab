@@ -1,6 +1,6 @@
 % Usage: mpsy_proto()
 % ----------------------------------------------------------------------
-%          Protocols the results of the previous run:
+%          Protocols the results of the previous adaptive run:
 %          plots M.VAR as a function of trial number
 %          writes a corresponding result line into the "psydat"
 %          file, in new psydat format version 2.
@@ -36,7 +36,7 @@
 
 
 % determine the trial indices of the measurement phase, i.e. where the
-% familiarization phase is finished, and the step size has reached it
+% familiarization phase is finished, and the step size has reached its
 % minimum value:
 M.measurement_fidx = find(M.STEPS == M.MINSTEP);
 
@@ -76,7 +76,7 @@ end
 
 % output the individual values of M.VAR and the answers to the
 % psydat file, if flag-variable M.SAVERUN has been set accordingly  
-if (isfield(M, 'SAVERUN')) && M.SAVERUN == 1
+if (isfield(M, 'SAVERUN')) & M.SAVERUN == 1
   fprintf(fidm, '%%%%----- VAL:');
   for k = 1:length(M.ANSWERS)
     fprintf(fidm, ' %g %d',M.VARS(k), M.ANSWERS(k));
@@ -84,7 +84,7 @@ if (isfield(M, 'SAVERUN')) && M.SAVERUN == 1
   fprintf(fidm, '\n');
 end
 
-if (isfield(M, 'SAVEMEAN')) && M.SAVEMEAN == 1
+if (isfield(M, 'SAVEMEAN')) & M.SAVEMEAN == 1
     fprintf(fidm,'  %s %f %f %f %f %s\n', ...
         M.VARNAME, M.mean_thres, M.std_thres, M.min_thres, M.max_thres, M.VARUNIT);
 else
@@ -143,10 +143,8 @@ if M.DEBUG>0,
   for k=1:3,
     m_filenamedate = [ m_filenamedate sprintf('%2.2d',mod(dv(k),100)) ];
   end
-  %if exist( [ m_filenamedate '.mat' ], 'file'),
   % add current hour to end of filename
   m_filenamedate = [ m_filenamedate '-' sprintf('%2.2d',dv(4))];
-  %end
   % now save it:
   save(m_filenamedate, 'M', 'M_*')
 end

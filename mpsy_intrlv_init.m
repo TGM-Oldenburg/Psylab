@@ -52,23 +52,7 @@ else
 end
 
 
-% Reset some internal variables.  
-
-% Use existing mpsy_init_run.m for this task.  It sets field variables
-% of the reserved name variable M.
-for k=1:M1.NUM_INTERLEAVED_TRACKS,
-  % The reserved name variable M1.cur_track_idx is 
-  % later needed by mpsy_intrlv_puttrack   
-  M1.cur_track_idx = k;
-  M = MI(k);
-  % then initialize this current M
-  mpsy_init_run;
-  % use existing mpsy_intrlv_puttrack.m to fill (partly new) field
-  % values of M back into MI 
-  mpsy_intrlv_puttrack
-end
-
-% and now fill any empty fields in elements of MI(2:end) with
+% Now fill any empty fields in elements of MI(2:end) with
 % contents of MI(1), and also check size/types of fields VAR, STEP, PARAM
 psize = size(MI(1).PARAM);
 for k=2:M1.NUM_INTERLEAVED_TRACKS,
@@ -89,6 +73,22 @@ for k=2:M1.NUM_INTERLEAVED_TRACKS,
     error('size of field PARAM of all elements of MI must be identical.');
   end
 end
+
+% Then reset some internal variables.  
+% We use the existing mpsy_init_run.m for this task.  It sets field
+% variables of the reserved name variable M. 
+for k=1:M1.NUM_INTERLEAVED_TRACKS,
+  % The reserved name variable M1.cur_track_idx is 
+  % later needed by mpsy_intrlv_puttrack   
+  M1.cur_track_idx = k;
+  M = MI(k);
+  % then initialize this current M
+  mpsy_init_run;
+  % use existing mpsy_intrlv_puttrack.m to fill (partly new) field
+  % values of M back into MI 
+  mpsy_intrlv_puttrack
+end
+
 
 % initialize some fields in order to maintain common fields of all
 % elements of MI 

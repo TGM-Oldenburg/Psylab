@@ -30,7 +30,7 @@ function [psylab_version, psylab_major, psylab_minor] = mpsy_version()
 %% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 psylab_major = 2;
-psylab_minor = 6;
+psylab_minor = 7;
 
 psylab_version = [ num2str( psylab_major ) '.' num2str(psylab_minor) ];
 

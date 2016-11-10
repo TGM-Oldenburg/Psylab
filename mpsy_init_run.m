@@ -51,32 +51,32 @@ M.DIRECTION = [];
 M.med_thres = [];
 
 % set some variables to default-values, if not yet present
-if ~isfield(M, 'TASK')
+if ~isfield(M, 'TASK') | isempty(M.TASK)
   M.TASK = '';
 end
-if ~isfield(M, 'EARSIDE'),
+if ~isfield(M, 'EARSIDE') | isempty(M.EARSIDE),
   M.EARSIDE = M_BINAURAL;
   % fprintf('*** Info: (%s)  M.EARSIDE has been set to M_BINAURAL\n', mfilename);
 end
-if ~isfield(M, 'RESULTSTYLE'),
+if ~isfield(M, 'RESULTSTYLE') | isempty(M.RESULTSTYLE),
   M.RESULTSTYLE = 1;   % all plots into one 
 end
-if ~isfield(M, 'USE_GUI'),
+if ~isfield(M, 'USE_GUI') | isempty(M.USE_GUI),
   M.USE_GUI = 0;
 end
-if ~isfield(M, 'VISUAL_INDICATOR'),
+if ~isfield(M, 'VISUAL_INDICATOR') | isempty(M.VISUAL_INDICATOR),
   M.VISUAL_INDICATOR = 0;
 end
-if ~isfield(M, 'INFO'),
+if ~isfield(M, 'INFO') | isempty(M.INFO),
   M.INFO = 1;
 end
-if ~isfield(M, 'FEEDBACK'),
+if ~isfield(M, 'FEEDBACK') | isempty(M.FEEDBACK),
   M.FEEDBACK = 1;
 end
-if ~isfield(M, 'DEBUG'),
+if ~isfield(M, 'DEBUG') | isempty(M.DEBUG),
   M.DEBUG = 0;
 end
-if ~isfield(M, 'USE_MSOUND')
+if ~isfield(M, 'USE_MSOUND') | isempty(M.USE_MSOUND)
   M.USE_MSOUND = 0;
 end
 
@@ -89,6 +89,40 @@ if M.USE_MSOUND
     % do nothing, continue to use the already opened msound
   end
 end
+
+
+%% --------------------------------------------------
+% check whether matlab's built-in sound works asynchronously
+% (control is back on the commandline right after the sound-command)
+% or synchronously (control is back on the commandline only after
+% the complete signal vector has been played by sound):
+%
+% however, we only need to check this when msound is not in use
+if M.USE_MSOUND == 0,
+  tmp_testdur = 0.2;
+  % first, use sound once in order to intiate the sound system 
+  sound( zeros(tmp_testdur*M.FS, 1), M.FS); 
+  % then measure the duration for playback of a silence vector of
+  % duration tmp_testdur 
+  tic; sound( zeros(tmp_testdur*M.FS, 1), M.FS); tmp_measdur = toc;
+  if tmp_measdur >= tmp_testdur,
+    M.SOUND_IS_SYNCHRONOUS = 1;
+    if M.VISUAL_INDICATOR == 1,
+      fprintf('\n\n*** INFO: the built-in function "sound" of your system/Matlab seems to \n');
+      fprintf('work synchronously.  In that case the VISUAL_INDICATOR feature will not \n');
+      fprintf('work. If you need the VISUAL_INDICATOR feature, then switch to \n');
+      fprintf('using "msound" instead of "sound".\n');
+      warning('M.VISUAL_INDICATOR has been set to 0.');
+      pause(2)
+      M.VISUAL_INDICATOR = 0;
+    end
+  else
+    M.SOUND_IS_SYNCHRONOUS = 0;
+  end
+end
+  
+
+
 
 % from version 2.6 and up, reversals are counted both at upper
 % reversals (change from going up to down) and lower reversals

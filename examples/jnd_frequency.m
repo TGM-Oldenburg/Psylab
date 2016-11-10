@@ -35,7 +35,6 @@ M.MINSTEP      = 1 ;   % minumum step size, in units of M.VARUNIT
 M.NAFC         = 3 ;   % number of forced choice intervals
 M.ADAPT_METHOD = '1up_2down'; 
 M.MAXREVERSAL  = 8 ;   % number of reversals required as stop criterion
-%% M.REVERSAL     = 3;   % force start of measurement phase according to M.STEP only
 M.FEEDBACK     = 1 ;     % flag for provision of feedback about correctness of answer
 
 % ------------------------------ 

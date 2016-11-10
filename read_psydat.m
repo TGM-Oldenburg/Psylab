@@ -62,7 +62,7 @@ while 1,
   
   % get new line
   lin = fgets(fid1);  line_number = line_number+1;
-  if lin == -1, break; end;  % we are now at EOF
+  if lin == -1, break; end;  % we are now at EOF, so exit the while(1)-loop
   
   % split it into space-separated words
   tok = mpsy_split_lines_to_toks(lin);
@@ -103,7 +103,7 @@ while 1,
 	% split it into space-separated words
 	tok = mpsy_split_lines_to_toks(lin);
 	
-        % to ensure compatability with older psydat files, check
+        % to ensure compatibility with older psydat files, check
         % whether or not the next line holds the ADAPT: info
         if strcmp(tok(2), 'ADAPT:')
           % output the name of the adaptive rule, as a cell
@@ -123,7 +123,7 @@ while 1,
           tok = mpsy_split_lines_to_toks(lin);
         end
         
-        % to ensure compatability with older psydat files, check
+        % to ensure compatibility with older psydat files, check
         % whether or not the next line holds the VAL: info
         if strcmp(tok(2), 'VAL:')
           x.run(entry).vars = str2num(char(tok(3:2:end)));

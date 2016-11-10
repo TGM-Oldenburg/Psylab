@@ -4,10 +4,10 @@ function [y_all, y_average, y_ave2, hplot] = display_psydat(s_name, exp_name, ps
 % ----------------------------------------------------------------------
 % Usage: [y_all, y_average, y_ave2, hplot] = display_psydat(s_name, exp_name, pstyle, param_perm) 
 %
-%     Use read_psydat to extract all data for subject s_name and
+%     Uses read_psydat to extract all data for subject s_name and
 %     experiment exp_name.  Then sort and combine data into different
 %     subgroups, one for each UNIQUE combination of values of M.PARAM(:).
-%     Calculate the mean across threshold-data of different runs,
+%     Calculates the mean across threshold-data of different runs,
 %     individually for each data subgroup. 
 %
 %     Output y_all and y_average are struct arrays, the length of both
@@ -16,13 +16,13 @@ function [y_all, y_average, y_ave2, hplot] = display_psydat(s_name, exp_name, ps
 %     y_all and y_average both contain one struct-member psydata.
 %
 %   input:   ---------
-%      s_name  subject name (initial as found in data file)
+%      s_name  subject name (as found in data file)
 %    exp_name  experiment name (as found in data file)
 %      pstyle  plot style  [optional, default = 1]: 
 %                 1 = plot all data into 1 figure
 %                 2 = make 1 figure per each unique value of higher
 %              parameters (parameter number > 2)
-% param_perm   parameter permutation [optinal, default: [1 2 3 ...]]
+% param_perm   parameter permutation [optional, default: [1 2 3 ...]]
 %                 allows to permutate the parameter numbers
 %
 %  output:   ---------

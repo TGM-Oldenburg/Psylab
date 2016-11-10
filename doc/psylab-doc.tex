@@ -13,7 +13,7 @@
 \setlength{\textheight}{24cm}
 \addtolength{\topmargin}{-1.8cm}
 
-\newcommand{\psylabversion}{2.6c}
+\newcommand{\psylabversion}{2.7}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -251,15 +251,16 @@ Fig.~\ref{fig:example_run}.
 
 \item[(stimulus) variable] 
 
-  The \index{stimulus variable}``variable'' inside \psylab\ takes the role
-  of that stimulus dimension/magnitude which is varied adaptively from
-  trial to trial in order to find the subjects threshold.  The
-  ``variable'' carries the reserved name \code{M.VAR} inside \psylab.
+  The \index{stimulus variable}``variable'' inside \psylab\ takes the
+  role of that stimulus dimension/magnitude which is varied from trial
+  to trial (for example adaptively, or using a method of constant
+  stimuli) in order to find the subjects threshold.  The ``variable''
+  carries the reserved name \code{M.VAR} inside \psylab.
 
 \item[(stimulus) step size] 
 
   The \index{step size} step size is the magnitude by which the
-  stimulus variable gets changed from trial to trial during the
+  stimulus variable gets changed from trial to trial during an
   adaptive experiment.  It is measured in the same units of the
   variable \code{M.VAR}.  The step size is typically larger in the
   beginning of the experiment and is then progressively reduced until
@@ -267,6 +268,8 @@ Fig.~\ref{fig:example_run}.
   reserved name \code{M.STEP} inside \psylab, and the 
   \index{step size!minimal}minimal step size carries the name
   \code{M.MINSTEP}.
+
+  The step size doesn't have a meaning in the ``method of constant stimuli''.
 
 \item[run] 
 
@@ -300,7 +303,7 @@ Fig.~\ref{fig:example_run}.
   them which contain the \index{signals!reference signal}reference signal,
   i.e.\ they do \emph{not} contain ``the signal'' or the ``cue'' that the subject is
   required to detect.  The reference signal carries the reserved name
-  \code{m\_ref} inside \psylab.
+  \code{m\_ref} \emph{or} \code{m\_ref1}, \code{m\_ref2} etc. inside \psylab.
 
 \item[test signal] 
   
@@ -313,11 +316,12 @@ Fig.~\ref{fig:example_run}.
 
 \item[familiarisation phase] 
 
-  At the beginning of a new run, the test signal will typically be
-  presented clearly above threshold in order to orient the subject
-  about the kind of the signal respectively the ``cue'' that is to be
-  detected, and to familiarise the subject with the measurement
-  procedure.  The step size will be large at the beginning of this
+  At the beginning of a new run with an adaptive control of the
+  stimulus variable, the test signal will typically be presented
+  clearly above threshold in order to orient the subject about the
+  kind of the signal respectively the ``cue'' that is to be detected,
+  and to familiarise the subject with the measurement procedure.  The
+  step size will be larger at the beginning of this
   \index{familiarisation phase}familiarisation phase so that correct
   responses of the subject will carry the stimulus variable towards
   the region of threshold more or less rapidly.  At the same time the
@@ -330,7 +334,7 @@ Fig.~\ref{fig:example_run}.
 
 \item[measurement phase] 
 
-  The \index{measurement phase}measurement phase starts at the end of
+  In an adaptive run, the \index{measurement phase}measurement phase starts at the end of
   the familiarisation phase.  The subject should have approached a
   point relatively close to the threshold and the stimulus variable
   changes now only with the minimal step size.  The measurement phase
@@ -484,9 +488,9 @@ reserved names, \eg \code{M.VAR}, \code{M.PARAM}, \code{m\_ref},
 \psylab\ offers to perform various kinds of experiments.  One class of
 experiments are detection and discrimination experiments using a
 $N$-AFC transformed-up-down method.  These experiments can be
-performed as a sequence of single runs, one at a time, or as a group
+performed as a sequence of single runs, one run at a time, or as a group
 of interleaved runs.  These are described in
-sections~\ref{sec:n-afc-experiments} and
+sections~\ref{sec:n-afc-experiments} resp.\
 \ref{sec:interleaved-experiments}.
 
 Slightly different are matching experiments, like for example employed
@@ -524,7 +528,8 @@ in section~\ref{sec:designing-your-own-experiment}.
 The script \code{mpsy\_match\_main.m} is a central part of \psylab\
 for controlling adaptive transformed-up-down matching experiments
 where two signal intervals are presented per trial and the subject is
-asked to adjust some stimulus dimension of one of them.
+asked to adjust some stimulus dimension of one of them, with the aim
+to ``match'' the stimuli regarding a given perceptual aspect. 
 
 The file \texttt{match\_freq\_binaural.m} in the subdirectory
 \texttt{examples} shows an example for such an experiment where a binaural
@@ -865,8 +870,8 @@ the global Matlab-workspace at the end of the user script:
   \index{signals!m\_ref1} \index{signals!m\_ref2}
   The $(n-1)$ signals vectors that contain the reference intervals in
   case that all reference intervals should be different from each
-  other.  This might, for example, be required if independent
-  realisations of a running noise should be used for each reference
+  other.  This is, for example, required if independent
+  realisations of a running noise shall be used for each reference
   interval.  In this case, the variable \texttt{m\_ref} must not exist
   in the workspace.  The $(n-1)$ reference signal vectors
   \texttt{m\_ref1}, \texttt{m\_ref2}, \ldots will be
@@ -886,7 +891,7 @@ respectively the set script:
 \begin{description}
 \item[ m\_quiet ] \index{signals!m\_quiet} The signal which is
   presented between two adjacent stimulus intervals.  Most often this
-  will be a quiet pause of silence, i.e.\ a vector of zeroes.
+  will be a quiet (sic!) pause of silence, i.e.\ a vector of zeroes.
   Alternatively the signal could be an empty vector
   (~\code{m\_quiet=[\,]}~) which would mean a direct succession of the
   $n$ intervals of a $n$-AFC trial.
@@ -970,8 +975,9 @@ variables is performed by the \psylab-script \texttt{mpsy\_check.m}.
 subject.  One simple interface is to answer via a keyboard.  Another
 is to provide a graphical user interface to be controlled via a mouse
 and/or key presses.  The former has the advantage that an extra
-monitor could be omitted.  The latter may be more informative for the
-subject and can provide some extra functionality.
+monitor in the listening booth could be omitted.  The latter may be
+more informative for the subject and can provide some extra
+functionality, of course.
 
 In an $n$-AFC test, a subject answer of 1, 2, \ldots, $n$ indicates the
 subjects decision for interval 1, 2, \ldots, $n$.  These answers can
@@ -994,8 +1000,8 @@ variables:
 \begin{description}
 \item[ M.FEEDBACK ]
   A value of 0 means: do not give feedback to the subject.\\
-  A value of 1 means: Give feedback to the subject, i.e.\ whether or not the
-  last answer was correct.
+  A value of 1 means: Give feedback to the subject, i.e.\ inform the
+  subject whether or not the last answer was correct.
   \\
   A value larger than 1 means: additionally save a plot of the current
   run's result after threshold has been reached.  The resulting
@@ -1147,7 +1153,8 @@ each time a run has been completed.  This behaviour will be turned on
 if \code{M.DEBUG}$>$0. However, this is mainly for rescue and analysis
 purposes and the binary files may as well be deleted.  They will not
 be used for later data analysis.  If you do not need this behaviour,
-just set \code{M.DEBUG=0;}
+just set \code{M.DEBUG=0;}.  
+
 %%%look at the end of the file \texttt{mpsy\_proto.m} and delete the corresponding lines.
 
 
@@ -1757,7 +1764,8 @@ the IHA, that uses the PortAudio-Interface
 sound card.  More information about
 msound can be found at the website of the Institute for Hearing
 Technology and Audiology (http://www.hoertechnik-audiologie.de/, then
-look for ``Institut für Hörtechnik und Audiologie'' $\rightarrow$ ``Software'').
+look for ``Institut für Hörtechnik und Audiologie'' $\rightarrow$
+``Software''), and on github. 
 
 The \code{msound} mex-file is now part of the \psylab-distribution.
 It comes in several pre-compiled versions for win and
@@ -2089,7 +2097,7 @@ versions of \psylab\ are released, the new features might migrate to
 become part of the regular \psylab-distribution.
 
 
-The first two contributions are provided by students of ``Institut für
+The first two contributions were provided by students of ``Institut für
 Hörtechnik und Audiologie''.  They implemented two new experimental
 designs in \psylab, namely
 \begin{enumerate}

@@ -61,10 +61,10 @@ mpsy_check;
 
 
 if M.INFO,
-  stmp = sprintf('\nthis run: Parameter (%s): %g %s', ...
+  stmp = sprintf('this run: Parameter (%s): %g %s', ...
 		 char(M.PARAMNAME(1)), M.PARAM(1), char(M.PARAMUNIT(1)));
   for k=2:M.NUM_PARAMS,
-    stmp = [stmp sprintf(', Par.%d (%s): %g %s', ...
+    stmp = [stmp sprintf(',\n       Par.%d (%s): %g %s', ...
                          k, char(M.PARAMNAME(k)), M.PARAM(k), char(M.PARAMUNIT(k)))];
   end
 	    
@@ -96,16 +96,17 @@ pause(0.5);
 while (M.REVERSAL < M.MAXREVERSAL) | (M.STEP > M.MINSTEP)
 
   % New values for M.VAR and M.STEP have been calculated based on
-  % the adaptive rule in use.  
+  % the adaptive rule in use; except for the very first run.  
   % Generate new signals by use of the "user-script"
   eval([M.EXPNAME 'user']);
 
   % Save the new values of M.VAR and M.STEP in the array of all of
   % their values during the current run.  
-  % This order is to reflect changes of M.VAR, as possibly made by the
-  % user script.  For example, the user script might limit M.VAR to
-  % within certain boundaries, e.g., to prevent amplitude clipping,
-  % overmodulation, negative increments, etc.
+  % This order (FIRST call the user script, THEN save the two
+  % variables) is needed to reflect changes of M.VAR, that are possibly
+  % made by the user script.  For example, the user script might
+  % limit M.VAR to within certain boundaries, e.g., to prevent
+  % amplitude clipping, overmodulation, negative increments, etc.
   M.VARS  = [M.VARS M.VAR];
   M.STEPS = [M.STEPS M.STEP];
   
@@ -129,8 +130,10 @@ while (M.REVERSAL < M.MAXREVERSAL) | (M.STEP > M.MINSTEP)
   
   % check whether familiarization phase has ended and measurement
   % phase starts for data collection:  
-  % note: a new M.STEP and a new M.VAR have just been calculated from the last answer
-  if M.STEP == M.MINSTEP & M.STEPS(end) > M.MINSTEP,
+  % note: a new M.STEP and a new M.VAR have just been calculated
+  % from the last answer, according to the adaptive rule.
+  if M.STEP == M.MINSTEP & M.STEPS(end) ~= M.MINSTEP,
+    % yes, we are right at the end of the familiarization phase.
     % start from 0 again for counting reversals during measurement phase  
     M.REVERSAL = 0;
     if M.FEEDBACK, 

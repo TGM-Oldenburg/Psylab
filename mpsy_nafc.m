@@ -7,6 +7,7 @@
 % Copyright (C) 2005 by Martin Hansen, Jade Hochschule, Oldenburg
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  31 Mrz 2005
+% Updated:  <10 Mai 2016 14:02, martin>  addition of background signal
 % Updated:  <16 Nov 2015 16:36, martin>
 % Updated:  < 3 Nov 2005 14:09, hansen>
 
@@ -27,6 +28,10 @@
 
 if exist('m_ref')
   
+  if exist('m_ref1'),
+    error('found variables "m_ref1" and also "m_ref" in your workspace.  Only one OR the other should be used!');
+  end
+  
   % call the "single-reference" N-AFC procedure, i.e. the case with
   % only one instance of the reference signal "m_ref"
   [m_outsig, M.rand_afc] = mpsy_nafc_singleref(m_test, m_ref, M.NAFC, m_quiet, m_presig, m_postsig);
@@ -42,8 +47,8 @@ else
   
    case 2   % --------------- 2AFC ---------------
 
-       % this case N==2 is identical to the "single-reference"
-       % case, where the refenrence is stored in variable 'm_ref'
+       % this case N==2 is identical to the "single-reference" case 
+       % (see above), where the refenrence is stored in variable 'm_ref'
        
        if exist('m_ref1'),
 	 error('found variable called "m_ref1" in your workspace.  It should probably be called "m_ref" ?');

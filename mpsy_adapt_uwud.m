@@ -90,7 +90,7 @@ end
 %  - wrong answer --> going up, and 
 %  - unsure ("I don't know") answer --> going up as well, but smaller step
 
-% variable M.STEP is defined to hold the step size S_correct for going down 
+% variable M.STEP is defined to hold the step size S_down for going down 
 M.STEP_DOWN   = M.STEP;    
 % now use equation (5) from  Kaernbach (2001) to calculate new step size
 % S_incorrect for going up. 

@@ -48,7 +48,7 @@ end
 mpsy_field_must_be_string = {'SNAME', 'VARNAME', 'VARUNIT'};
 
 % field variables that must contain a numeric scalar value
-mpsy_field_must_be_scalar = {'VAR', 'STEP', 'NUM_PARAMS'};
+mpsy_field_must_be_scalar = {'VAR', 'STEP', 'MINSTEP', 'NUM_PARAMS'};
 % field variables that must contain a numeric value (scalar or vector)
 mpsy_field_must_be_numeric = [mpsy_field_must_be_scalar, 'PARAM'];
 
@@ -87,7 +87,7 @@ for tmp = mpsy_field_must_be_string,
     error('psylab-variable "M.%s" must be a string!  \n', tmp_varname);
   end
   if strfind(getfield(M, tmp_varname), ' '),
-    error('content of psylab-variable "M.%s" must not contain blank spaces!  \n', tmp_varname);
+    error('content of psylab-variable "M.%s" must not contain blank spaces!  ', tmp_varname);
   end
 end
 
@@ -100,15 +100,15 @@ for tmp = mpsy_field_must_be_scalar,
 end
 
 
-% check for correct lengthes of M.PARAM* variables
+% check for correct lengths of M.PARAM* variables
 if length(M.PARAM) ~= M.NUM_PARAMS,
-  error('length of M.PARAM must match value of M.NUM_PARAMS \n');
+  error('length of M.PARAM must match value of M.NUM_PARAMS ');
 end
 if length(M.PARAMNAME) ~= M.NUM_PARAMS,
-  error('length of M.PARAMNAME must match value of M.NUM_PARAMS \n');
+  error('length of M.PARAMNAME must match value of M.NUM_PARAMS ');
 end
 if length(M.PARAMUNIT) ~= M.NUM_PARAMS,
-  error('length of M.PARAMUNIT must match value of M.NUM_PARAMS \n');
+  error('length of M.PARAMUNIT must match value of M.NUM_PARAMS ');
 end
 
 % check for cellstring type variables
@@ -138,34 +138,6 @@ if M.VISUAL_INDICATOR & ~M.USE_GUI,
   M.VISUAL_INDICATOR = 0;
 end
 
-%% --------------------------------------------------
-% check whether matlab's built-in sound works asynchronously
-% (control is back on the commandline right after the sound-command)
-% or synchronously (control is back on the commandline only after
-% the complete signal vector has been played by sound):
-%
-% however, we only need to check this when msound is not in use
-if M.USE_MSOUND == 0,
-  % first, use sound once in order to intiate the sound system 
-  sound( zeros(0.2*M.FS, 1), M.FS); 
-  % then measure the duration for playback of a 1 second silence vector
-  tic; sound( zeros(M.FS, 1), M.FS); tmpdur = toc;
-  if tmpdur >= 1,
-    M.SOUND_IS_SYNCHRONOUS = 1;
-    if M.VISUAL_INDICATOR == 1,
-      fprintf('\n\n*** INFO: the built-in function "sound" of your system/Matlab seems to \n');
-      fprintf('work synchronously.  In that case the VISUAL_INDICATOR feature will not \n');
-      fprintf('work. If you need the VISUAL_INDICATOR feature, then switch to \n');
-      fprintf('using "msound" instead of "sound".\n');
-      warning('M.VISUAL_INDICATOR has been set to 0.');
-      pause(2)
-      M.VISUAL_INDICATOR = 0;
-    end
-  else
-    M.SOUND_IS_SYNCHRONOUS = 0;
-  end
-end
-  
 
 
 %% --------------------------------------------------
@@ -212,8 +184,8 @@ end
 if exist('m_postsig')~=1, 
   m_postsig = [];  
 else
-  if isscalar(m_presig),
-    m_presig = zeros(round(m_presig*M.FS), numchannels);
+  if isscalar(m_postsig),
+    m_postsig = zeros(round(m_postsig*M.FS), numchannels);
   end
 end
 
