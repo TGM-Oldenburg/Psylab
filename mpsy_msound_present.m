@@ -1,6 +1,6 @@
 % Usage: mpsy_msound_present
 % ----------------------------------------------------------------------
-%   to be called from mpsy_    
+%   to be called from mpsy_***_present    
 %
 % this script plays the vector m_outsig using msound, depending on
 % variables M.MSOUND_DEVID, M.MSOUND_FRAMELEN and M.MSOUND_NCHAN
@@ -111,11 +111,11 @@ for kk=1:nframes
       set(afc_but(1:M.NAFC), 'BackgroundColor', c_tmp);  % backgroundcolor
       drawnow;
     else
-      % visual_frame_vec(kk) == 0, i.e. do nothing
+      % do nothing, as visual_frame_vec(kk) == 0
     end
   end
   
-  % sample indices for next frame:
+  % calculate sample indices of next frame, and output them:
   idx = (kk-1)*M.MSOUND_FRAMELEN + (1:M.MSOUND_FRAMELEN);
   msound('putSamples', m_outsig(idx,:)); 
 end

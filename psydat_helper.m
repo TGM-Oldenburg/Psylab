@@ -122,7 +122,7 @@ tmp_out = textscan(fid_tmp, '%s',  'whitespace', '\n');
 handles.psydat_all_lines = tmp_out{1};
 fclose(fid_tmp);
 % find occurrences of new experiment results
-handles.experiments_line_idx = strmatch ('#### ', handles.psydat_all_lines);
+handles.experiments_line_idx = strmatch ('##adapt## ', handles.psydat_all_lines);
 
 handles.experiments_name = {};
 for k=1:length(handles.experiments_line_idx),

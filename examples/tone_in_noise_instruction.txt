@@ -1,21 +1,23 @@
 
-	In diesem psychoakustischen Experiment geht es um die
-	Wahrnehmbarkeit von Tönen, die zusammen mit einem
-	Hintergrundrauschen dargeboten werden.  Die Töne können zum
-	Teil sehr leise sein und unterschiedliche Tonhöhe haben.
+	This psychoacoustical experiment investigates the perception
+	of tones that are presented together with a background noise.
+	The tones can possibly be very soft in loudness and have
+	varying pitch (tone height). 
 
-	In diesem Experiment werden Sie jeweils drei kurze Intervalle
-	hintereinander hören.  Zwei Intervalle sind dabei gleich und
-	enthalten nur Rauschen.  In einem der drei Intervalle ist
-	zusätzlich ein Ton enthalten.  Es wird jedes Mal von Neuem
-	zufällig ausgewählt, in welchem der Intervalle dieser Ton
-	enthalten ist.  Der Ton wird zunächst deutlich hörbar sein und
-	im Verlaufe des Experiments immer leiser werden, so dass Sie
-	ihn gerade eben noch hören können.
+	In this experiment, you will hear three intervals after
+	another.  The three intervals will be marked visually.  Two of
+	the intervals will be the same and they contain only the
+	noise.  One of the intervals will contain the noise and also
+	the additional tone.  In each presentation of the intervals,
+	the one containing the additional tone will be selected
+	randomly.  The tone will be clearly audible in the beginning
+	and it will become softer in loudness during the course of the
+	experiment, such that you may have difficulties or find it
+	impossible to hear the tone in the noise.
 
-	Ihre Aufgabe als Versuchsperson ist es, nach jeder Darbietung
-	zu entscheiden, in welchem der drei Intervalle (1, 2 oder 3)
-	Sie den Ton gehört haben.  Falls Sie sich nicht	entscheiden
-	können, sollen Sie raten. 
+	Your task as a test person is to decide, after each presentation,
+	in which of the intervals (1, 2, or 3) you heard the tone in
+	the noise.  You can answer by clicking the corresponding
+	answer button.  If you cannot decide, please make a guess.
 
 	

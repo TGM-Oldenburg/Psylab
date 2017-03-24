@@ -18,6 +18,8 @@
 %% See the GNU General Public License for more details:
 %% http://www.gnu.org/licenses/gpl
 
+MYVAR = 0;
+
 M.VAR  = -8 ;    % start modulations degree (in dB)
 M.STEP =  4 ;    % start STEP-size, same unit as M.VAR
 
@@ -65,7 +67,7 @@ m_presig  = m_quiet;
 
 % add some overall background signal:  a low level white noise
 %
-% This background noise is not part of the original experiment by
+% Note: This background noise is NOT part of the original experiment by
 % Kohlrausch et al. (2000).  It is added here for demostration purposes only
 
 % generate a signal template with the size of the final output signal

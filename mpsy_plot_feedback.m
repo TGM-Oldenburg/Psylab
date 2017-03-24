@@ -27,16 +27,15 @@
 idx_plus  = find(M.ANSWERS ==1);  % correct answers
 idx_minus = find(M.ANSWERS ==0);  % wrong answers
 
-% in case that threshold has not yet been reached, a preliminary
-% plot is shown.  Otherwise the plot is Whether threshold has been
-% reached, can be checked by the content of M.med_thres, which is
-% only set via mpsy_proto
+% In case that threshold has not yet been reached, a preliminary plot
+% is shown.  Whether threshold has been reached, can be checked by the
+% content of M.med_thres, which is only set via mpsy_proto_adapt
 if isempty(M.med_thres),
   % simple plot
   plot(1:length(M.VARS), M.VARS,'b.-', idx_plus, M.VARS(idx_plus), 'r+', idx_minus, M.VARS(idx_minus), 'ro');
 else
   % A somewhat nicer plot.   Careful:  The field M.familiarization_fidx
-  % has been calculated by mpsy_proto.  Then these are the 2 indices at
+  % has been calculated by mpsy_proto_adapt.  Then these are the 2 indices at
   % transition between familiarization phase and measurement phase:  
   idx_trans = [M.familiarization_fidx(end) M.measurement_fidx(1)]; %
   hp = plot(M.measurement_fidx, M.VARS(M.measurement_fidx), 'k.-', ...
@@ -64,7 +63,7 @@ legend( sprintf('%s: %s',M.SNAME,datestr(now)), 'location', 'Best');
 % and add text information about median and std.dev., 
 % but only if run is finished, i.e. threshold is reached.  This can
 % be checked via the variable M.med_thres that is set to a value
-% only after a call to mpsy_proto 
+% only after a call to mpsy_proto_adapt 
 if ~isempty(M.med_thres),
   text(M.measurement_fidx(1), 0.5*(M.VARS(M.measurement_fidx(1))+max(M.VARS)), ...
      sprintf('med:%g, mean:%g, std:%g ', M.med_thres, M.mean_thres, M.std_thres));

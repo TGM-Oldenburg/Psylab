@@ -76,31 +76,11 @@ if M.VISUAL_INDICATOR,
 end
 
 
-% showing this info as in mpsy_afc_main does not make sense in an
-% interleaved experiment, as it would only confuse the subject
-% repeatedly 
-% $$$ if M.INFO,
-% $$$   stmp = sprintf('\nthis run: Parameter (%s): %g %s', ...
-% $$$ 		 char(M.PARAMNAME(1)), M.PARAM(1), char(M.PARAMUNIT(1)));
-% $$$   for k=2:M.NUM_PARAMS,
-% $$$     stmp = [stmp sprintf(', Par.%d (%s): %g %s', ...
-% $$$                          k, char(M.PARAMNAME(k)), M.PARAM(k), char(M.PARAMUNIT(k)))];
-% $$$   end
-% $$$ 	    
-% $$$   mpsy_info(M.USE_GUI, afc_info, stmp);
-% $$$ end
+% showing info about the current parameters as in mpsy_afc_main does
+% not make sense in an interleaved experiment, as it would only
+% confuse the subject repeatedly
 
-if M.USE_GUI,
-  set(afc_fb, 'String', 'are you ready for this run?    to continue, hit RET');
-  M.UD = -1;   
-  % the variable 'M.UD' gets set via KeyPressFcn of the GUI.
-  % Actually, not only RET but also any key will lead to exit from
-  % this while loop. The pause is essential for catching GUI events
-  while M.UD == -1,    pause (0.5);  end;   
-  set(afc_fb, 'String', '');
-else
-    M.UD = input('\n\n are you ready for this run?    to continue, hit RET');
-end
+M.UD = mpsy_query_user(M.USE_GUI, afc_fb, 'are you ready for this run?    to continue, hit RET');
 % check user answer for a possible quit-request
 if M.UD == 9, M.QUIT = 1;  end
 if M.UD >= 8, return;  end
@@ -164,7 +144,7 @@ while ~all(M1.TRACKS_COMPLETED)
   % check whether familiarization phase has ended and data
   % collection starts during measurement phase: 
   % note: a new M.STEP and M.VAR have just been calculated from the last answer
-  if M.STEP == M.MINSTEP & M.STEPS(end) > M.MINSTEP,
+  if M.STEP == M.MINSTEP & M.STEPS(end) ~= M.MINSTEP,
     % count reversals during measurement phase again starting from 0
     M.REVERSAL = 0;
     
@@ -200,7 +180,7 @@ while ~all(M1.TRACKS_COMPLETED)
     M.VARS  = [M.VARS M.VAR];
     M.STEPS = [M.STEPS M.STEP];
     % protocol everything of this track
-    mpsy_proto;
+    mpsy_proto_adapt;
   end
   
   % fill data of current track, stored in M, back into array MI of all tracks 

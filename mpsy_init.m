@@ -24,6 +24,20 @@
 %% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
+
+
+if mpsy_querysplash,
+  clc
+  type PSYLAB_SPLASH
+  pause(1)
+  stmp = input('    OK, I UNDERSTAND, AND I AGREE \n    by pressing the "y" key followed by RET   ', 's');
+  if ~strcmp(stmp, 'y'),
+    fprintf('\n\n Thanks and good-bye, then.\n')
+    return
+  end
+end
+
+
 fprintf('\n\n *** Start of a new experiment.  ALL psylab variables are now deleted. ***\n')
 
 % clear variable M (and all its fields) belonging to PSYLAB (if any)
@@ -39,12 +53,13 @@ if ~isempty(tmp),
 end
 
 % reset overall quit-flag, indicating a quit of the whole experiment
-% This needs to be done AFTER an existing psylab gui has been deleted. 
+% This needs to be done AFTER an existing psylab gui has been
+% deleted, because that figure's DeleteFcn will set M.QUIT to 1
 M.QUIT  = 0;     
 
 % clear all gui handles pertaining to the answer GUI and all
 % possibly existing signal like m_quiet, m_test etc. 
-clear afc_* m_* 
+clear tmp afc_* m_* 
 
 
 % values for M.EARSIDE:  only left, only right or binaural

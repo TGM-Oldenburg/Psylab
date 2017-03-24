@@ -1,13 +1,13 @@
-% Measurement of modulation detection threshold for SAM as a function of mod. frequency
+% Measurement of modulation detection threshold for SAM as a function of modulation frequency
 %
 % Usage: sam_sincarrrier_detect
 %
 % Copyright (C) 2005       Martin Hansen, FH OOW
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  3 Apr 2005
-% Updated:   <13 Mai 2005 15:51, hansen>
-% Updated:   <13 Mai 2005 15:51, hansen>
-% Updated:  <15 Apr 2016 14:38, martin>
+% Updated:  <24 Mar 2017 11:14, mh>
+% Updated:  <15 Apr 2016 14:38, mh>
+% Updated:   <13 Mai 2005 15:51, mh>
 
 %% This file makes use of PSYLAB, a collection of scripts for
 %% designing and controling interactive psychoacoustical listening
@@ -22,7 +22,7 @@
 
 
 % This experiment reproduces the experiment by
-% Kohlrausch, Fassel, Dau (2000).  JASA 108(2), p. 723-734
+% Kohlrausch, Fassel, Dau (2000), JASA 108(2), p. 723-734,
 % who investigated the detection threshold of the modulation degree
 % for sinusoidal amplitude modulation of a sinusoidal carrier.
 
@@ -50,7 +50,7 @@ M.ADAPT_METHOD = '1up_2down';   % transformed 1-up-2-down
 
 M.MAXREVERSAL  = 6 ;  % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;  % 1/0 = yes/no, 2=show result plot, 3=save it with individual name
-M.INFO         = 1 ;  % flag for additional info for test subject
+M.INFO         = 1 ;  % flag to provide intermediate info for the subject
 
 
 % ------------------------------ 
@@ -60,9 +60,9 @@ M.EARSIDE          = M_BINAURAL;
 M.USE_GUI          = 1;     % use a GUI for user input
 M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
 M.DEBUG            = 0;
-M.SAVERUN          = 1;
+M.SAVERUN          = 1;     % save all values of M.VAR during run in psydat file
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ----------------------------------------
 M.USE_MSOUND       = 1;     % flag whether to use msound (1 or 0)
 M.MSOUND_DEVID     = 0;     % device ID for msound (choose 0 or [] for default device)
 M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
@@ -70,15 +70,17 @@ M.MSOUND_NCHAN     = 1;     % number of channels, must match  size(m_outsig,2)
 
 
 % set sound card to maximum output to ensure a permanent calibration
-% dos('volumemax&');
+% system('volumemax&');
 
-clc;  
+fprintf('\n\n\n'); 
 type sam_instruction.txt
 
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
-%% ==================================================
-carrier_freqs = -1;  %  broad band noise
+
+% ========================================
+
+% %%carrier_freqs = -1;  %  results in broad band noise
 carrier_freqs = [ 800 1600 3200 ]; 
 
 mod_freqs     = [ 16 64 256 ];
@@ -94,7 +96,8 @@ mpsy_plot_result;
 
 
 
-% M.PARAM(2)  =  800;
+% ==================================================
+% M.PARAM(2)  =  1000;
 
 % M.PARAM(1) = 2;
 % mpsy_afc_main;
@@ -112,7 +115,7 @@ mpsy_plot_result;
 
 
 
-%% ==================================================
+% ==================================================
 % M.PARAM(2)  = 2000;
 
 % M.PARAM(1) = 2;

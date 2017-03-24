@@ -15,6 +15,7 @@ doc/*.ps
 doc/*.toc
 exp2/
 simu/
+tests/
 *.m~
 *.tar*
 *.zip

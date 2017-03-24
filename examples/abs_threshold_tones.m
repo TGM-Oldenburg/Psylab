@@ -2,9 +2,10 @@
 %
 % Usage: abs_threshold_tones
 %
-% Copyright (C) 2006       Martin Hansen, FH OOW
+% Copyright (C) 2006       Martin Hansen, Jade Hochschule
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  16 May 2006
+% Updated:  <24 Mar 2017 11:24, mh>
 % Updated:  <16 Mai 2006 16:53, hansen>
 
 %% This file makes use of PSYLAB, a collection of scripts for
@@ -31,9 +32,10 @@ M.VARUNIT      = 'dB';
 M.TASK         = 'which interval contained the test signal (1,2,3)?  ';
 M.MINSTEP      = 1 ;    % minumum step size, in units of M.VARUNIT
 M.NAFC         = 3 ;    % number of forced choice intervals
-%M.ADAPT_METHOD = '1up_2down'; 
-M.PC_CONVERGE  = 0.75;
+%
 M.ADAPT_METHOD = 'wud';   % weighted up down
+M.PC_CONVERGE  = 0.75;    % target probability for convergence
+%
 M.MAXREVERSAL  = 6 ;    % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;    % flag for provision of feedback about correctness of answer
 
@@ -45,22 +47,22 @@ M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
 M.DEBUG            = 0;
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ========================================
 M.USE_MSOUND       = 1;     % flag whether to use msound (1 or 0)
 M.MSOUND_DEVID     = 0;     % device ID for msound (choose 0 or [] for default device)
 M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
 M.MSOUND_NCHAN     = 1;     % number of channels, must match  size(m_outsig,2)
 
 % set sound card to maximum output
-% dos('volumemax&');
+% system('volumemax&');
 
-clc;  
+fprintf('\n\n\n');  %%clc;  
 type abs_threshold_instruction.txt
 
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
-%% ==================================================
 
+% ==================================================
  
 frequencies = [125 250 500 1000 2000 4000 8000];
 for f0 = frequencies,

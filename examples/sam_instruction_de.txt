@@ -1,0 +1,20 @@
+
+	In diesem psychoakustischen Experiment geht es um die
+	Wahrnehmbarkeit von sogenannten Modulationen, d.h. zeitlichen
+	Schwankungen der Amplitude eines Tones.
+
+	In diesem Experiment werden Sie jeweils drei kurze
+	Tonintervalle hintereinander hören.  Zwei Intervalle sind
+	dabei gleich.  In einem der drei Intervalle weist der Ton
+	jedoch eine zusätzliche Modulation auf.  Es wird jedes Mal von
+	Neuem zufällig ausgewählt, welches der Intervalle diese
+	Modulation enthält.  Die Modulation wird zunächst deutlich
+	hörbar sein und im Verlaufe des Experiments immer schwächer
+	ausgeprägt sein.
+
+	Ihre Aufgabe als Versuchsperson ist es, nach jeder Darbietung
+	zu entscheiden, in welchem der drei Intervalle (1, 2 oder 3)
+	Sie die Modulation gehört haben.  Falls Sie sich nicht
+	entscheiden können, sollen Sie raten.
+
+	

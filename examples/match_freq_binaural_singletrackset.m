@@ -42,9 +42,9 @@ m_presig  = m_quiet;
 
 switch M.PARAM(2)
   case 1,
-      M.TASK = 'the left tone needs to go ...';
+      M.TASK = 'for equal pitch, the left tone needs to go ...';
   case 2,
-      M.TASK = 'the right tone needs to go ...';
+      M.TASK = 'for equal pitch, the right tone needs to go ...';
   otherwise, 
     error('wrong number in M.PARAM(2) (ear side of test signal), must be 1 or 2');
 end

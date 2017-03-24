@@ -71,17 +71,7 @@ if M.INFO,
   mpsy_info(M.USE_GUI, afc_info, stmp);
 end
 
-if M.USE_GUI,
-  set(afc_fb, 'String', 'are you ready for this run?    to continue, hit RET');
-  M.UA = -1;  
-  % the variable 'M.UA' gets set via KeyPressFcn of the GUI.
-  % Actually, not only RET but also any key will lead to exit from
-  % this while loop. The pause is essential for catching GUI events
-  while M.UA == -1,    pause (0.5);  end;   
-  set(afc_fb, 'String', '');
-else
-    M.UA = input('\n\n are you ready for this run?    to continue, hit RET');
-end
+M.UA = mpsy_query_user(M.USE_GUI, afc_fb, 'are you ready for this run?    to continue, hit RET');
 % check user answer for a possible quit-request
 if M.UA == 9, M.QUIT = 1;  end
 if M.UA >= 8, return;  end
@@ -168,7 +158,7 @@ M.VARS  = [M.VARS M.VAR];
 M.STEPS = [M.STEPS M.STEP];
 
 % protocol everything
-mpsy_proto;
+mpsy_proto_adapt;
  
 if M.FEEDBACK,  figure(111); mpsy_plot_feedback; end
 

@@ -1,21 +1,21 @@
 
-	In diesem psychoakustischen Experiment geht es um die
-	Wahrnehmbarkeit von Tonhöhen-ÄNDERUNGEN, d.h. der
-	Wahrnehmbarkeit einer Erhöhung der Frequenz eines
-	Tones
+	This psychoacoustical experiment investigates the perception
+	of DIFFERENCES in pitch (tone height), i.e. the detectability
+	of an increase of the frequency of a tone.  
 
-	In diesem Experiment werden Sie jeweils drei kurze
-	Tonintervalle hintereinander hören.  Zwei Intervalle sind
-	dabei gleich.  In einem der drei Intervalle weist der Ton
-	jedoch eine erhöhte Tonhöhe auf.  Es wird jedes Mal von
-	Neuem zufällig ausgewählt, welches der Intervalle diese
-	erhöhte Tonhöhe enthält.  Der Tonhöhenunterschied wird
-	zunächst deutlich hörbar sein und im Verlaufe des Experiments
-	immer schwächer ausgeprägt sein.
+	In this experiment, you will hear three tone intervals after
+	another.  The three intervals will be marked visually.  Two of
+	the intervals will be the same while one of the intervals
+	contains a tone with a higher pitch.  In each presentation of
+	the intervals, the one containing the tone with higher pitch
+	will be selected randomly.  The pitch difference will be
+	clearly audible in some trials and really small in others
+	during the course of the experiment, such that you may have
+	difficulties or find it impossible to hear the difference.
 
-	Ihre Aufgabe als Versuchsperson ist es, nach jeder Darbietung
-	zu entscheiden, in welchem der drei Intervalle (1, 2 oder 3)
-	Sie die erhöhte Tonhöhe gehört haben.  Falls Sie sich nicht
-	entscheiden können, sollen Sie raten.
+	Your task as a test person is to decide, after each presentation,
+	in which of the intervals (1, 2, or 3) you heard the tone with
+	the higher pitch.  You can answer by clicking the corresponding
+	answer button.  If you cannot decide, please make a guess.
 
 	

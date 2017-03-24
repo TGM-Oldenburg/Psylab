@@ -130,6 +130,24 @@ end
 
 
 %% --------------------------------------------------
+%% check type of experiment (e.g. n-AFC or matching) 
+clear tmp_type; 
+tmp_type(1) = isfield(M, 'NAFC');
+tmp_type(2) = isfield(M, 'MATCH_ORDER');
+tmp_type(3) = isfield(M, 'N_RECOGNITION');
+if sum(tmp_type) ~= 1,
+  error('exactly one of either M.NAFC or M.MATCH_ORDER or M.N_RECOGNITION must be set correctly');
+end
+
+%% --------------------------------------------------
+%% check correct sign of M.STEP and M.MINSTEP
+if sign(M.STEP) ~= sign(M.MINSTEP),
+  error('M.STEP and M.MINSTEP must have the same sign:  both positive for regular experiments, both negative for reversed-up-and-down experiment');
+end
+
+
+
+%% --------------------------------------------------
 % check proper value of M.VISUAL_INDICATOR
 if M.VISUAL_INDICATOR & ~M.USE_GUI,
   fprintf('\n*** INFO: the VISUAL_INDICATOR feature can only be used when using a GUI\n');
@@ -143,16 +161,23 @@ end
 %% --------------------------------------------------
 % check version of psydat file, create correct header line 
 % if file doesn't exist yet
-M.PSYDAT_VERSION = mpsy_check_psydat_version( ['psydat_' M.SNAME] );
-if M.PSYDAT_VERSION == 1,
-  fprintf('\n\n*** you are using psylab with psydat format version 2\n');
+M.PSYDAT_VERSION = mpsy_check_psydat_file( ['psydat_' M.SNAME] );
+if M.PSYDAT_VERSION < 3,
+  fprintf('\n\n*** You are using psylab with psydat file format version 3\n');
   fprintf('*** but you seem to have an existing psydat file in the current \n');
-  fprintf('*** directory which is in version 1 format.  Mixing the formats\n'); 
-  fprintf('*** in one file would screw up its readibility.  \n');
-  fprintf('*** Possible solution: move your experiment to another directory now\n')
-  fprintf('*** and restart it there.\n')
-  error('file "%s" in current directory seems to be in psydat format version 1', ['psydat_' M.SNAME] );
+  fprintf('*** directory which is in version %d format.  \n', M.PSYDAT_VERSION); 
+  fprintf('*** While your data would be saved without any loss, a mix of different\n')
+  fprintf('*** data formats in the same psydat file would destroy its automatic\n')
+  fprintf('*** readibility.\n');  
+  fprintf('*** Possible solution: Store your old psydat file in a different directory \n');  
+  fprintf('*** or move your experiment to another directory now and restart it there.\n')
+  fprintf('*** Your psydat file in version 2 can be read and processed by the function \n')
+  fprintf('*** "read_psydat_v2", while "read_psydat" will use psydat version 3\n')
+  fprintf('*** \n')
+  error('file "%s" in current directory seems to be in psydat format version %d', ...
+        ['psydat_' M.SNAME], M.PSYDAT_VERSION );
 end
+
 
 
 %% --------------------------------------------------
@@ -187,16 +212,6 @@ else
   if isscalar(m_postsig),
     m_postsig = zeros(round(m_postsig*M.FS), numchannels);
   end
-end
-
-%% --------------------------------------------------
-%% check type of experiment (e.g. n-AFC or matching) 
-clear tmp_type; 
-tmp_type(1) = isfield(M, 'NAFC');
-tmp_type(2) = isfield(M, 'MATCH_ORDER');
-tmp_type(3) = isfield(M, 'N_RECOGNITION');
-if sum(tmp_type) ~= 1,
-  error('exactly one of either M.NAFC or M.MATCH_ORDER or M.N_RECOGNITION must be set correctly');
 end
 
 

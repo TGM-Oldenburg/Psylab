@@ -25,13 +25,13 @@
 
 
 
-if ~isfield(M, 'ALLTHRES_MED'),
+if ~isfield(M, 'allthres_med'),
   warning('no threshold data seem to have been gathered so far');
   return
 end
 
 figure(200)
-h = mpsy_plot_data(M.ALLTHRES_MED, M.ALLTHRES_STD, M.ALLPARAM, M.RESULTSTYLE);
+h = mpsy_plot_data(M.allthres_med, M.allthres_std, M.allparam, M.RESULTSTYLE);
 
 xl = [char(M.PARAMNAME(1)) ' [' char(M.PARAMUNIT(1)) ']'];
 xlabel(strrep(xl, '_',' '));

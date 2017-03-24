@@ -1,0 +1,19 @@
+
+	In diesem psychoakustischen Experiment geht es um die
+	Wahrnehmbarkeit von zum Teil sehr leisen Tönen.
+
+	In diesem Experiment werden Sie jeweils drei kurze
+	Tonintervalle hintereinander hören.  Zwei Intervalle sind
+	dabei gleich und enthalten reine Stille.  In einem der drei
+	Intervalle ist ein Ton enthalten.  Es wird jedes Mal von
+	Neuem zufällig ausgewählt, in welchem der Intervalle dieser
+	Ton enthalten ist.  Der Ton wird zunächst deutlich hörbar sein
+	und im Verlaufe des Experiments immer leiser werden, so dass
+	Sie ihn gerade eben noch hören können. 
+
+	Ihre Aufgabe als Versuchsperson ist es, nach jeder Darbietung
+	zu entscheiden, in welchem der drei Intervalle (1, 2 oder 3)
+	Sie den Ton gehört haben.  Falls Sie sich nicht	entscheiden
+	können, sollen Sie raten. 
+
+	

@@ -24,13 +24,11 @@ mpsy_init;
 
 % ------------------------------ set M.* variables
 M.EXPNAME      = mfilename;    % experiment name, very important to be set correctly!
-M.NUM_PARAMS   = 3;            % number of parameters
+M.NUM_PARAMS   = 2;            % number of parameters
 M.PARAMNAME(1) = {'reference_frequency'};
 M.PARAMUNIT(1) = {'Hz'};
 M.PARAMNAME(2) = {'test_ear_side'};
 M.PARAMUNIT(2) = {'left1_right2'};
-M.PARAMNAME(3) = {'percent_correct'};
-M.PARAMUNIT(3) = {'percent'};
 M.VARNAME      = 'rel_frequency_increment';
 M.VARUNIT      = 'cent';
 %M.TASK         = 'match the tones in frequency';   % TASK gets set in the set-skript
@@ -48,28 +46,22 @@ M.INFO             = 1;     % flag for additional info for test subject
 M.VISUAL_INDICATOR = 0;     % flag whether to use visual interval indication
 M.DEBUG            = 0;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ========================================
 M.USE_MSOUND       = 1;     % flag whether to use msound (1 or 0)
 M.MSOUND_DEVID     = 0;     % device ID for msound (choose 0 or [] for default device)
 M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
 M.MSOUND_NCHAN     = 2;     % number of channels, must match  size(m_outsig,2)
 
 % set sound card to maximum output
-% dos('volumemax&');
+% system('volumemax&');
 
-clc;  
+fprintf('\n\n\n');  %%clc;  
 type match_freq_binaural_instruction.txt
 
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
-%% ==================================================
 
-
-M.PARAM(2)  =  1;   % test signal side left
-M.ADAPT_METHOD = '1up_2down';
-% this resulting p_correct needs to be set manually to match content of ADAPT_METHOD. 
-M.PARAM(3) = 70.7;
-
+% ==================================================
 
 %ref_freqs = 1000;
 ref_freqs = [500 1000 2000 3000 6000];
@@ -77,14 +69,22 @@ ref_freqs = [500 1000 2000 3000 6000];
 for freq = ref_freqs,
    
   M.PARAM(1) = freq;
+  M.PARAM(2)  =  1;   % test signal side left
+  
+  % NOTE:  the content of ADAPT_METHOD will be saved in the psylab file
+  M.ADAPT_METHOD = '1up_2down';
   mpsy_match_main;
-  mpsy_plot_result;
- 
+
+  % NOTE:  the content of ADAPT_METHOD will be saved in the psylab file 
+  M.ADAPT_METHOD = '2up_1down';
+  mpsy_match_main;
+  
+  
 end
 
 
 
-% End of file:  match_freq_binaural.m
+% End of file:  match_freq_binaural_singletrack.m
 
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"

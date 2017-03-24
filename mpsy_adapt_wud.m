@@ -41,21 +41,27 @@
 if length(M.ANSWERS) >= 2,
   
   % ----- a) uppper reversal
-  % last answer was correct/1/"go down", and the one before was wrong/0/"go up"
+  % last answer was correct/1/"go down", and the one before that was wrong/0/"go up"
   if M.ANSWERS(end) == 1 &  M.ANSWERS(end-1) == 0,
     % yep, new upper reversal found!    
     M.REVERSAL = M.REVERSAL + 1;
     % Now adapt step size M.STEP by halving it, ...
     % ... but do not go below the minimal stepsize M.MINSTEP! 
-    M.STEP = max(M.MINSTEP, M.STEP / 2); 
+    if ~M.REVERSED_UP_AND_DOWN,
+      % the normal case, M.STEP is positive
+      M.STEP = max(M.MINSTEP, M.STEP / 2); 
+    else
+      % the reversed case, M.STEP is negative
+      M.STEP = min(M.MINSTEP, M.STEP / 2); 
+    end
     
     % append newest index of reversal to list of all indices of reversals
     M.UPPER_REV_IDX = [M.UPPER_REV_IDX length(M.ANSWERS)];
     %% fprintf('M.UPPER_REV_IDX: %d   \n',  M.UPPER_REV_IDX )
   end
   
-  % ----- b) uppper reversal
-  % last answer was wrong/0/"go up" and the one before was correct/1/"go down"
+  % ----- b) lower reversal
+  % last answer was wrong/0/"go up" and the one before that was correct/1/"go down"
   if M.ANSWERS(end) == 0 &  M.ANSWERS(end-1) == 1,
     % yep, new lower reversal found!    
     M.REVERSAL = M.REVERSAL + 1;
@@ -68,9 +74,18 @@ if length(M.ANSWERS) >= 2,
 end
 
 
-% for security, ensure M.STEP to be positive
-if M.STEP <= 0,
-  error(' variable M.STEP (%g)  is <= 0', M.STEP);
+% for security, ensure M.STEP cannot become zero, or have wrong
+% sign in combination with the flag M.REVERSED_UP_AND_DOWN
+if M.STEP == 0,
+  error(' variable M.STEP  is = 0');
+end
+if ~M.REVERSED_UP_AND_DOWN & M.STEP < 0,
+  % in "normal" definition of "up" and "down", M.STEP must be positive:
+  error(' M.STEP (%g) must be positive', M.STEP);
+end
+if M.REVERSED_UP_AND_DOWN & M.STEP > 0,
+  % in "reversed" definition of "up" and "down", M.STEP must be negative:
+  error('If you choose the reversed definition of "up" and "down", then M.STEP (%g) must be negative', M.STEP);
 end
 
 
@@ -121,11 +136,21 @@ M.STEP_DOWN = M.STEP;
 M.STEP_UP   = M.PC_CONVERGE/(1-M.PC_CONVERGE) * M.STEP_DOWN;
 
 
+% note that the 2 step SIZES (M.STEP_UP, M.STEP_DOWN) both
+% have the same sign as M.STEP. That is: positive sign in the
+% normal case and negative sign in the reversed-up-down-case.   
+% The DIRECTION of change is then reflected in the following code: 
+
 if M.ACT_ANSWER == 0,
-  M.VAR = M.VAR + M.STEP_UP;    % 1 wrong answer, INcrease stimulus by M.STEP_UP
+  % 1 wrong answer, 
+  %     i.e. INcrease stimulus variable (normal case, M.STEP_UP is positive)
+  %    resp. DEcrease stimulus variable (reversed case, M.STEP_UP is negative)
+  M.VAR = M.VAR + M.STEP_UP;    
 else
   % (M.ACT_ANSWER == 1)
-  M.VAR = M.VAR - M.STEP_DOWN;  % 1 correct answer, DEcrease stimulus by M.STEP_DOWN
+  %     i.e. DEcrease stimulus variable (normal case, M.STEP_DOWN is positive)
+  %    resp. INcrease stimulus variable (reversed case, M.STEP_DOWN is negative)
+  M.VAR = M.VAR - M.STEP_DOWN;  
 end
 
 

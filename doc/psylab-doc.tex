@@ -13,7 +13,7 @@
 \setlength{\textheight}{24cm}
 \addtolength{\topmargin}{-1.8cm}
 
-\newcommand{\psylabversion}{2.7}
+\newcommand{\psylabversion}{2.8pre}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -28,6 +28,8 @@
 %% Copyright (C) 2004-2008         Martin Hansen, FH OOW  
 %% Author :  Martin Hansen,  <martin.hansen AT fh-oldenburg.de>
 %% Date   :  14 Jan 2004
+%% Updated:  <20 Feb 2017 14:41, martin>
+%% Updated:  < 7 Nov 2016 14:18, martin>
 %% Updated:  < 1 Nov 2011 08:58, martin>
 %% Updated:  < 8 Feb 2008 15:33, hansen>
 %% Updated:  <14 Jun 2007 11:59, hansen>
@@ -103,9 +105,11 @@ designing and controlling interactive psychoacoustical listening
 experiments in a uniform and quick manner.
 
 Currently, $n$-AFC detection and discrimination experiments
-($n=2,3,4$) and 2-AFC matching experiments with adaptive control of
-the stimulus variable according to $x$-up-$y$-down algorithms ($x,y
-\in \{1,2,3\})$) and weighted-up-down algorithms are readily supported.
+($n=2,3,4$) and 2-AFC matching experiments are readily supported.  The
+stimulus variable can either be controlled adaptively according to
+$x$-up-$y$-down algorithms ($x,y \in \{1,2,3\})$) and weighted-up-down
+algorithms.  Alternatively, the method of constant stimuli may be used
+for detection and discrimination experiments.
 
 
 %% --------------------------------------------------
@@ -126,26 +130,26 @@ and analysis of psychoacoustical experiments.  The philosophy and
 organisation of \psylab\ was inspired by the paradigms of ``SISG'' in
 many ways. 
 
-\psylab\ has been written 
-%since the start of the millennium 
-by Martin Hansen.  It is regularly used for education and research at
-Institut für Hörtechnik und Audiologie (IHA), Jade Hochschule in
-Oldenburg, Germany, where it has been used intensively by many
-students.  One aim of \psylab\ has been to provide the students in the
+\psylab\ has been written by Martin Hansen.  It is regularly used for
+education and research at Institut für Hörtechnik und Audiologie
+(IHA), Jade Hochschule in Oldenburg, Germany.
+% where it has been used intensively by many students.
+
+One aim of \psylab\ has been to provide the students in the
 psychoacoustic courses with a uniform and simple starting point for
-designing one's own listening experiments.  So far, more than 270
-students at IHA have used \psylab\ for their psychoacoustics
-assignments, i.e.\ designing and carrying out individual listening
-experiments, and their experience and comments have continuously
+designing one's own listening experiments.  So far, roughly 300
+students at IHA have used \psylab\ in their psychoacoustics
+assignments, for designing and carrying out individual listening
+experiments.  Their experience and comments have continuously
 contributed to new features and bug fixes of \psylab.
 
 
 %% --------------------------------------------------
-\subsection{Licence of \psylab}
+\subsection{License of \psylab}
 \label{sec:licence-psylab}
 
 \psylab\ is ``free software'' and is distributed in OpenSource format
-under the terms of the GNU General Public Licence (GPL).  This means,
+under the terms of the GNU General Public License (GPL).  This means,
 amongst others, that copies of the \psylab-software may be distributed
 without asking for permission, given that the terms of the GNU GPL are
 obeyed to.
@@ -217,8 +221,55 @@ experiment with interleaved tracks for measuring the detection
 threshold of the level of a sinusoid in broad band noise as a function
 of the tone frequency.  
 
-\section{Philosophy of \psylab}
+\section{Philosophy and structure of \psylab}
 \label{sec:philosophy-psylab}
+
+
+%% --------------------------------------------------
+\subsection{Coding style in \psylab}
+\label{sec:psylab-coding-style}
+
+The coding style in \psylab\ may lead to some debate for some
+people.  However, keep in mind that \psylab\ was not designed to serve
+as an example for one or another coding style.   
+
+For several reasons, amongst others easy accessibility for students
+with limited prior experience in programming/coding, most of the
+\psylab\ source files are written as \emph{scripts}/\emph{m-files}, i.e.\ not
+as functions.  This means that all variables controlling \psylab's
+behaviour reside in the global workspace of Matlab.  This makes it
+especially important for the user to be informed about the specific
+naming convention for files and variables.  This is explained in
+section~\ref{sec:name-conventions}.
+
+
+%% --------------------------------------------------
+\subsection{Conventions in \psylab: reserved names for files and variables}
+\label{sec:name-conventions}
+
+An important convention respectively requirement of \psylab\ is that every
+experiment must be made up of three (Matlab) scripts.  These are the
+\index{scripts!main script}``main script'', the 
+\index{scripts!set script}``set script'', and the 
+\index{scripts!user script}``user script''.  These three files must be pure scripts, i.e.\ they may
+\emph{not} be Matlab \emph{functions}!  As a consequence, the scripts
+can access all variables of the global Matlab-workspace.  The scripts
+can of course call further scripts or functions.  By defining the file
+name of the main script, the names of the set script and the user
+script are determined, too: Their names result from
+concatenating '\texttt{set}' respectively '\texttt{user}' directly after the
+name of the main script, \eg \texttt{testnameset.m} respectively 
+\texttt{testnameuser.m} if the name of the main script is
+\texttt{testname.m}.  Note that no single character is allowed between
+the '\texttt{set}' or the '\texttt{user}' and the name of the main
+script.
+
+Another convention applies to the use of certain variables with
+reserved names, \eg \code{M.VAR}, \code{M.PARAM}, \code{m\_ref},
+\code{m\_test}.  See sections~\ref{sec:main-script},
+\ref{sec:set-script}, \ref{sec:user-script},
+\ref{sec:variables-controlling-psylab}. 
+
 
 
 %% --------------------------------------------------
@@ -254,7 +305,7 @@ Fig.~\ref{fig:example_run}.
   The \index{stimulus variable}``variable'' inside \psylab\ takes the
   role of that stimulus dimension/magnitude which is varied from trial
   to trial (for example adaptively, or using a method of constant
-  stimuli) in order to find the subjects threshold.  The ``variable''
+  stimuli) in order to find the subject's threshold.  The ``variable''
   carries the reserved name \code{M.VAR} inside \psylab.
 
 \item[(stimulus) step size] 
@@ -269,7 +320,8 @@ Fig.~\ref{fig:example_run}.
   \index{step size!minimal}minimal step size carries the name
   \code{M.MINSTEP}.
 
-  The step size doesn't have a meaning in the ``method of constant stimuli''.
+  The step size doesn't have a meaning and isn't used in the ``method
+  of constant stimuli''. 
 
 \item[run] 
 
@@ -300,19 +352,20 @@ Fig.~\ref{fig:example_run}.
 
   In a trial of a $n$-AFC experiment, $n$ intervals are presented in
   succession, and in random order.  There are $n-1$ intervals among
-  them which contain the \index{signals!reference signal}reference signal,
-  i.e.\ they do \emph{not} contain ``the signal'' or the ``cue'' that the subject is
-  required to detect.  The reference signal carries the reserved name
-  \code{m\_ref} \emph{or} \code{m\_ref1}, \code{m\_ref2} etc. inside \psylab.
+  them which contain the \index{signals!reference signal}reference
+  signal, i.e.\ they do \emph{not} contain ``the signal'' or the
+  ``cue'' that the subject is required to detect.  The reference
+  signal must carry the reserved name \code{m\_ref} \emph{or}
+  \code{m\_ref1}, \code{m\_ref2} etc.\ inside \psylab.
 
 \item[test signal] 
   
-  The \index{signals!test signal}test signal is the signal which \emph{does}
-  contains that special ``cue'' that the subject is required to
-  detect, contrary to the reference signal which does not.  The test
-  signal will be presented at random in one of the $n$ intervals of a
-  $n$-AFC trial. The test signal carries the reserved name
-  \code{m\_test} inside \psylab.
+  The \index{signals!test signal}test signal is the signal which
+  \emph{does} contains that special ``cue'' that the subject is
+  required to detect, contrary to the reference signal which does not.
+  The test signal will be presented at random in one of the $n$
+  intervals of a $n$-AFC trial. The test signal must carry the
+  reserved name \code{m\_test} inside \psylab.
 
 \item[familiarisation phase] 
 
@@ -332,22 +385,26 @@ Fig.~\ref{fig:example_run}.
   threshold.  The trials of the familiarisation phase will however
   \emph{not} be included in the determination of the threshold.
 
+  When using the ``method of constant stimuli'', there is no
+  familiarisation phase.  
+
+
 \item[measurement phase] 
 
-  In an adaptive run, the \index{measurement phase}measurement phase starts at the end of
-  the familiarisation phase.  The subject should have approached a
-  point relatively close to the threshold and the stimulus variable
-  changes now only with the minimal step size.  The measurement phase
-  lasts until a certain number of reversals (see below) has been
-  reached.  This maximum number of reversals serves as a stop
-  criterion and needs to be specified by the user.  The threshold is
-  then estimated based on all values that the variable had taken on
-  during the measurement phase.
+  In an adaptive run, the \index{measurement phase}measurement phase
+  starts at the end of the familiarisation phase.  The subject should
+  have approached a point relatively close to the threshold and the
+  stimulus variable changes now only with the minimal step size.  The
+  measurement phase lasts until a certain number of reversals (see
+  below) has been reached.  This maximum number of reversals serves as
+  a stop criterion and needs to be specified by the user.  The
+  threshold is then estimated based on all values that the variable
+  had taken on during the measurement phase.
 
 \item[reversal / turning point]
 
   In a transformed-up-down experiment \cite{levitt_1971}, the stimulus
-  variable and its direction of change depend on the subjects
+  variable and its direction of change depend on the subject's
   responses.  The direction alternates back and forth between ``going down''
   and ``going up''.  
 \\
@@ -391,7 +448,7 @@ Fig.~\ref{fig:example_run}.
     circles ($\circ$) mark a wrong one. 
     % The arrows indicate the locations of a reversal.  
     The familiarisation phase (depicted in gray) lasted from trial 1 up to trial 34.
-    During that phase reversals occured at trial 17, 23, 31, and 34.  At
+    During that phase reversals occurred at trial 17, 23, 31, and 34.  At
     each upper reversal, the step size was halved until the minimum
     step size of 1~dB had been reached. At that point, the measurement phase
     started (at trial 35, depicted in black) and it lasted for 6 reversals (at trials
@@ -434,51 +491,6 @@ deviation of the threshold is calculated from the same data points and
 amounts to 0.76~dB in the example.
 
 
-%% --------------------------------------------------
-\subsection{Coding style in \psylab}
-\label{sec:psylab-coding-style}
-
-The coding style in \psylab\ could lead to some debate for some
-people.  However, keep in mind that \psylab\ was not designed to serve
-as an example for one or another coding style.   
-
-For several reasons, amongst others easy accessibility for students
-with limited programming/coding experience, most of the source files
-are written as \emph{scripts}/\emph{m-files}, i.e.\ not as functions.
-This means that all variables controlling \psylab's behaviour reside in the
-global workspace of Matlab.  This makes it especially important
-for the user to be informed about the specific naming convention for
-files and variables.  This is explained in
-section~\ref{sec:name-conventions}.
-
-
-
-%% --------------------------------------------------
-\subsection{Conventions in \psylab: reserved names for files and variables}
-\label{sec:name-conventions}
-
-An important convention respectively requirement of \psylab\ is that every
-experiment must be made up of three (Matlab) scripts.  These are the
-\index{scripts!main script}``main script'', the \index{scripts!set
-  script}``set script'', and the \index{scripts!user script}``user
-script''.  These three files must be pure scripts, i.e.\ they may
-\emph{not} be Matlab \emph{functions}!  As a consequence, the scripts
-can access all variables of the global Matlab-workspace.  The scripts
-can of course call further scripts or functions.  By defining the file
-name of the main script, the names of the set script and the user
-script are determined, too: Their names result from
-concatenating \texttt{set} respectively \texttt{user} directly after the
-name of the main script, \eg \texttt{testnameset.m} respectively 
-\texttt{testnameuser.m} if the name of the main script is
-\texttt{testname.m}.  Note that no single character is allowed between
-the '\texttt{set}' or the '\texttt{user}' and the name of the main
-script.
-
-Another convention applies to the use of certain variables with
-reserved names, \eg \code{M.VAR}, \code{M.PARAM}, \code{m\_ref},
-\code{m\_test}.  See sections~\ref{sec:main-script},
-\ref{sec:set-script}, \ref{sec:user-script},
-\ref{sec:variables-controlling-psylab}. 
 
 
 %% --------------------------------------------------
@@ -543,23 +555,64 @@ respectively right.
 
 \psylab\ offers a number of adaptive methods to choose from.  The
 purpose of these methods is to adaptively control the value of the
-stimulus variable, depending on the subjects previous answer(s).  
+stimulus variable, depending on the subject's previous answer(s).  
 
-The most well-know of these methods are probably the transformed
-up-down methods \cite{levitt_1971}, and 1up-1down, 1up-2down,
-2up-1down, and 1up-3down are readily available in \psylab.  The method
+
+The most well-known of these methods are probably the ``\emph{transformed
+up-down methods}'' \cite{levitt_1971}, and the 1up-1down, 1up-2down,
+2up-1down, and 1up-3down methods are readily available in \psylab.  The method
 is specified by the variable \code{M.ADAPT\_METHOD} which should hold
 the value '\code{1up-2down}' in order to use the 1up-2-down method.
 
-Other possible methods/values are '\code{wud}' for the
-``weighted-up-down'' method \cite{kaernbach_1991}, and '\code{uwud}'
+Two other possible methods/values are '\code{wud}' for the
+``\emph{weighted-up-down}'' method \cite{kaernbach_1991}, and '\code{uwud}'
 for the ``unforced weighted up-down'' method \cite{kaernbach_2001}.
-The latter methods offer the possibility to (more or less) freely
+These two methods offer the possibility to (more or less) freely
 select the percentage correct towards which the adaptive method shall
 converge.  This percentage, e.g.\ 0.75, must be specified in the
 variable \code{M.PC\_CONVERGE}.  For more information see the
 description of the variables \code{M.ADAPT\_METHOD} and
-\code{M.PC\_CONVERGE} in table~\ref{tab:reserved-variables} on page~\pageref{tab:item:m_adapt_method}.
+\code{M.PC\_CONVERGE} in table~\ref{tab:reserved-variables} on
+page~\pageref{tab:item:m_adapt_method}.
+\\
+
+When using any of the adaptive methods mentioned above, the common
+behaviour is that wrong answers of the subject lead to an
+\emph{up}-ward change of the stimulus variable (thereby making the
+task easier), while correct answers lead to a \emph{down}-ward change
+(making the task more difficult).  This behaviour can be changed using
+the variable \code{M.REVERSED\_UP\_AND\_DOWN}.
+Section~\ref{sec:reversed-up-and-down} explains this in more detail.
+
+
+
+
+%% --------------------------------------------------
+\subsubsection{Method of constant stimuli}
+\label{sec:const-stim-method}
+
+As an alternative to the adaptive control of the stimulus variable, as
+explained in section~\ref{sec:available-adapt-methods}, \psylab\ also
+offers the method of constant stimuli.  With this method, the stimuli
+(respectively the values of the stimulus variable) that are going to
+be presented is known/fixed prior to the test subject's arrival at the
+test booth, hence the name ``constant''.
+
+A number of different values of the stimulus variable is chosen and
+must be saved in the \psylab\ variable \code{M.CONSTSTIM\_ALLVARS}.  The
+number of (repeated) presentations must be specified in the variable
+\code{M.CONSTSTIM\_NUM\_PRESENTATIONS}.
+
+The total number of (\code{M.CONSTSTIM\_ALLVARS} $\cdot$
+\code{M.CONSTSTIM\_NUM\_PRESENTATIONS}) corresponding stimuli are then
+presented in a randomized/permuted order, with a new permutation for
+each new experimental run and for each subject.  
+
+The file \texttt{jnd\_frequency.m} in the subdirectory
+\texttt{examples} shows an example for such a constant stimuli
+experiment where the just noticeable difference in frequency for two
+sinusoidal stimuli is measured.  
+
 
 
 %% --------------------------------------------------
@@ -596,9 +649,15 @@ where two tracks with two different adaptive rules (1up-2down and
 2up-1down) are interleaved.  
 
 Note that interleaved-tracks experiments may require some extra amount
-of testing and debugging, expecially for the inexperienced programmer.
-For details see subsection~\ref{sec:design-interleaved-tracks}.  Use
-the force -- read the source!
+of testing and debugging, especially for the inexperienced programmer.
+For details see subsection~\ref{sec:design-interleaved-tracks}.  
+%
+Use the force -- read the source!
+
+Experiments with interleaved tracks are not yet available for the
+method of constant stimuli.  
+
+
 
 
 
@@ -615,23 +674,30 @@ Designing your own psychoacoustical experiment with \psylab\ is easy:
 Just write your main script, set script, and user script -- and start
 to listen.  This section shows you how to write these scripts.  You
 might also want to take a look at the example experiments in the
-subdirectory \texttt{examples} to get a demonstration, or to use it as a
+subdirectory \texttt{examples} to get a demonstration, or to use them as a
 starting point.
 
 
 
 %% --------------------------------------------------
-\subsection{The main script}
+\subsection{The main-script}
 \label{sec:main-script}
 
-The purpose of the \index{scripts!main script}main script is to assign proper
-values to a number of principal \psylab-variables which define your
-experiment.  These variables are all struct fields of the variable
-\code{M} in the global Matlab-workspace.  The name '\code{M}' is
-\emph{fixed} within \psylab, it is a \emph{reserved name} that cannot
-be used for other purposes (see also
-section~\ref{sec:variables-controlling-psylab}). 
-\\
+The purpose of the \index{scripts!main script}main script is to assign
+proper values to a number of principal \psylab-variables which define
+your experiment.  These variables are all struct fields of the
+variable ~\code{M}~ in the global Matlab-workspace.  The name
+'\code{M}' is \emph{fixed} within \psylab, it is a \emph{reserved
+  name} that cannot be used for other purposes.  The name '\texttt{M}'
+is due to historical reasons; think of it as originating from
+'\emph{M}'easurement.
+
+
+Section~\ref{sec:variables-controlling-psylab} explains how the
+different struct fields of \texttt{M} control the behaviour of
+\psylab.
+
+~\\
 
 Your main script should start with the following line 
 %
@@ -640,15 +706,28 @@ mpsy_init;
 \end{verbatim}
 %
 This call of \code{mpsy\_init.m} \emph{prior} to assigning
-values to further \psylab-variables is mandatory, as \code{mpsy\_init.m}
-initialises some \psylab-variables to their proper start values.  The
-reserved-name variable \code{M} must reside in the global
-Matlab-workspace.  Then, a number of struct fields of \code{M} need to
-be assigned.  One important variable is \code{M.EXPNAME} which carries
-the name of the experiment, as a string.  This name \emph{must} be identical
-to the file name of the main script.  Do not try to alter this
-behaviour!  Therefore, it is good practice to use the following line
-of code (see the help for \code{mfilename}) in the main script:
+values to further \psylab-variables is mandatory, as the code in
+\code{mpsy\_init.m} initialises some \psylab-variables to their proper start values.
+
+\code{mpsy\_init.m} will, amongst other things, also call a splash
+screen and query the users consent to being responsible for the
+control of the sound output level.  If the users wishes so, she can
+\index{splash screen!disable}disable the splash screen and the query
+by editing the file \code{mpsy\_querysplash.m}.  Have a look at the
+1-line-code in that file.
+\\
+
+% A number of struct fields of the reserved-name variable \code{M},
+% residing in the global Matlab-workspace, should be assigned in the
+% main script.
+%
+One important variable resp.\ struct field of \code{M} is
+\code{M.EXPNAME}, which carries the name of the experiment, as a string.
+This name \emph{must} be identical to the file name of the main
+script.  Do not try to alter this behaviour!  \code{M.EXPNAME} \emph{must} be
+defined in the main script.  Therefore, it is good practice to use the
+following line of code (see the help for \code{mfilename}) in the main
+script:
 %
 \begin{verbatim}
 M.EXPNAME = mfilename;  % important to be set correctly!
@@ -657,34 +736,34 @@ M.EXPNAME = mfilename;  % important to be set correctly!
 This implies of course that your main script should bear a good telling
 name.  
 
-Next, a number of variables need to be set in the main script.  The
-specific values of the following example are taken from the file
+A number of further variables resp.\ struct fields of \code{M} need to
+be set in the main script, which can best be explained by an example.
+The specific values of the following example are taken from the file
 \texttt{examples/sam\_sincarrier\_detect.m} of the
-\psylab-distribution.  It implements a
-modulation detection experiment as described by
-\cite{kohlrausch_2000a}
+\psylab-distribution.  It implements a modulation detection experiment
+as described by \cite{kohlrausch_2000a}
 %
 \begin{verbatim}
-M.NUM_PARAMS   = 2;   % number of parameters
-M.PARAMNAME(1) = {'modulation_frequency'};
-M.PARAMUNIT(1) = {'Hz'};
-M.PARAMNAME(2) = {'carrier_frequency'};
-M.PARAMUNIT(2) = {'Hz'};
-M.VARNAME      = 'modulation_degree';
-M.VARUNIT      = 'dB';
-M.MINSTEP      = 1 ;  % minumum step size, in units of M.VARUNIT
-M.NAFC         = 3 ;  % number of forced choice intervals
-M.ADAPT_METHOD = '1up_2down';   % select adaptive method: transformed 1-up-2-down
+M.NUM_PARAMS    = 2;   % number of parameters
+M.PARAMNAME(1)  = {'modulation_frequency'};
+M.PARAMUNIT(1)  = {'Hz'};
+M.PARAMNAME(2)  = {'carrier_frequency'};
+M.PARAMUNIT(2)  = {'Hz'};
+M.VARNAME       = 'modulation_degree';
+M.VARUNIT       = 'dB';
+M.MINSTEP       = 1 ;  % minumum step size, in units of M.VARUNIT
+M.NAFC          = 3 ;  % number of forced choice intervals
+M.ADAPT_METHOD  = '1up_2down';   % select adaptive method: transformed 1-up-2-down
 
-M.MAXREVERSAL  = 4 ;  % number of reversals required as stop criterion
-M.FEEDBACK     = 1 ;  % provide feedback (correct / not correct) to subject
-M.INFO         = 1 ;  % provide intermediate info for the subject
-M.TASK         = 'which interval contained the test signal (1,2,3)?  ';
+M.MAXREVERSAL   = 8 ;  % number of reversals required as stop criterion
+M.FEEDBACK      = 1 ;  % provide feedback (correct / not correct) to subject
+M.INFO          = 1 ;  % provide intermediate info for the subject
+M.TASK          = 'which interval contained the test signal (1,2,3)?  ';
 
 M.FS               = 48000; % sampling frequency
-M.EARSIDE          = M_BINAURAL;
 M.USE_GUI          = 1;     % use a GUI for user input
 M.VISUAL_INDICATOR = 1;     % use visual interval indication
+M.SAVERUN          = 1;     % save individual subject responses in psylab file
 M.DEBUG            = 0;     % no verbose debug output
 \end{verbatim}
 %%%M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
@@ -696,8 +775,13 @@ better: initials) of the test subject.  This could be achieved by
 M.SNAME = input('please type your initials (no spaces, please)','s');
 \end{verbatim}
 %
-It is  required by \psylab\ that \code{M.SNAME} must \emph{not}
-contain any whitespace characters! 
+It is required by \psylab\ that \code{M.SNAME} must \emph{not} contain
+any whitespace characters!  You should urge your subjects to always
+use the same, identical subject name for all measurements.  Otherwise the
+automatic data analysis might become much more complicated (for you as
+the investigator) than necessary.
+\\
+
 
 Next, your main script would assign proper value(s) for your stimulus
 parameter(s) stored in the \psylab-variable \texttt{M.PARAM}, and then
@@ -770,9 +854,9 @@ Fig.~\ref{fig:principle-mpsy_afc_main}.  As can be seen,
 \emph{once} in the beginning.  Then, in a loop running until threshold
 has been reached, the user script of the experiment will be called
 once for each trial.  The natural purpose of the user script is to
-generate (new) realisations of the reference signal \code{m\_ref} and
-the test signal \code{m\_test} which will then be presented to the
-subject in a $n$-AFC manner.  Subsequently, the subjects response will
+generate (new) realisations of the test signal \code{m\_test} and the reference signal(s) \code{m\_ref} (or
+\code{m\_ref1}, \code{m\_ref2}, etc.) which will then be presented to the
+subject in a $n$-AFC manner.  Subsequently, the subject's response will
 be evaluated and the stimulus variable will be changed according to
 the adaptive rule.
 
@@ -830,7 +914,7 @@ For an example, see the set script
 
 
 %% --------------------------------------------------
-\subsection{The user script}
+\subsection{The user-script}
 \label{sec:user-script}
 
 The \index{scripts!user script}user script will be called once prior to each
@@ -859,8 +943,8 @@ the global Matlab-workspace at the end of the user script:
   \code{m\_ref} exists in the Matlab workspace, \emph{this} signal is
   presented in the $(n-1)$ reference intervals of an $n$-AFC
   experiment, which means that all reference intervals are identical.
-  This is illustrated in the example experiment
-  \texttt{jnd\_frequency.m}.  
+  This is for example illustrated in the example experiments
+  \texttt{jnd\_frequency.m} and \texttt{sam\_sincarrier\_detect.m}.
 
   If \code{m\_ref} exists in the workspace, then \code{m\_ref1},
   \code{m\_ref2}, ... (see item described next) \emph{must not} exist
@@ -877,6 +961,8 @@ the global Matlab-workspace at the end of the user script:
   \texttt{m\_ref1}, \texttt{m\_ref2}, \ldots will be
   presented in random order within each trial (on top of the random
   placement of the test signal within the $n$ intervals).
+  This is for example illustrated in the example experiment
+  \texttt{tone\_in\_broadbandnoise.m}.
 
   If \code{m\_ref1}, \code{m\_ref2}, ...  exist in the workspace, then
   \code{m\_ref}(see item described before) \emph{must not} exist in
@@ -923,11 +1009,55 @@ in the set script, then this will be
 replaced by a silence signal with a duration as specified by that
 value (in seconds).  Example: \texttt{m\_quiet = 0.3;} will
 automatically be overwritten by the vector
-\verb+m_quiet = zeros(0.3*M.FS, 1);+
+\verb+m_quiet = zeros(round(0.3*M.FS), numchannels);+
+where the number of channels (1 for mono, 2 for
+stereo, ...) will be deduced automatically.  
 \\
 Note that this convenience will only work if the scalar duration is
 specified in the main script or in the set script, but not in the user
 script.  
+
+
+%% --------------------------------------------------
+\subsection{Need to go \emph{``up''} after \emph{correct} responses?}
+\label{sec:reversed-up-and-down}
+
+
+In normal adaptive methods, like 1-up-2-down etc., the stimulus
+variable goes down (is reduced) after one ore more correct answers,
+thereby making the task more difficult for the test subject.
+Likewise, the stimulus variable goes up (is increased) after one or
+more wrong answers, thereby making the task easier for the test
+subject.  A classical example for this is the detection of a test tone
+in a noise masker, where the masker level is kept fixed and the tone
+level is the stimulus variable.  When the tone level goes up after
+wrong answers it should get easier to detect the tone.
+
+Sometimes, however, the opposite up/down-behaviour is necessary: The
+stimulus variable should go up after correct responses and it should go
+down after correct responses.  An example of this is the same test of
+tone detection in a noise masker like above, but with a fixed tone
+level and the stimulus variable being the masker level.  After correct
+answers, the masker level should go further up to make the task more
+difficult.  
+
+This reversed-up/down behaviour can be used in \psylab\ by setting
+\code{M.REVERSED\_UP\_AND\_DOWN} as a special flag-variable to a
+non-zero value (meaning ``true'').  Additionally to this, your step
+size \code{M.STEP} and your minimal step size \code{M.MINSTEP} both
+have to take \emph{negative} values, like in the following code
+example:
+
+\begin{verbatim}
+M.REVERSED_UP_AND_DOWN  = 1;   % enable reversed up/down behaviour
+M.MINSTEP               = -1;  % dB final step size
+M.STEP                  = -8;  % dB initial step size 
+\end{verbatim}
+
+Using this code, the \emph{size} of initial steps will be 8~dB (but in
+opposite direction compared to the normal case), and the step size
+will be halved successively after each second reversal until it
+reaches the minimal \emph{size} of 1~dB.
 
 
 
@@ -980,7 +1110,7 @@ more informative for the subject and can provide some extra
 functionality, of course.
 
 In an $n$-AFC test, a subject answer of 1, 2, \ldots, $n$ indicates the
-subjects decision for interval 1, 2, \ldots, $n$.  These answers can
+subject's decision for interval 1, 2, \ldots, $n$.  These answers can
 be indicated by keyboard or by corresponding mouse clicks.\\
 Additionally, the following subject answers are possible which carry
 special meanings:
@@ -1017,7 +1147,7 @@ variables:
   etc.
 
 \item[ M.USE\_GUI ] A value of 0 means: use a pure keyboard
-  interface.  The subjects answer consists of a keypress,
+  interface.  The subject's answer consists of a keypress,
   \emph{followed by} \texttt{RET}.
   \\
   A value of 1 means: use a graphical user interface.  This can be
@@ -1049,7 +1179,7 @@ variables:
 %%
 \begin{figure}[htbp]
 \begin{center}
-  \includegraphics[width=0.7\textwidth]{example_3afcgui_psylab26a}
+  \includegraphics[width=0.7\textwidth]{example_3afcgui_psylab28a}
   \caption{Example of the graphical user interface for the subject.}
   \label{fig:example_3afc_gui}
 \end{center}
@@ -1073,7 +1203,6 @@ as specified by the experimenter.
 
 Analysis of your data can be performed at any later time,
 independently from the subject performing the measurement.
-
 
 
 %% --------------------------------------------------
@@ -1130,17 +1259,17 @@ at $m$=-31\,dB, with a standard deviation of 1.28\,dB.  The minimal
 respectively maximal values of the modulation degree during the
 measurement phase were -34\,dB respectively -29\,dB.
 
-The default behaviour of psylab is to calculate the
+The default behaviour of \psylab\ is to calculate the
 \index{threshold!calculation of}\emph{threshold} of
 the run as the \emph{median} of all values of \code{M.VAR} during the
 measurement phase.  However, by setting the variable \code{M.SAVEMEAN}
 to 1, you can change this and specify that the threshold should rather
 be calculated as the \emph{mean} of all values of \code{M.VAR} during
-the measurement phase.  The default behaviour can be acchieved by
+the measurement phase.  The default behaviour can be achieved by
 letting \code{M.SAVEMEAN} be an empty field or by setting it to a
 value~$\neq1$.
 
-The default behaviour of psylab is to output only the resulting
+The default behaviour of \psylab\ is to output only the resulting
 threshold value to the psydat-file.  However, by setting the variable
 \code{M.SAVERUN} to 1, you can change this and specify that also all
 values of \code{M.VAR} during the entire run, including the
@@ -1326,7 +1455,7 @@ empty will be filled in automatically by way of the script
 \\
 \emph{Note the use of the third parameter in this example}.  It is necessary
 in this case because the definition of ``threshold'' (i.e.\ which
-percent correct is defined to correspong to ``threshold'')  is not
+percent correct is defined to correspond to ``threshold'')  is not
 otherwise documented in the psydat file.  
 
 
@@ -1596,7 +1725,7 @@ deviation of each experimental run, appearing in the 2nd column of
 
 
 %% --------------------------------------------------
-\subsubsection{special effects: permutate/change the look of your data with display\_psydat.m}
+\subsubsection{special effects: permute/change the look of your data with display\_psydat.m}
 \label{sec:permuting-your-data}
 
 
@@ -1712,7 +1841,7 @@ single one shown in Fig.~\ref{fig:demoparam_dau99_perm21}.
 
 
 %% --------------------------------------------------
-%\subsubsection{Too many psydat files, forgotten subjects names? use psydat\_helper.m}
+%\subsubsection{Too many psydat files, forgotten subject's names? use psydat\_helper.m}
 \subsubsection{psydat\_helper.m}
 \label{sec:psydat_helper}
 
@@ -1720,7 +1849,7 @@ After measuring a lot with \psylab, you will end up with a larger
 number of psydat-files, or with very long psydat-files.  Eventually
 you may loose an overview: Which data are stored where?  What was the
 experiment called?  Which other experiments are stored in this
-psydat-file?   When did the subject perform those measurements?
+psydat-file?  When did the subject perform those measurements?
 
 In this case you may get help from the tool
 \code{psydat\_helper.m}. It opens a GUI and, after a click on the
@@ -1739,7 +1868,7 @@ shown in figure~\ref{fig:psydat_helper}.
 %%
 \begin{figure}[htbp]
 \begin{center}
-  \includegraphics[width=0.75\textwidth]{psydat_helper}
+  \includegraphics[width=0.8\textwidth]{psydat_helper_28a}
   \caption{Screenshot of the \code{psydat\_helper} GUI}
   \label{fig:psydat_helper}
 \end{center}
@@ -1756,24 +1885,26 @@ Unfortunately, in Version 2011 of Matlab the audio handling was
 redesigned in a way that made the built-in function \code{sound}
 almost non-functioning.
 
-A work-around for this annoying problem (and for others as well) is to
-use an alternative method to send your audio samples to your
-soundcard: ``\index{msound!alternative sound output}msound''.  \code{msound} is a mex-file, also developed at
-the IHA, that uses the PortAudio-Interface
-(\code{http://www.portaudio.com/}) for communicating with your 
-sound card.  More information about
-msound can be found at the website of the Institute for Hearing
-Technology and Audiology (http://www.hoertechnik-audiologie.de/, then
-look for ``Institut für Hörtechnik und Audiologie'' $\rightarrow$
-``Software''), and on github. 
+While this bug was fixed again by Matlab, a somewhat nicer and
+independent work-around for this annoying problem (and for others as
+well) is to use an alternative method to send your audio samples to
+your soundcard: ``\index{msound!alternative sound output}msound''.
+\code{msound} is a mex-file, also developed at the IHA, that uses the
+PortAudio-Interface (of \code{http://www.portaudio.com/}) for
+communicating with your sound card.  More information about msound can
+be found at the website of the Institute for Hearing Technology and
+Audiology (http://www.hoertechnik-audiologie.de/, then look for
+``Institut für Hörtechnik und Audiologie'' $\rightarrow$
+``Software''), and on github.
 
-The \code{msound} mex-file is now part of the \psylab-distribution.
-It comes in several pre-compiled versions for win and
-gnu/linux-systems in 32 and 64bit format.  The dll-format is used for
-older Matlab versions on win32-system.  If you encounter a warning
-about a ``shadowing'' effect of some msound-file over another, e.g.\
-the mexw32 version shadowing the dll version, you may just delete the
-dll version.
+The \code{msound} mex-file is now also included in the \psylab-distribution.
+It comes in several pre-compiled versions for win, gnu/linux-systems
+and mac, mostly in 32 and 64bit format.  The compiled binary files can also be
+found on github under ``releases''.  The dll-format (not on github any
+longer) is needed for older Matlab versions on win32-system.  If you
+encounter a warning about a ``shadowing'' effect of some msound-file
+over another, e.g.\ the mexw32 version shadowing the dll version, you
+may just delete the dll version.
 %
 In order to enable sound output via msound, only a few additional
 \psylab-variables need to be set:
@@ -1784,7 +1915,8 @@ M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
 M.MSOUND_NCHAN     = 1;     % number of channels, must match  size(m_outsig,2)
 \end{verbatim}
 
-The variable \verb+M.USE_MSOUND+ works as a flag-variable.  
+The variable \verb+M.USE_MSOUND+ works as a flag-variable whether or
+not to use \code{msound} instead of \code{sound}.
 
 The frame length \verb+M.MSOUND_FRAMELEN+ is the number of samples
 within each frame of audio, also called block size, that is sent to
@@ -1798,8 +1930,10 @@ of channels of your stimuli, i.e.\ 1 for mono/diotic and 2 for
 stereo/dichotic signals.  If \verb+M.MSOUND_NCHAN+ does not match
 \verb+size(m_outsig,2)+, an error will occur.
 
-When using sound output via msound in \psylab, it is also possible to
-use the visual interval indication.
+When using sound output via msound in \psylab, it is possible to
+use the visual interval indication.  Put another way round, on some
+systems it will only possible to use the visual interval indication \emph{if}
+you use msound for sound output.  
 
 
 
@@ -1864,7 +1998,7 @@ Name (type)              &  Meaning \\
 \hline
 \code{M.VAR}       (n)& 
    The value of the stimulus variable, as a scalar number, which is
-   adaptively changed from trial to trial to find the subjects threshold. \\
+   adaptively changed from trial to trial to find the subject's threshold. \\
 \code{M.VARNAME} (s)&
    Name of the stimulus variable \texttt{M.VAR}, \eg 'test\_tone\_level'.\\ 
 \code{M.VARUNIT} (s)&
@@ -1882,9 +2016,10 @@ Name (type)              &  Meaning \\
 \code{M.PARAMUNIT} (c)& 
    Unit(s) of the  parameter(s), \eg 'Hz'. \\
 % --------------------------------------------------
+\hline
 \code{M.STEP} (n)& 
    Value of the current step size by which \code{M.VAR} will be
-   changed adaptively depending on the subjects answer. \code{M.STEP}
+   changed adaptively depending on the subject's answer. \code{M.STEP}
    is specified in the same unit as \code{M.VAR}. \\ 
 \code{M.MINSTEP} (n)& 
    Minimal value of the step size.  As soon as the condition
@@ -1901,7 +2036,7 @@ Name (type)              &  Meaning \\
 \code{M.ADAPT\_METHOD} (s)   \label{tab:item:m_adapt_method} &
    The name of the adaptive method of the up-down algorithm.  This
    name must be the suffix of one of the existing
-   \code{mpsy\_adapt\_*.m} psylab scripts, e.g. ``\code{1up\_2down}''
+   \code{mpsy\_adapt\_*.m} \psylab\ scripts, e.g. ``\code{1up\_2down}''
    for 1-up-2-down according to \cite{levitt_1971}, ``\code{wud}'' for the
    ``weighted up-down'' \cite{kaernbach_1991}, or
    ``\code{uwud}'' for the ``unforced weighted up-down'' \cite{kaernbach_2001}. \\
@@ -1919,8 +2054,14 @@ Name (type)              &  Meaning \\
 %    The number of successive correct answers required for going
 %    ``down'' in the adaptive transformed-up-down rule.\\
 %
-% --------------------------------------------------
 \hline
+% --------------------------------------------------
+\code{M.CONSTSTIM\_ALLVARS} (v) & Vector containing all different (but
+constant) values of \code{M.VAR} during the constant stimulus method. \\
+\code{M.CONSTSTIM\_NPRESENTS} (n) & Number of repeated presentations,
+per each value in \code{M.CONSTSTIM\_ALLVARS}, during the constant stimulus method. \\
+\hline
+% --------------------------------------------------
 \code{M.FS}        (n)& 
    The sampling frequency, in Hz. \\
 \code{M.CALIB}     (v)& 
@@ -1929,7 +2070,8 @@ Name (type)              &  Meaning \\
 \code{M.EARSIDE} (n) & 
    Variable specifying the presentation side in case the signals are
    generated purely mono.  Can take one of three predefined values: 
-   \code{M\_BINAURAL} (default value),  \code{M\_LEFTSIDE}, or  \code{M\_RIGHTSIDE}. \\ 
+   \code{M\_BINAURAL} (default value, meaning \emph{diotic} presentation),
+                       \code{M\_LEFTSIDE}, or  \code{M\_RIGHTSIDE}. \\  
 \code{M.TASK}      (s)& 
    Task of the subject, as a string.  Typically something like ``Which
    interval contained the test signal?''\\
@@ -1938,7 +2080,7 @@ Name (type)              &  Meaning \\
    subject  (\eg correct'/not correct') after each answer. \\
 \code{M.USE\_GUI}  (n)& 
    Flag variable (1 or 0), whether or not to use a graphical user
-   interface for the subjects answers instead of keyboard input.  \\
+   interface for the subject's answers instead of keyboard input.  \\
 \code{M.VISUAL\_INDICATOR}     (n)& 
    Flag variable (1 or 0), whether or not to provide a visual
    indication of the individual $n$ intervals of each trial by
@@ -2012,7 +2154,7 @@ Name (type)     &        Meaning \\
    Current user answer in up-down experiment like in matching
    experiments.  Value~1 means 'down', value~2 means 'up'.\\
 \code{M.ANSWERS}       (v)&
-   Vector with all answers of the subjects during the current run.\\
+   Vector with all answers of the subject during the current run.\\
 \code{M.STEPS} (v)&
    Vector with all values of \code{M.STEP}  during the current run.\\
 % --------------------------------------------------
@@ -2108,6 +2250,10 @@ designs in \psylab, namely
   accompanying example experiment is a replication of the binaural
   pitch detection and discrimination experiment by \cite{santurette_2007}
   %% Santurette \& Dau (Hear.~Res.~223, 2007)
+
+  This has been replaced by new and extended code for the constant
+  stimuli method.   
+
 \item A closed-set 1-out-of-$n$ identification procedure.  The
   accompanying example experiment is a replication of the melody
   recognition experiment by \cite{akeroyd_2001}
@@ -2115,7 +2261,7 @@ designs in \psylab, namely
 \end{enumerate}
 
 Please note that the content of the contrib-directory is checked for
-consistency with the remaining part of psylab far less frequently! 
+consistency with the remaining part of \psylab\ \emph{far less} frequently! 
 
 
 \bibliography{mh-refs}
@@ -2486,5 +2632,8 @@ Public License instead of this License.
 
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"
+% TeX-master: t
 % End:
+
+
  

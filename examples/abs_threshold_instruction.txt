@@ -1,19 +1,19 @@
 
-	In diesem psychoakustischen Experiment geht es um die
-	Wahrnehmbarkeit von zum Teil sehr leisen Tönen.
+	This psychoacoustical experiment investigates the
+	detectability of (possibly very) soft tones.
 
-	In diesem Experiment werden Sie jeweils drei kurze
-	Tonintervalle hintereinander hören.  Zwei Intervalle sind
-	dabei gleich und enthalten reine Stille.  In einem der drei
-	Intervalle ist ein Ton enthalten.  Es wird jedes Mal von
-	Neuem zufällig ausgewählt, in welchem der Intervalle dieser
-	Ton enthalten ist.  Der Ton wird zunächst deutlich hörbar sein
-	und im Verlaufe des Experiments immer leiser werden, so dass
-	Sie ihn gerade eben noch hören können. 
+	In this experiment, you will hear three intervals after
+	another.  The three intervals will be marked visually.  Two of
+	the intervals will contain only silence and one of the
+	intervals contains a tone.  In each presentation of the
+	intervals, the one containing the tone will be selected
+	randomly.  The tone will be clearly audible in the beginning
+	and it will get softer in loudness during the course of the
+	experiment, such that you may have difficulties or find it
+	impossible to hear the tone difference.
 
-	Ihre Aufgabe als Versuchsperson ist es, nach jeder Darbietung
-	zu entscheiden, in welchem der drei Intervalle (1, 2 oder 3)
-	Sie den Ton gehört haben.  Falls Sie sich nicht	entscheiden
-	können, sollen Sie raten. 
-
+	Your task as a test person is to decide, after each
+	presentation, which of the intervals (1, 2, or 3) contained
+	the test tone.  You can answer by clicking the corresponding
+	answer button.  If you cannot decide, please make a guess. 
 	

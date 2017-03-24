@@ -1,10 +1,14 @@
 % Usage: mpsy_proto()
 % ----------------------------------------------------------------------
-%          Protocols the results of the previous adaptive run:
+%          Protocols the results of the previous adaptive run,
+%              -- IN PSYDAT VERSION 2 FILE FORMAT --
 %          plots M.VAR as a function of trial number
 %          writes a corresponding result line into the "psydat"
 %          file, in new psydat format version 2.
-%          saves all variables M.* to disk
+%          saves all variables M.* to disk.
+%
+%          Up to version 2.6, THIS file was called mpsy_proto.m
+%   
 % 
 %   input args:  (none) works on set of global variables M.* 
 %  output args:  (none) processes subjects' answer and protocolls everything
@@ -143,8 +147,10 @@ if M.DEBUG>0,
   for k=1:3,
     m_filenamedate = [ m_filenamedate sprintf('%2.2d',mod(dv(k),100)) ];
   end
+  %if exist( [ m_filenamedate '.mat' ], 'file'),
   % add current hour to end of filename
   m_filenamedate = [ m_filenamedate '-' sprintf('%2.2d',dv(4))];
+  %end
   % now save it:
   save(m_filenamedate, 'M', 'M_*')
 end

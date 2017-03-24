@@ -1,3 +1,56 @@
+2016-11-04  Martin Hansen  <psylab AT jade-hs.de>
+
+	* mpsy_check.m: added a check for correct value of M.MINSTEP,
+	and for matching signs of M.STEP and M.MINSTEP
+
+	corrected a typo in generation of m_postsig
+
+2016-11-02  Martin Hansen  <psylab AT jade-hs.de>
+
+	* mpsy_init_run.m: check/set default for new
+	M.REVERSE_UP_AND_DOWN which is used for runs with reversed
+	definition of "up" and "down" (see documentation).
+
+	* mpsy_proto_conststim.m: new file for constant stimuli
+	method, with functionality corresponding to mpsy_proto.m for
+	adaptive methods.
+
+	* mpsy_afc_conststim_main.m: implementation of the
+	constant stimuli method for measuring percentage correct
+	responses for a block-design.
+
+	* mpsy_querysplash.m (mpsy_querysplash): new function that
+	allows to bypass the user query in mpsy_init.m
+
+	* mpsy_init.m: show a new (small) splash screen with info
+	about license and no-warranty, and query user's OK.
+
+	* psydat_helper.m (psydat_helper): reading of psydat file
+	adapted to new version 3 psydat file format. 
+
+	* mpsy_check_psydat_file.m (mpsy_check_psydat_file): new file
+	name for previous file "mpsy_check_psydat_version.m".  Adapted
+	functionality for new version3 psydat file format.
+
+	* mpsy_proto_v2.m: new name *_v2 for old
+	version 2 psydat file format
+
+	* mpsy_proto.m: update to writing of the new
+	version 3 psydat file format
+
+	* read_psydat_v2.m (read_psydat_v2): new name *_v2 for old
+	version 2 psydat file format
+
+	* read_psydat.m (read_psydat): update to reading of the new
+	version 3 psydat file format
+
+	* mpsy_adapt_1up_2down.m: and all other files
+	* mpsy_adapt_*.m:
+	Fix of a typo in the comment when a LOWER reversal is detected
+
+	* mpsy_check.m: updated check for psydat file version from
+	version 2 to new version 3.
+
 2014-04-02  Martin Hansen  <psylab AT jade-hs.de>
 
 	* mpsy_maxreversal_check.m (mpsy_maxreversal_check):  new file

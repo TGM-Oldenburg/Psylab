@@ -1,13 +1,16 @@
 % Usage: mpsy_afc_present
 % ----------------------------------------------------------------------
 %
+% present the signal intervals of an N-AFC experiment, collect the
+% user answer and evaluate it
+%
 %   input:   (none), works on global variables
-%  output:   (none), presents signals in AFC fashion, collects and
-%                    evaluates subjects answer
+%  output:   (none)
 %
 % Copyright (C) 2007         Martin Hansen, Jade Hochschule Oldenburg
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  15 Mrz 2007
+% Updated:  < 6 Nov 2016 15:41, martin>
 % Updated:  < 1 Nov 2011 10:15, martin>
 
 %% This file is part of PSYLAB, a collection of scripts for
@@ -69,23 +72,12 @@ else
   end
   
 end
-clear M.ACT_ANSWER;
 
-% get User Answer M.UA
-M.UA = -1;
-%while (M.UA < 0 | M.UA > M.NAFC) & M.UA ~= 9,  
-while  ~any( M.UA == [ -3 (0:M.NAFC) 8 9]),
-  if M.USE_GUI,   %% ----- user answers via mouse/GUI
-    set(afc_info, 'String', M.TASK);
-    % a pause allows GUI-callbacks to be fetched.  The
-    % mpsy_afc_gui callbacks will set the variable M.UA
-    pause(0.5);  
-  else
-    % prompt user for an answer via keyboard
-    M.UA = input(M.TASK);
-  end    
-  if isempty(M.UA),  M.UA = -1;  end;
-end
+clear M.ACT_ANSWER;
+%%M.UA = mpsy_get_useranswer(M.USE_GUI, M.TASK, [ -3 (0:M.NAFC) 8 9]);
+M.ALLOWED_USER_ANSWERS = [ -3 (0:M.NAFC) 8 9];
+M.UA = mpsy_get_useranswer(M);
+
 
 % M.UA contains user answer for AFC 
 switch M.UA,

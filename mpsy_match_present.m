@@ -55,30 +55,34 @@ if M.USE_MSOUND
 else
   sound(m_outsig, M.FS); 
 
-  % the visual indicator mechanism is not supported for matching experiment:
-  if ispc,
-    %  Matlab 'sound' works asynchronously on WIN PCs, so: 
+  % (no visual indicator mechanism for matching experiment!)
+  
+  if M.SOUND_IS_SYNCHRONOUS==0,
+    %  if Matlabs "sound" works asynchronously, then
     %  pause execution for as long as the signal duration
     pause(length(m_outsig)/M.FS);
   end
   
 end
-clear M.ACT_ANSWER;
 
-% get user answer M.UD ("up-down")
-M.UD = -1;
-while ~any( M.UD == [ 1 2 8 9]),
-  if M.USE_GUI,   %% ----- user answers via mouse/GUI
-    set(afc_info, 'String', M.TASK);
-    % a pause allows GUI-callbacks to be fetched.  The
-    % mpsy_up_down_gui callbacks will set the variable M.UD
-    pause(0.5);  
-  else
-    % prompt user for an answer via keyboard
-    M.UD = input(M.TASK);
-  end  
-  if isempty(M.UD),  M.UD = -1;  end;
-end
+clear M.ACT_ANSWER;
+M.ALLOWED_USER_ANSWERS = [ 1 2 8 9];
+M.UD = mpsy_get_useranswer(M);
+
+% $$$ % get user answer M.UD ("up-down")
+% $$$ M.UD = -1;
+% $$$ while ~any( M.UD == [ 1 2 8 9]),
+% $$$   if M.USE_GUI,   %% ----- user answers via mouse/GUI
+% $$$     set(afc_info, 'String', M.TASK);
+% $$$     % a pause allows GUI-callbacks to be fetched.  The
+% $$$     % mpsy_up_down_gui callbacks will set the variable M.UD
+% $$$     pause(0.5);  
+% $$$   else
+% $$$     % prompt user for an answer via keyboard
+% $$$     M.UD = input(M.TASK);
+% $$$   end  
+% $$$   if isempty(M.UD),  M.UD = -1;  end;
+% $$$ end
 
 % M.UD contains user answer for up-down
 switch M.UD,

@@ -2,9 +2,10 @@
 %
 % Usage: jnd_frequency
 %
-% Copyright (C) 2003       Martin Hansen, FH OOW
+% Copyright (C) 2003       Martin Hansen, Jade Hochschule
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  26 Jun 2005
+% Updated:  <24 Mar 2017 11:17, mh>
 % Updated:  <26 Jun 2005 18:00, mh>
 
 %% This file makes use of PSYLAB, a collection of scripts for
@@ -37,6 +38,7 @@ M.ADAPT_METHOD = '1up_2down';
 M.MAXREVERSAL  = 8 ;   % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;     % flag for provision of feedback about correctness of answer
 
+
 % ------------------------------ 
 M.FS               = 48000; % sampling frequency
 M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
@@ -44,48 +46,42 @@ M.USE_GUI          = 1;
 M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
 M.DEBUG            = 0;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ------------------------------ 
 M.USE_MSOUND       = 1;     % flag whether to use msound (1 or 0)
 M.MSOUND_DEVID     = 0;     % device ID for msound (choose 0 or [] for default device)
 M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
 M.MSOUND_NCHAN     = 1;     % number of channels, must match  size(m_outsig,2)
 
-%M.EARSIDE = M_BINAURAL;
 
-% set sound card to maximum output
-% dos('volumemax&');
+% set your sound card to maximum output (!)
+% system('volumemax&');
 
-clc;  
+fprintf('\n\n\n'); 
 type jnd_frequency_instruction.txt
 
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
-%% ==================================================
-M.PARAM(2)  =  -20;
 
-%ref_freqs = 1000;
+% ==================================================
+M.PARAM(2)  =  -10;
+
+% ref_freqs = 1000;
 ref_freqs = [250 500 1000 2000 3000 6000];
-% 
+
+% number of repeated presentations per variable value
+M.CONSTSTIM_NUM_PRESENTATIONS = 5;
+
+% vector with all values for variable M.VAR
+M.CONSTSTIM_ALLVARS = [4 8 16 32];
+%M.CONSTSTIM_ALLVARS = [1 2 4 8 16 32];
+
+
 for freq = ref_freqs,
    
   M.PARAM(1) = freq;
-  mpsy_afc_main;
-  mpsy_plot_result;
+  mpsy_afc_conststim_main;
  
 end
-
-
-
-% %% ==================================================
-% M.PARAM(2)  = -15;
-% 
-% for freq = ref_freqs,
-%    
-%   M.PARAM(1) = freq;
-%   mpsy_afc_main;
-%   mpsy_plot_result;
-%  
-% end
 
 
 

@@ -16,6 +16,7 @@
 % Author :  Christian Bartsch,  <christian.asd AT gmx.de>
 % Date   :  27 Nov 2007
 %           edited based on existing mpsy_1up_2down.m by M. Hansen
+% Updated:  < 2 Nov 2016 17:32, martin>
 % Updated:  <17 Mar 2014 17:30, mh>
 % Updated:  <17 Jan 2008 14:53, hansen>
 
@@ -46,21 +47,27 @@ end
 if length(M.ANSWERS) >= 4,
   
   % ----- a) uppper reversal:  
-  % last 3 answers were correct and the one before was wrong
+  % last 3 answers were correct and the one before that was wrong
   if all(M.ANSWERS(end-2:end) == 1) &  M.ANSWERS(end-3) == 0,
     % yep, new upper reversal found!
     M.REVERSAL = M.REVERSAL + 1;
     % Now adapt step size M.STEP by halving it, ...
     % ... but do not go below the minimal stepsize M.MINSTEP! 
-    M.STEP = max(M.MINSTEP, M.STEP / 2); 
+    if ~M.REVERSED_UP_AND_DOWN,
+      % the normal case, M.STEP is positive
+      M.STEP = max(M.MINSTEP, M.STEP / 2); 
+    else
+      % the reversed case, M.STEP is negative
+      M.STEP = min(M.MINSTEP, M.STEP / 2); 
+    end
     
     % append newest index of reversal to list of all indices of reversals
     M.UPPER_REV_IDX = [M.UPPER_REV_IDX length(M.ANSWERS)];
     %% fprintf('M.UPPER_REV_IDX: %d   \n',  M.UPPER_REV_IDX )
   end
   
-  % ----- b) uppper reversal
-  % last answer was wrong and the 3 answers before were correct 
+  % ----- b) lower reversal
+  % last answer was wrong and the 3 answers before that were correct 
   if M.ANSWERS(end) == 0 &  all(M.ANSWERS(end-3:end-1) == 1),
     % yep, new lower reversal found!    
     M.REVERSAL = M.REVERSAL + 1;
@@ -72,11 +79,20 @@ if length(M.ANSWERS) >= 4,
   end
 end
 
-
-% for security, ensure M.STEP cannot become negative
-if M.STEP <= 0,
-  error(' variable M.STEP (%g)  is <= 0', M.STEP);
+% for security, ensure M.STEP cannot become zero, or have wrong
+% sign in combination with the flag M.REVERSED_UP_AND_DOWN
+if M.STEP == 0,
+  error(' variable M.STEP  is = 0');
 end
+if ~M.REVERSED_UP_AND_DOWN & M.STEP < 0,
+  % in "normal" definition of "up" and "down", M.STEP must be positive:
+  error(' M.STEP (%g) must be positive', M.STEP);
+end
+if M.REVERSED_UP_AND_DOWN & M.STEP > 0,
+  % in "reversed" definition of "up" and "down", M.STEP must be negative:
+  error('If you choose the reversed definition of "up" and "down", then M.STEP (%g) must be negative', M.STEP);
+end
+
 
 % ==================================================
 % apply adaptive   1-up-3-down   rule
@@ -90,12 +106,18 @@ else
 end
 %
 if M.ACT_ANSWER == 0,
-  M.VAR = M.VAR + M.STEP;    % 1 wrong answer, INcrease stimulus
+  % 1 wrong answer, 
+  %     i.e. INcrease stimulus variable (normal case, M.STEP is positive)
+  %    resp. DEcrease stimulus variable (reversed case, M.STEP is negative)
+  M.VAR = M.VAR + M.STEP;    
   M.DIRECTION = M_UP;
 else
   % (M.ACT_ANSWER == 1)
   if prev_answer == 1 & prevprev_answer == 1 & M.DIRECTION == M_STAY,
-    M.VAR = M.VAR - M.STEP;  % 3 succesive correct answers, DEcrease stimulus
+    % 3 succesive correct answers, 
+    %     i.e. DEcrease stimulus variable (normal case, M.STEP is positive)
+    %    resp. INcrease stimulus variable (reversed case, M.STEP is negative)
+    M.VAR = M.VAR - M.STEP;  
     M.DIRECTION = M_DOWN;
   elseif M.DIRECTION == M_DOWN,
     M.DIRECTION = [];        % previous direction was down

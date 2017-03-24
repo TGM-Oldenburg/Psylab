@@ -36,7 +36,7 @@ if nargin >= 3,
     set(h1, 'String', text1);
   else
     if ~isempty(text1),
-      fprintf('%s\n\n', text1);
+      fprintf('\n%s\n\n', text1);
     end
   end
 end
@@ -46,10 +46,12 @@ if nargin == 5
     set(h2, 'String', text2);
   else
     if ~isempty(text2),
-      fprintf('%s\n\n', text2);
+      fprintf('\n%s\n\n', text2);
     end
   end
 end
+
+
 
 % End of file:  mpsy_info.m
 

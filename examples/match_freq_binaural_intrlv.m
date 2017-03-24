@@ -29,14 +29,12 @@ M.PARAMNAME(1) = {'reference_frequency'};
 M.PARAMUNIT(1) = {'Hz'};
 M.PARAMNAME(2) = {'test_ear_side'};
 M.PARAMUNIT(2) = {'left1_right2'};
-M.PARAMNAME(3) = {'percent_correct'};
-M.PARAMUNIT(3) = {'percent'};
 M.VARNAME      = 'rel_frequency_increment';
 M.VARUNIT      = 'cent';
-%M.TASK         = 'match the tones in frequency';   % TASK gets set in the set-skript
+% %% M.TASK         = 'match the tones in frequency';   % TASK gets set in the set-skript!
 M.MINSTEP      = 1 ;   % minumum step size, in units of M.VARUNIT
 M.MATCH_ORDER  = 2 ;   % position of test signal (0=random, 1=first, 2=second)
-%M.ADAPT_METHOD = '1up_1down'; 
+M.ADAPT_METHOD = '1up_1down'; 
 M.MAXREVERSAL  = 8 ;   % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;   % flag for provision of feedback about correctness of answer
 
@@ -48,22 +46,22 @@ M.INFO             = 1;     % flag for additional info for test subject
 M.VISUAL_INDICATOR = 0;     % flag whether to use visual interval indication
 M.DEBUG            = 0;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ========================================
 M.USE_MSOUND       = 1;     % flag whether to use msound (1 or 0)
 M.MSOUND_DEVID     = 0;     % device ID for msound (choose 0 or [] for default device)
 M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
 M.MSOUND_NCHAN     = 2;     % number of channels, must match  size(m_outsig,2)
 
 % set sound card to maximum output
-% dos('volumemax&');
+% system('volumemax&');
 
-clc;  
+fprintf('\n\n\n');  %%clc;  
 type match_freq_binaural_instruction.txt
 
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
-%% ==================================================
 
+% ==================================================
 
 %ref_freqs = 1000;
 ref_freqs = [500 1000 2000 3000 6000];
@@ -72,16 +70,9 @@ for freq = ref_freqs,
   
   M(1).PARAM(1) = freq;
   M(1).PARAM(2)  =  1;   % test signal side left
-  M(1).ADAPT_METHOD = '1up_2down';
-  % this resulting p_correct needs to be set manually to match content of ADAPT_METHOD. 
-  M(1).PARAM(3) = 70.7;
-  
   
   M(2).PARAM(1) = freq;
-  M(2).PARAM(2)  =  1;   % test signal side left
-  M(2).ADAPT_METHOD = '2up_1down';
-  % this resulting p_correct needs to be set manually to match content of ADAPT_METHOD. 
-  M(2).PARAM(3) = 29.3;
+  M(2).PARAM(2)  =  2;   % test signal side right
   
   mpsy_intrlv_match_main;
  

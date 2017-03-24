@@ -46,12 +46,10 @@ M.USE_GUI          = 1;
 M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
 M.DEBUG            = 2;
 
-%M.EARSIDE = M_BINAURAL;
 
-% set sound card to maximum output
-% dos('volumemax&');
+% set sound card to maximum output (!)
 
-clc;  
+fprintf('\n\n\n\n');  %%clc;  
 type jnd_intensity_instruction.txt
 
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');

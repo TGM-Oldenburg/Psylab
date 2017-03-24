@@ -54,24 +54,22 @@ M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
 M.MSOUND_NCHAN     = 1;     % number of channels, must match  size(m_outsig,2)
 
 % set sound card to maximum output to ensure a permanent calibration
-% dos('volumemax&');
+% system('volumemax&');
 
-clc;  
+fprintf('\n\n\n\n');  %%clc;  
 type tone_in_noise_instruction.txt
 
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
-%% ==================================================
 
+% ==================================================
 
-% ----- for example like this -----
 % interleave some tracks with different tone frequencies:
 tone_freqs = [ 200 400 800 1600 3200 6400 ]; 
 for kk = 1:length(tone_freqs),
     M(kk).PARAM(1) = tone_freqs(kk);
     M(kk).PARAM(2) = -30;
 end
-
 
 mpsy_intrlv_afc_main;
 mpsy_plot_result;

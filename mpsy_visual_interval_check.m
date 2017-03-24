@@ -44,7 +44,7 @@ if M.VISUAL_INDICATOR,
     dur_ref1 = size(m_ref1,1)/M.FS;     
     dur_ref2 = size(m_ref2,1)/M.FS;     
     if dur_ref1 ~= dur_interval | dur_ref1 ~= dur_ref2, 
-      fprintf('*** your reference signals m_ref1 and m_ref2 and test signal m_test have different length\n');
+      fprintf('*** your reference signals m_ref1 and m_ref2 and test signal m_test have different lengths.\n');
       fprintf('*** in this case the visual interval indication cannot work\n');
       warning('setting M_VISUAL_INDICATOR to 0');
       M.VISUAL_INDICATOR = 0;

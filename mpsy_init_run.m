@@ -47,7 +47,7 @@ M.DIRECTION = [];
 %
 
 % reset some internal variables 
-% NOTE:  mpsy_proto and mpsy_plot_feedback depend on THIS:
+% NOTE:  mpsy_proto_adapt and mpsy_plot_feedback depend on THIS:
 M.med_thres = [];
 
 % set some variables to default-values, if not yet present
@@ -76,13 +76,25 @@ end
 if ~isfield(M, 'DEBUG') | isempty(M.DEBUG),
   M.DEBUG = 0;
 end
-if ~isfield(M, 'USE_MSOUND') | isempty(M.USE_MSOUND)
+if ~isfield(M, 'USE_MSOUND') | isempty(M.USE_MSOUND),
   M.USE_MSOUND = 0;
+end
+if ~isfield(M, 'REVERSED_UP_AND_DOWN') | isempty(M.REVERSED_UP_AND_DOWN),
+  M.REVERSED_UP_AND_DOWN = 0;
 end
 
 
 if M.USE_MSOUND
   msound_state = msound('verbose', 0);
+  
+  % check whether msound was used with a different number of
+  % channels previously.  If so, close msound:
+  if msound_state.ChannelsOut ~= M.MSOUND_NCHAN,
+    msound('close');
+  else
+    % nothing to do
+  end
+  
   if ~msound_state.IsOpenForWriting,
     msound('openWrite', M.MSOUND_DEVID, M.FS, M.MSOUND_FRAMELEN, M.MSOUND_NCHAN);
   else
@@ -129,7 +141,7 @@ end
 % (change from going down to up).  However, in version 2.5. and
 % below, only upper reversal were counted.  So check for meaningful
 % number of reversals:  
-% Every maximal reversal count <= 4 is suspicious for belonging
+% Every maximal reversal count <= 4 is suspected to belong
 % to an older psylab experiment designed before version 2.6:
 if M.MAXREVERSAL <= 4,
   % upon fresh delivery, the psylab distribution contains the two
