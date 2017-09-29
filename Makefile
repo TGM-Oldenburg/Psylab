@@ -43,7 +43,7 @@ PSYFILES = DISTRIBUTION INSTALLATION \
      mpsy_maxreversal_askagain.m  mpsy_maxreversal_check.m
 
 # these directories are formed (using mkdir) as part of the psylab distribution
-#DISTDIRS = doc examples contrib
+# DISTDIRS = doc examples contrib
 DISTDIRS = doc examples contrib contrib/huggins_pitch contrib/melody_recognition
 
 # these files are part of the psylab documentation
@@ -61,7 +61,8 @@ EXAMPLES = examples/abs_threshold*.m \
            examples/match_freq_binaural_intrlv*.m \
            examples/tone_in_broadbandnoise*.m \
            examples/*instruction*.txt  \
-           contrib/huggins_pitch/*  contrib/melody_recognition/*
+           contrib/*
+           #contrib/huggins_pitch/*  contrib/melody_recognition/*
 
 
 ### EXAMPLES = examples/*phase*.m examples/frozen_noise1.wav
