@@ -29,7 +29,7 @@
 
 % mount signals in a random N-AFC fashion with the test signal being
 % situated in the interval numbered M.rand_afc
-%%% [m_outsig, M.rand_afc] = mpsy_nafc(m_test, m_ref, M.NAFC, m_quiet, m_presig, m_postsig);
+% %% [m_outsig, M.rand_afc] = mpsy_nafc(m_test, m_ref, M.NAFC, m_quiet, m_presig, m_postsig);
 mpsy_nafc;
   
   
@@ -74,7 +74,6 @@ else
 end
 
 clear M.ACT_ANSWER;
-%%M.UA = mpsy_get_useranswer(M.USE_GUI, M.TASK, [ -3 (0:M.NAFC) 8 9]);
 M.ALLOWED_USER_ANSWERS = [ -3 (0:M.NAFC) 8 9];
 M.UA = mpsy_get_useranswer(M);
 

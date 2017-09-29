@@ -1,21 +1,21 @@
 
 	In diesem psychoakustischen Experiment geht es um die
-	Wahrnehmbarkeit von Lautstärke-ÄNDERUNGEN, d.h. der
+	Wahrnehmbarkeit von Lautstärke-ÄNDERUNGEN, d.h. um die
 	Wahrnehmbarkeit einer Erhöhung des Lautstärkepegels eines
 	Tones
 
-	In diesem Experiment werden Sie jeweils drei kurze
-	Tonintervalle hintereinander hören.  Zwei Intervalle sind
-	dabei gleich.  In einem der drei Intervalle weist der Ton
-	jedoch eine erhöhte Lautstärke auf.  Es wird jedes Mal von
-	Neuem zufällig ausgewählt, welches der Intervalle diese
-	erhöhte Lautstärke enthält.  Der Lautstärkeunterschied wird
-	zunächst deutlich hörbar sein und im Verlaufe des Experiments
-	immer schwächer ausgeprägt sein.
+	In diesem Experiment werden Sie jeweils zwei kurze
+	Tonintervalle hintereinander hören.  In einem der beiden
+	Intervalle weist der Ton eine höhere Lautstärke im Vergleich
+	zum anderen auf.  Es wird jedes Mal von neuem zufällig
+	ausgewählt, welches der Intervalle diese erhöhte Lautstärke
+	enthält.  Der Lautstärkeunterschied wird zunächst deutlich
+	hörbar sein und im Verlaufe des Experiments immer schwächer
+	ausgeprägt sein.
 
 	Ihre Aufgabe als Versuchsperson ist es, nach jeder Darbietung
-	zu entscheiden, in welchem der drei Intervalle (1, 2 oder 3)
+	zu entscheiden, in welchem der beiden Intervalle (1 oder 2)
 	Sie die erhöhte Lautstärke gehört haben.  Falls Sie sich nicht
-	entscheiden können, sollen Sie raten.
+	entscheiden können, sollen Sie bitte raten.
 
 	

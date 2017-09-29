@@ -49,8 +49,7 @@ end
 mpsy_init_run;
 
 % run the "set-script" once.  this should set some variables and/or
-% signals to constant values or to start values (among them is, at
-% least, M.VAR)
+% signals to constant values or to start values. 
 eval([M.EXPNAME 'set']);
 
 % check a number of variables for correct content/type, 
@@ -69,7 +68,8 @@ if M.INFO,
   mpsy_info(M.USE_GUI, afc_info, stmp);
 end
 
-M.UA = mpsy_query_user(M.USE_GUI, afc_fb, 'are you ready for this run?    to continue, hit RET');
+M.ALLOWED_USER_ANSWERS=[];
+M.UA = mpsy_get_useranswer(M, 'are you ready for this run?    to continue, hit RET', afc_fb);
 % check user answer for a possible quit-request
 if M.UA == 9, M.QUIT = 1;  end
 if M.UA >= 8, return;  end
@@ -134,7 +134,7 @@ for M_TRIAL_COUNT = 1 : M.CONSTSTIM_NTRIALS,
       idx_minus = find(plot_tmp_answ ==0);
       hp = plot(1:length(plot_tmp_vars), plot_tmp_vars, '.-', ...
                 idx_plus, plot_tmp_vars(idx_plus), 'r+', ...
-                idx_minus, plot_tmp_vars(idx_minus), 'ro');
+                idx_minus, plot_tmp_vars(idx_minus), 'bo');
       set(hp(1) , 'Color', 0.5*[1 1 1])
       xlabel('trial number')
       yl = [ M.VARNAME ' [' M.VARUNIT ']'];

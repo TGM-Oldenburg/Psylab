@@ -413,9 +413,9 @@ Fig.~\ref{fig:example_run}.
     point, i.e.\ the change from an up-phase to
     the next down-phase as 1 \index{reversal}``reversal''.
 \\
-  \underline{\textbf{NB:}  Since version 2.6}, \psylab\ counts both an
-  upper (from-up-to-down) and a lower (from-down-to-up) point as 1
-  \index{reversal}``reversal''. 
+  \underline{\textbf{NB:}  Starting in version 2.6}, \psylab\ now
+  counts both an upper (from-up-to-down) and a lower (from-down-to-up)
+    point as 1 \index{reversal}``reversal''.
 %\\
 \begin{quote}
   In other words, as of version 2.6, the occurrence of a local maximum, and
@@ -426,7 +426,7 @@ Fig.~\ref{fig:example_run}.
 \end{quote}
 % 
   The number of reversals serves as a \index{stop criterion}stop
-  criterion for a adaptive run.  When the number of reversals within the
+  criterion for a run.  When the number of reversals within the
   measurement phase has reached the
   \index{reversal!maximum number of}maximum number of reversals, as
   specified by \code{M.MAXREVERSAL}, that run is terminated.
@@ -466,33 +466,30 @@ Fig.~\ref{fig:example_run}.
 
 Figure~\ref{fig:example_run} shows an example run of the experiment
 \texttt{sam\_sincarrier\_detect.m} which can be found in the
-subdirectory \texttt{examples} of the \psylab-distribution.  The data
-show the value of the stimulus variable as a function of the trial
-number.  The plot can be generated automatically with the
-\psylab-script \texttt{mpsy\_display\_psydat.m}, see
-section~\ref{sec:display-results}.  The run started with the
+subdirectory \texttt{examples} of the \psylab-distribution.  The data show
+the value of the stimulus variable as a function of the trial number.
+Except for the arrows, indicating the reversals, the plot can be
+generated automatically with the \psylab-script
+\texttt{mpsy\_display\_psydat.m}, see
+section~\ref{sec:display-results}.  The run starts with the
 familiarisation phase with the settings \code{M.VAR = -8; M.STEP =
-  4;}.  Both values are stated in dB re. 1.  The first reversal was
-reached at trial~17, the step size remained at 4~dB.  At trial~23 the
-second reversal was reached.  As this was an upper reversal, the step
-size was halved to 2~dB.  At trial~31 the third reversal was
-encountered and the step size remained at 2~dB.  At trial~34 the
-fourth reversal was reached and the step size was halved to 1~dB.  As
-this step size had been defined as the minimal step size, the
-familiarisation phase ended here and the measurement phase started at
-the next trial~35.  From there, the number of reversals starts again
-counting from scratch.  The run terminated when a number of
-\code{M.MAXREVERSAL} reversals had been reached.  In the example with
-\code{M.MAXREVERSAL=6;} this point was reached after trial~47.  Note
-that the plot shows a data point at trial 48 which was \emph{not}
-presented to the subject.  The corresponding stimulus \emph{would}
-have been presented to the subject, hadn't the run just been
-terminated.  The threshold is calculated as the \emph{median} of all
-values of \code{M.VAR} during the measurement phase, a value of -31~dB
-in the example.  The standard deviation of the threshold is calculated
-from the same data points and amounted to 1.05~dB in the example. The
-mean of all data points in the measurement phase is also stated, but
-only in the plot.
+  8;}.  Both values are stated in dB re. 1.  The first reversal is
+reached at trial~12 where the step size is halved to 4~dB.  At
+trial~15 the second reversal is reached and the step size is halved to
+2~dB.  At trial~19 the third reversal is encountered and step size
+halved to 1~dB.  As this step size had been defined as the minimal
+step size, the measurement phase starts at that point.  From there,
+the number of reversals starts again counting from scratch.  The run
+terminates when a number of \code{M.MAXREVERSAL} reversals has been
+reached.  In the example with \code{M.MAXREVERSAL=4;} this point is
+reached after trial 38.  Note that the plot shows a data point at
+trial 39 which was \emph{not} presented to the subject.  The
+corresponding stimulus \emph{would} have been presented to the
+subject, hadn't the run just been terminated.  The threshold is
+calculated as the \emph{median} of all values of \code{M.VAR} during
+the measurement phase, a value of -34~dB in the example.  The standard
+deviation of the threshold is calculated from the same data points and
+amounts to 0.76~dB in the example.
 
 
 
@@ -768,8 +765,8 @@ M.FS               = 48000; % sampling frequency
 M.USE_GUI          = 1;     % use a GUI for user input
 M.VISUAL_INDICATOR = 1;     % use visual interval indication
 M.SAVERUN          = 1;     % save individual subject responses in psylab file
+M.DEBUG            = 0;     % no verbose debug output
 \end{verbatim}
-%%%M.DEBUG            = 0;     % no verbose debug output
 %%%M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
 
 You also need to assign the variable \code{M.SNAME} with the name (or
@@ -1157,7 +1154,7 @@ variables:
   A value of 1 means: use a graphical user interface.  This can be
   controlled via button clicks by a mouse.  Alternatively, answering
   by a single keypress, \emph{without} hitting \texttt{RET}, is
-  possible, too.  However, in order for this to work properly, the
+  possible, too.  However, in order for this to work properly the
   background of the answer GUI must have the focus (rather than, for
   example, any of the answer buttons).  Of course, the keypress needs
   to be a reasonable subject answer (numbers 1, through $n$, and 0, 8,
@@ -1176,14 +1173,8 @@ variables:
   A value of 0 means: no visual interval indication. 
 
   On some operating systems and/or matlab versions, the visual interval
-  indication is only supported when the built-in function ``\code{sound}''
-  works asynchronously.  When this is not the case, then the
-  visual interval indication will only work when ``\code{msound}'' is
-  used for audio output, instead of the built-in ``\code{sound}'', see
-  section~\ref{sec:avoid-builtin-sound}.
-
-  Whether the built-in \code{sound} works synchronously or
-  asynchronously is automatically checked by \code{mpsy\_init\_run.m}.  
+  indication is only supported when ``msound'' is used for audio
+  output, instead of the built-in ``sound'', see section~\ref{sec:avoid-builtin-sound}.
 \end{description}
 
 %%
@@ -1350,62 +1341,58 @@ The example of an interleaved-tracks experiment given on
 page~\pageref{page:example-code-afc-interleaved} illustrated the use
 of a number of concurrent parameter value(s) sets, i.e.\ different tone
 frequencies in that case.  However, this is not the only possibility
-offered by interleaved-tracks experiments in \psylab.  
-Another example is given in the file(s)
-\texttt{match\_freq\_binaural\_intrlv*.m} in the \code{examples} subdirectory. 
-
-%% The following example code, taken from the example
-%% \texttt{match\_freq\_binaural\_intrlv.m}, illustrates how you could
-%% interleave tracks for different parameter sets \emph{and/or} with
-%% different adaptive methods per track (with the aim to converge at
-%% different values of percent correct responses).
-%% %
-%% \begin{verbatim}
-%% ref_freqs = [1000 2000 400];
-%% 
-%% for freq = ref_freqs,
-%%  
-%%   M(1).PARAM(1) = freq;
-%%   M(1).PARAM(2)  =  1;   % test signal side left
-%%   M(1).ADAPT_METHOD = '1up_2down';
-%%   % this resulting p_correct needs to be set manually to match content of ADAPT_METHOD. 
-%%   M(1).PARAM(3) = 70.7;
-%%  
-%%   M(2).PARAM(1) = freq;
-%%   M(2).PARAM(2)  =  1;   % test signal side left
-%%   M(2).ADAPT_METHOD = '2up_1down';
-%%   % this resulting p_correct needs to be set manually to match content of ADAPT_METHOD. 
-%%   M(2).PARAM(3) = 29.3;
-%% 
-%%   mpsy_intrlv_match_main;
-%% 
-%% end
-%% \end{verbatim}
-%% This code will run three consecutive interleaved experiment, one for
-%% each reference frequency.  Note in this example that you must specify
-%% all values of the \code{PARAM} field of all elements of the vector
-%% \code{M(:)} explicitly, while the other fields of \code{M(:)} that have
-%% been left empty will be filled in automatically by way of the script
-%% \code{mpsy\_intrlv\_init.m}.
-%% \\
-%% \emph{Note the use of the third parameter in this example}.  It is
-%% necessary in this case because the definition of ``threshold'' (i.e.\
-%% which percent correct is defined to correspond to ``threshold'') is not
-%% otherwise documented in the psydat file.
+offered by interleaved-tracks experiments in \psylab.  The following
+example code, taken from the example
+\texttt{match\_freq\_binaural\_intrlv.m}, illustrates how you could
+interleave tracks for different parameter sets \emph{and/or} with
+different adaptive methods per track (with the aim to converge at
+different values of percent correct responses).
+%
+\begin{verbatim}
+ref_freqs = [1000 2000 400];
+ 
+for freq = ref_freqs,
+  
+  M(1).PARAM(1) = freq;
+  M(1).PARAM(2)  =  1;   % test signal side left
+  M(1).ADAPT_METHOD = '1up_2down';
+  % this resulting p_correct needs to be set manually to match content of ADAPT_METHOD. 
+  M(1).PARAM(3) = 70.7;
+  
+  M(2).PARAM(1) = freq;
+  M(2).PARAM(2)  =  1;   % test signal side left
+  M(2).ADAPT_METHOD = '2up_1down';
+  % this resulting p_correct needs to be set manually to match content of ADAPT_METHOD. 
+  M(2).PARAM(3) = 29.3;
+  
+  mpsy_intrlv_match_main;
+ 
+end
+\end{verbatim}
+This code will run three interleaved experiment, one for each reference
+frequency.  Note in this example that you must specify all values of
+the \code{PARAM} field of all elements of the vector \code{M(:)}
+explicitly, while the other fields of \code{M(:)} that have been left
+empty will be filled in automatically by way of the script
+\code{mpsy\_intrlv\_init.m}.  
+\\
+\emph{Note the use of the third parameter in this example}.  It is necessary
+in this case because the definition of ``threshold'' (i.e.\ which
+percent correct is defined to correspond to ``threshold'')  is not
+otherwise documented in the psydat file.  
 
 
 When designing your own interleaved experiment with \psylab\ you will
 probably need to study the files \code{mpsy\_intrlv\_*.m} in more
-detail.  For example, specifying the following lines 
+detail.  For example, specifying the following lines
 %
 \begin{verbatim}
 M(1).ADAPT_METHOD = '1up_2down';
 M(2).ADAPT_METHOD = '2up_1down';
 M(6).ADAPT_METHOD = '2up_1down';
 \end{verbatim}
-in the main script of some 6-interleaved-tracks experiment with
-different adaptive rules in the different tracks would lead to an
-auto-filled-in value of \verb+'1up_2down'+ for the field
+of some 6-interleaved-tracks experiment in the main script would lead
+to an auto-filled-in value of \verb+'1up_2down'+ for the field
 \verb+ADAPT_METHOD+ of \code{M(3)} through \code{M(5)} as these fields
 are empty so far.  This is carried out by \code{mpsy\_intrlv\_init.m}
 which will always set empty fields to the corresponding value of
@@ -1413,88 +1400,7 @@ which will always set empty fields to the corresponding value of
 
 
 %% --------------------------------------------------
-\subsection{Avoid the use of built-in function \texttt{sound} for playback}
-\label{sec:avoid-builtin-sound}
-
-Unfortunately, in Version 2011 of Matlab the audio handling was
-redesigned in a way that made the built-in function \code{sound}
-almost non-functioning.
-
-While this bug was fixed again by Matlab, a somewhat nicer and
-independent work-around for this annoying problem (and for others as
-well) is to use an alternative method to send your audio samples to
-your soundcard: ``\index{msound!alternative sound output}msound''.
-\code{msound} is a mex-file, also developed at the IHA, that uses the
-PortAudio-Interface (of \code{http://www.portaudio.com/}) for
-communicating with your sound card.  More information about \code{msound} can
-be found at the website of the Institute for Hearing Technology and
-Audiology (http://www.hoertechnik-audiologie.de/, then look for
-``Institut für Hörtechnik und Audiologie'' $\rightarrow$
-``Software''), and on github.
-
-The \code{msound} mex-file is now also included in the \psylab-distribution.
-It comes in several pre-compiled versions for win, gnu/linux-systems
-and mac, mostly in 32 and 64bit format.  The compiled binary files can also be
-found on github under ``releases''.  The 'dll'-format (not on github any
-longer) is needed for older Matlab versions on win32-system.  If you
-encounter a warning about a ``shadowing'' effect of some msound-file
-over another, e.g.\ the 'mexw32' version shadowing the 'dll' version, you
-may just delete the 'dll' version.
-%
-In order to enable sound output via \code{msound}, only a few additional
-\psylab-variables need to be set:
-\begin{verbatim}
-M.USE_MSOUND       = 1;     % flag whether or not to use msound (1 or 0)
-M.MSOUND_DEVID     = 0;     % device ID for msound (choose 0 or [] for default device)
-M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
-M.MSOUND_NCHAN     = 1;     % number of channels, must match  size(m_outsig,2)
-\end{verbatim}
-
-The variable \verb+M.USE_MSOUND+ works as a flag-variable whether or
-not to use \code{msound} instead of \code{sound}.
-
-The frame length \verb+M.MSOUND_FRAMELEN+ is the number of samples
-within each frame of audio, also called block size, that is sent to
-the soundcard.  You should test/experiment, which
-\verb+M.MSOUND_FRAMELEN+ works best on your own system.  The value of
-1024 worked well for most purposes on many machines/soundcards, but
-maybe not for yours.
-
-It is important to set the \verb+M.MSOUND_NCHAN+ to the number
-of channels of your stimuli, i.e.\ 1 for mono/diotic and 2 for
-stereo/dichotic signals.  If \verb+M.MSOUND_NCHAN+ does not match
-\verb+size(m_outsig,2)+, an error will occur.
-
-When using sound output via \code{msound} in \psylab, it is possible to
-use the visual interval indication.  Put another way round, on some
-systems it will only possible to use the visual interval indication \emph{if}
-you use \code{msound} for sound output.  
-
-
-
-%% --------------------------------------------------
-\subsection{Debugging your experiment}
-\label{sec:debug-your-experiment}
-
-For purposes of \index{debugging!variable \texttt{M.DEBUG}}debugging,
-set the variable \code{M.DEBUG} to a value larger than zero (1, 2, 3,
-4), to get an increasing amount of temporary information and plots.
-Stick to the rule: ``Use the force -- read the source'' to see the
-behaviour in case of \code{M.DEBUG}$>$0.
-
-When gathering real data with test subjects, however, you will want to
-set \code{M.DEBUG=0;}
-
-
-
-
-%% --------------------------------------------------
-\section{Saving and analysing your exerimental data}
-\label{sec:saving-the-data}
-
-
-%% --------------------------------------------------
-\subsection{How your data are saved: the 'psydat' file}
+\subsection{Saving your data: the 'psydat' file}
 \label{sec:psydat-file}
 
 Each time when one run has been completed, i.e.\ a threshold has been
@@ -1530,11 +1436,9 @@ section~\ref{sec:display-results}).
 The following data will be saved in the psydat-file after each
 completion of one run: experiment name; subject name; date and time;
 number of stimulus parameters; name, value, and unit of each
-parameter; name of adaptive rule; name of stimulus variable, threshold value, its standard
+parameter; name of stimulus variable, threshold value, its standard
 deviation and minimal and maximal value, unit of stimulus variable.
-The result entry of one run will span across 
-several
-%%\code{3+M.NUM\_PARAMS}
+The result entry of one run will span across \code{2+M.NUM\_PARAMS}
 lines in the psydat-file.  Have a look into one of the example
 psydat-files in the \texttt{examples} subdirectory.  One example entry
 in the psydat file belonging to the experiment
@@ -1551,22 +1455,20 @@ in the psydat file belonging to the experiment
 This entry informs you that the subject named '\texttt{mh}' performed
 the \emph{adapt}ive experiment '\texttt{sam\_sincarrier\_detect}' on the 8th of
 January 2006 in the early evening.  The experiment had 2 parameters
-which are specified in rows 2 and 3, and it used the adaptive
-1-up-2-down rule.  The result was a threshold value 
-at $m$=~-31\,dB, with a standard deviation of 1.28\,dB.  The minimal
+which are specified in rows 2 and 3, and it used the adaptive 1-up-2-down rule.  The result was a threshold value
+at $m$=-31\,dB, with a standard deviation of 1.28\,dB.  The minimal
 respectively maximal values of the modulation degree during the
 measurement phase were -34\,dB respectively -29\,dB.
 
 The default behaviour of \psylab\ is to calculate the
 \index{threshold!calculation of}\emph{threshold} of
 an adaptive run as the \emph{median} of all values of \code{M.VAR} during the
-measurement phase, and to output this value into the psydat file.
-However, by setting the variable \code{M.SAVEMEAN} 
-to 1 (meaning \emph{true}), you can change this and specify that the threshold should rather
+measurement phase.  However, by setting the variable \code{M.SAVEMEAN}
+to 1, you can change this and specify that the threshold should rather
 be calculated as the \emph{mean} of all values of \code{M.VAR} during
 the measurement phase.  The default behaviour can be achieved by
-letting \code{M.SAVEMEAN} be an empty field or by setting it to the
-value~0 (meaning \emph{false}).
+letting \code{M.SAVEMEAN} be an empty field or by setting it to a
+value~$\neq1$.
 
 The default behaviour of \psylab\ is to output only the resulting
 threshold value of an adaptive run to the psydat-file.  However, by setting the variable
@@ -1576,7 +1478,7 @@ corresponding answers of the subject, should be output to the
 psydat-file in a separate line.   One entry in the file could then
 look like this:
 \begin{verbatim}
-##adapt## sam_sincarrier_detect mh  22-Nov-2016__17:14:50 npar 2 ####
+##adapt## sam_sincarrier_detect mh4 22-Nov-2016__17:14:50 npar 2 ####
 %%----- PAR1: modulation_frequency 16.000000 Hz
 %%----- PAR2: carrier_frequency 800.000000 Hz
 %%----- ADAPT: 1up_2down 
@@ -1618,9 +1520,9 @@ An example entry, performed with the experiment
 Note that these four entries were written to the psydat file at the
 same time, namely after all 5 presentations for each of the four
 different values of the variable (4, 8, 16, and 32 cent) were
-completed.  These four data points can form a part of the psychometric
-function.  Any calculation of thresholds or fitting of a psychometric
-function from theses data is left to the user of \psylab.
+completed.  These four data points form part of the psychometric
+function.  Any calculation of threshold, or fitting of a 
+psychometric function, is left to the user of \psylab. 
 
 ~\\
 
@@ -1651,8 +1553,8 @@ from an ``old'' psydat file that was produced with \psylab\ older than
 version~2.8.   
 
 
-\subsubsection{Temporary files}
-\label{sec:temporary-files}
+\subsubsection{Temporary file output}
+\label{sec:temporary-file-output}
 
 In addition to the psydat-file in ASCII format, the variables
 \texttt{M} and \texttt{M\_*} can also get saved as a binary mat-file
@@ -1660,9 +1562,7 @@ each time a run has been completed.  This behaviour will be turned on
 if \code{M.DEBUG}$>$0. However, this is mainly for rescue and analysis
 purposes and the binary files may as well be deleted.  They will not
 be used for later data analysis.  If you do not need this behaviour,
-just set \code{M.DEBUG=0;}.  
-When \code{M.FEEDBACK}$>$1, then \code{mpsy\_plot\_result.m} will append
-a copy of the resulting figure to the file \verb+'plot_thres_+\textit{$<$subjectname$>$}'
+just set \code{M.DEBUG=0;}.
 
 
 
@@ -1919,25 +1819,9 @@ and the standard deviation across the thresholds that belong to the
 three repetitions of the experiment with 1st parameter=16~Hz and 2nd
 parameter=400~Hz.  The values -37.5000 and 3.5355 are the mean and
 the standard deviation of the two repetitions belonging to 1st
-parameter=64~Hz and 2nd parameter=400~Hz, etc.  
-
-Note that the standard deviation of each experimental run, appearing
-in the 2nd column of the output argument \code{x\_all(:).psydata}, is
-\emph{neglected} by \code{display\_psydat} regarding the averaging
-across repetitions.
-
-Note also that the information about the adaptive rule belonging to
-each data point is \emph{neglected} by \code{display\_psydat}
-regarding the averaging across repetitions.  If you design an
-experiment where you employ more than one adaptive rule, e.g.\
-1-up-2-down and 2-up-1-down (with the aim to average the separate
-thresholds belonging to the target probabilities of 70.7\% and 29.3\%)
-then you need to store that piece of information in a different way.
-It can be done by explicitly using a further parameter, as thresholds
-belonging to different parameter values will be averaged separately by
-\code{display\_psydat}.  As an example, the experiment
-\code{match\_freq\_binaural\_singletrack} shows how this extra
-parameter can be used.  
+parameter=64~Hz and 2nd parameter=400~Hz, etc.  Note that the standard
+deviation of each experimental run, appearing in the 2nd column of
+\code{x\_all(:).psydata}, is \emph{neglected} in \code{display\_psydat}.
 \\
 
 %% --------------------------------------------------
@@ -1989,143 +1873,20 @@ variable $\hat{p}=\bar{p}$ can be interpreted as the \emph{average} of
 a total number of $N_{tot}$ ones and zeros, with $X$ their sum.  The
 expectation value of $\bar{p}$ is then $E(\hat{p})=E(\bar{p})=p$ and
 the associated standard error, i.e.\ the standard deviation of
-$\bar{p}$, is $\sigma_{\bar{p}}=\sqrt{\frac{1}{N^2} Var(X)} = \sqrt{p(1-p)/N}$.  These
+$\bar{p}$, is $\sqrt{\frac{1}{N^2} Var(X)} = \sqrt{p(1-p)/N}$.  These
 two values are output by \code{display\_psydat}, separately for each
 different combination of values of stimulus variable and stimulus
 parameter(s).
 
-The following example data from a constant stimuli experiment
-with one parameter demonstrates this behaviour.  The psydat-file
-contains the following data:
-%
-\begin{verbatim}
-[x,y] = read_psydat('mm', 'demo_experiment')
-*** info:  read_psydat found 37 matching entries in psydat_mm
-*** info:  meaning of the 4 cols of y:
-           prob_correct, num_presentations, variable, par1 
-x = 
-                 date: {1x37 cell}
-                  par: [1x1 struct]
-    num_presentations: [5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5]
-              varname: {1x37 cell}
-                  var: [1x37 double]
-              varunit: {1x37 cell}
-         prob_correct: [1x37 double]
-y =
-    0.8000    5.0000  -35.0000    0.0300
-    0.8000    5.0000  -40.0000    0.0300
-    1.0000    5.0000  -35.0000    0.0300
-    0.8000    5.0000  -40.0000    0.0300
-    0.6000    5.0000  -45.0000    0.0300
-    0.8000    5.0000  -40.0000    0.0300
-    0.8000    5.0000  -45.0000    0.0300
-    0.8000    5.0000  -35.0000    0.0300
-    0.6000    5.0000  -40.0000    0.0300
-    0.4000    5.0000  -45.0000    0.0300
-    1.0000    5.0000  -35.0000    0.0300
-    0.4000    5.0000  -40.0000    0.0300
-    0.8000    5.0000  -45.0000    0.0300
-    0.8000    5.0000  -35.0000    0.0300
-    0.6000    5.0000  -40.0000    0.0300
-    0.6000    5.0000  -45.0000    0.0300
-    1.0000    5.0000  -35.0000    0.0300
-    0.6000    5.0000  -40.0000    0.0300
-    0.8000    5.0000  -35.0000    0.0300
-    1.0000    5.0000  -35.0000    0.0300
-    1.0000    5.0000  -35.0000    0.0300
-    1.0000    5.0000  -40.0000    0.0300
-    0.4000    5.0000  -45.0000    0.0300
-    1.0000    5.0000  -35.0000    0.0300
-    0.8000    5.0000  -40.0000    0.0300
-    0.6000    5.0000  -45.0000    0.0300
-    1.0000    5.0000  -35.0000    0.0300
-    1.0000    5.0000  -40.0000    0.0300
-    0.2000    5.0000  -45.0000    0.0300
-         0    5.0000  -50.0000    0.0300
-    0.8000    5.0000  -38.0000    0.0300
-         0    5.0000  -48.0000    0.0300
-    1.0000    5.0000  -34.0000    0.0300
-    0.8000    5.0000  -38.0000    0.0300
-    0.8000    5.0000  -42.0000    0.0300
-    0.4000    5.0000  -46.0000    0.0300
-    0.4000    5.0000  -48.0000    0.0300
-\end{verbatim}
-%
-The content of output variable $y$ shows that alls data point were
-always measured with the same number of 5 stimulus presentations (2nd
-column in \texttt{y}) and all measurements were made with the same
-value of 0.03 for the first parameter M.PARAM(1) (4th column in
-\texttt{y}).  The scores (which are proportions, resp. estimated
-probabilities, all ranging between 0 and 1) are given in the 1st
-column und the values of the stimulus variable (ranging between -50
-and -34) are given in the 3rd column.
+The following example demonstrates this behaviour:   ...
 
-When these data are analzed by \code{display\_psydat\_raw}, the number $N$
-of presentations and the score $p$ for each data point is taken to
-calculate the standard error $\sigma_{\bar{p}}$ of the score $p$, as described above.  
-The output then looks like this:
-\begin{verbatim}
-[x,y] = display_psydat_raw('mm', 'premasking_sinusoid_const')
-*** info:  read_psydat found 37 matching entries in psydat_mm
-*** info:  read_psydat: meaning of the 4 cols of 2nd output:
-           prob_correct, num_presentations, variable, par1 
-*** info:  display_psydat_raw: meaning of the 2nd column of 2nd output changed from
-           number of presentations to estimated standard error of prob_correct
-x = 
-                    date: {1x37 cell}
-                     par: [1x1 struct]
-                 varname: {1x37 cell}
-                     var: [1x37 double]
-                 varunit: {1x37 cell}
-            prob_correct: [1x37 double]
-    std_err_prob_correct: [1x37 double]
-y =
-    0.8000    0.1789  -35.0000    0.0300
-    0.8000    0.1789  -40.0000    0.0300
-    1.0000         0  -35.0000    0.0300
-    0.8000    0.1789  -40.0000    0.0300
-    0.6000    0.2191  -45.0000    0.0300
-...
-\end{verbatim}
-Only the first 5 lines of \texttt{y} are shown here.  As an example,
-the value 0.1789 in the first line was calculated as
-$\sqrt{0.8\cdot(1-0.8)/5}$, where 0.8 was the score and 5 was the number of presentations
-(see first line of \texttt{y} in the output of \code{read\_psydat}).
 
-For the same psydat-file, the output of \code{display\_psydat} then
-looks like this:
-\begin{verbatim}
-[y_all, y_ave, y_ave2] = display_psydat('mm', 'premasking_sinusoid_const')
-*** info:  read_psydat found 37 matching entries in psydat_mm
-*** info:  read_psydat: meaning of the 4 cols of 2nd output:
-           prob_correct, num_presentations, variable, par1 
 
-*** info:  display_psydat: NOTE that for a constant stimulus experiment the output
-           colums of read_psydat and display_psydat have different meanings, and 
-           output y_all, y_average have different contents in their 2nd column:
-           2nd col in y_all (1st output argument) contains  
-          "num_presentations" of indiv. data, and 
-           2nd col in y_average (2nd output argument) contains  
-          "estimated std.err." of averaged data
-y_all = 
-    psydata: [37x4 double]
-y_ave = 
-    psydata: [9x4 double]
-y_ave2 =
-         0         0  -50.0000    0.0300
-    0.2000    0.1265  -48.0000    0.0300
-    0.4000    0.2191  -46.0000    0.0300
-    0.5500    0.0787  -45.0000    0.0300
-    0.8000    0.1789  -42.0000    0.0300
-    0.7400    0.0620  -40.0000    0.0300
-    0.8000    0.1265  -38.0000    0.0300
-    0.9273    0.0350  -35.0000    0.0300
-    1.0000         0  -34.0000    0.0300
-\end{verbatim}
+
 
 
 %% --------------------------------------------------
-\subsubsection{Special effects: permute/change the look of your data with display\_psydat.m}
+\subsubsection{special effects: permute/change the look of your data with display\_psydat.m}
 \label{sec:permuting-your-data}
 
 
@@ -2288,6 +2049,79 @@ section~\ref{sec:psydat-file-version}).
  
 
 
+
+%% --------------------------------------------------
+\subsection{Avoid the use of built-in function \texttt{sound} for playback}
+\label{sec:avoid-builtin-sound}
+
+Unfortunately, in Version 2011 of Matlab the audio handling was
+redesigned in a way that made the built-in function \code{sound}
+almost non-functioning.
+
+While this bug was fixed again by Matlab, a somewhat nicer and
+independent work-around for this annoying problem (and for others as
+well) is to use an alternative method to send your audio samples to
+your soundcard: ``\index{msound!alternative sound output}msound''.
+\code{msound} is a mex-file, also developed at the IHA, that uses the
+PortAudio-Interface (of \code{http://www.portaudio.com/}) for
+communicating with your sound card.  More information about msound can
+be found at the website of the Institute for Hearing Technology and
+Audiology (http://www.hoertechnik-audiologie.de/, then look for
+``Institut für Hörtechnik und Audiologie'' $\rightarrow$
+``Software''), and on github.
+
+The \code{msound} mex-file is now also included in the \psylab-distribution.
+It comes in several pre-compiled versions for win, gnu/linux-systems
+and mac, mostly in 32 and 64bit format.  The compiled binary files can also be
+found on github under ``releases''.  The dll-format (not on github any
+longer) is needed for older Matlab versions on win32-system.  If you
+encounter a warning about a ``shadowing'' effect of some msound-file
+over another, e.g.\ the mexw32 version shadowing the dll version, you
+may just delete the dll version.
+%
+In order to enable sound output via msound, only a few additional
+\psylab-variables need to be set:
+\begin{verbatim}
+M.USE_MSOUND       = 1;     % flag whether or not to use msound (1 or 0)
+M.MSOUND_DEVID     = 0;     % device ID for msound (choose 0 or [] for default device)
+M.MSOUND_FRAMELEN  = 1024;  % framelen for msound (number of samples)
+M.MSOUND_NCHAN     = 1;     % number of channels, must match  size(m_outsig,2)
+\end{verbatim}
+
+The variable \verb+M.USE_MSOUND+ works as a flag-variable whether or
+not to use \code{msound} instead of \code{sound}.
+
+The frame length \verb+M.MSOUND_FRAMELEN+ is the number of samples
+within each frame of audio, also called block size, that is sent to
+the soundcard.  You should test/experiment, which
+\verb+M.MSOUND_FRAMELEN+ works best on your own system.  The value of
+1024 worked well for most purposes on many machines/soundcards, but
+maybe not for yours.
+
+It is important to set the \verb+M.MSOUND_NCHAN+ to the number
+of channels of your stimuli, i.e.\ 1 for mono/diotic and 2 for
+stereo/dichotic signals.  If \verb+M.MSOUND_NCHAN+ does not match
+\verb+size(m_outsig,2)+, an error will occur.
+
+When using sound output via msound in \psylab, it is possible to
+use the visual interval indication.  Put another way round, on some
+systems it will only possible to use the visual interval indication \emph{if}
+you use msound for sound output.  
+
+
+
+%% --------------------------------------------------
+\subsection{Debugging your experiment}
+\label{sec:debug-your-experiment}
+
+For purposes of \index{debugging!variable \texttt{M.DEBUG}}debugging,
+set the variable \code{M.DEBUG} to a value larger than zero (1, 2, 3,
+4), to get an increasing amount of temporary information and plots.
+Stick to the rule: ``Use the force -- read the source'' to see the
+behaviour in case of \code{M.DEBUG}$>$0.
+
+When gathering real data with test subjects, however, you will want to
+set \code{M.DEBUG=0;}
 
 
 %\clearpage

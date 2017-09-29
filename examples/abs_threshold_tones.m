@@ -69,9 +69,9 @@ for f0 = frequencies,
    
   M.PARAM(1) = f0;
   mpsy_afc_main;
-  mpsy_plot_result;
  
 end
+mpsy_plot_thresholds;
 
 
 

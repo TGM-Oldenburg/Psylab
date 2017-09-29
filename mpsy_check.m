@@ -27,6 +27,7 @@
 %% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
+% --------------------------------------------------
 % check for experiment using old psylab version via existence of
 % old-style variable M_PARAM 
 if exist('M_PARAM'),
@@ -36,6 +37,7 @@ if exist('M_PARAM'),
   warning('version mismatch of psylab version and your experiment files');
 end
 
+% --------------------------------------------------
 % check for experiment using old style definition of adaptive procedure
 if isfield(M, 'ADAPT_N_UP') & ~isfield(M, 'ADAPT_METHOD'),
   fprintf('*** You seem to try to run an experiment made for psylab version prior to 2.3,\n');
@@ -48,7 +50,13 @@ end
 mpsy_field_must_be_string = {'SNAME', 'VARNAME', 'VARUNIT'};
 
 % field variables that must contain a numeric scalar value
-mpsy_field_must_be_scalar = {'VAR', 'STEP', 'MINSTEP', 'NUM_PARAMS'};
+if isfield(M, 'ADAPT_METHOD'),
+  mpsy_field_must_be_scalar = {'VAR', 'STEP', 'MINSTEP', 'NUM_PARAMS'};
+end
+if isfield(M, 'CONSTSTIM_NUM_PRESENTATIONS'),
+  mpsy_field_must_be_scalar = {'CONSTSTIM_NUM_PRESENTATIONS', 'NUM_PARAMS'};
+end
+
 % field variables that must contain a numeric value (scalar or vector)
 mpsy_field_must_be_numeric = [mpsy_field_must_be_scalar, 'PARAM'];
 
@@ -58,6 +66,7 @@ mpsy_field_must_be_cell = {'PARAMNAME', 'PARAMUNIT'};
 
 mpsy_field_must_not_be_empty = [mpsy_field_must_be_string mpsy_field_must_be_numeric];
 
+% --------------------------------------------------
 % check for empty variables
 for tmp = mpsy_field_must_not_be_empty,
   tmp_varname = char(tmp);
@@ -72,6 +81,7 @@ for tmp = mpsy_field_must_not_be_empty,
   end
 end
 
+% --------------------------------------------------
 % check for numeric type variables
 for tmp = mpsy_field_must_be_numeric,
   tmp_varname = char(tmp);
@@ -80,6 +90,7 @@ for tmp = mpsy_field_must_be_numeric,
   end
 end
 
+% --------------------------------------------------
 % check for string type variables
 for tmp = mpsy_field_must_be_string,
   tmp_varname = char(tmp);
@@ -91,6 +102,7 @@ for tmp = mpsy_field_must_be_string,
   end
 end
 
+% --------------------------------------------------
 % check for being scalar variables
 for tmp = mpsy_field_must_be_scalar,
   tmp_varname = char(tmp);
@@ -100,6 +112,7 @@ for tmp = mpsy_field_must_be_scalar,
 end
 
 
+% --------------------------------------------------
 % check for correct lengths of M.PARAM* variables
 if length(M.PARAM) ~= M.NUM_PARAMS,
   error('length of M.PARAM must match value of M.NUM_PARAMS ');
@@ -111,6 +124,7 @@ if length(M.PARAMUNIT) ~= M.NUM_PARAMS,
   error('length of M.PARAMUNIT must match value of M.NUM_PARAMS ');
 end
 
+% --------------------------------------------------
 % check for cellstring type variables
 for tmp = mpsy_field_must_be_cell,
   tmp_varname = char(tmp);
@@ -129,8 +143,8 @@ for tmp = mpsy_field_must_be_cell,
 end
 
 
-%% --------------------------------------------------
-%% check type of experiment (e.g. n-AFC or matching) 
+% --------------------------------------------------
+% check type of experiment (e.g. n-AFC or matching) 
 clear tmp_type; 
 tmp_type(1) = isfield(M, 'NAFC');
 tmp_type(2) = isfield(M, 'MATCH_ORDER');
@@ -139,15 +153,17 @@ if sum(tmp_type) ~= 1,
   error('exactly one of either M.NAFC or M.MATCH_ORDER or M.N_RECOGNITION must be set correctly');
 end
 
-%% --------------------------------------------------
-%% check correct sign of M.STEP and M.MINSTEP
-if sign(M.STEP) ~= sign(M.MINSTEP),
-  error('M.STEP and M.MINSTEP must have the same sign:  both positive for regular experiments, both negative for reversed-up-and-down experiment');
+% --------------------------------------------------
+% check correct sign of M.STEP and M.MINSTEP
+if isfield(M, 'ADAPT_METHOD'),
+  if sign(M.STEP) ~= sign(M.MINSTEP),
+    error('M.STEP and M.MINSTEP must have the same sign:  both positive for regular experiments, both negative for reversed-up-and-down experiment');
+  end
 end
 
 
 
-%% --------------------------------------------------
+% --------------------------------------------------
 % check proper value of M.VISUAL_INDICATOR
 if M.VISUAL_INDICATOR & ~M.USE_GUI,
   fprintf('\n*** INFO: the VISUAL_INDICATOR feature can only be used when using a GUI\n');
@@ -158,7 +174,7 @@ end
 
 
 
-%% --------------------------------------------------
+% --------------------------------------------------
 % check version of psydat file, create correct header line 
 % if file doesn't exist yet
 M.PSYDAT_VERSION = mpsy_check_psydat_file( ['psydat_' M.SNAME] );
@@ -180,10 +196,10 @@ end
 
 
 
-%% --------------------------------------------------
-%% ensure existence of pre-signal, quiet-signal, and post-signal
-%% - if not yet existent, thencreate empty signals
-%% - if existent but a scalar value, then generate silence signals
+% --------------------------------------------------
+% ensure existence of pre-signal, quiet-signal, and post-signal
+% - if not yet existent, then create empty signals
+% - if existent but a scalar value, then generate silence signals
 %
 % For the generation of silence signals, we need to know the number
 % of channels (mono, stereo, ...).  In order to determine that
@@ -215,39 +231,16 @@ else
 end
 
 
-% $$$  this was a test - not working properly.  
-% $$$ %% --------------------------------------------------
-% $$$ %% (re)create gui 
-% $$$ if M.USE_GUI,
-% $$$   htmp = findobj('Tag', 'psylab_answer_gui');
-% $$$   if ~isempty(htmp),
-% $$$     % Delete the already existing GUI.  This is necessary
-% $$$     % especially in (some rare) cases where a matching experiment
-% $$$     % follows an AFC experiment, or vice versa. 
-% $$$     delete(htmp)
-% $$$   end
-% $$$   
-% $$$   % create a fresh GUI.  This avoids possible problems with cleared
-% $$$   % (handle) variables for the GUI objects
-% $$$   if isfield(M, 'NAFC') & M.NAFC >= 2,
-% $$$     % hm, seems like we have an n-AFC experiment
-% $$$     eval( ['mpsy_' num2str(M.NAFC) 'afc_gui;'] );
-% $$$   elseif isfield(M, 'MATCH_ORDER') & M.MATCH_ORDER >= 0,
-% $$$     % seems like we have a matching experiment
-% $$$     mpsy_up_down_gui;
-% $$$   end
-% $$$ end
 
-
-%% --------------------------------------------------
-%% create gui or get the handle for the afc gui 
+% --------------------------------------------------
+% create gui or get the handle for the afc gui 
 if M.USE_GUI,
   htmp = findobj('Tag', 'psylab_answer_gui');
   if isempty(htmp),
     % in case of first run or in case the answer-gui got cleared/closed 
     % unintentionally by the test subject:  create a fresh one.  
     if isfield(M, 'NAFC') & M.NAFC >= 2,
-      if strcmp(M.ADAPT_METHOD, 'uwud')
+      if isfield(M, 'ADAPT_METHOD') & strcmp(M.ADAPT_METHOD, 'uwud'),
         % seems like we have an unforced choice n-AUC experiment
         eval( ['mpsy_' num2str(M.NAFC) 'auc_gui;'] );
       else

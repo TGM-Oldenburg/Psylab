@@ -2,6 +2,7 @@ examples/*.mat
 examples/plot*.ps
 examples/psy_*.*
 examples/psydat*
+contrib/*/psydat*
 doc/*.aux
 doc/*.bbl
 doc/*.blg
@@ -12,16 +13,17 @@ doc/*.ind
 doc/*.log
 doc/*.out
 doc/*.ps
+doc/*.pdf
 doc/*.toc
 exp2/
 simu/
 tests/
+tests2/
 *.m~
 *.tar*
 *.zip
 psylab-*.*/
 todolist*
-Makefile*
 *~
 *v1*
 mpsy_simu*.m

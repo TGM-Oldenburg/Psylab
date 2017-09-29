@@ -1,4 +1,4 @@
-% Usage: mpsy_proto()
+% Usage: mpsy_proto_adapt()
 % ----------------------------------------------------------------------
 %          Protocols the results of the previous adaptive run:
 %          plots M.VAR as a function of trial number
@@ -120,7 +120,7 @@ if ~isfield(M, 'allthres_mean'),
   % hm, this seems to be the first completed run during this experiment
   M.allthres_mean = M.mean_thres ;   
 else  
-  M.allthres_mean = [ M.allthres_med; M.mean_thres ];  % append a column
+  M.allthres_mean = [ M.allthres_mean; M.mean_thres ];  % append a column
 end
 % add this threshold's standard deviation (std.dev. of M_VAR during
 % measurement phase of last run) to collection
@@ -170,7 +170,7 @@ if M.FEEDBACK,
 end
 
 
-% End of file:  mpsy_proto.m
+% End of file:  mpsy_proto_adapt.m
 
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"

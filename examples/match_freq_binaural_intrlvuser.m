@@ -1,6 +1,6 @@
 % user-script for match_freq_binaural_intlvr
 %
-% Usage: y = match_freq_binaural_intlvruser
+% Usage: match_freq_binaural_intlvruser
 %
 % Copyright (C) 2012 by Martin Hansen, Jade Hochschule, Oldenburg
 % Author :  Martin Hansen <psylab AT jade-hs.de>

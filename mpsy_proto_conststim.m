@@ -77,10 +77,10 @@ if ~isfield(M, 'collect_allvars'),
   M.collect_allvars = M.CONSTSTIM_ALLVARS ;   
 else  
   % append a column
-  M.collect_allvars = [ M.collect_allvars M.CONSTSTIM_ALLVARS; ];
+  M.collect_allvars = [ M.collect_allvars; M.CONSTSTIM_ALLVARS ];
 end
 % add this run's estimated prob_correct values to collection (of all runs)
-if ~isfield(M, 'collect_probcorr'),
+if ~isfield(M, 'collect_estim_probcorr'),
   % hm, this seems to be the first completed run during this experiment
   M.collect_estim_probcorr = M.result_estim_probcorr ;   
 else  
@@ -131,10 +131,11 @@ if M.FEEDBACK,
     fprintf('           Par.%d (%s): %g %s,\n', k, char(M.PARAMNAME(k)), M.PARAM(k), char(M.PARAMUNIT(k)));
   end  
   fprintf('           Variable %s (%s) \n', M.VARNAME, M.VARUNIT);
-  fprintf('           Var.     Prob.corr.    Pc. Std.error\n');
+  fprintf('           Number of presentations N: %d \n', M.CONSTSTIM_NUM_PRESENTATIONS); 
+  fprintf('           Var.         Prob.corr.    Pc. Std.error\n');
   fprintf('           ----------------------------------------\n');
   for k=1:length(M.CONSTSTIM_ALLVARS),
-    fprintf('           %5g    %.4f        %.4f\n', ...
+    fprintf('           %10g    %.4f        %.4f\n', ...
             M.CONSTSTIM_ALLVARS(k), M.result_estim_probcorr(k), M.result_stderr_probcorr(k));
   end
   fprintf('           ----------------------------------------\n');

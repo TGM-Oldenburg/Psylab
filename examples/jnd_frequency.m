@@ -32,10 +32,7 @@ M.PARAMUNIT(2) = {'dB'};
 M.VARNAME      = 'rel_frequency_increment';
 M.VARUNIT      = 'cent';
 M.TASK         = 'which interval contained the test signal (1,2,3)?  ';
-M.MINSTEP      = 1 ;   % minumum step size, in units of M.VARUNIT
 M.NAFC         = 3 ;   % number of forced choice intervals
-M.ADAPT_METHOD = '1up_2down'; 
-M.MAXREVERSAL  = 8 ;   % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;     % flag for provision of feedback about correctness of answer
 
 
@@ -69,20 +66,20 @@ M.PARAM(2)  =  -10;
 ref_freqs = [250 500 1000 2000 3000 6000];
 
 % number of repeated presentations per variable value
-M.CONSTSTIM_NUM_PRESENTATIONS = 5;
+M.CONSTSTIM_NUM_PRESENTATIONS = 20;
 
 % vector with all values for variable M.VAR
 M.CONSTSTIM_ALLVARS = [4 8 16 32];
-%M.CONSTSTIM_ALLVARS = [1 2 4 8 16 32];
+M.CONSTSTIM_ALLVARS = [1 2 4 8 16 32];
 
 
 for freq = ref_freqs,
    
   M.PARAM(1) = freq;
   mpsy_afc_conststim_main;
- 
-end
+  mpsy_plot_psycfunc;
 
+end
 
 
 

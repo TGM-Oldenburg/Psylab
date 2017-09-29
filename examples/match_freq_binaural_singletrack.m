@@ -1,10 +1,11 @@
 % Measurement of binaural frequency-matching for sinusoids as a function of Frequency
 %
-% Usage: match_freq_binaural
+% Usage: match_freq_binaural_singletrack
 %
 % Copyright (C) 2006       Martin Hansen, FH OOW
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 % Date   :  31 Okt 2006
+% Updated:  <29 Aug 2017 11:28, martin>
 % Updated:  <23 Apr 2013 16:21, martin>
 % Updated:  <31 Okt 2006 16:13, hansen>
 
@@ -24,18 +25,19 @@ mpsy_init;
 
 % ------------------------------ set M.* variables
 M.EXPNAME      = mfilename;    % experiment name, very important to be set correctly!
-M.NUM_PARAMS   = 2;            % number of parameters
+M.NUM_PARAMS   = 3;            % number of parameters
 M.PARAMNAME(1) = {'reference_frequency'};
 M.PARAMUNIT(1) = {'Hz'};
 M.PARAMNAME(2) = {'test_ear_side'};
 M.PARAMUNIT(2) = {'left1_right2'};
+M.PARAMNAME(3) = {'target_p_correct'};
+M.PARAMUNIT(3) = {'percent'};
 M.VARNAME      = 'rel_frequency_increment';
 M.VARUNIT      = 'cent';
-%M.TASK         = 'match the tones in frequency';   % TASK gets set in the set-skript
+% %% M.TASK         = 'match the tones in frequency';   % TASK gets set in the set-script!
 M.MINSTEP      = 1 ;   % minumum step size, in units of M.VARUNIT
 M.MATCH_ORDER  = 2 ;   % position of test signal (0=random, 1=first, 2=second)
-%M.ADAPT_METHOD = '1up_1down'; 
-M.MAXREVERSAL  = 8 ;   % number of reversals required as stop criterion
+M.MAXREVERSAL  = 10;   % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;   % flag for provision of feedback about correctness of answer
 
 % ------------------------------ 
@@ -43,7 +45,7 @@ M.FS               = 48000; % sampling frequency
 M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
 M.USE_GUI          = 1;
 M.INFO             = 1;     % flag for additional info for test subject
-M.VISUAL_INDICATOR = 0;     % flag whether to use visual interval indication
+M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
 M.DEBUG            = 0;
 
 % ========================================
@@ -67,16 +69,27 @@ M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN a
 ref_freqs = [500 1000 2000 3000 6000];
 % 
 for freq = ref_freqs,
-   
+  
   M.PARAM(1) = freq;
   M.PARAM(2)  =  1;   % test signal side left
   
-  % NOTE:  the content of ADAPT_METHOD will be saved in the psylab file
+  % NOTE:  the content of ADAPT_METHOD will be saved in the psylab file ...
   M.ADAPT_METHOD = '1up_2down';
+  % BUT:  during later analysis, display_psydat will not distinguish between
+  %       different values of ADAPT_METHOD 
+  % SOLUTION: save the information in a separate parameter
+  M.PARAM(3) = 70.7;
+  
   mpsy_match_main;
 
-  % NOTE:  the content of ADAPT_METHOD will be saved in the psylab file 
+  
+  % NOTE:  the content of ADAPT_METHOD will be saved in the psylab file ...
   M.ADAPT_METHOD = '2up_1down';
+  % BUT:  during later analysis, display_psydat will not distinguish between
+  %       different values of ADAPT_METHOD 
+  % SOLUTION: save the information in a separate parameter
+  M.PARAM(3) = 29.3;
+  
   mpsy_match_main;
   
   

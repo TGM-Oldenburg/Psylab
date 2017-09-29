@@ -90,7 +90,7 @@ while 1,
         elseif strcmp(tok(1), '##const##'), 
           experiment_type = 'const';
         else
-          error('unknown experiment type %s in psydat file %s', char(tok(1)), file_name);
+          error('   Unknown experiment type "%s" in psydat file %s.\n   You might want to try the old version read_psydat_v2', char(tok(1)), file_name);
         end
         
         nparam = str2num(char(tok(6)));
@@ -257,7 +257,7 @@ if nargout > 1,
         y(:,4+k) = x.par(k).value' ;
       end
       
-      fprintf('*** info:  meaning of the %d cols of y:\n', 4+nparam)
+      fprintf('*** info:  read_psydat: meaning of the %d cols of y (2nd output argument):\n', 4+nparam)
       fprintf('           threshold, thres_sd, thres_min, thres_max, par1')
       for k=2:nparam,   fprintf(', par%d', k);  end
       fprintf(' \n');
@@ -271,7 +271,7 @@ if nargout > 1,
         y(:,3+k) = x.par(k).value' ;
       end
       
-      fprintf('*** info:  meaning of the %d cols of y:\n', 3+nparam)
+      fprintf('*** info:  read_psydat: meaning of the %d cols of y (2nd output argument):\n', 3+nparam)
       fprintf('           prob_correct, num_presentations, variable, par1')
       for k=2:nparam,   fprintf(', par%d', k);  end
       fprintf(' \n');

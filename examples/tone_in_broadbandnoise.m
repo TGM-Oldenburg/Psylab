@@ -72,7 +72,7 @@ for kk = 1:length(tone_freqs),
 end
 
 mpsy_intrlv_afc_main;
-mpsy_plot_result;
+mpsy_plot_thresholds;
 display_psydat(M.SNAME, M.EXPNAME)
 
 

@@ -1,6 +1,6 @@
 % user-script for match_freq_binaural_singletrack
 %
-% Usage: y = match_freq_binaural_singletrackuser
+% Usage: match_freq_binaural_singletrackuser
 %
 % Copyright (C) 2012 by Martin Hansen, Jade Hochschule, Oldenburg
 % Author :  Martin Hansen <psylab AT jade-hs.de>

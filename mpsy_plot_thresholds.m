@@ -1,6 +1,10 @@
-% Usage: mpsy_plot_result
+% Usage: mpsy_plot_thresholds
 % ----------------------------------------------------------------------
-%     to be called from mpsy_afc_main  or similar scripts
+%     to be called at the end of mpsy_afc_main  or similar scripts
+%
+%     all data gathered in the previous adaptive experiment 
+%     are plotted with threshold as a function of the parameter value(s)
+%
 % 
 %   input:   (none), works on global variables
 %  output:   (none), a plot figure
@@ -8,6 +12,7 @@
 % Copyright (C) 2005  Martin Hansen, FH OOW  
 % Author :  Martin Hansen,  <psylab AT jade-hs.de>
 % Date   :  30 Nov 2005
+% Updated:  <25 Aug 2017 11:42, hansen>  file renamed from old name mpsy_plot_results.m
 % Updated:  <30 Nov 2005 16:08, hansen>
 
 %% This file is part of PSYLAB, a collection of scripts for
@@ -40,7 +45,6 @@ yl = [M.VARNAME ' [' M.VARUNIT ']'];
 ylabel(strrep(yl, '_',' '));
 
 
-%tit = ['Exp.: ' M.EXPNAME ', Param.: ' M.PARAMNAME ];
 tit = ['Exp. ' M.EXPNAME ];
 if M.NUM_PARAMS>1,
   for l=2:M.NUM_PARAMS,
@@ -49,9 +53,12 @@ if M.NUM_PARAMS>1,
 end
 title(strrep(tit,'_','\_'));
 
-print('-dpsc','-append', ['plot_thres_' M.SNAME])
+if M.FEEDBACK>1,
+  print('-dpsc','-append', ['plot_thres_' M.SNAME])
+end
 
-% End of file:  mpsy_plot_result.m
+
+% End of file:  mpsy_plot_thresholds.m
 
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"

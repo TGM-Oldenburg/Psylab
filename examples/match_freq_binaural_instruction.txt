@@ -1,6 +1,6 @@
 
 	This psychoacoustical experiment is about the subjective match
-	of tones of different pitch (tone height).
+	of tones to have equal pitch (tone height).
 
 	In this experiment, you will hear two short tones after
 	another.  One of the tones will always be the same ("reference

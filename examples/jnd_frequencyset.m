@@ -18,11 +18,11 @@
 %% See the GNU General Public License for more details:
 %% http://www.gnu.org/licenses/gpl
 
-M.VAR  = 33 ;     % start frequency increment factor
-M.STEP = 16 ;    % start STEP-size (
+M.VAR  = 32 ;  % start frequency increment factor.  The value is unimportant, 
+               % as it is later overwritten by mpsy_afc_conststim_main.m 
 
-tdur   = 0.4;    % Dauer des Traegers [s]
-a0     = sqrt(2)*10^(M.PARAM(2)/20);    % seine Amplitude
+tdur   = 0.4;    % duration of tone [s]
+a0     = sqrt(2)*10^(M.PARAM(2)/20);    % its amplitude
 
 % sinusoid
 ton1 = gensin(M.PARAM(1), a0, tdur, 0, M.FS);
@@ -36,11 +36,6 @@ m_quiet   = zeros(round(pauselen*M.FS),1);
 m_postsig = m_quiet(1:end/2);
 m_presig  = m_quiet;
 
-% $$$ pauselen  = 0.4;
-% $$$ m_quiet   = zeros(round(pauselen*M.FS),1);
-% $$$ m_postsig = m_quiet(1:2);
-% $$$ m_presig  = m_quiet(1:2);
-% $$$ 
 
 
 % End of file:  jnd_frequencyset.m

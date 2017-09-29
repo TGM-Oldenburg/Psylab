@@ -50,7 +50,7 @@ if flag_use_gui,
   % is essential for catching GUI events 
   while user_answer == -1,    
     pause (0.5);  
-    user_answer = guidata(guihandle);
+    user_answer = guidata(guihandle)
   end;   
   set(guihandle, 'String', '');
   

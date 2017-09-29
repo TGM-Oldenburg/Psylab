@@ -1,6 +1,6 @@
 % set-script for match_freq_binaural_singletrack
 %
-% Usage: match_freq_binaural_intrlvset
+% Usage: match_freq_binaural_singletrackset
 %
 %
 % Copyright (C) 2012 by Martin Hansen, Jade Hochschule
@@ -23,7 +23,6 @@ M.VAR  = 33 ;    % start frequency increment factor
 M.STEP = 16 ;    % start STEP-size 
 
 tdur   = 0.4;    % duration of tone [s]
-tdur   = 0.2;    % zum testen
 level  = -20;    % its level [dB FS]
 a0     = sqrt(2)*10^(level/20);    % its amplitude
 

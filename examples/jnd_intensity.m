@@ -44,31 +44,31 @@ M.FS               = 48000; % sampling frequency
 M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
 M.USE_GUI          = 1;
 M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
-M.DEBUG            = 2;
+M.DEBUG            = 0;
 
 
 % set sound card to maximum output (!)
 
-fprintf('\n\n\n\n');  %%clc;  
+fprintf('\n\n\n\n');  
 type jnd_intensity_instruction.txt
 
 M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN at end) ','s');
 
-%% ==================================================
+% ==================================================
 M.PARAM(2)  =  1000;
 
-ref_levels = -30;
-%ref_levels = [-70 -60 -50 -40 -30 -20 ];
+%ref_levels = -30;
+ref_levels = [-70 -60 -50 -40 -30 -20 ];
 for level = ref_levels,
    
   M.PARAM(1) = level;
   mpsy_afc_main;
  
 end
-mpsy_plot_result;
+mpsy_plot_thresholds;
 
 
-% %% ==================================================
+% ==================================================
 % M.PARAM(2)  = 2000;
 % 
 % for level = ref_levels,
@@ -77,7 +77,7 @@ mpsy_plot_result;
 %   mpsy_afc_main;
 %  
 % end
-% mpsy_plot_result;
+% mpsy_plot_thresholds;
 
 
 % End of file:  jnd_intensity.m

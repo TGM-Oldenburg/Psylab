@@ -49,6 +49,14 @@ M.DIRECTION = [];
 % reset some internal variables 
 % NOTE:  mpsy_proto_adapt and mpsy_plot_feedback depend on THIS:
 M.med_thres = [];
+% NOTE:  for completeness, also these variables should be reset:
+M.mean_thres = []; % THIS can be defined as threshold, see below
+M.std_thres  = [];
+M.min_thres  = [];
+M.max_thres  = [];
+M.measurement_fidx = [];
+M.familiarization_fidx = [];
+
 
 % set some variables to default-values, if not yet present
 if ~isfield(M, 'TASK') | isempty(M.TASK)
@@ -141,9 +149,9 @@ end
 % (change from going down to up).  However, in version 2.5. and
 % below, only upper reversal were counted.  So check for meaningful
 % number of reversals:  
-% Every maximal reversal count <= 4 is suspected to belong
+% Any maximal reversal count <= 4 is suspected to belong
 % to an older psylab experiment designed before version 2.6:
-if M.MAXREVERSAL <= 4,
+if isfield(M, 'ADAPT_METHOD') & M.MAXREVERSAL <= 4,
   % upon fresh delivery, the psylab distribution contains the two
   % files 'mpsy_maxreversal_check' and 'mpsy_maxreversal_askagain'
   % which are identical upon delivery

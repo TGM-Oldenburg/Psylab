@@ -24,18 +24,18 @@ mpsy_init;
 
 % ------------------------------ set M.* variables
 M.EXPNAME      = mfilename;    % experiment name, very important to be set correctly!
-M.NUM_PARAMS   = 3;            % number of parameters
+M.NUM_PARAMS   = 2;            % number of parameters
 M.PARAMNAME(1) = {'reference_frequency'};
 M.PARAMUNIT(1) = {'Hz'};
 M.PARAMNAME(2) = {'test_ear_side'};
 M.PARAMUNIT(2) = {'left1_right2'};
 M.VARNAME      = 'rel_frequency_increment';
 M.VARUNIT      = 'cent';
-% %% M.TASK         = 'match the tones in frequency';   % TASK gets set in the set-skript!
+% %% M.TASK         = 'match the tones in frequency';   % TASK gets set in the set-script!
 M.MINSTEP      = 1 ;   % minumum step size, in units of M.VARUNIT
 M.MATCH_ORDER  = 2 ;   % position of test signal (0=random, 1=first, 2=second)
 M.ADAPT_METHOD = '1up_1down'; 
-M.MAXREVERSAL  = 8 ;   % number of reversals required as stop criterion
+M.MAXREVERSAL  = 10;   % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;   % flag for provision of feedback about correctness of answer
 
 % ------------------------------ 
@@ -43,7 +43,7 @@ M.FS               = 48000; % sampling frequency
 M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
 M.USE_GUI          = 1;
 M.INFO             = 1;     % flag for additional info for test subject
-M.VISUAL_INDICATOR = 0;     % flag whether to use visual interval indication
+M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
 M.DEBUG            = 0;
 
 % ========================================

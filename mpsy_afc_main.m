@@ -71,7 +71,8 @@ if M.INFO,
   mpsy_info(M.USE_GUI, afc_info, stmp);
 end
 
-M.UA = mpsy_query_user(M.USE_GUI, afc_fb, 'are you ready for this run?    to continue, hit RET');
+M.ALLOWED_USER_ANSWERS=[];
+M.UA = mpsy_get_useranswer(M, 'are you ready for this run?    to continue, hit RET', afc_fb);
 % check user answer for a possible quit-request
 if M.UA == 9, M.QUIT = 1;  end
 if M.UA >= 8, return;  end

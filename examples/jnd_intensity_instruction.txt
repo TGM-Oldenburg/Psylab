@@ -3,18 +3,18 @@
 	of DIFFERENCES in loudness, i.e. the detectability of an
 	increase of the sound level of a tone.
 
-	In this experiment, you will hear three tone intervals after
-	another.  The three intervals will be marked visually.  Two of
-	the intervals will be the same while in one of the intervals
-	the tone will be louder.  In each presentation of the
-	intervals, the one containing the louder tone will be selected
-	randomly.  The loudness difference will be clearly audible in
-	the beginning and it will become smaller during the course of
-	the experiment, such that you may have difficulties or find it
-	impossible to hear the difference.
+	In this experiment, you will hear two tone intervals after
+	another.  The two intervals will be marked visually.  In one
+	of the intervals the tone will be louder than in the other.
+	In each presentation of the intervals, the one containing the
+	louder tone will be selected randomly.  The loudness
+	difference will be clearly audible in the beginning and it
+	will become smaller during the course of the experiment, such
+	that you may have difficulties or find it impossible to hear
+	the difference.
 
 	Your task as a test person is to decide, after each
-	presentation, in which of the intervals (1, 2, or 3) you heard
+	presentation, in which of the intervals (1 or 2) you heard
 	the louder tone.  You can answer by clicking the corresponding
 	answer button.  If you cannot decide, please make a guess.
 
