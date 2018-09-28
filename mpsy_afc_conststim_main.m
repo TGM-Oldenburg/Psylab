@@ -179,8 +179,8 @@ end
 mpsy_proto_conststim;
  
 if M.FEEDBACK,  
-  % figure(111); mpsy_plot_feedback; 
-  fprintf('*** info: a plot of the results can be generated via display_psydat\n')
+  figure(111); mpsy_plot_psycfunc; 
+  %fprintf('*** info: a plot of the results can be generated via display_psydat.\n')
 end
 
 mpsy_info(M.USE_GUI, afc_fb, '*** run completed ***');

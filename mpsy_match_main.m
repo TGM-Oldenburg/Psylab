@@ -38,26 +38,20 @@
 
 
 if M.QUIT,
-  % we get HERE in case the user requested a quit of the experiment
+  % we will get HERE in case the user requested a quit of the experiment
   % at the beginning of a new run which isn't the very last of all runs.
   mpsy_info(M.USE_GUI, afc_fb, '*** user-quit of this experiment ***', afc_info, '');
   %disp('experiment was quit by user-request')
   return
 end
 
-% $$$ %% Check definition of adaptive rule for matching experiment.  If
-% $$$ %% not present, issue a warning and set it to default value 1up_1down
-% $$$ if ~isfield(M, 'ADAPT_METHOD'),
-% $$$     fprintf('\n *** no adaptive method has been defined.\n')
-% $$$     warning('setting adaptive method to default value ''1up_1down'' ');
-% $$$     M.ADAPT_METHOD = '1up_1down';
-% $$$ end
 
 % clear previous run history, if any; set missing default values;
 % open msound, if requested; 
 mpsy_init_run;
 
 if M.VISUAL_INDICATOR,
+  warning(' M.VISUAL_INDICATOR has been set to 0.')
   M.VISUAL_INDICATOR = 0;
   disp('*** info:  The VISUAL_INDICATOR feature is not yet supported for matching experiments, ')
   disp('*** info:  as it does not make sense in most cases.');
@@ -99,24 +93,23 @@ pause(0.5);
 % ------------------------------------------------
 while (M.REVERSAL < M.MAXREVERSAL) | (M.STEP > M.MINSTEP)
 
-  % NEW REVERSED ORDER of step 1 and 2 rel. to version 2.2:
-  % new values for M.VAR and M.STEP have been calculated based on
-  % the adaptive rule in use.  
-  % new step 1 (was: step 2)
-  % generate new signals by use of the "user-script"
+  % New values for M.VAR and M.STEP have been calculated based on
+  % the adaptive rule in use; except for the very first run.  
+  % Generate new signals by use of the "user-script"
   eval([M.EXPNAME 'user']);
   
-  % new step 2 (was: step 1)  
-  % this is to reflect possible changes of M.VAR by the user
-  % script.  For example, the user script might limit M.VAR to
-  % within certain boundaries, e.g., to prevent amplitude clipping,
-  % overmodulation, negative increments, etc.  
-  % save current VAR and STEP 
+  % Save the new values of M.VAR and M.STEP in the array of all of
+  % their values during the current run.  
+  % This order (FIRST call the user script, THEN save the two
+  % variables) is needed to reflect changes of M.VAR, that are possibly
+  % made by the user script.  For example, the user script might
+  % limit M.VAR to within certain boundaries, e.g., to prevent
+  % amplitude clipping, overmodulation, negative increments, etc.
   M.VARS  = [M.VARS M.VAR];
   M.STEPS = [M.STEPS M.STEP];
   
   
-  % mount and present intervals in matching experiment fashion.
+  % Mount intervals in matching experiment fashion, present them,
   % obtain and process user answer. 
   mpsy_match_present;
   % check user answer for a possible quit-request
