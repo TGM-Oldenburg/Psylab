@@ -43,7 +43,7 @@ function [x,y] = read_psydat(s_name, exp_name)
 file_name = ['psydat_' s_name];
 [fid1,msg] = fopen(file_name,'r');
 if ~strcmp(msg,''),
-  fprintf('fopen on file % returned with message %s\n',file_name, msg);
+  fprintf('fopen on file %s returned with message "%s"\n',file_name, msg);
   return
 end
 
@@ -233,8 +233,8 @@ for k=2:length(x.varname),
   end
   
   if non_unique,
-    fprintf('***\n*** WARNING:  non-unique name or unit in y, at data set #%d  (id=%d)\n***\n',...
-            non_unique, k);
+    fprintf('***\n*** WARNING:  non-unique name or unit in y, at data set #%d  (id=d%d|b%s)\n***\n',...
+            k, non_unique, dec2bin(non_unique));
     break
   end
 end

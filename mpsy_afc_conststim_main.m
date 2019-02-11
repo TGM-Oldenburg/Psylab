@@ -110,6 +110,17 @@ for M_TRIAL_COUNT = 1 : M.CONSTSTIM_NTRIALS,
   % Generate new signals by use of the "user-script"
   eval([M.EXPNAME 'user']);
 
+  % Save the new value of M.VAR in the array of all its values during
+  % the current run.  Note that this is a redundant information here, as
+  % it is also contained in   M.CONSTSTIM_ALLTRIALS(M.RAND_ORDER(M_TRIAL_COUNT))
+  %
+  % This order (FIRST call the user script, THEN save the two variables)
+  % is needed to reflect changes of M.VAR, that are possibly made by
+  % the user script.  For example, the user script might limit M.VAR
+  % to within certain boundaries, e.g., to prevent amplitude clipping,
+  % overmodulation, negative increments, etc.
+  M.VARS  = [M.VARS M.VAR];
+
   % Mount intervals in n-AFC fashion, present them, 
   % obtain and process user answer.
   mpsy_afc_present;
@@ -125,6 +136,11 @@ for M_TRIAL_COUNT = 1 : M.CONSTSTIM_NTRIALS,
   % a 1-dim index into the 2-dim matrix.
   M.CONSTSTIM_ALLANSWERS(M.RAND_ORDER(M_TRIAL_COUNT)) = M.ACT_ANSWER;
 
+  % also append the current answer to the array of all answers.
+  % As above, this is a redundant information here, as it is also
+  % contained in   M.CONSTSTIM_ALLANSWERS(M.RAND_ORDER(M_TRIAL_COUNT)) 
+  M.ANSWERS = [M.ANSWERS M.ACT_ANSWER];
+
   if M.DEBUG>1,
       htmp = gcf;    % remember current figure (typically the GUI)
       figure(110);   
@@ -135,7 +151,7 @@ for M_TRIAL_COUNT = 1 : M.CONSTSTIM_NTRIALS,
       hp = plot(1:length(plot_tmp_vars), plot_tmp_vars, '.-', ...
                 idx_plus, plot_tmp_vars(idx_plus), 'r+', ...
                 idx_minus, plot_tmp_vars(idx_minus), 'bo');
-      set(hp(1) , 'Color', 0.5*[1 1 1])
+      set(hp(1) , 'Color', 0.6*[1 1 1])
       xlabel('trial number')
       yl = [ M.VARNAME ' [' M.VARUNIT ']'];
       ylabel(strrep(yl, '_','\_'));
@@ -145,7 +161,13 @@ for M_TRIAL_COUNT = 1 : M.CONSTSTIM_NTRIALS,
         tit = [tit '  Par.' num2str(k) ': ' char(M.PARAMNAME(k)) ' = ' num2str(M.PARAM(k)) ' ' char(M.PARAMUNIT(k))];
       end
       title(strrep(tit,'_','\_'));
-
+      hold on
+      hp(end+1) = barh(M.CONSTSTIM_ALLVARS, -sum(max(0, M.CONSTSTIM_ALLANSWERS)), 'w');
+      hold off
+      
+      % add the legend only after both correct and false responses have occured
+      if length(hp)>2,  legend(hp(2:end),'correct', 'false', '# hits', 'location', 'best'); end
+      
       if M.DEBUG > 2,
         % show progress of averall measurement 
         figure(111);   
@@ -170,6 +192,8 @@ end   % for loop
 % ----- end of loop of trials for one block ---
 % ---------------------------------------------
 
+  
+% check whether the experiment was quit by the user:
 if any(M.CONSTSTIM_ALLANSWERS<0),
   error(' Experimental block was not completed.  Data are NOT automatically saved by mpsy_proto_conststim.');
 end
@@ -177,7 +201,7 @@ end
 
 % protocol everything
 mpsy_proto_conststim;
- 
+
 if M.FEEDBACK,  
   figure(111); mpsy_plot_psycfunc; 
   %fprintf('*** info: a plot of the results can be generated via display_psydat.\n')

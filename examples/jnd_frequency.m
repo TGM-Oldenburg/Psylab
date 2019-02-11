@@ -62,11 +62,11 @@ M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN a
 % ==================================================
 M.PARAM(2)  =  -10;
 
-% ref_freqs = 1000;
+%ref_freqs = 1000;
 ref_freqs = [250 500 1000 2000 3000 6000];
 
 % number of repeated presentations per variable value
-M.CONSTSTIM_NUM_PRESENTATIONS = 20;
+M.CONSTSTIM_NUM_PRESENTATIONS = 10;
 
 % vector with all values for variable M.VAR
 M.CONSTSTIM_ALLVARS = [4 8 16 32];

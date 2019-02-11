@@ -33,7 +33,7 @@ PSYFILES = DISTRIBUTION INSTALLATION \
      mpsy_info.m mpsy_visual_interval_*.m \
      mpsy_msound_present.m \
      msound.dll msound.mexw32 msound.mexw64 msound*.mexglx msound.mexa64 msound.mexmaci64 \
-     mpsy_proto_adapt.m mpsy_proto_conststim.m mpsy_proto_v2.m \
+     mpsy_proto_adapt.m mpsy_proto_conststim.m mpsy_debug_savefile.m \
      mpsy_plot_feedback.m  mpsy_plot_thresholds.m mpsy_plot_psycfunc.m mpsy_plot_data.m \
      mpsy_replot_run.m read_psydat.m read_psydat_v2.m  mpsy_split_lines_to_toks.m \
      display_psydat.m display_psydat_v2.m display_psydat_raw_v2.m \

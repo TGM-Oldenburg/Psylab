@@ -89,7 +89,7 @@ end
 
 
 if M.FEEDBACK>1,
-  print('-dpsc','-append', ['plot_thres_' M.SNAME])
+  print('-dpsc','-append', ['plot_psycfunc_' M.SNAME])
 end
 
 

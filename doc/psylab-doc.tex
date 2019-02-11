@@ -26,8 +26,9 @@
 
 %% -----------------------------------------------------------------
 %% Copyright (C) 2004-2008         Martin Hansen, FH OOW  
-%% Author :  Martin Hansen,  <martin.hansen AT fh-oldenburg.de>
+%% Author :  Martin Hansen,  <psylab AT jade-hs.de>
 %% Date   :  14 Jan 2004
+%% Updated:  <11 Feb 2019 14:53, martin>
 %% Updated:  <29 Mai 2017 09:27, martin>
 %% Updated:  <20 Feb 2017 14:41, martin>
 %% Updated:  < 7 Nov 2016 14:18, martin>
@@ -522,9 +523,10 @@ experiments may also be carried out in an interleaved-runs fashion.
 \label{sec:n-afc-experiments}
 
 The script \code{mpsy\_afc\_main.m} is a central part of \psylab\ for
-controlling adaptive transformed-up-down $n$-AFC experiments, if you
+controlling adaptive transformed-up-down $n$-AFC experiments.  Use it if you
 intend to measure one experimental run at a time, \ie the next run
-starts only after the completion of the previous run. 
+starts only after the previous run has been completed, \ie threshold
+has been reached.   
 
 It should be unnecessary for the user to change this file.  However,
 in order to work properly, your own experiment scripts need to conform
@@ -591,33 +593,6 @@ Section~\ref{sec:reversed-up-and-down} explains this in more detail.
 
 
 
-%% --------------------------------------------------
-\subsubsection{Method of constant stimuli}
-\label{sec:const-stim-method}
-
-As an alternative to the adaptive control of the stimulus variable, as
-explained in section~\ref{sec:available-adapt-methods}, \psylab\ also
-offers the method of constant stimuli.  With this method, the stimuli
-(respectively the values of the stimulus variable) that are going to
-be presented is known/fixed prior to the test subject's arrival at the
-test booth, hence the name ``constant''.
-
-A number of different values of the stimulus variable is chosen and
-must be saved in the \psylab\ variable \code{M.CONSTSTIM\_ALLVARS}.  The
-number of (repeated) presentations must be specified in the variable
-\code{M.CONSTSTIM\_NUM\_PRESENTATIONS}.
-
-The total number of (\code{M.CONSTSTIM\_ALLVARS} $\cdot$
-\code{M.CONSTSTIM\_NUM\_PRESENTATIONS}) corresponding stimuli are then
-presented in a randomized/permuted order, with a new permutation for
-each new experimental run and for each subject.  
-
-The file \texttt{jnd\_frequency.m} in the subdirectory
-\texttt{examples} shows an example for such a constant stimuli
-experiment where the just noticeable difference in frequency for two
-sinusoidal stimuli is measured.  
-
-
 
 %% --------------------------------------------------
 \subsubsection{Experiments with interleaved tracks}
@@ -662,6 +637,43 @@ Experiments with interleaved tracks are not yet available for the
 method of constant stimuli.  
 
 
+%% --------------------------------------------------
+\subsubsection{Method of constant stimuli}
+\label{sec:const-stim-method}
+
+As an alternative to the adaptive control of the stimulus variable, as
+explained in section~\ref{sec:available-adapt-methods}, \psylab\ also
+offers the method of constant stimuli.  With this method, the stimuli
+(respectively the values of the stimulus variable) that are going to
+be presented is known/fixed prior to the test subject's arrival at the
+test booth, hence the name ``constant''.
+
+A number of different values of the stimulus variable is chosen and
+must be saved in the \psylab\ variable \code{M.CONSTSTIM\_ALLVARS}.  The
+number of (repeated) presentations must be specified in the variable
+\code{M.CONSTSTIM\_NUM\_PRESENTATIONS}.
+
+The total number of (\code{M.CONSTSTIM\_ALLVARS} $\cdot$
+\code{M.CONSTSTIM\_NUM\_PRESENTATIONS}) corresponding stimuli are then
+presented in a randomized/permuted order, with a new permutation for
+each new experimental run and for each subject.  
+
+The file \texttt{jnd\_frequency.m} in the subdirectory
+\texttt{examples} shows an example for such a constant stimuli
+experiment where the just noticeable difference in frequency for two
+sinusoidal stimuli is measured.  \\
+
+Note that an experiment with an adaptive method (like for example
+1-up-2-down) has an in-built familiarisation phase that takes place
+prior to the collection of those data points from which the threshold
+will be derived.  Such a familiarisation phase is not normally part of
+a constant stimuli experiment.  However, it is easy for you to
+implement some training phase, for which the results shall be
+discarded: You might always execute the same constant stimuli
+experiment twice, first with a temporary different subject name and
+with a smaller number of stimulus repetitions
+(\code{M.CONSTSTIM\_NUM\_PRESENTATIONS}), and the in the second run
+with the original subject name and number of repetitions.
 
 
 
@@ -1207,7 +1219,7 @@ user ID, for example, their initials, which must not contain any white-spaces.  
 data gathered from a subject will be saved in a cumulative fashion, on
 a one-separate-file-per-subject basis, see section~\ref{sec:psydat-file}.
 
-The subjects run the experiment at their own pace.  They may answer in
+The subjects can run the experiment at their own pace.  They may answer in
 one of the ways described in section~\ref{sec:test-subject-interface},
 as specified by the experimenter.
 
@@ -1234,15 +1246,18 @@ non-interleaved experiment, but the following exceptions apply:
   the struct variable \texttt{M(1)} to those of \texttt{M(2)}, \texttt{M(3)},
   \ldots\ for the 2nd, 3rd, \ldots\ concurrent run.  Instead, it is
   sufficient to only assign the ``relevant'' fields of \texttt{M(2)},
-  \texttt{M(3)}, \ldots\ .  When doing this, any fields of
-  \texttt{M(2:end)} that are left empty will be assigned with
+  \texttt{M(3)}, \ldots\ , \texttt{M(end)}, i.e. those fields with a different content
+  for a different run.  When doing this, any fields of
+  \texttt{M(2:end)} that are left unspecified will be assigned with
   the same values as found in \texttt{M(1)} automatically.  (This is
   a specific feature of \psylab, not of Matlab.) 
 
 \item The script \code{mpsy\_intrlv\_afc\_main.m} is called to control
   the whole interleaved AFC experiment, instead of \code{mpsy\_afc\_main.m}.
-\item The script \code{mpsy\_intrlv\_match\_main.m} is called to control
-  the whole interleaved matching experiment, instead of \code{mpsy\_match\_main.m}.
+
+  Likewise, the script \code{mpsy\_intrlv\_match\_main.m} is called to
+  control the whole interleaved matching experiment, instead of
+  \code{mpsy\_match\_main.m}.
 \end{enumerate}
 
 %%
@@ -1309,7 +1324,7 @@ tone_freqs = [ 200 400 800 1600 3200 6400 ];
 % assign different parameter sets for interleaved tracks experiment
 for kk = 1:length(tone_freqs),
     M(kk).PARAM(1) = tone_freqs(kk);
-    M(kk).PARAM(2) = -30;            % use a fixed noise level
+    M(kk).PARAM(2) = -30;            % use the same noise level for all freq.'s
 end
 
 mpsy_intrlv_afc_main;
@@ -1320,9 +1335,10 @@ The difference starts in the \code{for}-loop, where
 \code{M(kk).PARAM(1)} and \code{M(kk).PARAM(2)} are assigned, thereby
 rendering \code{M} into an array with \code{length(tone\_freqs)}
 elements (in this case 6 elements).  After the \code{for}-loop, most
-fields of \texttt{M(2:6)} are still empty (by standard Matlab behaviour).  These fields will be
-filled in automatically by way of the script
-\texttt{mpsy\_intrlv\_init.m} which is called inside \texttt{mpsy\_intrlv\_afc\_main}
+fields of \texttt{M(2:6)} are still empty (by standard Matlab
+behaviour).  These fields will be filled in automatically by way of
+the script \texttt{mpsy\_intrlv\_init.m} which is called inside
+\texttt{mpsy\_intrlv\_afc\_main}. 
 
 
 The script \texttt{mpsy\_intrlv\_afc\_main} will start an experiment
@@ -1413,7 +1429,7 @@ which will always set empty fields to the corresponding value of
 
 
 %% --------------------------------------------------
-\subsection{Avoid the use of built-in function \texttt{sound} for playback}
+\subsection{Avoid the use of built-in function {\tt sound} for playback}
 \label{sec:avoid-builtin-sound}
 
 Unfortunately, in Version 2011 of Matlab the audio handling was
@@ -1467,7 +1483,7 @@ stereo/dichotic signals.  If \verb+M.MSOUND_NCHAN+ does not match
 
 When using sound output via \code{msound} in \psylab, it is possible to
 use the visual interval indication.  Put another way round, on some
-systems it will only possible to use the visual interval indication \emph{if}
+systems it will only be   possible to use the visual interval indication \emph{if}
 you use \code{msound} for sound output.  
 
 
@@ -1656,13 +1672,19 @@ version~2.8.
 
 In addition to the psydat-file in ASCII format, the variables
 \texttt{M} and \texttt{M\_*} can also get saved as a binary mat-file
-each time a run has been completed.  This behaviour will be turned on
-if \code{M.DEBUG}$>$0. However, this is mainly for rescue and analysis
-purposes and the binary files may as well be deleted.  They will not
-be used for later data analysis.  If you do not need this behaviour,
-just set \code{M.DEBUG=0;}.  
-When \code{M.FEEDBACK}$>$1, then \code{mpsy\_plot\_result.m} will append
-a copy of the resulting figure to the file \verb+'plot_thres_+\textit{$<$subjectname$>$}'
+each time a run has been completed.  This behaviour will only be turned on
+if \code{M.DEBUG}$>$0.  However, this is mainly for rescue and special
+purposes.  They will not be used by \psylab\ for later data analysis,
+and so the binary files may as well be deleted.  If you do not need
+these temporary files, just set \code{M.DEBUG=0;}.  When
+\code{M.FEEDBACK}$>$1, then the functions
+\code{mpsy\_plot\_feedback.m},  
+\code{mpsy\_plot\_thresholds.m}, 
+and 
+\code{mpsy\_plot\_psycfunc.m}
+will append a
+copy of the resulting figure in eps format to a file named
+\verb+'plot_*_+\textit{$<$subjectname$>$}' 
 
 
 

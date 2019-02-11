@@ -18,8 +18,9 @@
 %% See the GNU General Public License for more details:
 %% http://www.gnu.org/licenses/gpl
 
-M.VAR  = 32 ;  % start frequency increment factor.  The value is unimportant, 
-               % as it is later overwritten by mpsy_afc_conststim_main.m 
+M.VAR  = 0 ;   % start frequency increment factor.  The value is
+               % unimportant, but the variable needs to be defined.
+               % It is later overwritten by mpsy_afc_conststim_main.m 
 
 tdur   = 0.4;    % duration of tone [s]
 a0     = sqrt(2)*10^(M.PARAM(2)/20);    % its amplitude

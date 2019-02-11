@@ -113,21 +113,22 @@ M.STEP_DOWN = M.STEP;
 % now use equation (1) from  Kaernbach (1991), (e.g. at 
 % http://www.emotion.uni-kiel.de/fileadmin/emotion/team/kaernbach/publications/1991a_kae_p_p.pdf )
 % to calculate new step size S_up for going up.   
+%
 % However, NOTE that that equation (1) and also the sentence following
 % immediately contains a MAJOR TYPO.  Quote from Kaernbach (1991):
-%%%  --- QUOTE BEGIN ---
-%%%      S_up * p = S_down * (1-p).               (eq. 1)
-%%%  For X_75, it   follows   that   S_up/S_down = 1/3.   
-%%%  --- QUOTE END ---
-%  That above equation is WRONG!  The sentence following it fits to
-%  the equation, which is wrong, however.
+% %%  --- QUOTE BEGIN ---
+% %%      S_up * p = S_down * (1-p).               (eq. 1)
+% %%  For X_75, it   follows   that   S_up/S_down = 1/3.   
+% %%  --- QUOTE END ---
+% That above equation is WRONG!  The sentence following it fits to
+% the equation, which is wrong, however.
 %
-%  The next sentence then, in the original paper, gives a CORRECT EXAMPLE
-%%%  --- QUOTE BEGIN ---
-%%%  The rule for a convergence to the X_75 point would thus read: 
-%%%  Decrease the Level 1 step after each correct response, and
-%%%  increase it 3 steps  after each incorrect response. 
-%%%  --- QUOTE END ---
+% The next sentence then, in the original paper, gives a CORRECT EXAMPLE
+% %%  --- QUOTE BEGIN ---
+% %%  The rule for a convergence to the X_75 point would thus read: 
+% %%  Decrease the Level 1 step after each correct response, and
+% %%  increase it 3 steps  after each incorrect response. 
+% %%  --- QUOTE END ---
 
 % So the correct equilibirum condition for convergence is:
 %   stepsize_UP * probability_UP = stepsize_DOWN * probability_DOWN
@@ -136,7 +137,7 @@ M.STEP_DOWN = M.STEP;
 M.STEP_UP   = M.PC_CONVERGE/(1-M.PC_CONVERGE) * M.STEP_DOWN;
 
 
-% note that the 2 step SIZES (M.STEP_UP, M.STEP_DOWN) both
+% Note that the 2 step SIZES (M.STEP_UP, M.STEP_DOWN) both
 % have the same sign as M.STEP. That is: positive sign in the
 % normal case and negative sign in the reversed-up-down-case.   
 % The DIRECTION of change is then reflected in the following code: 

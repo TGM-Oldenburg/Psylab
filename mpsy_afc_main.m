@@ -135,13 +135,15 @@ while (M.REVERSAL < M.MAXREVERSAL) | (M.STEP > M.MINSTEP)
   
   if M.DEBUG>1,
       htmp = gcf;    % remember current figure
+      
       % show last stimuli and answers
       figure(111);   mpsy_plot_feedback;
       if M.DEBUG > 2,
 	figure(112);   plot((1:length(m_outsig))/M.FS, m_outsig);
-	title('stimuli of PREVIOUS run')
+	title('stimuli of PREVIOUS trial')
 	xlabel('time [s]'); ylabel('amplitude');
       end
+      
       if M.USE_GUI,
 	figure(htmp);  % make previous figure current again, e.g. the answer GUI
       end

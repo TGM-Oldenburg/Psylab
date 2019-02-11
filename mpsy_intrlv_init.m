@@ -95,7 +95,6 @@ end
 for k=1:M1.NUM_INTERLEAVED_TRACKS,
   MI(k).VAR        = [];
   MI(k).STEP       = [];
-  %%MI(k).UA         = [];
   MI(k).ACT_ANSWER = [];
 end
 

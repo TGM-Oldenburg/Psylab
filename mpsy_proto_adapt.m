@@ -1,11 +1,11 @@
 % Usage: mpsy_proto_adapt()
 % ----------------------------------------------------------------------
 %          Protocols the results of the previous adaptive run:
-%          plots M.VAR as a function of trial number
+%          plots M.VAR as a function of trial number,
 %          writes a corresponding result line into the "psydat"
 %          file, in psydat format version 3.
 %          In case M.DEBUG > 0,  all variables M.* are saved in a
-%          separate mat-file 
+%          separate mat-file which can be useful for debugging
 % 
 %   input args:  (none) works on set of global variables M.* 
 %  output args:  (none) processes subjects' answer and protocolls everything
@@ -58,13 +58,14 @@ M.max_thres  =    max (M.VARS(M.measurement_fidx));
 M.familiarization_fidx = find(M.STEPS ~= M.MINSTEP);
 
 
-% now output all relevant information to a text protocol file
+% Now output all relevant information to a text protocol file
 % this is done in the psydat format version 3 
 %
-% N.B. the order of the following information output DOES matter,
+% N.B. the order of the information in the following output DOES matter,
 %       as read_psydat.m and psydat_helper.m rely on it. 
 %
 [fidm,message] = fopen( ['psydat_',M.SNAME], 'a' );
+
 fprintf(fidm,'##adapt## %s %s %s__%s npar %d ####\n', ...
 	M.EXPNAME, M.SNAME, datestr(now,1), datestr(now,13), M.NUM_PARAMS);
 for k=1:M.NUM_PARAMS,
@@ -81,12 +82,12 @@ else
 end
 
 
-% output the individual values of M.VAR and the answers to the
-% psydat file, if flag-variable M.SAVERUN has been set accordingly  
+% if flag-variable M.SAVERUN has been set accordingly, output the
+% individual values of M.VAR and the answers to the psydat file.  
 if (isfield(M, 'SAVERUN')) & M.SAVERUN == 1
   fprintf(fidm, '%%%%----- VAL:');
   for k = 1:length(M.ANSWERS)
-    fprintf(fidm, ' %g %d',M.VARS(k), M.ANSWERS(k));
+    fprintf(fidm, ' %g %d', M.VARS(k), M.ANSWERS(k));
   end
   fprintf(fidm, '\n');
 end
@@ -112,7 +113,8 @@ if ~isfield(M, 'allthres_med'),
   % hm, this seems to be the first completed run during this experiment
   M.allthres_med = M.med_thres ;   
 else  
-  M.allthres_med = [ M.allthres_med; M.med_thres ];  % append a column
+  % append a row
+  M.allthres_med = [ M.allthres_med; M.med_thres ];  
 end
 % add this run's mean threshold value (mean of M_VAR during measurement phase
 % of last run) to collection
@@ -120,7 +122,8 @@ if ~isfield(M, 'allthres_mean'),
   % hm, this seems to be the first completed run during this experiment
   M.allthres_mean = M.mean_thres ;   
 else  
-  M.allthres_mean = [ M.allthres_mean; M.mean_thres ];  % append a column
+  % append a row
+  M.allthres_mean = [ M.allthres_mean; M.mean_thres ];
 end
 % add this threshold's standard deviation (std.dev. of M_VAR during
 % measurement phase of last run) to collection
@@ -128,42 +131,32 @@ if ~isfield(M, 'allthres_std'),
   % hm, this seems to be the first completed run during this experiment
   M.allthres_std = M.std_thres ;
 else  
-  M.allthres_std = [ M.allthres_std; M.std_thres ];  % append a column
+    % append a row
+    M.allthres_std = [ M.allthres_std; M.std_thres ]; 
 end
 % add the set of values of all parameters of the current run, as a
-% row vector, to the collection parameter sets.  
+% row vector, to the collection of parameter sets (of all runs)
 if ~isfield(M, 'allparam'),
   % hm, this seems to be the first completed run during this experiment
   M.allparam = M.PARAM(:).';    % force a ROW shape
 else
   % different values of the same parameter from different runs form
   % a column, so there will be M.NUM_PARAMS columns in M.ALLPARAM
-  M.allparam  = [ M.allparam; M.PARAM(:).' ];  
+  M.allparam  = [ M.allparam; M.PARAM(:).' ];  % append a row
 end
-
-M.DATE = datestr(now);
 
 
 if M.DEBUG>0,
-  % setup filename with date/time info for saving in matlab format
-  m_filenamedate = ['psy_' M.SNAME '_'];
-  dv=datevec(now);
-  for k=1:3,
-    m_filenamedate = [ m_filenamedate sprintf('%2.2d',mod(dv(k),100)) ];
-  end
-  %if exist( [ m_filenamedate '.mat' ], 'file'),
-  % add current hour to end of filename
-  m_filenamedate = [ m_filenamedate '-' sprintf('%2.2d',dv(4))];
-  %end
-  % now save it:
-  save(m_filenamedate, 'M', 'M_*')
+  mpsy_debug_savefile
 end
 
 % 
 if M.FEEDBACK,
-  fprintf('  Result:  Parameter (%s): %g %s,\n', char(M.PARAMNAME(1)), M.PARAM(1), char(M.PARAMUNIT(1)));
+  fprintf('  Result:  Parameter (%s): %g %s,\n', ...
+           char(M.PARAMNAME(1)), M.PARAM(1), char(M.PARAMUNIT(1)));
   for k=2:M.NUM_PARAMS,
-    fprintf('           Par.%d (%s): %g %s,\n', k, char(M.PARAMNAME(k)), M.PARAM(k), char(M.PARAMUNIT(k)));
+    fprintf('           Param.%d   (%s): %g %s,\n', ...
+             k, char(M.PARAMNAME(k)), M.PARAM(k), char(M.PARAMUNIT(k)));
   end  
   fprintf('           Threshold (%s) Median: %g %s,  STD: %g %s \n\n', ...
 	  M.VARNAME, M.med_thres, M.VARUNIT, M.std_thres, M.VARUNIT);

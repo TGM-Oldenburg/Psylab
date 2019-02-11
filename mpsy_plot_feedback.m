@@ -1,7 +1,11 @@
 % Usage: mpsy_plot_feedback
 % ----------------------------------------------------------------------
 %     to be called from mpsy_afc_main  or similar scripts
-% 
+%
+%     all data/values of M.VAR during the current adaptive afc run
+%     are plotted as a function of their trial number
+%
+%
 %   input:   (none), works on global variables
 %  output:   (none), a plot figure
 %

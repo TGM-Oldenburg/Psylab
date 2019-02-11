@@ -19,18 +19,24 @@ function y = fft_rect_filt(x, f1, f2, fsamp, notch, high_idx_offset)
 %                y  filtered output signal
 %
 %   Filter signal x having samplingrate fsamp via FFT, so that
-%   frequencies between f1 and f2 (both inclusive) are passed through,
-%   unless notch is set ~=0, which means pass frequencies outside of
-%   f1 and f2.  Output to y.  The filter has rectangular shape in
-%   frequency domain, i.e., it has very steep slopes of approx. 300 dB
-%   damping within the bandwidth of 1 FFT-bin.  It is possible that
-%   f1==f2, resulting in a filter passing through (or notching) only 1
-%   single FFT-bin.  Because of the FFT, this script works fastest
-%   with signal lengths that are powers of 2.
-%
-%   For filterbank purposes, high_idx_offset should be set to -1 to
-%   assure that neighbouring bands have exactly zero samples
-%   overlap at the common edge frequencies, see the following example: 
+%   frequencies between f1 and f2 (both inclusive) are passed
+%   through, while spectral components outside that band are set to
+%   zero before the inverse FFT.  If f1 or f2 don't match an
+%   FFT-bin precisely, then the bin numbers are rounded by floor(). 
+%   If the flag notch is set ~=0, then the behaviour is reversed:
+%   frequencies outside of f1 and f2 are passed, while spectral
+%   components are set to zero inside that region.   
+%   The filter has rectangular shape in frequency domain, i.e., it has
+%   very steep slopes of approx. 300 dB damping within the bandwidth
+%   of 1 FFT-bin.  It is possible that f1==f2, resulting in a filter
+%   passing through (or notching) only 1 single FFT-bin.  Because of
+%   the FFT, this script works fastest with signal lengths that are
+%   powers of 2.
+%   For filterbank purposes, for example, high_idx_offset should be
+%   set to -1 to assure that neighbouring bands have exactly zero
+%   samples overlap at the common edge frequencies, see the
+%   following example that generates 3 non-overlapping band bass
+%   signals:   
 %   a = fft_rect_filt(x,    0,  300, fs, 0, -1);
 %   b = fft_rect_filt(x,  300, 1000, fs, 0, -1);
 %   c = fft_rect_filt(x, 1000, 2000, fs, 0, -1);
@@ -39,6 +45,7 @@ function y = fft_rect_filt(x, f1, f2, fsamp, notch, high_idx_offset)
 % Author :  Martin Hansen <psylab AT jade-hs.de>
 
 % Date   :  11 May 2003
+% Updated:  <14 Jun 2018 10:02, martin>  help text updated
 % Updated:  < 5 Sep 2006 09:04, hansen>
 % Updated:  <13 Feb 2005 13:50, mh>
 % Updated:  <19 Jun 2003 11:26, hansen>
@@ -91,10 +98,10 @@ ff = f;
 % and LIKEWISE at indices idx3:idx4 at negative frequencies.  
 % Everything outside these index-ranges is set to ZERO.
 % 
-% The following three lines also work for true lowpass situation:
-%   f1=0 ==> idx1=1 ==> idx4 = N+1 
-%   because both index ranges (1:idx1-1), and (idx4+1:end) are EMPTY(!)
-% They also work for a true highpass situation where
+% The following three lines also work for true lowpass situation where
+%   f1=0 ==> idx1=1 ==> idx4 = N+1, 
+%   so both index ranges (1:idx1-1), and (idx4+1:end) are EMPTY(!).
+%   They also work for a true highpass situation where
 %   f2=fs/2 ==> idx2 = N/2+1 ==> idx3 = N/2+1
 %   because the index range (idx2+1:idx3-1) is EMPTY(!)
 

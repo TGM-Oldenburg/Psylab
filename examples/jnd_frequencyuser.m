@@ -20,7 +20,7 @@
 
 % make shure we always have an INCREMENT in frequency.  
 if M.VAR < 0,
-  warning(' M.VAR < 0 detected.  Set to M.VAR=0;');
+  warning(' M.VAR < 0 detected, which makes no sense for JND measurement. Set to M.VAR=0;');
   M.VAR = 0;    % force guessing
 end
 

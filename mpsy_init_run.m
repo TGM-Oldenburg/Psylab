@@ -96,8 +96,10 @@ if M.USE_MSOUND
   msound_state = msound('verbose', 0);
   
   % check whether msound was used with a different number of
-  % channels previously.  If so, close msound:
-  if msound_state.ChannelsOut ~= M.MSOUND_NCHAN,
+  % channels or with a different frame length previously.  If so,
+  % close msound: 
+  if (msound_state.ChannelsOut ~= M.MSOUND_NCHAN) | ...
+       (msound_state.BlockSize ~= M.MSOUND_FRAMELEN),
     msound('close');
   else
     % nothing to do
