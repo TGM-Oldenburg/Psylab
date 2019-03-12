@@ -29,7 +29,7 @@ moddur = 0.5;    % duration of the modulation [s]
 
 
 if M.PARAM(2) == -1,
-  disp('broad band noise carrier instead of sinusoid carrier')
+  disp('semi-frozen broad band noise carrier instead of sinusoid carrier')
   carrier =  0.1*randn(round(tdur*M.FS),1);
 else
   carrier = gensin(M.PARAM(2), a0, tdur, 0, M.FS);

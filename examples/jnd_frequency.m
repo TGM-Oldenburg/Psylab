@@ -32,9 +32,9 @@ M.PARAMUNIT(2) = {'dB'};
 M.VARNAME      = 'rel_frequency_increment';
 M.VARUNIT      = 'cent';
 M.TASK         = 'which interval contained the test signal (1,2,3)?  ';
-M.NAFC         = 3 ;   % number of forced choice intervals
-M.FEEDBACK     = 1 ;     % flag for provision of feedback about correctness of answer
-
+M.NAFC         = 3 ;  % number of forced choice intervals
+M.FEEDBACK     = 1 ;  % flag for provision of feedback about correctness of answer
+M.SAVERUN      = 0 ;  % flag whether to save the whole run into the psydat file
 
 % ------------------------------ 
 M.FS               = 48000; % sampling frequency

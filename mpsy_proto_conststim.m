@@ -44,10 +44,15 @@ M.result_stderr_probcorr = sqrt(M.result_estim_probcorr.*(1-M.result_estim_probc
 %
 [fidm,message] = fopen( ['psydat_',M.SNAME], 'a' );
 
+
+% to avoid that the second changes during the foll
+tmp_date = datestr(now,1);
+tmp_time = datestr(now,13);
+
 for ktmp = 1:length(M.CONSTSTIM_ALLVARS),
   
   fprintf(fidm,'##const## %s %s %s__%s npar %d ####\n', ...
-          M.EXPNAME, M.SNAME, datestr(now,1), datestr(now,13), M.NUM_PARAMS);
+          M.EXPNAME, M.SNAME, tmp_date, tmp_time, M.NUM_PARAMS);
   for k=1:M.NUM_PARAMS,
     fprintf(fidm,'%%%%----- PAR%d: %s %f %s\n', k, char(M.PARAMNAME(k)), M.PARAM(k), char(M.PARAMUNIT(k)));
   end  
@@ -60,6 +65,17 @@ for ktmp = 1:length(M.CONSTSTIM_ALLVARS),
   fprintf(fidm,'  %s %f %s   %s %f\n', ...
           M.VARNAME, M.CONSTSTIM_ALLVARS(ktmp), M.VARUNIT, 'prob_correct', M.result_estim_probcorr(ktmp));
 
+end
+
+% if flag-variable M.SAVERUN has been set accordingly, output the
+% individual values of M.VAR and the answers to the psydat file.  Here,
+% the data are output at the end of a block of const-stim data points
+if (isfield(M, 'SAVERUN')) & M.SAVERUN == 1
+  fprintf(fidm, '%%%%----- VAL:');
+  for k = 1:length(M.ANSWERS)
+    fprintf(fidm, ' %g %d', M.VARS(k), M.ANSWERS(k));
+  end
+  fprintf(fidm, '\n');
 end
 
 fclose(fidm);
@@ -107,7 +123,7 @@ end
 
 
 if M.DEBUG>0,
-  mpsy_debug_savefile
+  mpsy_proto_debuginfo;
 end
 
 % 

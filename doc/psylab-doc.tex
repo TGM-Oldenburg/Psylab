@@ -13,7 +13,7 @@
 \setlength{\textheight}{24cm}
 \addtolength{\topmargin}{-1.8cm}
 
-\newcommand{\psylabversion}{2.8}
+\newcommand{\psylabversion}{2.9}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -121,7 +121,7 @@ for detection and discrimination experiments.
 
 \psylab\ is based on many ideas of the programs 'SI/SISG' which were
 written at ``Drittes Physikalisches Institut'', Universität Göttingen,
-during the years 1989 to 1991, and which were distributed under GNU
+during the years 1989 to 1991, and which were distributed under the GNU
 General Public License (GNU~GPL).
 %
 SI~(``Signalverarbeitung interaktiv'') was programmed in Fortran by
@@ -139,7 +139,7 @@ education and research at Institut für Hörtechnik und Audiologie
 
 One aim of \psylab\ has been to provide the students in the
 psychoacoustic courses with a uniform and simple starting point for
-designing one's own listening experiments.  So far, roughly 300
+designing one's own listening experiments.  So far, roughly 400
 students at IHA have used \psylab\ in their psychoacoustics
 assignments, for designing and carrying out individual listening
 experiments.  Their experience and comments have continuously
@@ -161,7 +161,7 @@ at a verbose copy of the GNU GPL on page~\pageref{sec:gnu-gpl}.
 
 
 %% --------------------------------------------------
-\subsection{No warranty}
+\subsection{No warranty, no liability}
 \label{sec:psylab-no-warranty}
 
 \emph{  \psylab\ is distributed without any kind of warranty.
@@ -1600,6 +1600,15 @@ look like this:
 -24 1 -24 1 -25 1 -25 1 -26 0 -25 1 -25 1 -26 0 -25 1 -25 1 -26 0 -25 1 -25 1
   modulation_degree -25.000000 0.492366 -26.000000 -25.000000 dB
 \end{verbatim}
+%
+The line starting with \verb+%%----- VAL:+ informs you that the
+subjects listened to stimuli with the following variable values
+resp. modulations degrees (and gave answers in parentheses) during
+this run:\\
+-8~dB (correct); -8~dB (correct); -12~dB (correct); -12~dB (correct); -16~dB (correct); etc.
+The run consisted of 27 trials, of which the last three were at
+-26~dB (wrong); -25~dB (correct); -25~dB (correct).  
+
 
 
 \subsubsection{Constant stimuli experiments}
@@ -1609,6 +1618,7 @@ In case of a constant stimuli experiment, one experimental run will
 produce several entries in the psydat-file, one per variable value.
 An example entry, performed with the experiment
 \texttt{jnd\_frequency.m}, looks like this:
+%
 \begin{verbatim}
 ##const## jnd_frequency mh4 22-Mar-2017__12:55:13 npar 2 ####
 %%----- PAR1: reference_frequency 250.000000 Hz
@@ -1631,12 +1641,49 @@ An example entry, performed with the experiment
 %%----- CONST: num_presentations 5 
   rel_frequency_increment 32.000000 cent   prob_correct 1.000000
 \end{verbatim}
+%
 Note that these four entries were written to the psydat file at the
 same time, namely after all 5 presentations for each of the four
 different values of the variable (4, 8, 16, and 32 cent) were
 completed.  These four data points can form a part of the psychometric
 function.  Any calculation of thresholds or fitting of a psychometric
 function from theses data is left to the user of \psylab.
+
+For a constant stimulus experiment, the default behaviour of \psylab\
+is to output the resulting pairs of variable/$P_{correct}$ to the
+psydat-file.  As for an adaptive experiment, you can change this by
+setting the variable \code{M.SAVERUN} to 1 to specify that also all
+values of \code{M.VAR} during the entire constant stimuli run,
+including the corresponding answers of the subject, should be output
+to the psydat-file in a separate line.  One set of entries in the file could
+then look like this:
+%
+\begin{verbatim}
+##const## jnd_frequency mh 12-Mar-2019__15:40:42 npar 2 ####
+%%----- PAR1: reference_frequency 250.000000 Hz
+%%----- PAR2: tone_level -10.000000 dB
+%%----- CONST: num_presentations 3 
+  rel_frequency_increment 4.000000 cent   prob_correct 0.333333
+##const## jnd_frequency mh 12-Mar-2019__15:40:42 npar 2 ####
+%%----- PAR1: reference_frequency 250.000000 Hz
+%%----- PAR2: tone_level -10.000000 dB
+%%----- CONST: num_presentations 3 
+  rel_frequency_increment 16.000000 cent   prob_correct 1.000000
+##const## jnd_frequency mh 12-Mar-2019__15:40:42 npar 2 ####
+%%----- PAR1: reference_frequency 250.000000 Hz
+%%----- PAR2: tone_level -10.000000 dB
+%%----- CONST: num_presentations 3 
+%%----- VAL: 32 1 16 1 32 1 4 0 16 1 16 1 32 1 4 0 4 1
+  rel_frequency_increment 32.000000 cent   prob_correct 1.000000
+\end{verbatim}
+%
+In this short example, three different variable values (being 4, 16,
+and 32 cent) were presented three times each.  Note that the line
+starting with \verb+%%----- VAL:+ is present in the file only once,
+close to the end of the last of the three entries.  However, it informs you about all
+the 3$\cdot 3$=9 presented stimuli that produced the three entries,
+one for 4 cent, 16 cent, and 32 cent as the stimulus variable.
+
 
 ~\\
 

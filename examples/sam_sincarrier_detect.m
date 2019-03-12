@@ -48,17 +48,16 @@ M.ADAPT_METHOD = '1up_2down';   % transformed 1-up-2-down
 % %%M.ADAPT_METHOD = 'uwud';   % unforced weighted up down
 M.MAXREVERSAL  = 8 ;  % number of reversals required as stop criterion
 
-M.FEEDBACK     = 1 ;  % 1/0 = yes/no, 2=show result plot, 3=save it with individual name
+M.FEEDBACK     = 1 ;  % level of feedback given to the subject
 M.INFO         = 1 ;  % flag to provide intermediate info for the subject
 
 
 % ------------------------------ 
 M.FS               = 48000; % sampling frequency
 M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
-M.EARSIDE          = M_BINAURAL;
 M.USE_GUI          = 1;     % use a GUI for user input
 M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
-M.SAVERUN          = 1;     % save all values of M.VAR during run in psydat file
+M.SAVERUN          = 1;     % flag whether to save all values of M.VAR during the run in psydat file
 M.DEBUG            = 0;
 
 % ----------------------------------------

@@ -147,7 +147,7 @@ end
 
 
 if M.DEBUG>0,
-  mpsy_debug_savefile
+  mpsy_proto_debuginfo;
 end
 
 % 

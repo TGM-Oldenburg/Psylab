@@ -207,7 +207,7 @@ while 1,
     
   else
     % nothing to do here.  the current line does not belong to the
-    % requested experiment.  so in the qwhile(1)-loop the next line
+    % requested experiment.  so in the while(1)-loop the next line
     % of the psydat file will be read
     
   end % if correct starting line
@@ -241,7 +241,7 @@ end
 
 
 % Set a second output variable y, containing same data as x, but skip
-% all variables containings string data etc. und leave only numeric
+% all variables containings string data etc. and leave only numeric
 % data, i.e. M.PARAM(:,:) and threshold data.  Arrange them in a
 % matrix format
 if nargout > 1,

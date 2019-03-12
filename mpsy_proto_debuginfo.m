@@ -1,4 +1,4 @@
-% Usage: mpsy_debug_savefile
+% Usage: mpsy_proto_debuginfo
 % ----------------------------------------------------------------------
 %      Save all variables M* into a file for debugging purposes
 %
@@ -45,7 +45,7 @@ save(m_filenamedate, 'M', 'M_*')
 
 
 
-% End of file:  mpsy_debug_savefile.m
+% End of file:  mpsy_proto_debuginfo.m
 
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"
