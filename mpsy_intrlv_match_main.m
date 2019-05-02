@@ -84,8 +84,8 @@ end
 
 
 M.ALLOWED_USER_ANSWERS=[];
-M.UD = mpsy_get_useranswer(M, 'are you ready for this run?    to continue, hit RET', afc_fb);
-% M.UD = mpsy_query_user(M.USE_GUI, afc_fb, 'are you ready for this run?    to continue, hit RET');
+M.UD = mpsy_get_useranswer(M, 'Are you ready for this run?    To continue, hit RET', afc_fb);
+% M.UD = mpsy_query_user(M.USE_GUI, afc_fb, 'Are you ready for this run?    To continue, hit RET');
 % check user answer for a possible quit-request
 if M.UD == 9, M.QUIT = 1;  end
 if M.UD >= 8, return;  end

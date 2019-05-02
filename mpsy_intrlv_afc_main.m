@@ -74,7 +74,7 @@ mpsy_check;
 % confuse the subject repeatedly
 
 M.ALLOWED_USER_ANSWERS=[];
-M.UA = mpsy_get_useranswer(M, 'are you ready for this run?    to continue, hit RET', afc_fb);
+M.UA = mpsy_get_useranswer(M, 'Are you ready for this run?    To continue, hit RET', afc_fb);
 % check user answer for a possible quit-request
 if M.UA == 9, M.QUIT = 1;  end
 if M.UA >= 8, return;  end

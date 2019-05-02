@@ -58,7 +58,7 @@ mpsy_check;
 
 
 if M.INFO,
-  stmp = sprintf('this run: Parameter (%s): %g %s', ...
+  stmp = sprintf('This run: Parameter (%s): %g %s', ...
 		 char(M.PARAMNAME(1)), M.PARAM(1), char(M.PARAMUNIT(1)));
   for k=2:M.NUM_PARAMS,
     stmp = [stmp sprintf(',\n       Par.%d (%s): %g %s', ...
@@ -69,7 +69,7 @@ if M.INFO,
 end
 
 M.ALLOWED_USER_ANSWERS=[];
-M.UA = mpsy_get_useranswer(M, 'are you ready for this run?    to continue, hit RET', afc_fb);
+M.UA = mpsy_get_useranswer(M, 'Are you ready for this run?    To continue, hit RET', afc_fb);
 % check user answer for a possible quit-request
 if M.UA == 9, M.QUIT = 1;  end
 if M.UA >= 8, return;  end
