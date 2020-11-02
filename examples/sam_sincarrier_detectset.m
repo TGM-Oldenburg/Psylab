@@ -23,9 +23,9 @@ MYVAR = 0;
 M.VAR  = -8 ;    % start modulations degree (in dB)
 M.STEP =  4 ;    % start STEP-size, same unit as M.VAR
 
-tdur   = 0.6;    % duration of the carrier [s]
+tdur   = 0.8;    % duration of the carrier [s]
 a0     = 0.5;    % its amplitude
-moddur = 0.5;    % duration of the modulation [s]
+moddur = 0.6;    % duration of the modulation [s]
 
 
 if M.PARAM(2) == -1,
@@ -35,15 +35,19 @@ else
   carrier = gensin(M.PARAM(2), a0, tdur, 0, M.FS);
 end
 
-% the "ones-offset" of the modulator with 50ms Hanning-ramps
+% the "ones-offset" of the modulator with 150ms Hanning window
 mod1 = ones(size(carrier));
-mod1 = hanwin(mod1, round(0.05*M.FS));
+mod1 = hanwin(mod1, round(0.15*M.FS));
 
-% sinusoidal-modulator with amplitude 1, again with 50ms Hanning-ramps
+% sinusoidal-modulator with amplitude 1,
 sam  = gensin(M.PARAM(1), 1, moddur, 0, M.FS);
-sam = hanwin(sam, round(0.05*M.FS));
+sam = hanwin(sam);   % with full length hanning window 
+% sam = hanwin(sam, round(0.05*M.FS));  % or only 50 ms ramp length
 
 % temporal structure of the modulator:
+% here illustrated for shorter onset ramps:
+% 50 ms carrier onset ramp and 50 ms modulation onset ramp
+% 
 %                          ---------------------
 %                         /     modulation      \ 
 %                   -----.                       .-----

@@ -88,6 +88,11 @@ if M.VISUAL_INDICATOR,
   for kk=1:M.NAFC,  
     % frame number at START of interval kk:
     frame_num = floor( 1+(nsamp_presig + (kk-1)*nsamp_interval +(kk-1)*nsamp_quiet) / M.MSOUND_FRAMELEN);
+    if visual_frame_vec(frame_num) ~= 0,
+        % this can happen, when the quiet interval has zero length, nsamp_quiet == 0
+        % in that case, let the next interval indication begin 1 frame later
+        frame_num = frame_num + 1;
+    end
     visual_frame_vec (frame_num) = kk;
     
     % frame number at END of interval kk:

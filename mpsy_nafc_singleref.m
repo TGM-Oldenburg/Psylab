@@ -41,6 +41,8 @@ function [m_outsig, rand_afc] = mpsy_nafc_singleref(m_test, m_ref, N, m_quiet, m
 
 % THIS used to be the file mpsy_nafc.m prior to version 1.97  
 
+disp('this file is obsolete since psylab 2.10');
+return
 
 if nargin < 6, help(mfilename); return; end;
 

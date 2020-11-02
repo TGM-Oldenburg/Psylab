@@ -172,6 +172,11 @@ if M.VISUAL_INDICATOR & ~M.USE_GUI,
   M.VISUAL_INDICATOR = 0;
 end
 
+% --------------------------------------------------
+% check proper value of M.NAFC
+if isfield(M, 'NAFC') & M.NAFC ~= round(M.NAFC),
+  error('field M.NAFC must contain an integer');
+end
 
 
 % --------------------------------------------------

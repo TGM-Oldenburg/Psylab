@@ -7,4 +7,4 @@ psylab is based on many ideas of the programs 'SI/SISG' which were written at ``
 
 psylab is regularly used for education and research at Institut für Hörtechnik und Audiologie (IHA), Jade Hochschule in Oldenburg, Germany.
 
-One aim of psylab has been to provide the students in the psychoacoustic courses with a uniform and simple starting point for designing one's own listening experiments.  So far, roughly +300 students at IHA have used psylab in their psychoacoustics assignments, for designing and carrying out individual listening experiments.  Their experience and comments have continuously contributed to new features and bug fixes of psylab.
+One aim of psylab has been to provide the students in the psychoacoustic courses with a uniform and simple starting point for designing their own listening experiments.  So far, roughly +380 students at IHA have used psylab in their psychoacoustics assignments, for designing and carrying out individual listening experiments.  Their experience and comments have continuously contributed to new features and bug fixes of psylab.

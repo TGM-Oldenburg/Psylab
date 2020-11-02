@@ -28,7 +28,7 @@ pause_dur = 0.2;   % duration of inter stimulus interval
 
 
 % calculate sample indices to place tone temporally centered in the noise
-if tone_dur> noise_dur,
+if tone_dur > noise_dur,
   error('noise should be equal or longer in duration than the tone');
 end
 start_idx = round((noise_dur-tone_dur)*M.FS/2)+1;

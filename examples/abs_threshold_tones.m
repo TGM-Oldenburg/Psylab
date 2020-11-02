@@ -36,7 +36,7 @@ M.NAFC         = 3 ;    % number of forced choice intervals
 M.ADAPT_METHOD = 'wud';   % weighted up down
 M.PC_CONVERGE  = 0.75;    % target probability for convergence
 %
-M.MAXREVERSAL  = 6 ;    % number of reversals required as stop criterion
+M.MAXREVERSAL  = 8 ;    % number of reversals required as stop criterion
 M.FEEDBACK     = 1 ;    % flag for provision of feedback about correctness of answer
 
 % ------------------------------ 

@@ -22,9 +22,10 @@
 
 
 % This experiment reproduces the experiment by
-% Kohlrausch, Fassel, Dau (2000), JASA 108(2), p. 723-734,
+% Kohlrausch, Fassel, Dau (2000), JASA 108(2), p. 723-734, 
 % who investigated the detection threshold of the modulation degree
 % for sinusoidal amplitude modulation of a sinusoidal carrier.
+% The stimuli are generated as described in the setup in section I.B.
 
 
 
@@ -58,7 +59,7 @@ M.CALIB            = 100;   % means: a full-scale square wave has THIS dB SPL
 M.USE_GUI          = 1;     % use a GUI for user input
 M.VISUAL_INDICATOR = 1;     % flag whether to use visual interval indication
 M.SAVERUN          = 1;     % flag whether to save all values of M.VAR during the run in psydat file
-M.DEBUG            = 0;
+M.DEBUG            = 3;
 
 % ----------------------------------------
 M.USE_MSOUND       = 1;     % flag whether to use msound (1 or 0)
@@ -78,10 +79,13 @@ M.SNAME = input('\n\n please type your name (initials, no spaces, press RETURN a
 
 % ========================================
 
-% %%carrier_freqs = -1;  %  results in broad band noise
 carrier_freqs = [ 800 1600 3200 ]; 
+%carrier_freqs = [ 1000 3000 5000 10000 ]; 
+% 
+%carrier_freqs = -1;  %  results in broad band noise
 
 mod_freqs     = [ 16 64 256 ];
+%mod_freqs     = [ 4 16 64 256 ];
 
 for carrierf = carrier_freqs,
     M.PARAM(2) = carrierf;

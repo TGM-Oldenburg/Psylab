@@ -24,19 +24,72 @@
 %% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
-%if nargin < 6, help(mfilename); return; end;
 
-if exist('m_ref')
-  
-  if exist('m_ref1'),
-    error('found variables "m_ref1" and also "m_ref" in your workspace.  Only one OR the other should be used!');
+% make random interval index, the one in which the test sig will be presented
+M.rand_afc = 1+floor(M.NAFC*rand(1));
+
+
+if exist('m_ref')     % ====================  single reference signal ==========
+
+  % implement the "single-reference" N-AFC procedure,
+  % i.e. the case where all (n-1) instances of the reference signal 
+  % are identical in an n-AFC experiment.   
+
+  % check for presence of reference signal(s) in the workspace:
+  if exist('m_ref1') | exist('m_ref2'),
+    error('Variable "m_ref1" or/and "m_ref2" found in your workspace, and also "m_ref".  Only one OR the other(s) should be used!');
   end
   
-  % call the "single-reference" N-AFC procedure, i.e. the case with
-  % only one instance of the reference signal "m_ref"
-  [m_outsig, M.rand_afc] = mpsy_nafc_singleref(m_test, m_ref, M.NAFC, m_quiet, m_presig, m_postsig);
+  switch M.NAFC
+  
+    case 2   % --------------- 2AFC ---------------
 
-else
+      % mount intervals together ...
+      switch M.rand_afc
+       case 1
+	m_outsig = [m_presig; m_test; m_quiet;  m_ref; m_postsig];
+       case 2	     	              	               
+	m_outsig = [m_presig;  m_ref; m_quiet; m_test; m_postsig];
+       otherwise
+        error('wrong value of rand_afc:%.1f, aborting\n', M.rand_afc);
+      end
+      
+    case 3   % --------------- 3AFC ---------------
+
+      % mount intervals together ...
+      switch M.rand_afc
+       case 1
+	m_outsig = [m_presig; m_test; m_quiet;  m_ref; m_quiet;  m_ref; m_postsig];
+       case 2	     	              	               
+	m_outsig = [m_presig;  m_ref; m_quiet; m_test; m_quiet;  m_ref; m_postsig];
+       case 3	     	              	               
+	m_outsig = [m_presig;  m_ref; m_quiet;  m_ref; m_quiet; m_test; m_postsig];
+       otherwise
+        error('wrong value of rand_afc:%.1f, aborting\n', M.rand_afc);
+      end
+
+    case 4   % --------------- 4AFC ---------------
+
+      % mount intervals together ...
+      switch M.rand_afc
+       case 1
+	m_outsig = [m_presig; m_test; m_quiet;  m_ref; m_quiet;  m_ref; m_quiet;  m_ref; m_postsig];
+       case 2	     	              	               		                       
+	m_outsig = [m_presig;  m_ref; m_quiet; m_test; m_quiet;  m_ref; m_quiet;  m_ref; m_postsig];
+       case 3	     	              	               		                       
+	m_outsig = [m_presig;  m_ref; m_quiet;  m_ref; m_quiet; m_test; m_quiet;  m_ref; m_postsig];
+       case 4	     	              	               		                       
+	m_outsig = [m_presig;  m_ref; m_quiet;  m_ref; m_quiet;  m_ref; m_quiet; m_test; m_postsig];
+       otherwise
+        error('wrong value of rand_afc:%.1f, aborting\n', M.rand_afc);
+      end
+
+    otherwise 
+      error('N-AFC not yet implemented for N=%d, aborting\n', N);
+    end
+
+
+else       % ====================  multiple reference signals ==========
     
   % implement the "multiple/different-references" N-AFC procedure,
   % i.e. the case where (n-1) different instances of a reference signal 
@@ -48,17 +101,14 @@ else
    case 2   % --------------- 2AFC ---------------
 
        % this case N==2 is identical to the "single-reference" case 
-       % (see above), where the refenrence is stored in variable 'm_ref'
+       % (see above), where the reference is stored in variable 'm_ref'
        
-       if exist('m_ref1'),
-	 error('found variable called "m_ref1" in your workspace.  It should probably be called "m_ref" ?');
+       if exist('m_ref1') | exist('m_ref2'),
+	 error('Variable "m_ref1" or/and "m_ref2" found in your workspace. This does not make sense for 2AFC. You need a variable "m_ref".');
        end
             
    case 3   % --------------- 3AFC ---------------
     
-      % make random interval index, the one in which the test sig is presented
-      M.rand_afc = 1+floor(3*rand(1));
-
       % select random permutation of m_ref1 and m_ref2
       rand_ref_perm = randperm(2);
       eval(['m_ref_a = m_ref' num2str(rand_ref_perm(1)) ';']);
@@ -78,9 +128,6 @@ else
 
    case 4   % --------------- 4AFC ---------------
     
-      % make random interval index, the one in which the test sig is presented
-      M.rand_afc = 1+floor(4*rand(1));
-
       % select random permutation of m_ref1 and m_ref2 and m_ref3
       rand_ref_perm = randperm(3);
       eval(['m_ref_a = m_ref' num2str(rand_ref_perm(1)) ';']);

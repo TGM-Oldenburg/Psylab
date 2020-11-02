@@ -18,7 +18,7 @@
 %% See the GNU General Public License for more details:
 %% http://www.gnu.org/licenses/gpl
 
-M.VAR  = -30 ;  % start level increment (in dB)
+M.VAR  = -30 ;  % start level of tone (in dB)
 M.STEP = 8 ;    % start STEP-size (in dB)
 
 tdur   = 0.5;    % duration of the tone [s]

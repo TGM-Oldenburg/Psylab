@@ -1,4 +1,4 @@
-% a GUI for the recording answers of the test subject in 4 AFC tasks 
+% a GUI for answers of the test subject in 4 AFC tasks 
 %
 % Usage: mpsy_4afc_gui
 %
