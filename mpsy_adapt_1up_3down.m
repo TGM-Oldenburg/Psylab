@@ -1,4 +1,4 @@
-% Usage: mpsy_1up_3down
+% Usage: mpsy_adapt_1up_3down
 % ----------------------------------------------------------------------
 %  
 %    set new value of measurement variable M.VAR and stepsize
@@ -128,7 +128,7 @@ end
 
 
 
-% End of file:  mpsy_1up_3down.m
+% End of file:  mpsy_adapt_1up_3down.m
 
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"

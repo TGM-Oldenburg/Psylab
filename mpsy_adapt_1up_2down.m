@@ -1,4 +1,4 @@
-% Usage: mpsy_1up_2down
+% Usage: mpsy_adapt_1up_2down
 % ----------------------------------------------------------------------
 %  
 %    set new value of measurement variable M.VAR and stepsize
@@ -110,7 +110,7 @@ if M.ACT_ANSWER == 0,
   M.VAR = M.VAR + M.STEP;    
   M.DIRECTION = M_UP;
 else
-  %% i.e. M.ACT_ANSWER == 1
+  % i.e. M.ACT_ANSWER == 1
   if prev_answer == 1 & M.DIRECTION ~= M_DOWN,
     % 2 succesive correct answers, 
     %     i.e. DEcrease stimulus variable (normal case, M.STEP is positive)
@@ -124,7 +124,7 @@ end
 
 
 
-% End of file:  mpsy_1up_2down.m
+% End of file:  mpsy_adapt_1up_2down.m
 
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"

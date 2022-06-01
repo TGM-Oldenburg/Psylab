@@ -13,7 +13,7 @@
 #
 
 
-VERSION = 2.9
+VERSION = 2.10
 
 DIR = psylab-$(VERSION)
 DISTBASE = $(DIR)

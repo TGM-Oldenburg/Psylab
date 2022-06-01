@@ -142,7 +142,7 @@ end
 
 
 
-% End of file:  mpsy_adapt_wud.m
+% End of file:  mpsy_adapt_uwud.m
 
 % Local Variables:
 % time-stamp-pattern: "40/Updated:  <%2d %3b %:y %02H:%02M, %u>"

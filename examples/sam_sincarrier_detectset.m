@@ -45,7 +45,7 @@ sam = hanwin(sam);   % with full length hanning window
 % sam = hanwin(sam, round(0.05*M.FS));  % or only 50 ms ramp length
 
 % temporal structure of the modulator:
-% here illustrated for shorter onset ramps:
+% illustrated here for shorter onset ramps:
 % 50 ms carrier onset ramp and 50 ms modulation onset ramp
 % 
 %                          ---------------------
