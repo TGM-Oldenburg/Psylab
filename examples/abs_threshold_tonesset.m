@@ -29,6 +29,9 @@ ton = gensin(M.PARAM(1), sqrt(2), tdur, 0, M.FS);
 ton = hanwin(ton, round(0.05*M.FS));
 
 
+m_ref  = ton * 0;
+
+
 % pause-signals
 m_quiet   = 0.2;
 m_postsig = m_quiet;

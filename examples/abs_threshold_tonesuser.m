@@ -24,7 +24,6 @@ if M.VAR > -3,
   M.VAR = -3;
 end
 
-m_ref  = ton * 0;
 m_test = ton * 10^(M.VAR/20);
 
 

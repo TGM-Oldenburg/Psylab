@@ -25,7 +25,7 @@ M.STEP =  4 ;    % start STEP-size, same unit as M.VAR
 
 tdur   = 0.8;    % duration of the carrier [s]
 a0     = 0.5;    % its amplitude
-moddur = 0.6;    % duration of the modulation [s]
+moddur = 0.5;    % duration of the modulation [s]
 
 
 if M.PARAM(2) == -1,
